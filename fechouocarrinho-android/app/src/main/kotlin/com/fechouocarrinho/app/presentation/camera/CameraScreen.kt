@@ -13,7 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
+import androidx.camera.core.Preview as CameraXPreview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.Box
@@ -84,6 +84,7 @@ fun CameraScreen(
             if (uiState is CameraUiState.Preview || uiState is CameraUiState.Error) {
                 ExtendedFloatingActionButton(
                     onClick = onNavigateToList,
+                    icon = {},
                     text = { Text("Meus precos") }
                 )
             }
@@ -193,7 +194,7 @@ private fun startCamera(
     cameraProviderFuture.addListener({
         val cameraProvider = cameraProviderFuture.get()
 
-        val preview = Preview.Builder()
+        val preview = CameraXPreview.Builder()
             .build()
             .also { it.setSurfaceProvider(previewView.surfaceProvider) }
 
@@ -255,7 +256,6 @@ private fun takePhoto(
 
             override fun onError(exception: ImageCaptureException) {
                 Log.e(TAG, "Falha na captura", exception)
-                image.close()
             }
         }
     )

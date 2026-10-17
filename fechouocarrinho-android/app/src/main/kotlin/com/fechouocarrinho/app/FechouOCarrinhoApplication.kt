@@ -13,7 +13,7 @@ class FechouOCarrinhoApplication : Application() {
             AppDatabase::class.java,
             "fechouocarrinho_db"
         )
-            .fallbackToDestructiveMigration(false)
+            .fallbackToDestructiveMigration()
             .build()
     }
 
