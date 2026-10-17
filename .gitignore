@@ -1,0 +1,36 @@
+# Node / Next.js
+node_modules/
+.next/
+out/
+dist/
+.env
+.env.local
+.env.*.local
+
+# Android
+.feCHOU
+.gradle/
+build/
+*.apk
+*.aab
+local.properties
+*.keystore
+*.jks
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Maestri
+.maestri/
+.orca/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Supabase
+.supabase/

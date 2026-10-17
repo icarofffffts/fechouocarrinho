@@ -1,0 +1,246 @@
+[
+  {
+    "base": "live",
+    "page": "/",
+    "status": 200,
+    "ms": 1962,
+    "file": "C:/Users/usuario/orca/projects/ScanList/fechouocarrinho-next/qa-shots/live-home-390x844.png",
+    "errors": [],
+    "metrics": {
+      "title": "Fechou o Carrinho — Seu total sem sustos no caixa",
+      "scrollW": 390,
+      "clientW": 390,
+      "overflowX": false,
+      "imgs": [
+        {
+          "src": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=500&fit=crop",
+          "ok": true,
+          "w": 400
+        },
+        {
+          "src": "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://fechouocarrinho.site/downloads/fechouocarrinho.apk",
+          "ok": true,
+          "w": 200
+        }
+      ],
+      "cssLinks": [
+        "https://fechouocarrinho.site/_next/static/chunks/11i1dsyz9p_ii.css"
+      ],
+      "sheets": [
+        {
+          "href": "https://fechouocarrinho.site/_next/static/chunks/11i1dsyz9p_ii.css",
+          "rules": 79
+        }
+      ],
+      "hasQR": true,
+      "apkLinks": [
+        "https://fechouocarrinho.site/downloads/fechouocarrinho.apk",
+        "https://fechouocarrinho.site/downloads/fechouocarrinho.apk"
+      ],
+      "emojis": 1
+    }
+  },
+  {
+    "base": "live",
+    "page": "/como-funciona",
+    "status": 200,
+    "ms": 822,
+    "file": "C:/Users/usuario/orca/projects/ScanList/fechouocarrinho-next/qa-shots/live-como-funciona-390x844.png",
+    "errors": [],
+    "metrics": {
+      "title": "Fechou o Carrinho — Seu total sem sustos no caixa",
+      "scrollW": 390,
+      "clientW": 390,
+      "overflowX": false,
+      "imgs": [],
+      "cssLinks": [
+        "https://fechouocarrinho.site/_next/static/chunks/11i1dsyz9p_ii.css"
+      ],
+      "sheets": [
+        {
+          "href": "https://fechouocarrinho.site/_next/static/chunks/11i1dsyz9p_ii.css",
+          "rules": 79
+        }
+      ],
+      "hasQR": false,
+      "apkLinks": [],
+      "emojis": 1
+    }
+  },
+  {
+    "base": "live",
+    "page": "/supermercados",
+    "status": 200,
+    "ms": 944,
+    "file": "C:/Users/usuario/orca/projects/ScanList/fechouocarrinho-next/qa-shots/live-supermercados-390x844.png",
+    "errors": [],
+    "metrics": {
+      "title": "Fechou o Carrinho — Seu total sem sustos no caixa",
+      "scrollW": 390,
+      "clientW": 390,
+      "overflowX": false,
+      "imgs": [],
+      "cssLinks": [
+        "https://fechouocarrinho.site/_next/static/chunks/11i1dsyz9p_ii.css"
+      ],
+      "sheets": [
+        {
+          "href": "https://fechouocarrinho.site/_next/static/chunks/11i1dsyz9p_ii.css",
+          "rules": 79
+        }
+      ],
+      "hasQR": false,
+      "apkLinks": [],
+      "emojis": 1
+    }
+  },
+  {
+    "base": "live",
+    "page": "/ajuda",
+    "status": 200,
+    "ms": 820,
+    "file": "C:/Users/usuario/orca/projects/ScanList/fechouocarrinho-next/qa-shots/live-ajuda-390x844.png",
+    "errors": [],
+    "metrics": {
+      "title": "Fechou o Carrinho — Seu total sem sustos no caixa",
+      "scrollW": 390,
+      "clientW": 390,
+      "overflowX": false,
+      "imgs": [],
+      "cssLinks": [
+        "https://fechouocarrinho.site/_next/static/chunks/11i1dsyz9p_ii.css"
+      ],
+      "sheets": [
+        {
+          "href": "https://fechouocarrinho.site/_next/static/chunks/11i1dsyz9p_ii.css",
+          "rules": 79
+        }
+      ],
+      "hasQR": false,
+      "apkLinks": [],
+      "emojis": 1
+    }
+  },
+  {
+    "base": "local",
+    "page": "/",
+    "status": 200,
+    "ms": 1468,
+    "file": "C:/Users/usuario/orca/projects/ScanList/fechouocarrinho-next/qa-shots/local-home-390x844.png",
+    "errors": [],
+    "metrics": {
+      "title": "Fechou o Carrinho — Seu total sem sustos no caixa",
+      "scrollW": 390,
+      "clientW": 390,
+      "overflowX": false,
+      "imgs": [
+        {
+          "src": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=500&fit=crop",
+          "ok": true,
+          "w": 400
+        },
+        {
+          "src": "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://fechouocarrinho.site/downloads/fechouocarrinho.apk",
+          "ok": true,
+          "w": 200
+        }
+      ],
+      "cssLinks": [
+        "http://127.0.0.1:3100/_next/static/chunks/3p3twltnjib5v.css"
+      ],
+      "sheets": [
+        {
+          "href": "http://127.0.0.1:3100/_next/static/chunks/3p3twltnjib5v.css",
+          "rules": 79
+        }
+      ],
+      "hasQR": true,
+      "apkLinks": [
+        "http://127.0.0.1:3100/downloads/fechouocarrinho.apk",
+        "http://127.0.0.1:3100/downloads/fechouocarrinho.apk"
+      ],
+      "emojis": 1
+    }
+  },
+  {
+    "base": "local",
+    "page": "/como-funciona",
+    "status": 200,
+    "ms": 607,
+    "file": "C:/Users/usuario/orca/projects/ScanList/fechouocarrinho-next/qa-shots/local-como-funciona-390x844.png",
+    "errors": [],
+    "metrics": {
+      "title": "Fechou o Carrinho — Seu total sem sustos no caixa",
+      "scrollW": 390,
+      "clientW": 390,
+      "overflowX": false,
+      "imgs": [],
+      "cssLinks": [
+        "http://127.0.0.1:3100/_next/static/chunks/3p3twltnjib5v.css"
+      ],
+      "sheets": [
+        {
+          "href": "http://127.0.0.1:3100/_next/static/chunks/3p3twltnjib5v.css",
+          "rules": 79
+        }
+      ],
+      "hasQR": false,
+      "apkLinks": [],
+      "emojis": 1
+    }
+  },
+  {
+    "base": "local",
+    "page": "/supermercados",
+    "status": 200,
+    "ms": 609,
+    "file": "C:/Users/usuario/orca/projects/ScanList/fechouocarrinho-next/qa-shots/local-supermercados-390x844.png",
+    "errors": [],
+    "metrics": {
+      "title": "Fechou o Carrinho — Seu total sem sustos no caixa",
+      "scrollW": 390,
+      "clientW": 390,
+      "overflowX": false,
+      "imgs": [],
+      "cssLinks": [
+        "http://127.0.0.1:3100/_next/static/chunks/3p3twltnjib5v.css"
+      ],
+      "sheets": [
+        {
+          "href": "http://127.0.0.1:3100/_next/static/chunks/3p3twltnjib5v.css",
+          "rules": 79
+        }
+      ],
+      "hasQR": false,
+      "apkLinks": [],
+      "emojis": 1
+    }
+  },
+  {
+    "base": "local",
+    "page": "/ajuda",
+    "status": 200,
+    "ms": 596,
+    "file": "C:/Users/usuario/orca/projects/ScanList/fechouocarrinho-next/qa-shots/local-ajuda-390x844.png",
+    "errors": [],
+    "metrics": {
+      "title": "Fechou o Carrinho — Seu total sem sustos no caixa",
+      "scrollW": 390,
+      "clientW": 390,
+      "overflowX": false,
+      "imgs": [],
+      "cssLinks": [
+        "http://127.0.0.1:3100/_next/static/chunks/3p3twltnjib5v.css"
+      ],
+      "sheets": [
+        {
+          "href": "http://127.0.0.1:3100/_next/static/chunks/3p3twltnjib5v.css",
+          "rules": 79
+        }
+      ],
+      "hasQR": false,
+      "apkLinks": [],
+      "emojis": 1
+    }
+  }
+]
