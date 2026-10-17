@@ -58,6 +58,7 @@ import androidx.compose.ui.unit.sp
 import com.fechouocarrinho.app.domain.model.Price
 import com.fechouocarrinho.app.ocr.PriceExtractor
 import com.fechouocarrinho.app.presentation.components.PriceItem
+import com.fechouocarrinho.app.presentation.components.UpdateDialog
 import com.fechouocarrinho.app.presentation.theme.FechouOCarrinhoTheme
 import com.fechouocarrinho.app.presentation.theme.Primary
 import com.fechouocarrinho.app.presentation.theme.Accent
@@ -72,6 +73,12 @@ fun HomeScreen(
     onNavigateToHelp: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val updateInfo by viewModel.updateInfo.collectAsState()
+    val isForce by viewModel.isForceUpdate.collectAsState()
+
+    updateInfo?.let { info ->
+        UpdateDialog(info = info, isForce = isForce, onDismiss = { viewModel.dismissUpdate() })
+    }
 
     Scaffold(
         topBar = {
