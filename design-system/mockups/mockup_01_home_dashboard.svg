@@ -5,10 +5,10 @@
       <stop offset="100%" stop-color="#146B32"/>
     </linearGradient>
     <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#111827" flood-opacity="0.08"/>
+      <feDropShadow dx="0" dy="4" std-deviation="8" flood-color="#111827" flood-opacity="0.08"/>
     </filter>
     <filter id="fabShadow" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#FF6B00" flood-opacity="0.35"/>
+      <feDropShadow dx="0" dy="6" std-deviation="10" flood-color="#FF6B00" flood-opacity="0.35"/>
     </filter>
   </defs>
 
@@ -16,7 +16,7 @@
   <rect width="390" height="844" fill="#FFF8F0"/>
 
   <!-- Status bar -->
-  <text x="20" y="28" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">9:41</text>
+  <text x="24" y="28" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">9:41</text>
   <g transform="translate(300, 14)">
     <rect x="0" y="2" width="18" height="10" rx="2" fill="none" stroke="#111827" stroke-width="1.2"/>
     <rect x="2" y="4" width="12" height="6" rx="1" fill="#111827"/>
@@ -32,10 +32,10 @@
   </g>
 
   <!-- Header -->
-  <rect y="44" width="390" height="100" fill="url(#hdrGrad)"/>
-  <g transform="translate(20, 62)">
-    <rect width="40" height="40" rx="12.5" fill="white"/>
-    <g transform="translate(4, 4) scale(0.85)">
+  <rect y="44" width="390" height="104" fill="url(#hdrGrad)"/>
+  <g transform="translate(20, 60)">
+    <rect width="42" height="42" rx="13" fill="white"/>
+    <g transform="translate(5, 5) scale(0.8)">
       <path d="M7.5 9.8H10C12 9.8 13.6 11.1 14 13L14.4 14.8H26.5C27.2 14.8 27.8 15.1 28.3 15.6L33.2 20.2C33.8 20.8 33.8 21.7 33.2 22.3L28.3 26.9C27.8 27.4 27.2 27.7 26.5 27.7H16.4C14.8 27.7 13.5 26.6 13.2 25.1L10.9 14.4C10.7 13.6 10.3 13.1 9.5 13.1H7.5C6.5 13.1 5.7 12.4 5.7 11.4C5.7 10.5 6.5 9.8 7.5 9.8Z" fill="#1B8C42"/>
       <path d="M15.5 20.7L18.2 23.3L23 18.2" stroke="white" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
       <circle cx="28.4" cy="21.25" r="1.65" fill="#FF6B00"/>
@@ -43,96 +43,118 @@
       <circle cx="25.6" cy="31.15" r="1.8" fill="#1B8C42"/>
     </g>
   </g>
-  <text x="72" y="84" font-family="Nunito, sans-serif" font-size="20" font-weight="800" letter-spacing="-0.5" fill="white">fechou o carrinho</text>
-  <text x="72" y="102" font-family="Inter, sans-serif" font-size="12" font-weight="400" fill="white" fill-opacity="0.8">olá, bora às compras?</text>
+  <text x="74" y="80" font-family="Nunito, sans-serif" font-size="20" font-weight="800" letter-spacing="-0.5" fill="white">fechou o carrinho</text>
+  <text x="74" y="100" font-family="Inter, sans-serif" font-size="12" font-weight="400" fill="white" fill-opacity="0.85">olá, bora às compras?</text>
   <!-- store badge -->
-  <rect x="250" y="68" width="120" height="28" rx="14" fill="white" fill-opacity="0.18"/>
-  <text x="262" y="87" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="white">Supermercados BH</text>
+  <rect x="236" y="64" width="134" height="28" rx="14" fill="white" fill-opacity="0.18"/>
+  <text x="250" y="83" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="white">Supermercados BH</text>
 
   <!-- Budget card -->
-  <rect x="20" y="164" width="350" height="150" rx="24" fill="white" filter="url(#cardShadow)"/>
-  <text x="40" y="192" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#6B7280">orçamento da compra</text>
-  <text x="40" y="232" font-family="Nunito, sans-serif" font-size="34" font-weight="800" letter-spacing="-1.5" fill="#111827">R$ 142,80</text>
-  <text x="40" y="256" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6B7280">de R$ 200,00 (meta)</text>
-  <rect x="40" y="272" width="310" height="10" rx="5" fill="#EAE5DC"/>
-  <rect x="40" y="272" width="221" height="10" rx="5" fill="#1B8C42"/>
-  <text x="40" y="300" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#1B8C42">71% da meta · R$ 57,20 restantes</text>
+  <rect x="20" y="168" width="350" height="156" rx="24" fill="white" filter="url(#cardShadow)"/>
+  <text x="40" y="196" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#6B7280">orçamento da compra</text>
+  <text x="40" y="236" font-family="Nunito, sans-serif" font-size="34" font-weight="800" letter-spacing="-1.5" fill="#111827">R$ 142,80</text>
+  <text x="40" y="260" font-family="Inter, sans-serif" font-size="13" font-weight="400" fill="#6B7280">de R$ 200,00 (meta)</text>
+  <rect x="40" y="278" width="310" height="10" rx="5" fill="#EAE5DC"/>
+  <rect x="40" y="278" width="221" height="10" rx="5" fill="#1B8C42"/>
+  <text x="40" y="308" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#1B8C42">71% da meta · R$ 57,20 restantes</text>
 
   <!-- Shopping list -->
-  <text x="20" y="344" font-family="Nunito, sans-serif" font-size="16" font-weight="800" fill="#111827">lista de compras</text>
+  <text x="20" y="352" font-family="Nunito, sans-serif" font-size="16" font-weight="800" fill="#111827">lista de compras</text>
 
   <!-- Category Mercearia -->
-  <text x="20" y="372" font-family="monospace" font-size="10" font-weight="700" letter-spacing="1.5" fill="#6B7280">MERCEARIA</text>
+  <text x="20" y="380" font-family="monospace" font-size="10" font-weight="700" letter-spacing="1.5" fill="#6B7280">MERCEARIA</text>
 
   <!-- Item 1 Arroz -->
-  <rect x="20" y="382" width="350" height="60" rx="16" fill="white" filter="url(#cardShadow)"/>
-  <rect x="32" y="394" width="36" height="36" rx="10" fill="#EAE5DC"/>
-  <text x="46" y="418" font-size="18">🌾</text>
-  <text x="80" y="408" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Arroz integral 5kg</text>
-  <text x="80" y="426" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">1 un · R$ 28,90</text>
-  <rect x="80" y="430" width="46" height="16" rx="8" fill="#FF6B00"/>
-  <text x="86" y="442" font-family="monospace" font-size="9" font-weight="700" fill="white">OCR</text>
-  <text x="350" y="418" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#111827" text-anchor="end">R$ 28,90</text>
+  <rect x="20" y="390" width="350" height="64" rx="16" fill="white" filter="url(#cardShadow)"/>
+  <g transform="translate(32, 402)">
+    <rect width="40" height="40" rx="10" fill="#FDE68A"/>
+    <path d="M8 12 L20 4 L28 12 V30 H8 Z" fill="#D97706"/>
+    <rect x="10" y="18" width="12" height="12" rx="1" fill="#B45309"/>
+  </g>
+  <text x="84" y="416" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Arroz integral 5kg</text>
+  <text x="84" y="434" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">1 un · R$ 28,90</text>
+  <rect x="84" y="440" width="44" height="14" rx="7" fill="#FF6B00"/>
+  <text x="90" y="450" font-family="monospace" font-size="8" font-weight="700" fill="white">OCR</text>
+  <text x="350" y="424" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#111827" text-anchor="end">R$ 28,90</text>
 
   <!-- Item 2 Feijao -->
-  <rect x="20" y="450" width="350" height="60" rx="16" fill="white" filter="url(#cardShadow)"/>
-  <rect x="32" y="462" width="36" height="36" rx="10" fill="#EAE5DC"/>
-  <text x="44" y="486" font-size="18">🫘</text>
-  <text x="80" y="476" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Feijão carioca 1kg</text>
-  <text x="80" y="494" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">2 un · R$ 3,74</text>
-  <text x="350" y="486" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#111827" text-anchor="end">R$ 7,49</text>
+  <rect x="20" y="462" width="350" height="64" rx="16" fill="white" filter="url(#cardShadow)"/>
+  <g transform="translate(32, 474)">
+    <rect width="40" height="40" rx="10" fill="#FED7AA"/>
+    <ellipse cx="12" cy="14" rx="6" ry="4" fill="#92400E"/>
+    <ellipse cx="24" cy="22" rx="6" ry="4" fill="#78350F"/>
+    <ellipse cx="16" cy="28" rx="5" ry="3" fill="#92400E"/>
+  </g>
+  <text x="84" y="488" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Feijão carioca 1kg</text>
+  <text x="84" y="506" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">2 un · R$ 3,74</text>
+  <text x="350" y="496" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#111827" text-anchor="end">R$ 7,49</text>
 
   <!-- Category Laticinios -->
-  <text x="20" y="532" font-family="monospace" font-size="10" font-weight="700" letter-spacing="1.5" fill="#6B7280">LATICÍNIOS</text>
+  <text x="20" y="548" font-family="monospace" font-size="10" font-weight="700" letter-spacing="1.5" fill="#6B7280">LATICÍNIOS</text>
 
   <!-- Item 3 Leite -->
-  <rect x="20" y="542" width="350" height="60" rx="16" fill="white" filter="url(#cardShadow)"/>
-  <rect x="32" y="554" width="36" height="36" rx="10" fill="#EAE5DC"/>
-  <text x="44" y="578" font-size="18">🥛</text>
-  <text x="80" y="568" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Leite integral 1L</text>
-  <text x="80" y="586" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">4 un · R$ 4,99</text>
-  <text x="350" y="578" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#111827" text-anchor="end">R$ 19,96</text>
+  <rect x="20" y="558" width="350" height="64" rx="16" fill="white" filter="url(#cardShadow)"/>
+  <g transform="translate(32, 570)">
+    <rect width="40" height="40" rx="10" fill="#DBEAFE"/>
+    <rect x="14" y="6" width="12" height="6" rx="1" fill="#60A5FA"/>
+    <rect x="10" y="12" width="20" height="22" rx="2" fill="#93C5FD"/>
+  </g>
+  <text x="84" y="584" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Leite integral 1L</text>
+  <text x="84" y="602" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">4 un · R$ 4,99</text>
+  <text x="350" y="592" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#111827" text-anchor="end">R$ 19,96</text>
 
   <!-- Category Bebidas -->
-  <text x="20" y="624" font-family="monospace" font-size="10" font-weight="700" letter-spacing="1.5" fill="#6B7280">BEBIDAS</text>
+  <text x="20" y="644" font-family="monospace" font-size="10" font-weight="700" letter-spacing="1.5" fill="#6B7280">BEBIDAS</text>
 
   <!-- Item 4 Cafe -->
-  <rect x="20" y="634" width="350" height="60" rx="16" fill="white" filter="url(#cardShadow)"/>
-  <rect x="32" y="646" width="36" height="36" rx="10" fill="#EAE5DC"/>
-  <text x="44" y="670" font-size="18">☕</text>
-  <text x="80" y="660" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Café torrado 500g</text>
-  <text x="80" y="678" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">1 un · R$ 18,50</text>
-  <text x="350" y="670" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#111827" text-anchor="end">R$ 18,50</text>
+  <rect x="20" y="654" width="350" height="64" rx="16" fill="white" filter="url(#cardShadow)"/>
+  <g transform="translate(32, 666)">
+    <rect width="40" height="40" rx="10" fill="#E7E5E4"/>
+    <rect x="8" y="12" width="18" height="14" rx="2" fill="#78350F"/>
+    <path d="M26 14 Q30 14 30 19 Q30 24 26 24" stroke="#78350F" stroke-width="1.6" fill="none"/>
+    <rect x="10" y="26" width="14" height="3" rx="1" fill="#57534E"/>
+  </g>
+  <text x="84" y="680" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Café torrado 500g</text>
+  <text x="84" y="698" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">1 un · R$ 18,50</text>
+  <text x="350" y="688" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#111827" text-anchor="end">R$ 18,50</text>
 
   <!-- Bottom nav bar -->
   <rect y="764" width="390" height="80" fill="white"/>
   <line x1="0" y1="764" x2="390" y2="764" stroke="#111827" stroke-opacity="0.08" stroke-width="1"/>
 
-  <!-- nav icons -->
-  <g transform="translate(40, 778)">
-    <rect width="24" height="24" rx="6" fill="#1B8C42" fill-opacity="0.12"/>
-    <text x="6" y="17" font-size="14">🏠</text>
-    <text x="0" y="46" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#1B8C42">Home</text>
+  <!-- nav home -->
+  <g transform="translate(34, 778)">
+    <path d="M12 3 L22 10 V21 H14 V15 H10 V21 H2 V10 Z" fill="#1B8C42"/>
+    <text x="-2" y="46" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#1B8C42">Home</text>
   </g>
-  <g transform="translate(110, 778)">
-    <rect width="24" height="24" rx="6" fill="#6B7280" fill-opacity="0.12"/>
-    <text x="6" y="17" font-size="14">📋</text>
+  <!-- nav lista -->
+  <g transform="translate(104, 778)">
+    <rect x="3" y="5" width="18" height="2" rx="1" fill="#6B7280"/>
+    <rect x="3" y="11" width="18" height="2" rx="1" fill="#6B7280"/>
+    <rect x="3" y="17" width="18" height="2" rx="1" fill="#6B7280"/>
     <text x="2" y="46" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#6B7280">Lista</text>
   </g>
 
   <!-- Central FAB scan button -->
   <circle cx="195" cy="764" r="34" fill="#FF6B00" filter="url(#fabShadow)"/>
-  <text x="195" y="772" font-size="20" text-anchor="middle" fill="white">📷</text>
+  <g transform="translate(183, 752)">
+    <rect x="0" y="4" width="24" height="16" rx="3" fill="white"/>
+    <circle cx="12" cy="12" r="5" fill="#FF6B00"/>
+    <rect x="8" y="1" width="8" height="3" rx="1" fill="white"/>
+  </g>
   <text x="195" y="812" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#FF6B00" text-anchor="middle">Escanear</text>
 
-  <g transform="translate(256, 778)">
-    <rect width="24" height="24" rx="6" fill="#6B7280" fill-opacity="0.12"/>
-    <text x="6" y="17" font-size="14">🛒</text>
+  <!-- nav carrinho -->
+  <g transform="translate(250, 778)">
+    <path d="M4 5 H6 L8 16 H18 L20 8 H7" stroke="#6B7280" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="9" cy="19" r="1.6" fill="#6B7280"/>
+    <circle cx="17" cy="19" r="1.6" fill="#6B7280"/>
     <text x="0" y="46" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#6B7280">Carrinho</text>
   </g>
-  <g transform="translate(326, 778)">
-    <rect width="24" height="24" rx="6" fill="#6B7280" fill-opacity="0.12"/>
-    <text x="6" y="17" font-size="14">👤</text>
+  <!-- nav perfil -->
+  <g transform="translate(320, 778)">
+    <circle cx="12" cy="8" r="4" fill="#6B7280"/>
+    <path d="M4 21 C4 16 8 14 12 14 C16 14 20 16 20 21" fill="#6B7280"/>
     <text x="2" y="46" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#6B7280">Perfil</text>
   </g>
 </svg>
