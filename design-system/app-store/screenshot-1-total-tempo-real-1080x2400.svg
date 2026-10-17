@@ -1,0 +1,84 @@
+<svg width="1080" height="2400" viewBox="0 0 1080 2400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="2400" fill="#1B8C42"/>
+  
+  <!-- Subtle circular halo -->
+  <circle cx="540" cy="1400" r="600" fill="white" fill-opacity="0.05"/>
+
+  <!-- Top Copy Header -->
+  <g transform="translate(80, 160)">
+    <!-- Category Pill -->
+    <rect width="280" height="52" rx="26" fill="white" fill-opacity="0.15"/>
+    <text x="28" y="33" font-family="monospace" font-size="20" font-weight="700" letter-spacing="2" fill="#FFE8D6">CONTROLE TOTAL</text>
+
+    <!-- Main Title -->
+    <text x="0" y="160" font-family="Nunito, sans-serif" font-size="82" font-weight="800" letter-spacing="-3" fill="white">Total da compra</text>
+    <text x="0" y="255" font-family="Nunito, sans-serif" font-size="82" font-weight="800" letter-spacing="-3" fill="#FFC091">em tempo real.</text>
+
+    <!-- Subtitle -->
+    <text x="0" y="330" font-family="Inter, sans-serif" font-size="30" font-weight="400" fill="white" fill-opacity="0.82">Saiba o valor exato antes de chegar ao caixa.</text>
+  </g>
+
+  <!-- Large Phone Mockup (Center/Bottom) -->
+  <g transform="translate(140, 680)">
+    <!-- Device Frame Shadow -->
+    <rect x="-15" y="-10" width="830" height="1620" rx="90" fill="#051C0D" fill-opacity="0.45"/>
+    <!-- Outer Bezel -->
+    <rect width="800" height="1600" rx="84" fill="#111827"/>
+    <!-- Inner Screen -->
+    <rect x="22" y="22" width="756" height="1556" rx="66" fill="#FFF8F0"/>
+
+    <!-- Island -->
+    <rect x="268" y="45" width="220" height="46" rx="23" fill="#111827"/>
+
+    <!-- Custom Screen Content -->
+    
+    <g transform="translate(60, 140)">
+      <!-- Top Bar -->
+      <g>
+        <rect width="64" height="64" rx="20" fill="#1B8C42"/>
+        <text x="80" y="44" font-family="Nunito, sans-serif" font-size="34" font-weight="800" fill="#111827">fechou</text>
+      </g>
+      <text x="0" y="140" font-family="Nunito, sans-serif" font-size="28" font-weight="800" fill="#111827">olá, bora às compras?</text>
+
+      <!-- Total Box -->
+      <g transform="translate(0, 170)">
+        <rect width="636" height="260" rx="36" fill="#1B8C42"/>
+        <text x="44" y="60" font-family="Inter, sans-serif" font-size="22" font-weight="500" fill="white" fill-opacity="0.8">total até agora</text>
+        <text x="44" y="150" font-family="Nunito, sans-serif" font-size="76" font-weight="800" letter-spacing="-3" fill="white">R$ 147,82</text>
+        <text x="44" y="210" font-family="Inter, sans-serif" font-size="22" font-weight="500" fill="white" fill-opacity="0.75">18 itens adicionados</text>
+      </g>
+
+      <!-- Scan CTA -->
+      <g transform="translate(0, 460)">
+        <rect width="636" height="90" rx="28" fill="#FF6B00"/>
+        <text x="175" y="56" font-family="Inter, sans-serif" font-size="26" font-weight="700" fill="white">📷 Registrar preço</text>
+      </g>
+
+      <!-- List -->
+      <g transform="translate(0, 590)">
+        <rect width="636" height="100" rx="24" fill="white"/>
+        <rect x="20" y="20" width="60" height="60" rx="16" fill="#EAE5DC"/>
+        <text x="100" y="48" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#111827">Arroz integral 1kg</text>
+        <text x="100" y="74" font-family="Inter, sans-serif" font-size="18" fill="#6B7280">2 un · R$ 8,49</text>
+        <text x="480" y="60" font-family="Nunito, sans-serif" font-size="26" font-weight="800" fill="#111827">R$ 16,98</text>
+
+        <g transform="translate(0, 116)">
+          <rect width="636" height="100" rx="24" fill="white"/>
+          <rect x="20" y="20" width="60" height="60" rx="16" fill="#EAE5DC"/>
+          <text x="100" y="48" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#111827">Café torrado 500g</text>
+          <text x="100" y="74" font-family="Inter, sans-serif" font-size="18" fill="#6B7280">1 un · R$ 18,90</text>
+          <text x="480" y="60" font-family="Nunito, sans-serif" font-size="26" font-weight="800" fill="#111827">R$ 18,90</text>
+        </g>
+
+        <g transform="translate(0, 232)">
+          <rect width="636" height="100" rx="24" fill="white"/>
+          <rect x="20" y="20" width="60" height="60" rx="16" fill="#EAE5DC"/>
+          <text x="100" y="48" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#111827">Leite integral 1L</text>
+          <text x="100" y="74" font-family="Inter, sans-serif" font-size="18" fill="#6B7280">4 un · R$ 4,79</text>
+          <text x="480" y="60" font-family="Nunito, sans-serif" font-size="26" font-weight="800" fill="#111827">R$ 19,16</text>
+        </g>
+      </g>
+    </g>
+  
+  </g>
+</svg>

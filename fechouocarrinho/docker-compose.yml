@@ -1,0 +1,29 @@
+services:
+  fechouocarrinho:
+    build: .
+    container_name: fechouocarrinho-landing
+    restart: unless-stopped
+    volumes:
+      - ./downloads:/usr/share/nginx/html/downloads:ro
+      - ./.well-known:/usr/share/nginx/html/.well-known:ro
+    networks:
+      - coolify
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=coolify"
+      - "traefik.http.routers.fechouocarrinho-site.entrypoints=https"
+      - "traefik.http.routers.fechouocarrinho-site.rule=Host(`fechouocarrinho.site`) || Host(`www.fechouocarrinho.site`)"
+      - "traefik.http.routers.fechouocarrinho-site.tls.certresolver=letsencrypt"
+      - "traefik.http.services.fechouocarrinho-site.loadbalancer.server.port=80"
+      - "traefik.http.routers.fechouocarrinho-site-www.middlewares=fechouocarrinho-www-redirect"
+      - "traefik.http.middlewares.fechouocarrinho-www-redirect.redirectregex.regex=^https?://www\\.fechouocarrinho\\.site/(.*)"
+      - "traefik.http.middlewares.fechouocarrinho-www-redirect.redirectregex.replacement=https://fechouocarrinho.site/$${1}"
+      - "traefik.http.middlewares.fechouocarrinho-www-redirect.redirectregex.permanent=true"
+      - "traefik.http.routers.fechouocarrinho-preview.entrypoints=https"
+      - "traefik.http.routers.fechouocarrinho-preview.rule=Host(`fechouocarrinho.185.111.156.178.sslip.io`)"
+      - "traefik.http.routers.fechouocarrinho-preview.tls.certresolver=letsencrypt"
+      - "traefik.http.services.fechouocarrinho-preview.loadbalancer.server.port=80"
+
+networks:
+  coolify:
+    external: true

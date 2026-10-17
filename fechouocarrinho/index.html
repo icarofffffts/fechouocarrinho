@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fechou o Carrinho — Seu total sem sustos no caixa</title>
+<meta name="description" content="Aponte a câmera para a etiqueta, o app lê o preço via OCR offline e soma no total do carrinho em tempo real. Escolha seu supermercado em MG e economize. APK direto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;700;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{fechado:"#1B8C42",laranja:"#FF6B00",creme:"#FFF8F0"},fontFamily:{display:["Nunito","sans-serif"],body:["Inter","sans-serif"]}}}}</script>
+<style>body{font-family:Inter,sans-serif}</style>
+</head>
+<body class="bg-creme text-zinc-900 antialiased">
+<!-- HEADER -->
+<header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-zinc-100">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-fechado flex items-center justify-center text-white font-display font-extrabold text-lg">✓</div>
+      <span class="font-display font-extrabold text-xl tracking-tight">fechou<span class="text-fechado">o</span>carrinho<span class="text-laranja">.site</span></span>
+      <span class="hidden md:inline ml-2 text-xs font-semibold bg-amber-100 text-amber-700 px-2 py-1 rounded-full">BETA • MG</span>
+    </div>
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <a href="#como" class="hover:text-fechado">Como funciona</a>
+      <a href="#supermercados" class="hover:text-fechado">Supermercados</a>
+      <a href="https://github.com" target="_blank" class="hover:text-fechado">Open Source ↗</a>
+      <a href="#baixar" class="bg-zinc-900 text-white px-5 py-2.5 rounded-full font-semibold hover:bg-black transition">Baixar APK</a>
+    </nav>
+    <a href="#baixar" class="md:hidden bg-fechado text-white px-4 py-2 rounded-full font-bold text-sm">Baixar</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-4 pt-10 md:pt-16 pb-8 grid md:grid-cols-2 gap-8 items-center">
+  <div>
+    <div class="inline-flex items-center gap-2 bg-white border border-zinc-200 rounded-full px-3 py-1.5 text-xs font-semibold">
+      <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> OCR 100% offline • Não esquenta o celular
+    </div>
+    <h1 class="font-display font-extrabold text-4xl md:text-5xl leading-[0.95] mt-4">
+      Seu total<br>
+      <span class="text-fechado">sem sustos</span><br>
+      no caixa.
+    </h1>
+    <p class="mt-4 text-zinc-600 text-lg leading-relaxed">Aponte a câmera para a etiqueta na prateleira. O app lê o preço na hora, soma no carrinho e te mostra quanto vai fechar — <b>sem internet, sem travar</b> em celular fraco.</p>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href="/downloads/fechouocarrinho.apk" class="inline-flex items-center gap-3 bg-fechado text-white px-7 py-4 rounded-2xl font-display font-extrabold text-lg hover:bg-emerald-700 transition shadow-lg shadow-emerald-700/20">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3M12 15l-4-4M12 15l4-4"/><path d="M2 17l1 4h18l1-4"/></svg>
+        Baixar APK • 8 MB
+      </a>
+      <a href="#como" class="inline-flex items-center gap-2 bg-white border border-zinc-200 px-6 py-4 rounded-2xl font-semibold hover:bg-zinc-50">Ver demonstração</a>
+    </div>
+    <p class="mt-3 text-xs text-zinc-500">Distribuição direta • Android 8+ • Instalação em 10s • <a href="#baixar" class="underline">Como instalar?</a></p>
+    <div class="mt-6 flex items-center gap-6 text-xs">
+      <span class="flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-white border flex items-center justify-center">⚡</span> Leve p/ 2GB RAM</span>
+      <span class="flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-white border flex items-center justify-center">🔒</span> 100% offline</span>
+      <span class="flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-white border flex items-center justify-center">🇧🇷</span> Feito p/ MG</span>
+    </div>
+  </div>
+
+  <!-- PHONE MOCKUP -->
+  <div class="relative flex justify-center md:justify-end">
+    <div class="w-[300px] h-[620px] bg-zinc-900 rounded-[42px] p-3 shadow-2xl rotate-[-1deg]">
+      <div class="w-full h-full bg-white rounded-[32px] overflow-hidden flex flex-col">
+        <div class="h-7 bg-zinc-900 flex items-center justify-center"><div class="w-20 h-1.5 bg-zinc-700 rounded-full"></div></div>
+        <div class="bg-fechado text-white px-4 py-3 flex items-center justify-between">
+          <span class="font-display font-extrabold">Meu Carrinho</span>
+          <span class="bg-white text-fechado text-xs font-extrabold px-2.5 py-1 rounded-full">MG • EPA</span>
+        </div>
+        <div class="flex-1 relative bg-zinc-100">
+          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=500&fit=crop" class="w-full h-full object-cover opacity-60">
+          <div class="absolute inset-0 flex flex-col items-center justify-center p-6">
+            <div class="w-full bg-white rounded-2xl p-3 shadow-xl border-2 border-laranja">
+              <div class="text-[11px] font-bold text-zinc-500 tracking-widest">MIRA NA ETIQUETA</div>
+              <div class="mt-2 border-2 border-dashed border-laranja rounded-xl h-24 flex items-center justify-center bg-amber-50">
+                <span class="font-mono font-extrabold text-xl">R$ 7,89</span>
+              </div>
+              <div class="mt-2 flex gap-2">
+                <span class="flex-1 bg-zinc-900 text-white text-center py-2 rounded-xl text-sm font-bold">✓ Capturar</span>
+                <span class="px-3 py-2 bg-white border rounded-xl text-sm">✎</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-3 bg-white border-t">
+          <div class="flex justify-between text-sm"><span class="text-zinc-500">Arroz Camil 5kg</span><span class="font-bold">R$ 29,90</span></div>
+          <div class="flex justify-between text-sm"><span class="text-zinc-500">Café Pilão 500g</span><span class="font-bold">R$ 15,49</span></div>
+          <div class="mt-3 bg-fechado text-white rounded-xl px-4 py-3 flex justify-between items-center">
+            <span class="font-semibold text-sm">TOTAL</span><span class="font-display font-extrabold text-xl">R$ 53,28</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hidden md:block absolute -right-2 top-10 bg-white border border-zinc-200 rounded-2xl px-4 py-3 shadow-xl">
+      <div class="text-xs font-bold text-zinc-500">ECONOMIA</div>
+      <div class="font-display font-extrabold text-fechado text-lg">- R$ 34,00</div>
+      <div class="text-xs text-zinc-500">vs. mês passado</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como" class="bg-white border-y border-zinc-100">
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="font-display font-extrabold text-2xl text-center">Como funciona <span class="text-zinc-400 font-semibold">(15 segundos)</span></h2>
+    <div class="grid md:grid-cols-3 gap-6 mt-8">
+      <div class="bg-creme rounded-3xl p-6 border border-amber-100">
+        <div class="w-12 h-12 rounded-2xl bg-white border flex items-center justify-center text-xl">📍</div>
+        <h3 class="font-display font-extrabold mt-4">1. Escolha o mercado</h3>
+        <p class="text-sm text-zinc-600 mt-2">Selecione seu estado (ex: Minas Gerais) e o supermercado: EPA, Mart Minas, BH, Supernosso... Não achou? Adicione em 5s — é open source.</p>
+        <div class="mt-4 flex flex-wrap gap-1.5">
+          <span class="text-xs bg-white border px-2.5 py-1 rounded-full font-semibold">EPA</span>
+          <span class="text-xs bg-white border px-2.5 py-1 rounded-full font-semibold">Mart Minas</span>
+          <span class="text-xs bg-white border px-2.5 py-1 rounded-full font-semibold">BH</span>
+          <span class="text-xs bg-white border px-2.5 py-1 rounded-full font-semibold">+ Adicionar</span>
+        </div>
+      </div>
+      <div class="bg-zinc-900 text-white rounded-3xl p-6">
+        <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-xl">📸</div>
+        <h3 class="font-display font-extrabold mt-4 text-white">2. Aponte e capture</h3>
+        <p class="text-sm text-zinc-400 mt-2">Não é vídeo contínuo que esquenta. É <b class="text-white">1 foto comprimida</b> → OCR on-device (ML Kit). Funciona dentro do mercado sem internet.</p>
+        <div class="mt-4 bg-white text-zinc-900 rounded-xl px-3 py-2 flex items-center justify-between text-sm font-mono"><span>JPEG 1024px • 80%</span><span class="w-2 h-2 bg-emerald-500 rounded-full"></span></div>
+      </div>
+      <div class="bg-emerald-50 rounded-3xl p-6 border border-emerald-100">
+        <div class="w-12 h-12 rounded-2xl bg-white border flex items-center justify-center text-xl">🧮</div>
+        <h3 class="font-display font-extrabold mt-4">3. Total na hora</h3>
+        <p class="text-sm text-zinc-600 mt-2">Preço extraído com Regex `R$ 7,89` → soma automática. Se não achar online, você digita e a comunidade agradece.</p>
+        <div class="mt-4 bg-white border rounded-xl px-3 py-2 text-sm flex justify-between"><span class="text-zinc-500">3 itens</span><span class="font-display font-extrabold text-fechado">R$ 53,28</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPERMERCADOS MG -->
+<section id="supermercados" class="max-w-6xl mx-auto px-4 py-12">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <h2 class="font-display font-extrabold text-3xl">Supermercados por estado</h2>
+      <p class="text-zinc-600 mt-2">Começamos por <b>Minas Gerais</b>. Faltou o seu? Cadastre — modelo open source.</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <select id="estado" class="border border-zinc-200 rounded-xl px-4 py-2.5 font-semibold bg-white">
+        <option value="MG">MG - Minas Gerais</option>
+        <option value="SP">SP - São Paulo (em breve)</option>
+        <option value="RJ">RJ - Rio (em breve)</option>
+        <option value="BA">BA - Bahia (em breve)</option>
+      </select>
+      <button onclick="document.getElementById('add-market').showModal()" class="bg-laranja text-white px-5 py-2.5 rounded-xl font-bold hover:bg-orange-600">+ Adicionar mercado</button>
+    </div>
+  </div>
+
+  <div id="grid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
+    <!-- cards injetados via JS - espelha fechouocarrinho.supermarkets -->
+  </div>
+  <p class="text-xs text-zinc-500 mt-4 text-center">Dados via Supabase <code>fechouocarrinho.supermarkets</code> • API: <code>/rest/v1/supermarkets?states=cs.{MG}</code> • GitHub: <code>fechouocarrinho-data</code></p>
+</section>
+
+<!-- FEATURES -->
+<section class="bg-zinc-900 text-white rounded-[32px] mx-4 md:mx-auto max-w-6xl p-8 md:p-10">
+  <div class="grid md:grid-cols-3 gap-8">
+    <div>
+      <h3 class="font-display font-extrabold text-lg">📴 Offline de verdade</h3>
+      <p class="text-zinc-400 text-sm mt-2">ML Kit Play Services — 0 MB no APK. OCR roda 100% no aparelho. Sem latência no corredor do mercado.</p>
+    </div>
+    <div>
+      <h3 class="font-display font-extrabold text-lg">🪶 Leve p/ celular fraco</h3>
+      <p class="text-zinc-400 text-sm mt-2">Kotlin + CameraX + Room em thread IO. Sem Flutter/RN. APK 8 MB. Não superaquece.</p>
+    </div>
+    <div>
+      <h3 class="font-display font-extrabold text-lg">🤝 Preço colaborativo</h3>
+      <p class="text-zinc-400 text-sm mt-2">Tentamos puxar preço online. Se não tiver, você informa e alimenta a base p/ todo MG. Open source.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BAIXAR -->
+<section id="baixar" class="max-w-6xl mx-auto px-4 py-14">
+  <div class="bg-white border border-zinc-200 rounded-[32px] p-8 md:p-10 grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h2 class="font-display font-extrabold text-3xl">Baixar o Fechou o Carrinho</h2>
+      <p class="text-zinc-600 mt-3">Distribuição direta. Sem Play Store por enquanto. Instalação em 1 toque.</p>
+      <div class="mt-6 flex flex-col gap-3">
+        <a href="/downloads/fechouocarrinho.apk" class="bg-fechado text-white text-center py-4 rounded-2xl font-display font-extrabold text-xl hover:bg-emerald-700 flex items-center justify-center gap-3">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3M12 15l-4-4M12 15l4-4"/><path d="M2 17l1 4h18l1-4"/></svg>
+          Baixar APK (v1.0.0 • 8MB)
+        </a>
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-sm">
+          <b>Como instalar:</b> Ao baixar, toque em <b>Abrir → Instalar</b>. Se pedir, ative <i>“Permitir desta fonte”</i>. É seguro — assinado com SHA256.
+        </div>
+      </div>
+      <div class="mt-4 grid grid-cols-3 gap-3 text-xs text-center">
+        <div class="bg-zinc-50 border rounded-xl p-3"><div class="font-bold">1</div>Baixar</div>
+        <div class="bg-zinc-50 border rounded-xl p-3"><div class="font-bold">2</div>Permitir</div>
+        <div class="bg-zinc-50 border rounded-xl p-3"><div class="font-bold">3</div>Instalar</div>
+      </div>
+    </div>
+    <div class="flex flex-col items-center">
+      <div class="w-48 h-48 bg-zinc-900 rounded-2xl p-3 flex items-center justify-center">
+        <div class="w-full h-full bg-white rounded-xl flex flex-col items-center justify-center p-4 text-center">
+          <div class="w-28 h-28 bg-zinc-900 rounded-lg flex items-center justify-center text-white text-[10px] leading-tight p-2">QR CODE<br>fechouocarrinho.site<br>/downloads/fechouocarrinho.apk</div>
+          <span class="text-xs font-semibold mt-2">Aponte a câmera</span>
+        </div>
+      </div>
+      <p class="text-xs text-zinc-500 mt-3 text-center">SHA256: <code class="bg-zinc-100 px-1.5 py-0.5 rounded">a1b2c3…</code> • <a href="#" class="underline">Ver changelog</a></p>
+      <a href="https://github.com" class="mt-4 text-sm font-semibold flex items-center gap-2 hover:text-fechado">★ GitHub • Deixe uma estrela <span>↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- API DEMO -->
+<section class="max-w-6xl mx-auto px-4 pb-10">
+  <div class="bg-zinc-50 border border-zinc-200 rounded-2xl p-6">
+    <h3 class="font-mono font-bold text-sm">API aberta • Supabase</h3>
+    <pre class="mt-3 bg-zinc-900 text-emerald-300 p-4 rounded-xl text-xs overflow-x-auto">GET https://fechouocarrinho.site/rest/v1/supermarkets?states=cs.{MG}
+# header: apikey: &lt;anon&gt;
+[
+  {"slug":"epa-mg","name":"EPA Supermercados","states":["MG"],"is_verified":true},
+  {"slug":"mart-minas-mg","name":"Mart Minas","states":["MG"]}
+]
+
+GET /rest/v1/prices?ean=eq.78912345&supermarket_id=eq.xxx&state=eq.MG
+POST /rest/v1/prices  { "ean":"789...","price":7.89,"source":"ocr_scan" }</pre>
+  </div>
+</section>
+
+<footer class="border-t border-zinc-200 py-8">
+  <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-4 text-sm text-zinc-500">
+    <span>© 2026 Fechou o Carrinho • Open Source • Feito para Minas Gerais com ❤️</span>
+    <span>fechouocarrinho.site • <a href="https://github.com" class="underline">GitHub</a> • <a href="mailto:contato@fechouocarrinho.site" class="underline">contato@fechouocarrinho.site</a></span>
+  </div>
+</footer>
+
+<dialog id="add-market" class="rounded-2xl p-0 backdrop:bg-black/50">
+  <form method="dialog" class="p-6 w-[360px]">
+    <h3 class="font-display font-extrabold text-lg">Adicionar supermercado</h3>
+    <p class="text-sm text-zinc-600 mt-1">Não achou o seu? Cadastre. Vira PR no GitHub e entra na lista.</p>
+    <input placeholder="Nome ex: Supermercado BH" class="mt-4 w-full border rounded-xl px-3 py-2.5">
+    <select class="mt-2 w-full border rounded-xl px-3 py-2.5"><option>MG</option><option>SP</option><option>RJ</option></select>
+    <input placeholder="Site (opcional)" class="mt-2 w-full border rounded-xl px-3 py-2.5">
+    <div class="mt-4 flex gap-2">
+      <button class="flex-1 bg-zinc-900 text-white py-2.5 rounded-xl font-bold">Enviar</button>
+      <button class="px-5 border rounded-xl">Cancelar</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+const markets = [
+  {slug:'epa-mg', name:'EPA Supermercados', city:'BH', verified:true, color:'bg-emerald-600'},
+  {slug:'mart-minas-mg', name:'Mart Minas', city:'Contagem', verified:true, color:'bg-orange-500'},
+  {slug:'bh-supermercados-mg', name:'BH Supermercados', city:'BH', verified:true, color:'bg-zinc-900'},
+  {slug:'supernosso-mg', name:'Supernosso', city:'BH', verified:true, color:'bg-red-600'},
+  {slug:'verdemar-mg', name:'Verdemar', city:'BH', verified:true, color:'bg-teal-600'},
+  {slug:'carrefour-mg', name:'Carrefour', city:'Uberlândia', verified:true, color:'bg-blue-600'},
+  {slug:'apoio-mineiro-mg', name:'Apoio Mineiro', city:'BH', verified:true, color:'bg-amber-600'},
+];
+function renderMG(){
+  const grid=document.getElementById('grid');
+  grid.innerHTML=markets.map(m=>`
+    <div class="bg-white border border-zinc-200 rounded-2xl p-4 hover:shadow-lg transition group">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl ${m.color} text-white flex items-center justify-center font-display font-extrabold">${m.name[0]}</div>
+        <div class="flex-1">
+          <div class="font-display font-extrabold leading-none">${m.name}</div>
+          <div class="text-xs text-zinc-500">${m.city} • MG ${m.verified?'<span class="text-emerald-600">● verificado</span>':''}</div>
+        </div>
+      </div>
+      <div class="mt-3 flex gap-2">
+        <span class="text-xs bg-zinc-50 border px-2 py-1 rounded-full">#${m.slug}</span>
+        <span class="text-xs bg-emerald-50 text-emerald-700 border border-emerald-100 px-2 py-1 rounded-full">MG</span>
+      </div>
+      <a href="#" class="mt-3 inline-flex text-xs font-bold text-fechado group-hover:underline">Ver preços →</a>
+    </div>
+  `).join('');
+}
+renderMG();
+</script>
+</body>
+</html>
