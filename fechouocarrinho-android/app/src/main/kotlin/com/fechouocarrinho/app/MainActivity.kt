@@ -22,6 +22,8 @@ import com.fechouocarrinho.app.ocr.PriceExtractor
 import com.fechouocarrinho.app.ocr.TextRecognitionHelper
 import com.fechouocarrinho.app.presentation.camera.CameraScreen
 import com.fechouocarrinho.app.presentation.camera.CameraViewModel
+import com.fechouocarrinho.app.presentation.home.HomeScreen
+import com.fechouocarrinho.app.presentation.home.HomeViewModel
 import com.fechouocarrinho.app.presentation.list.PriceListScreen
 import com.fechouocarrinho.app.presentation.list.PriceListViewModel
 import com.fechouocarrinho.app.presentation.theme.FechouOCarrinhoTheme
@@ -43,7 +45,19 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = "camera") {
+                    NavHost(navController = navController, startDestination = "home") {
+                        composable("home") {
+                            val viewModel: HomeViewModel = viewModel {
+                                HomeViewModel(repository = repository)
+                            }
+                            HomeScreen(
+                                viewModel = viewModel,
+                                onNavigateToCamera = { navController.navigate("camera") },
+                                onNavigateToList = { navController.navigate("list") },
+                                onNavigateToSupermarkets = { navController.navigate("list") },
+                                onNavigateToHelp = { navController.navigate("list") }
+                            )
+                        }
                         composable("camera") {
                             val viewModel: CameraViewModel = viewModel {
                                 CameraViewModel(
