@@ -1,0 +1,15 @@
+{
+  "title": "fechou o carrinho — seu total sem sustos",
+  "description": "Monte sua lista, aponte a câmera para a etiqueta e acompanhe o total enquanto compra. Funciona sem internet e leve para qualquer celular.",
+  "language": "pt-BR",
+  "robots": {
+    "index": true
+  },
+  "icons": {
+    "icon": "/favicon.svg"
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

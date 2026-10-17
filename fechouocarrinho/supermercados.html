@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Supermercados — Fechou o Carrinho</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{fechado:"#1B8C42",laranja:"#FF6B00",creme:"#FFF8F0",grafite:"#111827"},fontFamily:{display:["Nunito","sans-serif"],body:["Inter","sans-serif"]}}}}</script>
+<style>body{font-family:Inter,sans-serif}</style>
+</head>
+<body class="bg-creme text-grafite antialiased">
+<header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-zinc-100">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3"><div class="w-9 h-9 rounded-xl bg-fechado flex items-center justify-center text-white"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M5 12l5 5l10 -10"/></svg></div><span class="font-display font-extrabold text-xl">fechou o carrinho</span></a>
+    <nav class="hidden md:flex items-center gap-7 text-sm font-medium"><a href="/como-funciona.html" class="hover:text-fechado">Como funciona</a><a href="/supermercados.html" class="text-fechado font-bold">Supermercados</a><a href="/ajuda.html" class="hover:text-fechado">Ajuda</a><a href="/#baixar" class="bg-grafite text-white px-5 py-2.5 rounded-full font-semibold">Baixar APK</a></nav>
+  </div>
+</header>
+<main class="max-w-6xl mx-auto px-4 py-10">
+  <a href="/" class="text-sm font-medium text-zinc-600 hover:text-grafite inline-flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Voltar</a>
+  <h1 class="font-display font-extrabold text-4xl mt-4">Supermercados disponíveis</h1>
+  <p class="text-zinc-600 mt-3 max-w-2xl leading-relaxed">Escolha o estado e depois o mercado onde você costuma comprar. Se o seu não aparecer, sugira — avaliamos e adicionamos para todos.</p>
+  <div class="mt-6 flex flex-wrap gap-3">
+    <select id="estado-page" class="border border-zinc-200 rounded-xl px-4 py-2.5 font-semibold bg-white"><option value="MG">Minas Gerais</option><option>Em breve: SP, RJ, BA</option></select>
+    <button onclick="document.getElementById('suggest').showModal()" class="bg-fechado text-white px-5 py-2.5 rounded-xl font-bold hover:bg-emerald-700">Sugerir supermercado</button>
+  </div>
+  <div id="grid-page" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8"></div>
+  <p class="text-xs text-zinc-500 mt-6">Cobertura: todos os mercados listados atendem várias cidades do estado, não apenas a capital.</p>
+  <div class="mt-10 bg-white border border-zinc-200 rounded-3xl p-6">
+    <h3 class="font-display font-bold">Não encontrou o seu mercado?</h3>
+    <p class="text-sm text-zinc-600 mt-1">Envie o nome, cidade e estado. Nossa equipe verifica e disponibiliza para escolha no app.</p>
+    <button onclick="document.getElementById('suggest').showModal()" class="mt-4 bg-grafite text-white px-5 py-2.5 rounded-xl font-semibold">Enviar sugestão</button>
+  </div>
+</main>
+<dialog id="suggest" class="rounded-2xl p-0 backdrop:bg-black/50">
+  <form method="dialog" class="p-6 w-[360px]">
+    <h3 class="font-display font-extrabold text-lg">Sugerir supermercado</h3>
+    <p class="text-sm text-zinc-600 mt-1">Preencha os dados. Vamos analisar e adicionar.</p>
+    <input placeholder="Nome do supermercado" class="mt-4 w-full border border-zinc-200 rounded-xl px-3 py-2.5">
+    <input placeholder="Cidade • Estado (ex: Juiz de Fora • MG)" class="mt-2 w-full border border-zinc-200 rounded-xl px-3 py-2.5">
+    <div class="mt-4 flex gap-2"><button class="flex-1 bg-fechado text-white py-2.5 rounded-xl font-bold">Enviar</button><button class="px-5 border border-zinc-200 rounded-xl font-semibold">Cancelar</button></div>
+  </form>
+</dialog>
+<footer class="border-t border-zinc-200 py-8 bg-white mt-10"><div class="max-w-6xl mx-auto px-4 flex justify-between text-sm text-zinc-500"><span>© 2026 Fechou o Carrinho</span><a href="mailto:contato@fechouocarrinho.site" class="underline">contato@fechouocarrinho.site</a></div></footer>
+<script>
+const markets2 = [
+  {slug:'epa-mg', name:'EPA Supermercados', abbr:'EPA', city:'Várias cidades • MG', color:'bg-emerald-600'},
+  {slug:'mart-minas-mg', name:'Mart Minas', abbr:'MM', city:'Várias cidades • MG', color:'bg-orange-500'},
+  {slug:'bh-supermercados-mg', name:'BH Supermercados', abbr:'BH', city:'Várias cidades • MG', color:'bg-zinc-900'},
+  {slug:'supernosso-mg', name:'Supernosso', abbr:'SN', city:'Várias cidades • MG', color:'bg-red-600'},
+  {slug:'verdemar-mg', name:'Verdemar', abbr:'VM', city:'Várias cidades • MG', color:'bg-teal-600'},
+  {slug:'carrefour-mg', name:'Carrefour', abbr:'CA', city:'Várias cidades • MG/SP/RJ', color:'bg-blue-600'},
+  {slug:'apoio-mineiro-mg', name:'Apoio Mineiro', abbr:'AM', city:'Várias cidades • MG', color:'bg-amber-600'},
+];
+document.getElementById('grid-page').innerHTML = markets2.map(m=>`
+  <div class="bg-white border border-zinc-200 rounded-2xl p-4">
+    <div class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-xl ${m.color} text-white flex items-center justify-center font-display font-extrabold text-sm">${m.abbr}</div>
+      <div><div class="font-display font-extrabold leading-none">${m.name}</div><div class="text-xs text-zinc-500 mt-1">${m.city}</div></div>
+    </div>
+    <button disabled class="mt-4 w-full bg-zinc-100 text-zinc-400 text-sm font-semibold py-2.5 rounded-xl cursor-not-allowed">Preços em breve</button>
+  </div>
+`).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<svg width="1080" height="2400" viewBox="0 0 1080 2400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="2400" fill="#165D30"/>
+  
+  <!-- Subtle circular halo -->
+  <circle cx="540" cy="1400" r="600" fill="white" fill-opacity="0.05"/>
+
+  <!-- Top Copy Header -->
+  <g transform="translate(80, 160)">
+    <!-- Category Pill -->
+    <rect width="280" height="52" rx="26" fill="white" fill-opacity="0.15"/>
+    <text x="28" y="33" font-family="monospace" font-size="20" font-weight="700" letter-spacing="2" fill="#FFE8D6">LEITURA INTELIGENTE</text>
+
+    <!-- Main Title -->
+    <text x="0" y="160" font-family="Nunito, sans-serif" font-size="82" font-weight="800" letter-spacing="-3" fill="white">Aponte a câmera,</text>
+    <text x="0" y="255" font-family="Nunito, sans-serif" font-size="82" font-weight="800" letter-spacing="-3" fill="#FFC091">capture o preço.</text>
+
+    <!-- Subtitle -->
+    <text x="0" y="330" font-family="Inter, sans-serif" font-size="30" font-weight="400" fill="white" fill-opacity="0.82">Reconhecimento ágil na etiqueta do corredor.</text>
+  </g>
+
+  <!-- Large Phone Mockup (Center/Bottom) -->
+  <g transform="translate(140, 680)">
+    <!-- Device Frame Shadow -->
+    <rect x="-15" y="-10" width="830" height="1620" rx="90" fill="#051C0D" fill-opacity="0.45"/>
+    <!-- Outer Bezel -->
+    <rect width="800" height="1600" rx="84" fill="#111827"/>
+    <!-- Inner Screen -->
+    <rect x="22" y="22" width="756" height="1556" rx="66" fill="#FFF8F0"/>
+
+    <!-- Island -->
+    <rect x="268" y="45" width="220" height="46" rx="23" fill="#111827"/>
+
+    <!-- Custom Screen Content -->
+    
+    <g transform="translate(60, 140)">
+      <!-- Header -->
+      <text x="0" y="40" font-family="Nunito, sans-serif" font-size="32" font-weight="800" fill="#111827">Mire na etiqueta</text>
+      <text x="0" y="75" font-family="Inter, sans-serif" font-size="20" fill="#6B7280">Posicione o valor dentro do quadro</text>
+
+      <!-- Viewfinder -->
+      <g transform="translate(0, 120)">
+        <rect width="636" height="600" rx="36" fill="#1E293B"/>
+        <!-- Scanner Guide -->
+        <rect x="68" y="150" width="500" height="280" rx="24" stroke="#FF6B00" stroke-width="4" stroke-dasharray="16 12" fill="white" fill-opacity="0.06"/>
+        <line x1="68" y1="290" x2="568" y2="290" stroke="#FF4500" stroke-width="3" stroke-opacity="0.8"/>
+        <text x="195" y="300" font-family="Nunito, sans-serif" font-size="70" font-weight="800" fill="white">R$ 7,89</text>
+        <!-- Confirmed Tag -->
+        <rect x="218" y="450" width="200" height="50" rx="25" fill="#1B8C42"/>
+        <text x="245" y="482" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="white">✓ Preço lido</text>
+      </g>
+
+      <!-- Bottom Card -->
+      <g transform="translate(0, 760)">
+        <rect width="636" height="160" rx="32" fill="white"/>
+        <text x="36" y="52" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#111827">Biscoito recheado 130g</text>
+        <text x="36" y="85" font-family="Inter, sans-serif" font-size="18" fill="#6B7280">Preço unitário: R$ 7,89</text>
+        <rect x="420" y="45" width="180" height="70" rx="22" fill="#1B8C42"/>
+        <text x="450" y="88" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="white">+ Adicionar</text>
+      </g>
+    </g>
+  
+  </g>
+</svg>

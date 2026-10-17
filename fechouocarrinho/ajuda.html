@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ajuda — Fechou o Carrinho</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{fechado:"#1B8C42",laranja:"#FF6B00",creme:"#FFF8F0",grafite:"#111827"},fontFamily:{display:["Nunito","sans-serif"],body:["Inter","sans-serif"]}}}}</script>
+<style>body{font-family:Inter,sans-serif}</style>
+</head>
+<body class="bg-creme text-grafite antialiased">
+<header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-zinc-100">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3"><div class="w-9 h-9 rounded-xl bg-fechado flex items-center justify-center text-white"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M5 12l5 5l10 -10"/></svg></div><span class="font-display font-extrabold text-xl">fechou o carrinho</span></a>
+    <nav class="hidden md:flex items-center gap-7 text-sm font-medium"><a href="/como-funciona.html" class="hover:text-fechado">Como funciona</a><a href="/supermercados.html" class="hover:text-fechado">Supermercados</a><a href="/ajuda.html" class="text-fechado font-bold">Ajuda</a><a href="/#baixar" class="bg-grafite text-white px-5 py-2.5 rounded-full font-semibold">Baixar APK</a></nav>
+  </div>
+</header>
+<main class="max-w-3xl mx-auto px-4 py-10">
+  <a href="/" class="text-sm font-medium text-zinc-600 hover:text-grafite inline-flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Voltar</a>
+  <h1 class="font-display font-extrabold text-4xl mt-4">Ajuda</h1>
+  <p class="text-zinc-600 mt-3 leading-relaxed">Tire suas dúvidas sobre instalação e uso.</p>
+  <div class="mt-8 bg-white border border-zinc-200 rounded-3xl divide-y divide-zinc-100">
+    <details class="p-6 group" open><summary class="font-display font-bold cursor-pointer list-none flex items-center justify-between">Como instalar o APK?<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg></summary><p class="text-sm text-zinc-600 mt-3 leading-relaxed">Baixe pelo botão, toque em Abrir e depois em Instalar. Se o sistema pedir, permita a instalação apenas para este arquivo. O processo leva segundos.</p></details>
+    <details class="p-6 group"><summary class="font-display font-bold cursor-pointer list-none flex items-center justify-between">Preciso de internet no mercado?<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg></summary><p class="text-sm text-zinc-600 mt-3 leading-relaxed">Não. A leitura da etiqueta acontece no próprio aparelho, ideal para quando o sinal falha dentro do mercado.</p></details>
+    <details class="p-6 group"><summary class="font-display font-bold cursor-pointer list-none flex items-center justify-between">Posso corrigir um preço?<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg></summary><p class="text-sm text-zinc-600 mt-3 leading-relaxed">Sim. Se a leitura não ficar perfeita, toque no valor e digite manualmente antes de adicionar à lista.</p></details>
+    <details class="p-6 group"><summary class="font-display font-bold cursor-pointer list-none flex items-center justify-between">Meu mercado não está na lista. O que faço?<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg></summary><p class="text-sm text-zinc-600 mt-3 leading-relaxed">Na página de supermercados, clique em Sugerir supermercado e informe nome e cidade. Analisamos e liberamos para todos.</p></details>
+  </div>
+  <div class="mt-8 bg-white border border-zinc-200 rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div><h3 class="font-display font-bold">Ainda precisa de ajuda?</h3><p class="text-sm text-zinc-600 mt-1">Fale com a gente por e-mail.</p></div>
+    <a href="mailto:contato@fechouocarrinho.site" class="bg-grafite text-white px-6 py-3 rounded-xl font-semibold">contato@fechouocarrinho.site</a>
+  </div>
+</main>
+<footer class="border-t border-zinc-200 py-8 bg-white mt-10"><div class="max-w-6xl mx-auto px-4 flex justify-between text-sm text-zinc-500"><span>© 2026 Fechou o Carrinho</span><a href="mailto:contato@fechouocarrinho.site" class="underline">contato@fechouocarrinho.site</a></div></footer>
+</body>
+</html>

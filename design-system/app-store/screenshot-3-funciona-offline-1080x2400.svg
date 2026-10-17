@@ -1,0 +1,57 @@
+<svg width="1080" height="2400" viewBox="0 0 1080 2400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="2400" fill="#254E33"/>
+  
+  <!-- Subtle circular halo -->
+  <circle cx="540" cy="1400" r="600" fill="white" fill-opacity="0.05"/>
+
+  <!-- Top Copy Header -->
+  <g transform="translate(80, 160)">
+    <!-- Category Pill -->
+    <rect width="280" height="52" rx="26" fill="white" fill-opacity="0.15"/>
+    <text x="28" y="33" font-family="monospace" font-size="20" font-weight="700" letter-spacing="2" fill="#FFE8D6">SEM INTERNET</text>
+
+    <!-- Main Title -->
+    <text x="0" y="160" font-family="Nunito, sans-serif" font-size="82" font-weight="800" letter-spacing="-3" fill="white">Funciona 100%</text>
+    <text x="0" y="255" font-family="Nunito, sans-serif" font-size="82" font-weight="800" letter-spacing="-3" fill="#FFC091">sem conexão.</text>
+
+    <!-- Subtitle -->
+    <text x="0" y="330" font-family="Inter, sans-serif" font-size="30" font-weight="400" fill="white" fill-opacity="0.82">Pode entrar no subsolo do supermercado sem medo.</text>
+  </g>
+
+  <!-- Large Phone Mockup (Center/Bottom) -->
+  <g transform="translate(140, 680)">
+    <!-- Device Frame Shadow -->
+    <rect x="-15" y="-10" width="830" height="1620" rx="90" fill="#051C0D" fill-opacity="0.45"/>
+    <!-- Outer Bezel -->
+    <rect width="800" height="1600" rx="84" fill="#111827"/>
+    <!-- Inner Screen -->
+    <rect x="22" y="22" width="756" height="1556" rx="66" fill="#FFF8F0"/>
+
+    <!-- Island -->
+    <rect x="268" y="45" width="220" height="46" rx="23" fill="#111827"/>
+
+    <!-- Custom Screen Content -->
+    
+    <g transform="translate(60, 140)">
+      <g transform="translate(0, 80)">
+        <!-- Offline Shield Graphic -->
+        <rect width="636" height="340" rx="36" fill="#111827"/>
+        <circle cx="318" cy="140" r="70" fill="white" fill-opacity="0.1"/>
+        <text x="290" y="160" font-size="60">📶</text>
+        <line x1="260" y1="90" x2="380" y2="200" stroke="#FF6B00" stroke-width="8" stroke-linecap="round"/>
+        <text x="180" y="260" font-family="Nunito, sans-serif" font-size="34" font-weight="800" fill="white">Modo 100% Offline</text>
+        <text x="110" y="300" font-family="Inter, sans-serif" font-size="20" fill="white" fill-opacity="0.75">Suas listas e contas ficam salvas no seu aparelho</text>
+      </g>
+
+      <g transform="translate(0, 470)">
+        <rect width="636" height="280" rx="32" fill="white"/>
+        <text x="40" y="60" font-family="Nunito, sans-serif" font-size="28" font-weight="800" fill="#111827">Vantagens do fechou:</text>
+        
+        <text x="40" y="115" font-family="Inter, sans-serif" font-size="20" font-weight="500" fill="#111827">✓ Não consome seus dados móveis</text>
+        <text x="40" y="165" font-family="Inter, sans-serif" font-size="20" font-weight="500" fill="#111827">✓ Sem login ou senhas complicadas</text>
+        <text x="40" y="215" font-family="Inter, sans-serif" font-size="20" font-weight="500" fill="#111827">✓ Resposta instantânea no cálculo</text>
+      </g>
+    </g>
+  
+  </g>
+</svg>

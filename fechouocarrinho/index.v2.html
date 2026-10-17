@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fechou o Carrinho — Seu total sem sustos no caixa</title>
+<meta name="description" content="Aponte a câmera para a etiqueta, o app lê o preço e soma no total do carrinho em tempo real. Escolha seu supermercado e economize.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;700;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{fechado:"#1B8C42",laranja:"#FF6B00",creme:"#FFF8F0",grafite:"#111827"},fontFamily:{display:["Nunito","sans-serif"],body:["Inter","sans-serif"]}}}}</script>
+<style>body{font-family:Inter,sans-serif}</style>
+</head>
+<body class="bg-creme text-grafite antialiased">
+
+<!-- HEADER -->
+<header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-zinc-100">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-fechado flex items-center justify-center text-white">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg>
+      </div>
+      <span class="font-display font-extrabold text-xl tracking-tight">fechou o carrinho</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-7 text-sm font-medium">
+      <a href="/como-funciona.html" class="hover:text-fechado transition">Como funciona</a>
+      <a href="/supermercados.html" class="hover:text-fechado transition">Supermercados</a>
+      <a href="/ajuda.html" class="hover:text-fechado transition">Ajuda</a>
+      <a href="#baixar" class="bg-grafite text-white px-5 py-2.5 rounded-full font-semibold hover:bg-black transition">Baixar APK</a>
+    </nav>
+    <a href="#baixar" class="md:hidden bg-fechado text-white px-4 py-2 rounded-full font-bold text-sm">Baixar</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-4 pt-10 md:pt-16 pb-8 grid md:grid-cols-2 gap-10 items-center">
+  <div>
+    <div class="inline-flex items-center gap-2 bg-white border border-zinc-200 rounded-full px-3 py-1.5 text-xs font-semibold shadow-sm">
+      <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> Funciona sem internet • Leve para qualquer celular
+    </div>
+    <h1 class="font-display font-extrabold text-4xl md:text-[48px] leading-[0.95] mt-5">
+      Seu total<br>
+      <span class="text-fechado">sem sustos</span><br>
+      no caixa.
+    </h1>
+    <p class="mt-4 text-zinc-600 text-lg leading-relaxed">Aponte a câmera para a etiqueta na prateleira. O app identifica o preço na hora e atualiza o total do seu carrinho — simples, rápido e sem complicação.</p>
+    <div class="mt-7 flex flex-wrap gap-3">
+      <a href="/downloads/fechouocarrinho.apk" class="inline-flex items-center gap-3 bg-fechado text-white px-7 py-4 rounded-2xl font-display font-extrabold text-lg hover:bg-emerald-700 transition shadow-lg shadow-emerald-700/20">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3M12 15l-4-4M12 15l4-4"/><path d="M2 17l1 4h18l1-4"/></svg>
+        Baixar APK
+      </a>
+      <a href="/como-funciona.html" class="inline-flex items-center gap-2 bg-white border border-zinc-200 px-6 py-4 rounded-2xl font-semibold hover:bg-zinc-50 transition">
+        Ver como funciona
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <p class="mt-3 text-xs text-zinc-500">Android 8 ou superior • Instalação em poucos segundos • <a href="/ajuda.html" class="underline hover:text-fechado">Como instalar?</a></p>
+    <div class="mt-8 grid grid-cols-3 gap-4 text-xs">
+      <div class="bg-white border border-zinc-100 rounded-2xl p-3 flex flex-col gap-2">
+        <div class="w-8 h-8 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-fechado">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <span class="font-semibold leading-tight">Rápido e leve</span>
+      </div>
+      <div class="bg-white border border-zinc-100 rounded-2xl p-3 flex flex-col gap-2">
+        <div class="w-8 h-8 rounded-full bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <span class="font-semibold leading-tight">Sem internet no mercado</span>
+      </div>
+      <div class="bg-white border border-zinc-100 rounded-2xl p-3 flex flex-col gap-2">
+        <div class="w-8 h-8 rounded-full bg-zinc-50 border border-zinc-200 flex items-center justify-center text-zinc-700">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11v2"/></svg>
+        </div>
+        <span class="font-semibold leading-tight">Feito para o dia a dia</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHONE MOCKUP - mantido como você gostou -->
+  <div class="relative flex justify-center md:justify-end">
+    <div class="w-[300px] h-[620px] bg-zinc-900 rounded-[42px] p-3 shadow-2xl rotate-[-0.5deg]">
+      <div class="w-full h-full bg-white rounded-[32px] overflow-hidden flex flex-col">
+        <div class="h-7 bg-zinc-900 flex items-center justify-center"><div class="w-20 h-1.5 bg-zinc-700 rounded-full"></div></div>
+        <div class="bg-fechado text-white px-4 py-3 flex items-center justify-between">
+          <span class="font-display font-extrabold">Meu Carrinho</span>
+          <span class="bg-white text-fechado text-xs font-extrabold px-2.5 py-1 rounded-full">MG • EPA</span>
+        </div>
+        <div class="flex-1 relative bg-zinc-100">
+          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=500&fit=crop" class="w-full h-full object-cover opacity-60">
+          <div class="absolute inset-0 flex flex-col items-center justify-center p-6">
+            <div class="w-full bg-white rounded-2xl p-3 shadow-xl border-2 border-laranja">
+              <div class="text-[11px] font-bold text-zinc-500 tracking-widest">MIRE NA ETIQUETA</div>
+              <div class="mt-2 border-2 border-dashed border-laranja rounded-xl h-24 flex items-center justify-center bg-amber-50">
+                <span class="font-mono font-extrabold text-xl">R$ 7,89</span>
+              </div>
+              <div class="mt-2 flex gap-2">
+                <span class="flex-1 bg-grafite text-white text-center py-2 rounded-xl text-sm font-bold flex items-center justify-center gap-2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                  Capturar
+                </span>
+                <span class="px-3 py-2 bg-white border rounded-xl text-sm flex items-center justify-center">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-3 bg-white border-t">
+          <div class="flex justify-between text-sm"><span class="text-zinc-500">Arroz Camil 5kg</span><span class="font-bold">R$ 29,90</span></div>
+          <div class="flex justify-between text-sm"><span class="text-zinc-500">Café Pilão 500g</span><span class="font-bold">R$ 15,49</span></div>
+          <div class="mt-3 bg-fechado text-white rounded-xl px-4 py-3 flex justify-between items-center">
+            <span class="font-semibold text-sm">TOTAL</span><span class="font-display font-extrabold text-xl">R$ 53,28</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hidden md:block absolute -right-2 top-10 bg-white border border-zinc-200 rounded-2xl px-4 py-3 shadow-xl">
+      <div class="text-xs font-bold text-zinc-500 tracking-widest">VOCÊ ECONOMIZA</div>
+      <div class="font-display font-extrabold text-fechado text-lg">R$ 34,00</div>
+      <div class="text-xs text-zinc-500">neste mês</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA - REFINADO COM PÁGINAS -->
+<section class="bg-white border-y border-zinc-100">
+  <div class="max-w-6xl mx-auto px-4 py-14">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <h2 class="font-display font-extrabold text-3xl">Como funciona</h2>
+        <p class="text-zinc-600 mt-2 max-w-xl">Três passos simples para não errar no total. Cada etapa tem uma página dedicada com detalhes.</p>
+      </div>
+      <a href="/como-funciona.html" class="hidden md:inline-flex items-center gap-2 text-fechado font-bold hover:underline">Ver guia completo <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 mt-8">
+      <!-- 1 -->
+      <a href="/como-funciona.html#mercado" class="group bg-creme rounded-3xl p-6 border border-amber-100 hover:border-amber-200 hover:shadow-lg transition text-left block">
+        <div class="w-12 h-12 rounded-2xl bg-white border border-amber-100 flex items-center justify-center text-fechado shadow-sm">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 class="font-display font-extrabold mt-4 text-lg">1. Escolha onde vai comprar</h3>
+        <p class="text-sm text-zinc-600 mt-2 leading-relaxed">Selecione seu estado e o supermercado. Se o seu não estiver na lista, você pode sugerir em segundos.</p>
+        <span class="inline-flex items-center gap-1.5 mt-4 text-sm font-bold text-fechado group-hover:gap-2 transition-all">Saber mais <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <!-- 2 -->
+      <a href="/como-funciona.html#camera" class="group bg-grafite text-white rounded-3xl p-6 hover:bg-black transition text-left block">
+        <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <h3 class="font-display font-extrabold mt-4 text-lg text-white">2. Aponte para a etiqueta</h3>
+        <p class="text-sm text-zinc-400 mt-2 leading-relaxed">O app faz uma leitura rápida da etiqueta e identifica o valor. Funciona mesmo sem internet dentro do mercado.</p>
+        <span class="inline-flex items-center gap-1.5 mt-4 text-sm font-bold text-white group-hover:gap-2 transition-all">Como a leitura funciona <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <!-- 3 -->
+      <a href="/como-funciona.html#total" class="group bg-emerald-50 rounded-3xl p-6 border border-emerald-100 hover:border-emerald-200 hover:shadow-lg transition text-left block">
+        <div class="w-12 h-12 rounded-2xl bg-white border border-emerald-100 flex items-center justify-center text-fechado shadow-sm">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3 class="font-display font-extrabold mt-4 text-lg">3. Acompanhe o total</h3>
+        <p class="text-sm text-zinc-600 mt-2 leading-relaxed">Cada item entra na lista e o total é atualizado na hora. Você decide o que levar sem surpresas no caixa.</p>
+        <span class="inline-flex items-center gap-1.5 mt-4 text-sm font-bold text-fechado group-hover:gap-2 transition-all">Ver lista na prática <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SUPERMERCADOS - COM LOGOS E CIDADES CORRIGIDAS -->
+<section class="max-w-6xl mx-auto px-4 py-14">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <h2 class="font-display font-extrabold text-3xl">Onde você compra</h2>
+      <p class="text-zinc-600 mt-2 max-w-2xl">Selecione seu estado e veja os mercados disponíveis. Trabalhamos para cobrir várias cidades de cada estado — não apenas a capital.</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <select id="estado" class="border border-zinc-200 rounded-xl px-4 py-2.5 font-semibold bg-white min-w-[160px]">
+        <option value="MG">Minas Gerais</option>
+        <option value="SP">São Paulo (em breve)</option>
+        <option value="RJ">Rio de Janeiro (em breve)</option>
+        <option value="BA">Bahia (em breve)</option>
+      </select>
+      <a href="/supermercados.html" class="hidden md:inline-flex bg-white border border-zinc-200 px-5 py-2.5 rounded-xl font-bold hover:bg-zinc-50">Ver todos</a>
+    </div>
+  </div>
+
+  <div id="grid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-7">
+    <!-- cards via JS -->
+  </div>
+  <div class="mt-6 flex flex-wrap items-center justify-between gap-3">
+    <p class="text-xs text-zinc-500">Não encontrou seu mercado? <a href="/supermercados.html" class="font-bold text-fechado underline">Sugerir supermercado</a> — analisamos e adicionamos.</p>
+    <a href="/supermercados.html" class="text-sm font-bold text-grafite hover:underline inline-flex items-center gap-1">Explorar todos os mercados <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- BENEFÍCIOS - SEM EMOJI, SEM TERMO TÉCNICO -->
+<section class="bg-white border-y border-zinc-100">
+  <div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
+    <div class="flex gap-4">
+      <div class="w-11 h-11 rounded-2xl bg-zinc-900 flex items-center justify-center text-white shrink-0">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+      </div>
+      <div>
+        <h3 class="font-display font-bold">Funciona sem internet</h3>
+        <p class="text-sm text-zinc-600 mt-1 leading-relaxed">A leitura acontece no seu aparelho. Ideal para dentro do mercado, onde o sinal costuma falhar.</p>
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <div class="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-fechado shrink-0">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      </div>
+      <div>
+        <h3 class="font-display font-bold">Leve para qualquer celular</h3>
+        <p class="text-sm text-zinc-600 mt-1 leading-relaxed">Pensado para aparelhos mais simples. Ocupa pouco espaço e não deixa o celular lento.</p>
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <div class="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 shrink-0">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div>
+        <h3 class="font-display font-bold">Lista que ajuda no dia a dia</h3>
+        <p class="text-sm text-zinc-600 mt-1 leading-relaxed">Organize por mercado, ajuste quantidades e veja o total antes de ir ao caixa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BAIXAR - QR CORRIGIDO -->
+<section id="baixar" class="max-w-6xl mx-auto px-4 py-14">
+  <div class="bg-white border border-zinc-200 rounded-[32px] p-8 md:p-10 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <h2 class="font-display font-extrabold text-3xl">Baixe o Fechou o Carrinho</h2>
+      <p class="text-zinc-600 mt-3 leading-relaxed">Baixe direto por aqui. Você receberá o arquivo para instalar em poucos toques.</p>
+      <div class="mt-6 flex flex-col gap-3">
+        <a href="/downloads/fechouocarrinho.apk" class="bg-fechado text-white text-center py-4 rounded-2xl font-display font-extrabold text-xl hover:bg-emerald-700 transition flex items-center justify-center gap-3 shadow-lg shadow-emerald-700/15">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 15V3M12 15l-4-4M12 15l4-4"/><path d="M2 17l1 4h18l1-4"/></svg>
+          Baixar APK
+        </a>
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm leading-relaxed">
+          <span class="font-bold">Como instalar:</span> Toque em <b>Abrir</b> após o download e depois em <b>Instalar</b>. Se o sistema pedir, permita <b>“Instalar de fontes desconhecidas”</b> apenas para este arquivo. É seguro e leva segundos.
+        </div>
+      </div>
+      <div class="mt-5 grid grid-cols-3 gap-3 text-xs text-center">
+        <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-4">
+          <div class="w-8 h-8 mx-auto rounded-full bg-white border flex items-center justify-center font-bold">1</div>
+          <div class="mt-2 font-semibold">Baixar</div>
+        </div>
+        <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-4">
+          <div class="w-8 h-8 mx-auto rounded-full bg-white border flex items-center justify-center font-bold">2</div>
+          <div class="mt-2 font-semibold">Permitir</div>
+        </div>
+        <div class="bg-zinc-50 border border-zinc-100 rounded-2xl p-4">
+          <div class="w-8 h-8 mx-auto rounded-full bg-white border flex items-center justify-center font-bold">3</div>
+          <div class="mt-2 font-semibold">Instalar</div>
+        </div>
+      </div>
+      <p class="mt-4 text-xs text-zinc-500">Versão 1.0.0 • Compatível com Android 8 ou superior • <a href="/ajuda.html" class="underline hover:text-fechado">Precisa de ajuda?</a></p>
+    </div>
+    <div class="flex flex-col items-center">
+      <div class="w-56 h-56 bg-white border border-zinc-200 rounded-3xl p-4 shadow-xl flex flex-col items-center justify-center">
+        <img id="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://fechouocarrinho.site/downloads/fechouocarrinho.apk" alt="QR Code para baixar o app" class="w-44 h-44 rounded-xl">
+        <span class="text-xs font-semibold mt-2 text-zinc-600">Aponte a câmera do celular</span>
+      </div>
+      <p class="text-xs text-zinc-500 mt-4 text-center max-w-[260px]">O QR leva para o mesmo arquivo do botão ao lado. Escaneie com a câmera para baixar direto no celular.</p>
+      <a href="/ajuda.html" class="mt-4 text-sm font-semibold flex items-center gap-2 hover:text-fechado">Dúvidas sobre instalação <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-zinc-200 py-8 bg-white">
+  <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-6 text-sm">
+    <div>
+      <div class="font-display font-extrabold flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-fechado flex items-center justify-center text-white">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M5 12l5 5l10 -10"/></svg>
+        </div>
+        fechou o carrinho
+      </div>
+      <p class="text-zinc-500 mt-2 max-w-sm leading-relaxed">Controle simples do total da sua compra. Escolha o mercado, some os itens e vá ao caixa com tranquilidade.</p>
+    </div>
+    <div class="flex gap-10 text-sm">
+      <div class="flex flex-col gap-2">
+        <span class="font-bold">Navegação</span>
+        <a href="/como-funciona.html" class="text-zinc-600 hover:text-grafite">Como funciona</a>
+        <a href="/supermercados.html" class="text-zinc-600 hover:text-grafite">Supermercados</a>
+        <a href="/ajuda.html" class="text-zinc-600 hover:text-grafite">Ajuda</a>
+      </div>
+      <div class="flex flex-col gap-2">
+        <span class="font-bold">Contato</span>
+        <a href="mailto:contato@fechouocarrinho.site" class="text-zinc-600 hover:text-grafite">contato@fechouocarrinho.site</a>
+        <span class="text-zinc-500 text-xs">© 2026 Fechou o Carrinho</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const markets = [
+  {slug:'epa-mg', name:'EPA Supermercados', abbr:'EPA', city:'Várias cidades • MG', color:'bg-emerald-600'},
+  {slug:'mart-minas-mg', name:'Mart Minas', abbr:'MM', city:'Várias cidades • MG', color:'bg-orange-500'},
+  {slug:'bh-supermercados-mg', name:'BH Supermercados', abbr:'BH', city:'Várias cidades • MG', color:'bg-zinc-900'},
+  {slug:'supernosso-mg', name:'Supernosso', abbr:'SN', city:'Várias cidades • MG', color:'bg-red-600'},
+  {slug:'verdemar-mg', name:'Verdemar', abbr:'VM', city:'Várias cidades • MG', color:'bg-teal-600'},
+  {slug:'carrefour-mg', name:'Carrefour', abbr:'CA', city:'Várias cidades • MG/SP/RJ', color:'bg-blue-600'},
+  {slug:'apoio-mineiro-mg', name:'Apoio Mineiro', abbr:'AM', city:'Várias cidades • MG', color:'bg-amber-600'},
+];
+function renderMG(){
+  const grid=document.getElementById('grid');
+  grid.innerHTML=markets.map(m=>`
+    <div class="bg-white border border-zinc-200 rounded-2xl p-4 hover:shadow-md transition flex flex-col">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl ${m.color} text-white flex items-center justify-center font-display font-extrabold text-sm shrink-0">${m.abbr}</div>
+        <div class="flex-1 min-w-0">
+          <div class="font-display font-extrabold leading-none truncate">${m.name}</div>
+          <div class="text-xs text-zinc-500 mt-1">${m.city}</div>
+        </div>
+        <span class="w-2 h-2 bg-emerald-500 rounded-full shrink-0"></span>
+      </div>
+      <div class="mt-3 flex gap-2">
+        <span class="text-xs bg-zinc-50 border px-2 py-1 rounded-full font-medium">#${m.slug}</span>
+      </div>
+      <button disabled class="mt-4 w-full bg-zinc-100 text-zinc-400 text-sm font-semibold py-2.5 rounded-xl cursor-not-allowed">Preços em breve</button>
+    </div>
+  `).join('');
+}
+renderMG();
+</script>
+</body>
+</html>

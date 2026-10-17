@@ -1,0 +1,9 @@
+<svg width="720" height="200" viewBox="0 0 720 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="200" rx="28" fill="#FFF8F0" stroke="#111827" stroke-width="2"/>
+  <g transform="translate(32, 32)">
+    <rect width="130" height="28" rx="14" fill="#FF6B00"/>
+    <text x="16" y="18" font-family="monospace" font-size="11" font-weight="700" fill="white">EM BREVE</text>
+    <text x="0" y="65" font-family="Nunito, sans-serif" font-size="24" font-weight="800" fill="#111827">Plano Família: Lista compartilhada</text>
+    <text x="0" y="94" font-family="Inter, sans-serif" font-size="15" fill="#6B7280">Você em um corredor e quem você ama no outro, somando no mesmo carrinho.</text>
+  </g>
+</svg>

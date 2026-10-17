@@ -1,0 +1,22 @@
+{
+  "brand": {
+    "primary": "#1B8C42",
+    "primaryDark": "#146B32",
+    "accent": "#FF6B00",
+    "surface": "#FFF8F0",
+    "ink": "#111827"
+  },
+  "typography": {
+    "display": "Nunito, sans-serif",
+    "body": "Inter, sans-serif",
+    "mono": "monospace"
+  },
+  "specs": {
+    "featureGraphic": "1024x500",
+    "playStoreIcon": "512x512",
+    "screenshots": "1080x2400",
+    "promoHorizontal": "1200x628",
+    "postSquare": "1080x1080",
+    "storyVertical": "1080x1920"
+  }
+}
