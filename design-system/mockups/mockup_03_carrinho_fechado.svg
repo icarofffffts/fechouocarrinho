@@ -33,7 +33,7 @@
   </g>
 
   <!-- Status bar (light) -->
-  <text x="20" y="28" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="white">9:41</text>
+  <text x="24" y="28" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="white">9:41</text>
   <g transform="translate(300, 14)">
     <rect x="0" y="2" width="18" height="10" rx="2" fill="none" stroke="white" stroke-width="1.2"/>
     <rect x="2" y="4" width="12" height="6" rx="1" fill="white"/>
@@ -51,62 +51,83 @@
   <!-- Top close -->
   <g transform="translate(20, 56)">
     <circle cx="16" cy="16" r="16" fill="white" fill-opacity="0.12"/>
-    <text x="10" y="22" font-size="16" fill="white">✕</text>
+    <line x1="10" y1="10" x2="22" y2="22" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    <line x1="22" y1="10" x2="10" y2="22" stroke="white" stroke-width="2" stroke-linecap="round"/>
   </g>
 
-  <!-- Celebration icon -->
+  <!-- Celebration badge -->
   <g transform="translate(195, 150)">
     <circle cx="0" cy="0" r="52" fill="white" fill-opacity="0.15"/>
     <circle cx="0" cy="0" r="38" fill="white"/>
-    <text x="0" y="14" font-size="40" text-anchor="middle">🎉</text>
+    <g transform="translate(-14, -14)">
+      <path d="M5 14 L12 21 L23 9" stroke="#1B8C42" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <!-- radiating ticks -->
+    <g stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.9">
+      <line x1="0" y1="-58" x2="0" y2="-66"/>
+      <line x1="41" y1="-41" x2="47" y2="-47"/>
+      <line x1="58" y1="0" x2="66" y2="0"/>
+      <line x1="41" y1="41" x2="47" y2="47"/>
+      <line x1="0" y1="58" x2="0" y2="66"/>
+      <line x1="-41" y1="41" x2="-47" y2="47"/>
+      <line x1="-58" y1="0" x2="-66" y2="0"/>
+      <line x1="-41" y1="-41" x2="-47" y2="-47"/>
+    </g>
   </g>
 
   <!-- Title -->
-  <text x="195" y="230" font-family="Nunito, sans-serif" font-size="28" font-weight="800" letter-spacing="-1" fill="white" text-anchor="middle">Fechou o Carrinho!</text>
-  <text x="195" y="256" font-family="Inter, sans-serif" font-size="14" font-weight="400" fill="white" fill-opacity="0.85" text-anchor="middle">Sua compra está calculada, sem sustos no caixa.</text>
+  <text x="195" y="232" font-family="Nunito, sans-serif" font-size="28" font-weight="800" letter-spacing="-1" fill="white" text-anchor="middle">Fechou o Carrinho!</text>
+  <text x="195" y="258" font-family="Inter, sans-serif" font-size="14" font-weight="400" fill="white" fill-opacity="0.85" text-anchor="middle">Sua compra está calculada, sem sustos no caixa.</text>
 
   <!-- Main total card -->
-  <rect x="24" y="286" width="342" height="170" rx="28" fill="white" filter="url(#cardShadow3)"/>
-  <text x="44" y="316" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#6B7280">total calculado</text>
-  <text x="44" y="362" font-family="Nunito, sans-serif" font-size="46" font-weight="800" letter-spacing="-2" fill="#111827">R$ 189,40</text>
-  <text x="44" y="386" font-family="Inter, sans-serif" font-size="12" fill="#6B7280">12 itens · Supermercados BH</text>
+  <rect x="24" y="288" width="342" height="170" rx="28" fill="white" filter="url(#cardShadow3)"/>
+  <text x="44" y="318" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#6B7280">total calculado</text>
+  <text x="44" y="364" font-family="Nunito, sans-serif" font-size="46" font-weight="800" letter-spacing="-2" fill="#111827">R$ 189,40</text>
+  <text x="44" y="388" font-family="Inter, sans-serif" font-size="12" fill="#6B7280">12 itens · Supermercados BH</text>
 
   <!-- Divider -->
-  <line x1="44" y1="402" x2="346" y2="402" stroke="#111827" stroke-opacity="0.08" stroke-width="1"/>
+  <line x1="44" y1="404" x2="346" y2="404" stroke="#111827" stroke-opacity="0.08" stroke-width="1"/>
 
   <!-- Savings -->
-  <g transform="translate(44, 416)">
-    <rect width="120" height="30" rx="15" fill="#1B8C42" fill-opacity="0.12"/>
-    <text x="12" y="20" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#1B8C42">economia R$ 27,60</text>
+  <g transform="translate(44, 418)">
+    <rect width="150" height="30" rx="15" fill="#1B8C42" fill-opacity="0.12"/>
+    <g transform="translate(12, 8)">
+      <path d="M2 7 L5 10 L10 4" stroke="#1B8C42" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="28" y="20" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#1B8C42">economia R$ 27,60</text>
   </g>
-  <text x="346" y="436" font-family="Inter, sans-serif" font-size="11" fill="#6B7280" text-anchor="end">vs. meta de R$ 200,00</text>
+  <text x="346" y="438" font-family="Inter, sans-serif" font-size="11" fill="#6B7280" text-anchor="end">vs. meta de R$ 200,00</text>
 
   <!-- Breakdown list -->
-  <text x="24" y="482" font-family="Nunito, sans-serif" font-size="16" font-weight="800" fill="white">resumo da compra</text>
+  <text x="24" y="484" font-family="Nunito, sans-serif" font-size="16" font-weight="800" fill="white">resumo da compra</text>
 
-  <g transform="translate(24, 496)">
+  <g transform="translate(24, 498)">
     <rect width="342" height="44" rx="14" fill="white" fill-opacity="0.12"/>
     <text x="16" y="28" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="white">Mercearia (6 itens)</text>
     <text x="326" y="28" font-family="Nunito, sans-serif" font-size="13" font-weight="800" fill="white" text-anchor="end">R$ 98,40</text>
   </g>
-  <g transform="translate(24, 548)">
+  <g transform="translate(24, 550)">
     <rect width="342" height="44" rx="14" fill="white" fill-opacity="0.12"/>
     <text x="16" y="28" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="white">Laticínios (3 itens)</text>
     <text x="326" y="28" font-family="Nunito, sans-serif" font-size="13" font-weight="800" fill="white" text-anchor="end">R$ 42,30</text>
   </g>
-  <g transform="translate(24, 600)">
+  <g transform="translate(24, 602)">
     <rect width="342" height="44" rx="14" fill="white" fill-opacity="0.12"/>
     <text x="16" y="28" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="white">Bebidas (3 itens)</text>
     <text x="326" y="28" font-family="Nunito, sans-serif" font-size="13" font-weight="800" fill="white" text-anchor="end">R$ 48,70</text>
   </g>
 
   <!-- Buttons -->
-  <rect x="24" y="670" width="164" height="52" rx="26" fill="white"/>
-  <text x="106" y="702" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#1B8C42" text-anchor="middle">Compartilhar</text>
+  <rect x="24" y="672" width="164" height="52" rx="26" fill="white"/>
+  <g transform="translate(86, 688)">
+    <circle cx="8" cy="8" r="6" fill="none" stroke="#1B8C42" stroke-width="1.6"/>
+    <path d="M8 4 V8 H12" stroke="#1B8C42" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+  </g>
+  <text x="106" y="704" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="#1B8C42" text-anchor="middle">Compartilhar</text>
 
-  <rect x="202" y="670" width="164" height="52" rx="26" fill="#FF6B00"/>
-  <text x="284" y="702" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">Finalizar</text>
+  <rect x="202" y="672" width="164" height="52" rx="26" fill="#FF6B00"/>
+  <text x="284" y="704" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">Finalizar</text>
 
   <!-- Footer note -->
-  <text x="195" y="748" font-family="Inter, sans-serif" font-size="11" fill="white" fill-opacity="0.6" text-anchor="middle">Lista salva offline · pode ser reaberta a qualquer momento</text>
+  <text x="195" y="750" font-family="Inter, sans-serif" font-size="11" fill="white" fill-opacity="0.6" text-anchor="middle">Lista salva offline · pode ser reaberta a qualquer momento</text>
 </svg>
