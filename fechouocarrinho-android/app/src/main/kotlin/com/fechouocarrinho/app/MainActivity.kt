@@ -26,6 +26,15 @@ import com.fechouocarrinho.app.presentation.home.HomeScreen
 import com.fechouocarrinho.app.presentation.home.HomeViewModel
 import com.fechouocarrinho.app.presentation.list.PriceListScreen
 import com.fechouocarrinho.app.presentation.list.PriceListViewModel
+import com.fechouocarrinho.app.presentation.screens.CarrinhoFechadoScreenReal
+import com.fechouocarrinho.app.presentation.screens.ComparadorScreenReal
+import com.fechouocarrinho.app.presentation.screens.CorrecaoOcrScreenReal
+import com.fechouocarrinho.app.presentation.screens.ListasScreenReal
+import com.fechouocarrinho.app.presentation.screens.ManualScreenReal
+import com.fechouocarrinho.app.presentation.screens.PerfilScreenReal
+import com.fechouocarrinho.app.presentation.screens.ReciboScreenReal
+import com.fechouocarrinho.app.presentation.screens.SelecaoMercadoScreenReal
+import com.fechouocarrinho.app.presentation.screens.SplashScreenReal
 import com.fechouocarrinho.app.presentation.theme.FechouOCarrinhoTheme
 
 class MainActivity : ComponentActivity() {
@@ -82,6 +91,15 @@ class MainActivity : ComponentActivity() {
                                 onBack = { navController.popBackStack() }
                             )
                         }
+                        composable("carrinho") { CarrinhoFechadoScreenReal(onFinalizar = { navController.popBackStack() }, onCompartilhar = {}) }
+                        composable("comparador") { ComparadorScreenReal(onRota = {}) }
+                        composable("listas") { ListasScreenReal(onNovaLista = { navController.navigate("home") }) }
+                        composable("perfil") { PerfilScreenReal() }
+                        composable("splash") { SplashScreenReal(onComeçar = { navController.navigate("home") }) }
+                        composable("selecao") { SelecaoMercadoScreenReal() }
+                        composable("manual") { ManualScreenReal() }
+                        composable("correcao") { CorrecaoOcrScreenReal() }
+                        composable("recibo") { ReciboScreenReal() }
                     }
                 }
             }
