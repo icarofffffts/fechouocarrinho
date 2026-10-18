@@ -7,6 +7,8 @@
     <filter id="sheetShadow" x="-10%" y="-20%" width="120%" height="140%">
       <feDropShadow dx="0" dy="-4" std-deviation="12" flood-color="#000000" flood-opacity="0.35"/>
     </filter>
+    <clipPath id="pkg96"><rect width="96" height="96" rx="8"/></clipPath>
+    <clipPath id="thumb48"><rect width="48" height="48" rx="12"/></clipPath>
   </defs>
 
   <!-- Camera viewfinder background -->
@@ -65,10 +67,13 @@
   <!-- Simulated shelf label inside viewfinder -->
   <g transform="translate(70, 180)">
     <rect width="250" height="120" rx="12" fill="white" fill-opacity="0.92"/>
-    <text x="16" y="30" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#6B7280">Supermercados BH</text>
-    <text x="16" y="58" font-family="Nunito, sans-serif" font-size="18" font-weight="800" fill="#111827">Arroz Tio João 5kg</text>
-    <text x="16" y="92" font-family="Nunito, sans-serif" font-size="26" font-weight="800" fill="#FF6B00">R$ 28,90</text>
-    <text x="16" y="110" font-family="Inter, sans-serif" font-size="9" fill="#6B7280">preço por unidade</text>
+    <rect x="12" y="12" width="96" height="96" rx="8" fill="#EAE5DC"/>
+    <image href="products/arroz-tio-joao.jpg" xlink:href="products/arroz-tio-joao.jpg" x="12" y="12" width="96" height="96" preserveAspectRatio="xMidYMid slice" clip-path="url(#pkg96)"/>
+    <rect x="12" y="12" width="96" height="96" rx="8" fill="none" stroke="#111827" stroke-opacity="0.08" stroke-width="1"/>
+    <text x="120" y="34" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#6B7280">Supermercados BH</text>
+    <text x="120" y="58" font-family="Nunito, sans-serif" font-size="15" font-weight="800" fill="#111827">Arroz Tio João 5kg</text>
+    <text x="120" y="90" font-family="Nunito, sans-serif" font-size="22" font-weight="800" fill="#FF6B00">R$ 28,90</text>
+    <text x="120" y="108" font-family="Inter, sans-serif" font-size="9" fill="#6B7280">preço por unidade</text>
   </g>
 
   <!-- Detection highlight box -->
@@ -94,9 +99,9 @@
   <!-- Detected product card -->
   <rect x="32" y="530" width="326" height="92" rx="20" fill="#FFF8F0"/>
   <g transform="translate(48, 546)">
-    <rect width="48" height="48" rx="12" fill="#FDE68A"/>
-    <path d="M8 14 L24 6 L32 14 V34 H8 Z" fill="#D97706"/>
-    <rect x="12" y="20" width="16" height="14" rx="1" fill="#B45309"/>
+    <rect width="48" height="48" rx="12" fill="#EAE5DC"/>
+    <image href="products/arroz-tio-joao.jpg" xlink:href="products/arroz-tio-joao.jpg" x="0" y="0" width="48" height="48" preserveAspectRatio="xMidYMid slice" clip-path="url(#thumb48)"/>
+    <rect width="48" height="48" rx="12" fill="none" stroke="#111827" stroke-opacity="0.08" stroke-width="1"/>
   </g>
   <text x="108" y="566" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#111827">Arroz Tio João 5kg</text>
   <text x="108" y="586" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">Supermercados BH · 1 un</text>

@@ -7,6 +7,7 @@
     <filter id="cardShadow4" x="-10%" y="-10%" width="120%" height="130%">
       <feDropShadow dx="0" dy="4" std-deviation="8" flood-color="#111827" flood-opacity="0.08"/>
     </filter>
+    <clipPath id="thumb56"><rect width="56" height="56" rx="10"/></clipPath>
   </defs>
 
   <!-- Background -->
@@ -49,6 +50,11 @@
   <!-- Card 1 - Supermercados BH (winner) -->
   <rect x="20" y="244" width="350" height="124" rx="24" fill="#1B8C42" filter="url(#cardShadow4)"/>
   <rect x="32" y="256" width="132" height="24" rx="12" fill="white"/>
+  <g transform="translate(282, 278)">
+    <rect width="56" height="56" rx="10" fill="white" fill-opacity="0.2"/>
+    <image href="products/arroz-tio-joao.jpg" xlink:href="products/arroz-tio-joao.jpg" x="0" y="0" width="56" height="56" preserveAspectRatio="xMidYMid slice" clip-path="url(#thumb56)"/>
+    <rect width="56" height="56" rx="10" fill="none" stroke="white" stroke-opacity="0.3" stroke-width="1"/>
+  </g>
   <g transform="translate(40, 262)">
     <path d="M2 6 L5 9 L11 3" stroke="#1B8C42" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
