@@ -25,6 +25,9 @@ interface PriceDao {
     @Query("SELECT COUNT(*) FROM prices WHERE syncStatus = :status")
     suspend fun countByStatus(status: SyncStatus): Int
 
+    @Query("SELECT COALESCE(SUM(value), 0) FROM prices")
+    suspend fun totalValue(): Double
+
     @Query("DELETE FROM prices WHERE id = :id")
     suspend fun deleteById(id: Long)
 }

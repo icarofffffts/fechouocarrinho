@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { fetchSupermarkets, isSupabaseConfigured, type Supermarket } from "@/lib/supabase";
+import MockupViewer from "@/components/MockupViewer";
 
 const MARKET_COLORS: Record<string, string> = {
   "epa-mg": "bg-emerald-600",
@@ -308,6 +309,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <MockupViewer />
 
       <footer className="border-t border-zinc-200 py-8 bg-white">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-6 text-sm">

@@ -53,10 +53,10 @@ class PriceRepositoryImpl(
         }
         val dtos = pending.map { entity ->
             PriceDto(
-                label = entity.label,
-                value = entity.value,
-                rawText = entity.rawText,
-                capturedAt = dateFormat.format(Date(entity.createdAt))
+                price = entity.value,
+                productName = entity.label,
+                state = "MG",
+                source = "manual"
             )
         }
 

@@ -24,13 +24,15 @@ class SupabaseService private constructor(
             .toRequestBody("application/json".toMediaType())
 
         val request = Request.Builder()
-            .url("${BuildConfig.SUPABASE_URL}/prices")
+            .url("${BuildConfig.SUPABASE_URL}/rest/v1/prices")
             .post(body)
             .header("apikey", BuildConfig.SUPABASE_KEY)
             .header("Authorization", "Bearer ${BuildConfig.SUPABASE_KEY}")
             .header("Content-Type", "application/json")
             .header("Accept", "application/json")
             .header("Accept-Profile", BuildConfig.SUPABASE_PROFILE)
+            .header("Content-Profile", BuildConfig.SUPABASE_PROFILE)
+            .header("Prefer", "return=representation")
             .build()
 
         return try {

@@ -5,12 +5,18 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PriceDto(
-    @SerialName("label")
-    val label: String,
-    @SerialName("value")
-    val value: Double,
-    @SerialName("raw_text")
-    val rawText: String,
-    @SerialName("captured_at")
-    val capturedAt: String
+    @SerialName("price")
+    val price: Double,
+    @SerialName("product_name")
+    val productName: String? = null,
+    @SerialName("ean")
+    val ean: String? = null,
+    @SerialName("state")
+    val state: String? = null,
+    @SerialName("city")
+    val city: String? = null,
+    @SerialName("source")
+    val source: String = "manual",
+    @SerialName("scan_image_hash")
+    val scanImageHash: String? = null
 )

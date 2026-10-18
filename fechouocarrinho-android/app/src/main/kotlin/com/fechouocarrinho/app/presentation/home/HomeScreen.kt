@@ -3,37 +3,14 @@ package com.fechouocarrinho.app.presentation.home
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CameraAlt
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material.icons.filled.WifiOff
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -42,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -75,9 +53,12 @@ data class HomeListItem(
 fun HomeScreen(
     viewModel: HomeViewModel,
     onNavigateToCamera: () -> Unit,
-    onNavigateToList: () -> Unit,
+    onNavigateToList: () -> Unit = {},
+    onNavigateToCarrinho: () -> Unit = {},
+    onNavigateToPerfil: () -> Unit = {},
     onNavigateToSupermarkets: () -> Unit = {},
-    onNavigateToHelp: () -> Unit = {}
+    onNavigateToHelp: () -> Unit = {},
+    selectedSupermarket: String = "Supermercados BH"
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -86,7 +67,9 @@ fun HomeScreen(
         bottomBar = {
             HomeBottomBar(
                 onNavigateToCamera = onNavigateToCamera,
-                onNavigateToList = onNavigateToList
+                onNavigateToList = onNavigateToList,
+                onNavigateToCarrinho = onNavigateToCarrinho,
+                onNavigateToPerfil = onNavigateToPerfil
             )
         }
     ) { padding ->
@@ -97,10 +80,13 @@ fun HomeScreen(
                 .verticalScroll(rememberScrollState())
                 .background(AppBackground)
         ) {
-            HomeHeader()
+            HomeHeader(
+                selectedSupermarket = selectedSupermarket,
+                onNavigateToSupermarkets = onNavigateToSupermarkets
+            )
             Spacer(modifier = Modifier.height(20.dp))
-            BudgetCard()
-            Spacer(modifier = Modifier.height(8.dp))
+            BudgetCard(total = uiState.total, pendingCount = uiState.pendingCount)
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = "lista de compras",
                 style = MaterialTheme.typography.titleMedium.copy(
@@ -109,41 +95,83 @@ fun HomeScreen(
                     fontSize = 16.sp
                 ),
                 color = TextPrimary,
-                modifier = Modifier.padding(start = 20.dp, top = 8.dp, bottom = 4.dp)
+                modifier = Modifier.padding(start = 20.dp, top = 4.dp, bottom = 4.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            CategorySection(
-                title = "MERCEARIA",
-                items = listOf(
-                    HomeListItem("Arroz integral 5kg", 1, "R$ 28,90", "R$ 28,90", true, false, "A"),
-                    HomeListItem("Feijão carioca 1kg", 2, "R$ 3,74", "R$ 7,49", false, false, "F")
+            val homeItems = uiState.prices.map { p ->
+                HomeListItem(
+                    name = p.label,
+                    quantity = 1,
+                    unitPrice = com.fechouocarrinho.app.ocr.PriceExtractor.formatCurrency(p.value),
+                    total = com.fechouocarrinho.app.ocr.PriceExtractor.formatCurrency(p.value),
+                    hasOcr = true,
+                    checked = false,
+                    thumbInitial = p.label.take(1).uppercase()
                 )
-            )
-            CategorySection(
-                title = "LATICÍNIOS",
-                items = listOf(
-                    HomeListItem("Leite integral 1L", 4, "R$ 4,99", "R$ 19,96", false, false, "L")
-                )
-            )
-            CategorySection(
-                title = "HORTIFRUTI",
-                items = emptyList()
-            )
-            CategorySection(
-                title = "BEBIDAS",
-                items = listOf(
-                    HomeListItem("Café torrado 500g", 1, "R$ 18,50", "R$ 18,50", false, false, "C")
-                )
-            )
+            }
+            if (homeItems.isEmpty()) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp, vertical = 8.dp),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = SurfaceWhite)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(24.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(52.dp)
+                                .clip(RoundedCornerShape(14.dp))
+                                .background(BrandGreen.copy(alpha = 0.1f)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.CameraAlt,
+                                contentDescription = null,
+                                tint = BrandGreen,
+                                modifier = Modifier.size(28.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text(
+                            text = "Nenhum item escaneado ainda",
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                            color = TextPrimary
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "Toque em 'Escanear' abaixo para ler etiquetas no supermercado sem internet.",
+                            style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                            color = TextSecondary,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            } else {
+                Column(modifier = Modifier.padding(horizontal = 20.dp)) {
+                    homeItems.forEach { item ->
+                        ShoppingItem(item)
+                        Spacer(modifier = Modifier.height(10.dp))
+                    }
+                }
+            }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
 
 @Composable
-private fun HomeHeader() {
+private fun HomeHeader(
+    selectedSupermarket: String = "Supermercados BH",
+    onNavigateToSupermarkets: () -> Unit = {}
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -152,6 +180,7 @@ private fun HomeHeader() {
                     colors = listOf(BrandGreen, BrandGreenDark)
                 )
             )
+            .statusBarsPadding()
             .padding(horizontal = 20.dp, vertical = 16.dp)
     ) {
         Row(
@@ -193,21 +222,31 @@ private fun HomeHeader() {
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(14.dp))
-                        .background(SurfaceWhite.copy(alpha = 0.18f))
-                        .padding(horizontal = 12.dp, vertical = 6.dp)
+                        .background(SurfaceWhite.copy(alpha = 0.22f))
+                        .clickable { onNavigateToSupermarkets() }
+                        .padding(horizontal = 10.dp, vertical = 6.dp)
                 ) {
-                    Text(
-                        text = "Supermercados BH",
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.SemiBold),
-                        color = SurfaceWhite
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = selectedSupermarket,
+                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.Bold),
+                            color = SurfaceWhite
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Icon(
+                            imageVector = Icons.Default.ArrowDropDown,
+                            contentDescription = "Trocar supermercado",
+                            tint = SurfaceWhite,
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
                 }
                 Spacer(modifier = Modifier.height(4.dp))
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(14.dp))
                         .background(SurfaceWhite.copy(alpha = 0.18f))
-                        .padding(horizontal = 12.dp, vertical = 6.dp)
+                        .padding(horizontal = 10.dp, vertical = 5.dp)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
@@ -219,7 +258,7 @@ private fun HomeHeader() {
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
                             text = "100% Offline",
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.SemiBold),
+                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp, fontWeight = FontWeight.SemiBold),
                             color = SurfaceWhite
                         )
                     }
@@ -230,38 +269,45 @@ private fun HomeHeader() {
 }
 
 @Composable
-private fun BudgetCard() {
+private fun BudgetCard(total: Double = 0.0, pendingCount: Int = 0) {
+    val meta = 200.0
+    val pct = if (meta > 0) (total / meta * 100).toInt().coerceIn(0, 100) else 0
+    val remaining = (meta - total).coerceAtLeast(0.0)
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp),
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
-                text = "orçamento da compra",
-                style = MaterialTheme.typography.labelMedium.copy(fontSize = 12.sp, fontWeight = FontWeight.Medium),
+                text = "TOTAL NO CARRINHO",
+                style = MaterialTheme.typography.labelSmall.copy(
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 10.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 1.2.sp
+                ),
                 color = TextSecondary
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "R$ 142,80",
+                text = com.fechouocarrinho.app.ocr.PriceExtractor.formatCurrency(total),
                 style = MaterialTheme.typography.headlineMedium.copy(
                     fontFamily = FontFamilyNunito,
                     fontWeight = FontWeight.ExtraBold,
-                    fontSize = 34.sp,
-                    letterSpacing = (-1.5).sp
+                    fontSize = 32.sp
                 ),
                 color = TextPrimary
             )
             Text(
-                text = "de R$ 200,00 (meta)",
+                text = "de ${com.fechouocarrinho.app.ocr.PriceExtractor.formatCurrency(meta)} (meta)",
                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp),
                 color = TextSecondary
             )
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(14.dp))
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -271,7 +317,7 @@ private fun BudgetCard() {
             ) {
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth(0.714f)
+                        .fillMaxWidth((pct / 100f).coerceIn(0f, 1f))
                         .height(10.dp)
                         .clip(RoundedCornerShape(5.dp))
                         .background(BrandGreen)
@@ -279,7 +325,7 @@ private fun BudgetCard() {
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "71% da meta · R$ 57,20 restantes",
+                text = "$pct% da meta · ${com.fechouocarrinho.app.ocr.PriceExtractor.formatCurrency(remaining)} restantes" + if (pendingCount > 0) " · $pendingCount pendente(s)" else "",
                 style = MaterialTheme.typography.labelMedium.copy(fontSize = 12.sp, fontWeight = FontWeight.SemiBold),
                 color = BrandGreen
             )
@@ -287,33 +333,17 @@ private fun BudgetCard() {
     }
 }
 
-@Composable
-private fun CategorySection(title: String, items: List<HomeListItem>) {
-    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp)) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.labelSmall.copy(
-                fontFamily = FontFamily.Monospace,
-                fontSize = 10.sp,
-                fontWeight = FontWeight.Bold,
-                letterSpacing = 1.5.sp
-            ),
-            color = TextSecondary
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        if (items.isEmpty()) {
-            Text(
-                text = "Nenhum item nesta seção",
-                style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
-                color = Color(0xFF9CA3AF),
-                modifier = Modifier.padding(vertical = 4.dp)
-            )
-        } else {
-            items.forEach { item ->
-                ShoppingItem(item)
-                Spacer(modifier = Modifier.height(10.dp))
-            }
-        }
+private fun getProductIcon(name: String): ImageVector {
+    val n = name.lowercase()
+    return when {
+        n.contains("arroz") || n.contains("feijao") || n.contains("feijão") || n.contains("trigo") || n.contains("cereal") || n.contains("farinha") -> Icons.Default.LocalGroceryStore
+        n.contains("leite") || n.contains("queijo") || n.contains("iogurte") || n.contains("manteiga") || n.contains("requeijao") -> Icons.Default.LocalDrink
+        n.contains("cafe") || n.contains("café") || n.contains("cha") || n.contains("chá") || n.contains("suco") || n.contains("refrigerante") || n.contains("agua") -> Icons.Default.LocalCafe
+        n.contains("pao") || n.contains("pão") || n.contains("bolo") || n.contains("biscoito") || n.contains("bolacha") || n.contains("torrada") -> Icons.Default.BakeryDining
+        n.contains("carne") || n.contains("frango") || n.contains("peixe") || n.contains("bife") || n.contains("linguica") || n.contains("linguiça") -> Icons.Default.Restaurant
+        n.contains("maca") || n.contains("maçã") || n.contains("banana") || n.contains("tomate") || n.contains("alface") || n.contains("legume") || n.contains("fruta") -> Icons.Default.Eco
+        n.contains("sabao") || n.contains("sabão") || n.contains("detergente") || n.contains("amaciante") || n.contains("desinfetante") -> Icons.Default.CleanHands
+        else -> Icons.Default.ShoppingBag
     }
 }
 
@@ -323,12 +353,12 @@ private fun ShoppingItem(item: HomeListItem) {
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp),
+                .padding(14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // circular checkbox
@@ -353,19 +383,21 @@ private fun ShoppingItem(item: HomeListItem) {
                     )
                 }
             }
-            Spacer(modifier = Modifier.width(10.dp))
-            // photo 1:1
+            Spacer(modifier = Modifier.width(12.dp))
+            // product packshot badge with clean category icon
             Box(
                 modifier = Modifier
-                    .size(40.dp)
-                    .clip(RoundedCornerShape(10.dp))
-                    .background(ThumbBackground),
+                    .size(44.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(BrandGreen.copy(alpha = 0.08f))
+                    .border(1.dp, BrandGreen.copy(alpha = 0.15f), RoundedCornerShape(12.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = item.thumbInitial,
-                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                    color = TextSecondary
+                Icon(
+                    imageVector = getProductIcon(item.name),
+                    contentDescription = item.name,
+                    tint = BrandGreen,
+                    modifier = Modifier.size(24.dp)
                 )
             }
             Spacer(modifier = Modifier.width(12.dp))
@@ -380,7 +412,7 @@ private fun ShoppingItem(item: HomeListItem) {
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "${item.quantity} un · ${item.unitPrice} · x${item.quantity}",
+                        text = "${item.quantity} un · ${item.unitPrice}",
                         style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp),
                         color = TextSecondary
                     )
@@ -388,9 +420,9 @@ private fun ShoppingItem(item: HomeListItem) {
                         Spacer(modifier = Modifier.width(6.dp))
                         Box(
                             modifier = Modifier
-                                .clip(RoundedCornerShape(7.dp))
+                                .clip(RoundedCornerShape(6.dp))
                                 .background(AccentOrange)
-                                .padding(horizontal = 6.dp, vertical = 2.dp)
+                                .padding(horizontal = 5.dp, vertical = 2.dp)
                         ) {
                             Text(
                                 text = "OCR",
@@ -407,12 +439,12 @@ private fun ShoppingItem(item: HomeListItem) {
             }
             Text(
                 text = item.total,
-                style = MaterialTheme.typography.titleSmall.copy(
+                style = MaterialTheme.typography.titleMedium.copy(
                     fontFamily = FontFamilyNunito,
                     fontWeight = FontWeight.ExtraBold,
-                    fontSize = 15.sp
+                    fontSize = 16.sp
                 ),
-                color = TextPrimary,
+                color = AccentOrange,
                 textAlign = TextAlign.End
             )
         }
@@ -422,13 +454,16 @@ private fun ShoppingItem(item: HomeListItem) {
 @Composable
 private fun HomeBottomBar(
     onNavigateToCamera: () -> Unit,
-    onNavigateToList: () -> Unit
+    onNavigateToList: () -> Unit,
+    onNavigateToCarrinho: () -> Unit = {},
+    onNavigateToPerfil: () -> Unit = {}
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp)
+            .navigationBarsPadding()
             .background(SurfaceWhite)
+            .padding(top = 10.dp, bottom = 8.dp)
     ) {
         // top divider
         Box(
@@ -436,24 +471,25 @@ private fun HomeBottomBar(
                 .fillMaxWidth()
                 .height(1.dp)
                 .background(TextPrimary.copy(alpha = 0.08f))
+                .align(Alignment.TopCenter)
         )
         Row(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 24.dp),
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp, vertical = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             BottomNavItem(icon = Icons.Default.Home, label = "Home", active = true, onClick = {})
             BottomNavItem(icon = Icons.Default.List, label = "Lista", active = false, onClick = onNavigateToList)
-            Spacer(modifier = Modifier.width(56.dp))
-            BottomNavItem(icon = Icons.Default.ShoppingCart, label = "Carrinho", active = false, onClick = onNavigateToList)
-            BottomNavItem(icon = Icons.Default.Person, label = "Perfil", active = false, onClick = {})
+            Spacer(modifier = Modifier.width(64.dp))
+            BottomNavItem(icon = Icons.Default.ShoppingCart, label = "Carrinho", active = false, onClick = onNavigateToCarrinho)
+            BottomNavItem(icon = Icons.Default.Person, label = "Perfil", active = false, onClick = onNavigateToPerfil)
         }
         Column(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .offset(y = (-34).dp),
+                .offset(y = (-24).dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             FloatingActionButton(
@@ -461,11 +497,11 @@ private fun HomeBottomBar(
                 containerColor = AccentOrange,
                 contentColor = SurfaceWhite,
                 shape = CircleShape,
-                modifier = Modifier.size(68.dp)
+                modifier = Modifier.size(60.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.CameraAlt,
-                    contentDescription = null,
+                    contentDescription = "Escanear",
                     modifier = Modifier.size(28.dp)
                 )
             }
@@ -473,7 +509,7 @@ private fun HomeBottomBar(
             Text(
                 text = "Escanear",
                 style = MaterialTheme.typography.labelSmall.copy(
-                    fontSize = 10.sp,
+                    fontSize = 11.sp,
                     fontWeight = FontWeight.Bold
                 ),
                 color = AccentOrange
@@ -484,14 +520,17 @@ private fun HomeBottomBar(
 
 @Composable
 private fun BottomNavItem(
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: ImageVector,
     label: String,
     active: Boolean,
     onClick: () -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.clickable { onClick() }
+        modifier = Modifier
+            .clip(RoundedCornerShape(8.dp))
+            .clickable { onClick() }
+            .padding(horizontal = 8.dp, vertical = 4.dp)
     ) {
         Icon(
             imageVector = icon,
@@ -502,15 +541,16 @@ private fun BottomNavItem(
         Spacer(modifier = Modifier.height(2.dp))
         Text(
             text = label,
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp, fontWeight = if (active) FontWeight.SemiBold else FontWeight.Medium),
+            style = MaterialTheme.typography.labelSmall.copy(
+                fontSize = 10.sp,
+                fontWeight = if (active) FontWeight.SemiBold else FontWeight.Medium
+            ),
             color = if (active) BrandGreen else TextSecondary
         )
     }
 }
 
-// Font family placeholders (Nunito not bundled; fallback to default)
 private val FontFamilyNunito = FontFamily.Default
-private val FontFamilyMonospace = FontFamily.Monospace
 
 @Preview(showBackground = true)
 @Composable

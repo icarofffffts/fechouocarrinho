@@ -1,28 +1,14 @@
 package com.fechouocarrinho.app.presentation.list
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -30,12 +16,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.fechouocarrinho.app.domain.model.Price
 import com.fechouocarrinho.app.presentation.components.PriceItem
 import com.fechouocarrinho.app.presentation.theme.FechouOCarrinhoTheme
+
+private val BrandGreen = Color(0xFF1B8C42)
+private val AccentOrange = Color(0xFFFF6B00)
+private val AppBackground = Color(0xFFFFF8F0)
+private val TextPrimary = Color(0xFF111827)
+private val TextSecondary = Color(0xFF6B7280)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,9 +42,10 @@ fun PriceListScreen(
     val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
+        containerColor = AppBackground,
         topBar = {
             TopAppBar(
-                title = { Text("Meus preços") },
+                title = { Text("Meus Preços", fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
@@ -57,11 +53,21 @@ fun PriceListScreen(
                             contentDescription = "Voltar"
                         )
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = BrandGreen,
+                    titleContentColor = Color.White,
+                    navigationIconContentColor = Color.White
+                )
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { viewModel.sync() }) {
+            FloatingActionButton(
+                onClick = { viewModel.sync() },
+                containerColor = AccentOrange,
+                contentColor = Color.White,
+                shape = CircleShape
+            ) {
                 Icon(imageVector = Icons.Default.Refresh, contentDescription = "Sincronizar")
             }
         },
@@ -71,10 +77,14 @@ fun PriceListScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
+                .background(AppBackground)
         ) {
             when (val state = uiState) {
                 is PriceListUiState.Loading -> {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center),
+                        color = BrandGreen
+                    )
                 }
 
                 is PriceListUiState.Empty -> {
@@ -104,14 +114,15 @@ private fun ContentList(state: PriceListUiState.Content) {
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp),
                 style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.secondary
+                color = AccentOrange
             )
         }
         if (state.isSyncing) {
             CircularProgressIndicator(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
-                    .padding(8.dp)
+                    .padding(8.dp),
+                color = BrandGreen
             )
         }
         LazyColumn(modifier = Modifier.weight(1f)) {
@@ -128,38 +139,30 @@ private fun EmptyContent(pendingCount: Int) {
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        Spacer(modifier = Modifier.weight(1f))
         Text(
             text = "Nenhum preço salvo ainda.",
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.headlineSmall
+            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+            color = TextPrimary
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = "Use a câmera na tela inicial para escanear etiquetas.",
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodyMedium,
+            color = TextSecondary
         )
         if (pendingCount > 0) {
+            Spacer(modifier = Modifier.height(12.dp))
             Text(
-                text = "$pendingCount pendente(s)",
-                color = MaterialTheme.colorScheme.secondary,
-                modifier = Modifier.padding(top = 8.dp)
+                text = "$pendingCount pendente(s) de envio",
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodySmall,
+                color = AccentOrange
             )
         }
-        Spacer(modifier = Modifier.weight(1f))
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun PriceListPreview() {
-    FechouOCarrinhoTheme {
-        ContentList(
-            state = PriceListUiState.Content(
-                prices = listOf(
-                    Price(id = 1, label = "ARROZ", value = 24.99, rawText = "R$ 24,99", syncStatus = "SYNCED"),
-                    Price(id = 2, label = "FEIJAO", value = 8.79, rawText = "R$ 8,79", syncStatus = "PENDING")
-                ),
-                pendingCount = 1,
-                isSyncing = false
-            )
-        )
     }
 }

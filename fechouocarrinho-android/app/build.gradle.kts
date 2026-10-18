@@ -22,9 +22,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // Configurações Supabase (substituir pelos valores reais no CI/local.properties)
-        buildConfigField("String", "SUPABASE_URL", "\"https://fechouocarrinho.supermarkets\"")
-        buildConfigField("String", "SUPABASE_KEY", "\"YOUR_ANON_KEY\"")
-        buildConfigField("String", "SUPABASE_PROFILE", "\"public\"")
+        buildConfigField("String", "SUPABASE_URL", "\"https://supabase.arxdevs.xyz\"")
+        buildConfigField("String", "SUPABASE_KEY", "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzc4MzgxNzgyLCJleHAiOjIwOTM3NDE3ODJ9.K4fBz3HC_CoeNdUwWCvIsdo4I8Z5OmJJcSB5Pzx6Dfw\"")
+        buildConfigField("String", "SUPABASE_PROFILE", "\"fechouocarrinho\"")
     }
 
     buildTypes {
@@ -102,8 +102,8 @@ dependencies {
     implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
     implementation("androidx.camera:camera-view:$cameraxVersion")
 
-    // ML Kit Text Recognition via Play Services (0MB no APK; modelo baixado sob demanda)
-    implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.1")
+    // ML Kit Text Recognition bundled (offline garantido, ~30MB mas sem download)
+    implementation("com.google.mlkit:text-recognition:16.0.1")
 
     // Room
     val roomVersion = "2.6.1"

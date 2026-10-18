@@ -25,15 +25,23 @@ class CameraViewModel(
             extractPricesUseCase(bitmap)
                 .onSuccess { prices ->
                     _uiState.value = if (prices.isEmpty()) {
-                        CameraUiState.Error("Nenhum preço encontrado. Tente novamente com melhor iluminação.")
+                        CameraUiState.Error("Não encontramos o preço na etiqueta. Tente posicionar a etiqueta no centro do quadro com boa iluminação.")
                     } else {
-                        prices.forEach { savePriceUseCase(it) }
                         CameraUiState.Success(prices)
                     }
                 }
                 .onFailure { error ->
                     _uiState.value = CameraUiState.Error(error.message ?: "Erro ao processar imagem")
                 }
+        }
+    }
+
+    fun confirmPrice(price: Price, quantity: Int = 1, onSaved: () -> Unit = {}) {
+        viewModelScope.launch {
+            repeat(quantity.coerceAtLeast(1)) {
+                savePriceUseCase(price)
+            }
+            onSaved()
         }
     }
 
