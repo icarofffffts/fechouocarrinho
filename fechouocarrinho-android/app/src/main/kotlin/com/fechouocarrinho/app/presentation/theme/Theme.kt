@@ -28,11 +28,11 @@ private val LightColors = lightColorScheme(
 )
 
 private val DarkColors = darkColorScheme(
-    primary = PrimaryDark,
+    primary = Primary,
     onPrimary = Color.White,
     secondary = Accent,
-    background = Color(0xFF121212),
-    surface = Color(0xFF1E1E1E),
+    background = Color(0xFF1E293B),
+    surface = Color(0xFF0F172A),
     onSurface = Color.White,
     error = Error
 )
@@ -40,7 +40,7 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun FechouOCarrinhoTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false, // desligado por padrão para economia em low-end
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -56,8 +56,12 @@ fun FechouOCarrinhoTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
+            val insetsController = WindowCompat.getInsetsController(window, view)
+            // A interface é projetada sobre o fundo claro #FFF8F0.
+            // Para o usuário enxergar perfeitamente a barra normal do celular
+            // (relógio, bateria, Wi-Fi, sinal 5G e notificações), os ícones devem ser ESCUROS:
+            insetsController.isAppearanceLightStatusBars = true
+            insetsController.isAppearanceLightNavigationBars = true
         }
     }
 

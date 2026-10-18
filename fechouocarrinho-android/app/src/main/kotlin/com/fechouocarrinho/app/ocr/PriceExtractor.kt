@@ -85,6 +85,9 @@ class PriceExtractor {
             } else {
                 cleaned.replace(" ", "")
             }
+        } else if (cleaned.contains(".") && !cleaned.contains(",") && cleaned.matches(Regex(""".*\.\d{2}"""))) {
+            // Ponto como decimal (ex: 18.50) - mantém o ponto
+            cleaned.replace(" ", "")
         } else {
             cleaned.replace(" ", "")
                 .replace(".", "")
@@ -123,6 +126,17 @@ class PriceExtractor {
             return cleanedCurrent
         }
 
+        // Prioriza a linha imediatamente anterior ao preço (caso Zepa: LEITE INTEGRAL 1L antes de 10 98)
+        val priceLineIndex = lines.indexOfFirst { it.contains(rawPrice) || it.trim() == rawPrice.trim() }
+        if (priceLineIndex > 0) {
+            val prevLine = cleanLabelText(lines[priceLineIndex - 1].replace(rawPrice, ""))
+            if (isValidProductTitle(prevLine) && prevLine.length >= 3) {
+                // Verifica se não é palavra ignorada isolada
+                val upperPrev = prevLine.uppercase()
+                val isIgnored = setOf("EPA", "ZEPA", "BH", "SUPERMERCADOS", "CARREFOUR", "MART", "MINAS", "OFERTA", "PRECO", "VAL", "LOTE", "FAB", "TOTAL", "UN", "KG").any { upperPrev == it || upperPrev.startsWith("$it ") || upperPrev.endsWith(" $it") }
+                if (!isIgnored) return prevLine
+            }
+        }
         val ignoreWords = setOf("EPA", "ZEPA", "BH", "SUPERMERCADOS", "CARREFOUR", "MART", "MINAS", "OFERTA", "PRECO", "VAL", "LOTE", "FAB", "TOTAL", "UN", "KG")
         val candidateLines = lines
             .map { cleanLabelText(it.replace(rawPrice, "")) }

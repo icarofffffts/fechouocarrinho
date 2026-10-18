@@ -85,6 +85,15 @@ fun CameraScreen(
         }
     }
 
+    DisposableEffect(Unit) {
+        val window = (context as? android.app.Activity)?.window
+        val insetsController = window?.let { androidx.core.view.WindowCompat.getInsetsController(it, window.decorView) }
+        insetsController?.isAppearanceLightStatusBars = false
+        onDispose {
+            insetsController?.isAppearanceLightStatusBars = true
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()

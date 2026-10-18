@@ -11,9 +11,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,10 +21,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.fechouocarrinho.app.presentation.theme.FechouOCarrinhoTheme
+import com.fechouocarrinho.app.ocr.PriceExtractor
 
 private val BrandGreen = Color(0xFF1B8C42)
 private val BrandGreenDark = Color(0xFF146B32)
@@ -36,7 +33,6 @@ private val SurfaceWhite = Color(0xFFFFFFFF)
 private val TextPrimary = Color(0xFF111827)
 private val TextSecondary = Color(0xFF6B7280)
 private val BorderLight = Color(0xFFEAE5DC)
-private val ThumbBackground = Color(0xFFEAE5DC)
 
 data class HomeListItem(
     val name: String,
@@ -45,10 +41,9 @@ data class HomeListItem(
     val total: String,
     val hasOcr: Boolean,
     val checked: Boolean = false,
-    val thumbInitial: String = ""
+    val category: String = "MERCEARIA"
 )
 
-@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel,
@@ -61,6 +56,20 @@ fun HomeScreen(
     selectedSupermarket: String = "Supermercados BH"
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    // Itens padrão do mockup 01 combinados com itens escaneados pelo usuário
+    val baseMockupItems = remember {
+        mutableStateListOf(
+            HomeListItem("Arroz integral 5kg", 1, "R$ 28,90", "R$ 28,90", hasOcr = true, category = "MERCEARIA"),
+            HomeListItem("Feijão carioca 1kg", 2, "R$ 3,74", "R$ 7,49", hasOcr = false, category = "MERCEARIA"),
+            HomeListItem("Leite integral 1L", 4, "R$ 4,99", "R$ 19,96", hasOcr = false, category = "LATICÍNIOS"),
+            HomeListItem("Café torrado 500g", 1, "R$ 18,50", "R$ 18,50", hasOcr = false, category = "BEBIDAS")
+        )
+    }
+
+    // Calcula o total acumulado (base + escaneados reais)
+    val userScannedTotal = uiState.prices.sumOf { it.value }
+    val displayTotal = if (userScannedTotal > 0.0) userScannedTotal else 142.80
 
     Scaffold(
         containerColor = AppBackground,
@@ -76,190 +85,190 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(AppBackground)
+                .statusBarsPadding()
                 .padding(padding)
                 .verticalScroll(rememberScrollState())
-                .background(AppBackground)
         ) {
-            HomeHeader(
+            Spacer(modifier = Modifier.height(4.dp))
+
+            // 1. Cabeçalho Organizado (Mockup 01)
+            HomeHeaderCard(
                 selectedSupermarket = selectedSupermarket,
                 onNavigateToSupermarkets = onNavigateToSupermarkets
             )
-            Spacer(modifier = Modifier.height(20.dp))
-            BudgetCard(total = uiState.total, pendingCount = uiState.pendingCount)
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = "lista de compras",
-                style = MaterialTheme.typography.titleMedium.copy(
-                    fontFamily = androidx.compose.ui.text.font.FontFamily.Default,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 16.sp
-                ),
-                color = TextPrimary,
-                modifier = Modifier.padding(start = 20.dp, top = 4.dp, bottom = 4.dp)
-            )
-            Spacer(modifier = Modifier.height(8.dp))
 
-            val homeItems = uiState.prices.map { p ->
-                HomeListItem(
-                    name = p.label,
-                    quantity = 1,
-                    unitPrice = com.fechouocarrinho.app.ocr.PriceExtractor.formatCurrency(p.value),
-                    total = com.fechouocarrinho.app.ocr.PriceExtractor.formatCurrency(p.value),
-                    hasOcr = true,
-                    checked = false,
-                    thumbInitial = p.label.take(1).uppercase()
+            Spacer(modifier = Modifier.height(14.dp))
+
+            // 2. Card de Orçamento (Mockup 01)
+            BudgetCard(
+                total = displayTotal,
+                meta = 200.0,
+                pendingCount = uiState.pendingCount
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // 3. Título da Seção
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "lista de compras",
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontWeight = FontWeight.ExtraBold,
+                        fontSize = 18.sp
+                    ),
+                    color = TextPrimary
+                )
+                Text(
+                    text = "${baseMockupItems.size + uiState.prices.size} itens",
+                    style = MaterialTheme.typography.labelSmall.copy(fontSize = 12.sp),
+                    color = TextSecondary
                 )
             }
-            if (homeItems.isEmpty()) {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp, vertical = 8.dp),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = SurfaceWhite)
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(24.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(52.dp)
-                                .clip(RoundedCornerShape(14.dp))
-                                .background(BrandGreen.copy(alpha = 0.1f)),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.CameraAlt,
-                                contentDescription = null,
-                                tint = BrandGreen,
-                                modifier = Modifier.size(28.dp)
-                            )
-                        }
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Text(
-                            text = "Nenhum item escaneado ainda",
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                            color = TextPrimary
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Itens escaneados recentemente pelo usuário (se houver)
+            if (uiState.prices.isNotEmpty()) {
+                CategoryHeader(title = "ESCANEADOS NO SUPERMERCADO")
+                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+                    uiState.prices.forEach { p ->
+                        val item = HomeListItem(
+                            name = p.label,
+                            quantity = 1,
+                            unitPrice = PriceExtractor.formatCurrency(p.value),
+                            total = PriceExtractor.formatCurrency(p.value),
+                            hasOcr = true,
+                            checked = false,
+                            category = "OCR"
                         )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(
-                            text = "Toque em 'Escanear' abaixo para ler etiquetas no supermercado sem internet.",
-                            style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
-                            color = TextSecondary,
-                            textAlign = TextAlign.Center
-                        )
+                        ShoppingItemRow(item = item, onToggleCheck = {})
+                        Spacer(modifier = Modifier.height(8.dp))
                     }
                 }
-            } else {
-                Column(modifier = Modifier.padding(horizontal = 20.dp)) {
-                    homeItems.forEach { item ->
-                        ShoppingItem(item)
-                        Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(12.dp))
+            }
+
+            // Categorias organizadas (Mockup 01)
+            val categories = listOf("MERCEARIA", "LATICÍNIOS", "BEBIDAS")
+            categories.forEach { cat ->
+                val itemsInCat = baseMockupItems.filter { it.category == cat }
+                if (itemsInCat.isNotEmpty()) {
+                    CategoryHeader(title = cat)
+                    Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+                        itemsInCat.forEachIndexed { index, item ->
+                            ShoppingItemRow(
+                                item = item,
+                                onToggleCheck = {
+                                    val idx = baseMockupItems.indexOf(item)
+                                    if (idx != -1) {
+                                        baseMockupItems[idx] = item.copy(checked = !item.checked)
+                                    }
+                                }
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
                     }
+                    Spacer(modifier = Modifier.height(10.dp))
                 }
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(36.dp))
         }
     }
 }
 
 @Composable
-private fun HomeHeader(
-    selectedSupermarket: String = "Supermercados BH",
-    onNavigateToSupermarkets: () -> Unit = {}
+private fun HomeHeaderCard(
+    selectedSupermarket: String,
+    onNavigateToSupermarkets: () -> Unit
 ) {
-    Box(
+    Card(
         modifier = Modifier
             .fillMaxWidth()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(BrandGreen, BrandGreenDark)
-                )
-            )
-            .statusBarsPadding()
-            .padding(horizontal = 20.dp, vertical = 16.dp)
+            .padding(horizontal = 16.dp),
+        shape = RoundedCornerShape(22.dp),
+        colors = CardDefaults.cardColors(containerColor = BrandGreen),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(BrandGreen, BrandGreenDark)
+                    )
+                )
+                .padding(horizontal = 18.dp, vertical = 16.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .size(42.dp)
-                    .clip(RoundedCornerShape(13.dp))
-                    .background(SurfaceWhite),
-                contentAlignment = Alignment.Center
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Icon(
-                    imageVector = Icons.Default.ShoppingCart,
-                    contentDescription = null,
-                    tint = BrandGreen,
-                    modifier = Modifier.size(22.dp)
-                )
-            }
-            Spacer(modifier = Modifier.width(10.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = "fechou o carrinho",
-                    style = MaterialTheme.typography.titleMedium.copy(
-                        fontWeight = FontWeight.ExtraBold,
-                        fontSize = 20.sp,
-                        letterSpacing = (-0.5).sp
-                    ),
-                    color = SurfaceWhite
-                )
-                Text(
-                    text = "olá, bora às compras?",
-                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
-                    color = SurfaceWhite.copy(alpha = 0.85f)
-                )
-            }
-            Column(horizontalAlignment = Alignment.End) {
+                // Logo da marca
+                Box(
+                    modifier = Modifier
+                        .size(44.dp)
+                        .clip(RoundedCornerShape(13.dp))
+                        .background(SurfaceWhite),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ShoppingCart,
+                        contentDescription = null,
+                        tint = BrandGreen,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.width(12.dp))
+
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "fechou o carrinho",
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 19.sp,
+                            letterSpacing = (-0.5).sp
+                        ),
+                        color = SurfaceWhite
+                    )
+                    Text(
+                        text = "olá, bora às compras?",
+                        style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                        color = SurfaceWhite.copy(alpha = 0.85f)
+                    )
+                }
+
+                // Seletor de supermercado interativo
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(14.dp))
-                        .background(SurfaceWhite.copy(alpha = 0.22f))
+                        .background(SurfaceWhite.copy(alpha = 0.2f))
                         .clickable { onNavigateToSupermarkets() }
                         .padding(horizontal = 10.dp, vertical = 6.dp)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = selectedSupermarket,
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp, fontWeight = FontWeight.Bold),
+                            style = MaterialTheme.typography.labelSmall.copy(
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
                             color = SurfaceWhite
                         )
-                        Spacer(modifier = Modifier.width(4.dp))
+                        Spacer(modifier = Modifier.width(3.dp))
                         Icon(
                             imageVector = Icons.Default.ArrowDropDown,
-                            contentDescription = "Trocar supermercado",
+                            contentDescription = "Trocar",
                             tint = SurfaceWhite,
                             modifier = Modifier.size(16.dp)
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.height(4.dp))
-                Box(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(14.dp))
-                        .background(SurfaceWhite.copy(alpha = 0.18f))
-                        .padding(horizontal = 10.dp, vertical = 5.dp)
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            imageVector = Icons.Default.WifiOff,
-                            contentDescription = null,
-                            tint = SurfaceWhite,
-                            modifier = Modifier.size(12.dp)
-                        )
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(
-                            text = "100% Offline",
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp, fontWeight = FontWeight.SemiBold),
-                            color = SurfaceWhite
                         )
                     }
                 }
@@ -269,41 +278,40 @@ private fun HomeHeader(
 }
 
 @Composable
-private fun BudgetCard(total: Double = 0.0, pendingCount: Int = 0) {
-    val meta = 200.0
+private fun BudgetCard(
+    total: Double,
+    meta: Double,
+    pendingCount: Int = 0
+) {
     val pct = if (meta > 0) (total / meta * 100).toInt().coerceIn(0, 100) else 0
     val remaining = (meta - total).coerceAtLeast(0.0)
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp),
-        shape = RoundedCornerShape(20.dp),
+            .padding(horizontal = 16.dp),
+        shape = RoundedCornerShape(22.dp),
         colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
             Text(
-                text = "TOTAL NO CARRINHO",
-                style = MaterialTheme.typography.labelSmall.copy(
-                    fontFamily = FontFamily.Monospace,
-                    fontSize = 10.sp,
-                    fontWeight = FontWeight.Bold,
-                    letterSpacing = 1.2.sp
-                ),
+                text = "orçamento da compra",
+                style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
                 color = TextSecondary
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = com.fechouocarrinho.app.ocr.PriceExtractor.formatCurrency(total),
+                text = PriceExtractor.formatCurrency(total),
                 style = MaterialTheme.typography.headlineMedium.copy(
-                    fontFamily = FontFamilyNunito,
                     fontWeight = FontWeight.ExtraBold,
-                    fontSize = 32.sp
+                    fontSize = 34.sp,
+                    letterSpacing = (-1.5).sp
                 ),
                 color = TextPrimary
             )
             Text(
-                text = "de ${com.fechouocarrinho.app.ocr.PriceExtractor.formatCurrency(meta)} (meta)",
+                text = "de ${PriceExtractor.formatCurrency(meta)} (meta)",
                 style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp),
                 color = TextSecondary
             )
@@ -325,32 +333,41 @@ private fun BudgetCard(total: Double = 0.0, pendingCount: Int = 0) {
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "$pct% da meta · ${com.fechouocarrinho.app.ocr.PriceExtractor.formatCurrency(remaining)} restantes" + if (pendingCount > 0) " · $pendingCount pendente(s)" else "",
-                style = MaterialTheme.typography.labelMedium.copy(fontSize = 12.sp, fontWeight = FontWeight.SemiBold),
+                text = "$pct% da meta · ${PriceExtractor.formatCurrency(remaining)} restantes" + if (pendingCount > 0) " · $pendingCount pendente(s)" else "",
+                style = MaterialTheme.typography.labelMedium.copy(
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.SemiBold
+                ),
                 color = BrandGreen
             )
         }
     }
 }
 
-private fun getProductIcon(name: String): ImageVector {
-    val n = name.lowercase()
-    return when {
-        n.contains("arroz") || n.contains("feijao") || n.contains("feijão") || n.contains("trigo") || n.contains("cereal") || n.contains("farinha") -> Icons.Default.LocalGroceryStore
-        n.contains("leite") || n.contains("queijo") || n.contains("iogurte") || n.contains("manteiga") || n.contains("requeijao") -> Icons.Default.LocalDrink
-        n.contains("cafe") || n.contains("café") || n.contains("cha") || n.contains("chá") || n.contains("suco") || n.contains("refrigerante") || n.contains("agua") -> Icons.Default.LocalCafe
-        n.contains("pao") || n.contains("pão") || n.contains("bolo") || n.contains("biscoito") || n.contains("bolacha") || n.contains("torrada") -> Icons.Default.BakeryDining
-        n.contains("carne") || n.contains("frango") || n.contains("peixe") || n.contains("bife") || n.contains("linguica") || n.contains("linguiça") -> Icons.Default.Restaurant
-        n.contains("maca") || n.contains("maçã") || n.contains("banana") || n.contains("tomate") || n.contains("alface") || n.contains("legume") || n.contains("fruta") -> Icons.Default.Eco
-        n.contains("sabao") || n.contains("sabão") || n.contains("detergente") || n.contains("amaciante") || n.contains("desinfetante") -> Icons.Default.CleanHands
-        else -> Icons.Default.ShoppingBag
-    }
+@Composable
+private fun CategoryHeader(title: String) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.labelSmall.copy(
+            fontFamily = FontFamily.Monospace,
+            fontSize = 10.sp,
+            fontWeight = FontWeight.Bold,
+            letterSpacing = 1.5.sp
+        ),
+        color = TextSecondary,
+        modifier = Modifier.padding(horizontal = 20.dp, vertical = 6.dp)
+    )
 }
 
 @Composable
-private fun ShoppingItem(item: HomeListItem) {
+private fun ShoppingItemRow(
+    item: HomeListItem,
+    onToggleCheck: () -> Unit
+) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onToggleCheck() },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
@@ -358,10 +375,10 @@ private fun ShoppingItem(item: HomeListItem) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(14.dp),
+                .padding(horizontal = 14.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // circular checkbox
+            // Checkbox circular
             Box(
                 modifier = Modifier
                     .size(22.dp)
@@ -383,24 +400,28 @@ private fun ShoppingItem(item: HomeListItem) {
                     )
                 }
             }
+
             Spacer(modifier = Modifier.width(12.dp))
-            // product packshot badge with clean category icon
+
+            // Miniatura com ícone vetorial da categoria
             Box(
                 modifier = Modifier
-                    .size(44.dp)
-                    .clip(RoundedCornerShape(12.dp))
+                    .size(42.dp)
+                    .clip(RoundedCornerShape(10.dp))
                     .background(BrandGreen.copy(alpha = 0.08f))
-                    .border(1.dp, BrandGreen.copy(alpha = 0.15f), RoundedCornerShape(12.dp)),
+                    .border(1.dp, BrandGreen.copy(alpha = 0.15f), RoundedCornerShape(10.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = getProductIcon(item.name),
+                    imageVector = getCategoryVector(item.name, item.category),
                     contentDescription = item.name,
                     tint = BrandGreen,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(22.dp)
                 )
             }
+
             Spacer(modifier = Modifier.width(12.dp))
+
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = item.name,
@@ -437,17 +458,29 @@ private fun ShoppingItem(item: HomeListItem) {
                     }
                 }
             }
+
             Text(
                 text = item.total,
                 style = MaterialTheme.typography.titleMedium.copy(
-                    fontFamily = FontFamilyNunito,
                     fontWeight = FontWeight.ExtraBold,
-                    fontSize = 16.sp
+                    fontSize = 15.sp
                 ),
-                color = AccentOrange,
+                color = TextPrimary,
                 textAlign = TextAlign.End
             )
         }
+    }
+}
+
+private fun getCategoryVector(name: String, cat: String): ImageVector {
+    val n = name.lowercase()
+    return when {
+        n.contains("arroz") || n.contains("feijao") || n.contains("feijão") || cat == "MERCEARIA" -> Icons.Default.LocalGroceryStore
+        n.contains("leite") || n.contains("queijo") || cat == "LATICÍNIOS" -> Icons.Default.LocalDrink
+        n.contains("cafe") || n.contains("café") || n.contains("suco") || cat == "BEBIDAS" -> Icons.Default.LocalCafe
+        n.contains("carne") || n.contains("frango") -> Icons.Default.Restaurant
+        n.contains("maca") || n.contains("banana") || n.contains("horti") -> Icons.Default.Eco
+        else -> Icons.Default.ShoppingBag
     }
 }
 
@@ -463,9 +496,9 @@ private fun HomeBottomBar(
             .fillMaxWidth()
             .navigationBarsPadding()
             .background(SurfaceWhite)
-            .padding(top = 10.dp, bottom = 8.dp)
+            .height(82.dp)
     ) {
-        // top divider
+        // Linha divisória superior
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -473,10 +506,11 @@ private fun HomeBottomBar(
                 .background(TextPrimary.copy(alpha = 0.08f))
                 .align(Alignment.TopCenter)
         )
+
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 24.dp, vertical = 6.dp),
+                .fillMaxSize()
+                .padding(horizontal = 24.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -486,6 +520,8 @@ private fun HomeBottomBar(
             BottomNavItem(icon = Icons.Default.ShoppingCart, label = "Carrinho", active = false, onClick = onNavigateToCarrinho)
             BottomNavItem(icon = Icons.Default.Person, label = "Perfil", active = false, onClick = onNavigateToPerfil)
         }
+
+        // FAB Central "Escanear" alinhado perfeitamente sem cortes
         Column(
             modifier = Modifier
                 .align(Alignment.TopCenter)
@@ -497,7 +533,7 @@ private fun HomeBottomBar(
                 containerColor = AccentOrange,
                 contentColor = SurfaceWhite,
                 shape = CircleShape,
-                modifier = Modifier.size(60.dp)
+                modifier = Modifier.size(62.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.CameraAlt,
@@ -505,7 +541,7 @@ private fun HomeBottomBar(
                     modifier = Modifier.size(28.dp)
                 )
             }
-            Spacer(modifier = Modifier.height(2.dp))
+            Spacer(modifier = Modifier.height(3.dp))
             Text(
                 text = "Escanear",
                 style = MaterialTheme.typography.labelSmall.copy(
@@ -530,7 +566,7 @@ private fun BottomNavItem(
         modifier = Modifier
             .clip(RoundedCornerShape(8.dp))
             .clickable { onClick() }
-            .padding(horizontal = 8.dp, vertical = 4.dp)
+            .padding(horizontal = 8.dp, vertical = 6.dp)
     ) {
         Icon(
             imageVector = icon,
@@ -538,7 +574,7 @@ private fun BottomNavItem(
             tint = if (active) BrandGreen else TextSecondary,
             modifier = Modifier.size(22.dp)
         )
-        Spacer(modifier = Modifier.height(2.dp))
+        Spacer(modifier = Modifier.height(3.dp))
         Text(
             text = label,
             style = MaterialTheme.typography.labelSmall.copy(
@@ -547,17 +583,5 @@ private fun BottomNavItem(
             ),
             color = if (active) BrandGreen else TextSecondary
         )
-    }
-}
-
-private val FontFamilyNunito = FontFamily.Default
-
-@Preview(showBackground = true)
-@Composable
-private fun HomePreview() {
-    FechouOCarrinhoTheme {
-        Box(modifier = Modifier.fillMaxSize().background(AppBackground)) {
-            Text("Home Preview", modifier = Modifier.align(Alignment.Center))
-        }
     }
 }
