@@ -1,0 +1,139 @@
+<svg width="390" height="844" viewBox="0 0 390 844" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="asBg" x1="0" y1="0" x2="0" y2="844" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFF8F0"/>
+      <stop offset="100%" stop-color="#F2EDE4"/>
+    </linearGradient>
+    <filter id="asCard" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" std-deviation="8" flood-color="#111827" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="390" height="844" fill="url(#asBg)"/>
+
+  <!-- Status bar -->
+  <text x="24" y="28" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">9:41</text>
+  <g transform="translate(300,14)">
+    <rect x="0" y="2" width="18" height="10" rx="2" fill="none" stroke="#111827" stroke-width="1.2"/>
+    <rect x="2" y="4" width="12" height="6" rx="1" fill="#111827"/>
+    <rect x="18" y="5" width="2" height="4" rx="1" fill="#111827"/>
+  </g>
+  <g transform="translate(326,14)">
+    <path d="M0 12 L4 8 L8 10 L12 6 L16 4" stroke="#111827" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(348,14)">
+    <rect x="0" y="4" width="3" height="8" rx="1" fill="#111827"/>
+    <rect x="5" y="2" width="3" height="10" rx="1" fill="#111827"/>
+    <rect x="10" y="0" width="3" height="12" rx="1" fill="#111827"/>
+  </g>
+
+  <!-- Header -->
+  <g transform="translate(20,56)">
+    <circle cx="16" cy="16" r="16" fill="#1B8C42" fill-opacity="0.12"/>
+    <path d="M20 10 L14 16 L20 22" stroke="#1B8C42" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="56" y="76" font-family="Nunito, sans-serif" font-size="20" font-weight="800" letter-spacing="-0.5" fill="#111827">Sincronização Familiar</text>
+  <text x="56" y="96" font-family="Inter, sans-serif" font-size="12" fill="#6B7280">Compartilhe listas com sua família</text>
+
+  <!-- Logged user card -->
+  <rect x="20" y="116" width="350" height="90" rx="20" fill="white" filter="url(#asCard)"/>
+  <g transform="translate(36,134)">
+    <circle cx="28" cy="28" r="28" fill="#1B8C42"/>
+    <circle cx="28" cy="20" r="10" fill="white"/>
+    <path d="M8 46 C8 32 16 28 28 28 C40 28 48 32 48 46" fill="white"/>
+  </g>
+  <text x="104" y="146" font-family="Nunito, sans-serif" font-size="16" font-weight="800" fill="#111827">Maria Silva</text>
+  <text x="104" y="166" font-family="Inter, sans-serif" font-size="12" fill="#6B7280">maria.silva@email.com</text>
+  <rect x="104" y="176" width="90" height="20" rx="10" fill="#1B8C42" fill-opacity="0.12"/>
+  <g transform="translate(112,180)">
+    <path d="M2 6 L5 9 L11 3" stroke="#1B8C42" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="128" y="191" font-family="monospace" font-size="9" font-weight="700" fill="#1B8C42">CONECTADO</text>
+  <g transform="translate(320,142)">
+    <rect width="34" height="34" rx="10" fill="#1B8C42" fill-opacity="0.12"/>
+    <g transform="translate(7,7)">
+      <path d="M10 0 L20 6 L20 16 L10 22 L0 16 L0 6 Z" fill="#1B8C42"/>
+      <path d="M6 11 L9 14 L15 8" stroke="white" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- Sync toggle card -->
+  <rect x="20" y="222" width="350" height="74" rx="18" fill="white" filter="url(#asCard)"/>
+  <g transform="translate(36,240)">
+    <rect width="36" height="36" rx="10" fill="#1B8C42" fill-opacity="0.12"/>
+    <g transform="translate(8,8)">
+      <path d="M10 2 L18 6 L18 14 L10 18 L2 14 L2 6 Z" fill="none" stroke="#1B8C42" stroke-width="1.6"/>
+      <path d="M6 10 L9 13 L14 7" stroke="#1B8C42" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+  <text x="84" y="252" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Sincronização em tempo real</text>
+  <text x="84" y="270" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">Atualiza a lista em todos os aparelhos</text>
+  <g transform="translate(312,248)">
+    <rect width="44" height="24" rx="12" fill="#1B8C42"/>
+    <circle cx="32" cy="12" r="9" fill="white"/>
+  </g>
+
+  <!-- Cloud backup status -->
+  <rect x="20" y="312" width="350" height="74" rx="18" fill="white" filter="url(#asCard)"/>
+  <g transform="translate(36,330)">
+    <rect width="36" height="36" rx="10" fill="#6B7280" fill-opacity="0.12"/>
+    <g transform="translate(8,8)">
+      <path d="M4 14 C2 14 0 12 0 9 C0 6 3 4 6 4 C7 1 11 0 14 2 C17 0 20 2 20 6 C22 6 24 8 24 11 C24 14 22 16 19 16 L4 16 Z" fill="#6B7280"/>
+    </g>
+  </g>
+  <text x="84" y="342" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Backup na nuvem</text>
+  <text x="84" y="360" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">Último backup: hoje, 09:41</text>
+  <g transform="translate(312,338)">
+    <rect width="44" height="28" rx="14" fill="#1B8C42" fill-opacity="0.12"/>
+    <text x="22" y="19" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#1B8C42" text-anchor="middle">OK</text>
+  </g>
+
+  <!-- Share list by code card -->
+  <rect x="20" y="402" width="350" height="170" rx="24" fill="#1B8C42" filter="url(#asCard)"/>
+  <text x="40" y="432" font-family="Nunito, sans-serif" font-size="16" font-weight="800" fill="white">Compartilhar Lista</text>
+  <text x="40" y="452" font-family="Inter, sans-serif" font-size="12" fill="white" fill-opacity="0.8">Envie o código de 6 dígitos para a família</text>
+
+  <!-- Code display -->
+  <g transform="translate(40,472)">
+    <rect width="200" height="52" rx="14" fill="white" fill-opacity="0.2"/>
+    <text x="100" y="36" font-family="Nunito, sans-serif" font-size="26" font-weight="800" letter-spacing="6" fill="white" text-anchor="middle">A7K9Q2</text>
+  </g>
+  <g transform="translate(250,472)">
+    <rect width="100" height="52" rx="14" fill="white"/>
+    <g transform="translate(22,14)">
+      <rect x="0" y="0" width="20" height="20" rx="4" fill="none" stroke="#1B8C42" stroke-width="1.6"/>
+      <rect x="4" y="4" width="12" height="12" fill="#1B8C42"/>
+    </g>
+    <text x="50" y="34" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1B8C42" text-anchor="middle">Copiar</text>
+  </g>
+
+  <text x="40" y="546" font-family="Inter, sans-serif" font-size="11" fill="white" fill-opacity="0.7">Quem tiver o código poderá ver e editar a lista</text>
+
+  <!-- Family members -->
+  <text x="24" y="596" font-family="Nunito, sans-serif" font-size="16" font-weight="800" fill="#111827">membros da família</text>
+  <g transform="translate(20,612)">
+    <rect width="350" height="60" rx="18" fill="white" filter="url(#asCard)"/>
+    <g transform="translate(16,12)">
+      <circle cx="18" cy="18" r="18" fill="#FF6B00"/>
+      <circle cx="18" cy="12" r="7" fill="white"/>
+      <path d="M4 30 C4 22 10 19 18 19 C26 19 32 22 32 30" fill="white"/>
+    </g>
+    <text x="64" y="30" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#111827">João Silva</text>
+    <text x="64" y="46" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">conectado · editando lista</text>
+    <g transform="translate(314,20)">
+      <circle cx="10" cy="10" r="10" fill="#1B8C42" fill-opacity="0.12"/>
+      <path d="M6 10 L9 13 L14 7" stroke="#1B8C42" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- Disconnect button -->
+  <rect x="20" y="688" width="350" height="52" rx="26" fill="#EAE5DC"/>
+  <g transform="translate(108,702)">
+    <path d="M12 0 L12 8 M12 16 L12 24" stroke="#6B7280" stroke-width="2" stroke-linecap="round"/>
+    <path d="M4 6 C0 10 0 18 4 22 M20 6 C24 10 24 18 20 22" stroke="#6B7280" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+  <text x="195" y="720" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#6B7280" text-anchor="middle">Desconectar conta</text>
+
+  <!-- Footer -->
+  <text x="195" y="762" font-family="Inter, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Dados sincronizados com segurança na nuvem</text>
+</svg>
