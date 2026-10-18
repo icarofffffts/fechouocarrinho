@@ -1,0 +1,159 @@
+<svg width="390" height="844" viewBox="0 0 390 844" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pfBg" x1="0" y1="0" x2="0" y2="844" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFF8F0"/>
+      <stop offset="100%" stop-color="#F2EDE4"/>
+    </linearGradient>
+    <filter id="pfCard" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" std-deviation="8" flood-color="#111827" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="390" height="844" fill="url(#pfBg)"/>
+
+  <!-- Status bar -->
+  <text x="24" y="28" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">9:41</text>
+  <g transform="translate(300,14)">
+    <rect x="0" y="2" width="18" height="10" rx="2" fill="none" stroke="#111827" stroke-width="1.2"/>
+    <rect x="2" y="4" width="12" height="6" rx="1" fill="#111827"/>
+    <rect x="18" y="5" width="2" height="4" rx="1" fill="#111827"/>
+  </g>
+  <g transform="translate(326,14)">
+    <path d="M0 12 L4 8 L8 10 L12 6 L16 4" stroke="#111827" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(348,14)">
+    <rect x="0" y="4" width="3" height="8" rx="1" fill="#111827"/>
+    <rect x="5" y="2" width="3" height="10" rx="1" fill="#111827"/>
+    <rect x="10" y="0" width="3" height="12" rx="1" fill="#111827"/>
+  </g>
+
+  <!-- Header -->
+  <text x="24" y="72" font-family="Nunito, sans-serif" font-size="24" font-weight="800" letter-spacing="-0.5" fill="#111827">Perfil</text>
+
+  <!-- Avatar card -->
+  <rect x="20" y="96" width="350" height="150" rx="24" fill="white" filter="url(#pfCard)"/>
+  <g transform="translate(40,120)">
+    <circle cx="42" cy="42" r="42" fill="#1B8C42"/>
+    <circle cx="42" cy="32" r="14" fill="white"/>
+    <path d="M14 70 C14 50 26 44 42 44 C58 44 70 50 70 70" fill="white"/>
+  </g>
+  <text x="140" y="140" font-family="Nunito, sans-serif" font-size="20" font-weight="800" fill="#111827">Maria Silva</text>
+  <text x="140" y="162" font-family="Inter, sans-serif" font-size="12" fill="#6B7280">maria.silva@email.com</text>
+  <rect x="140" y="174" width="110" height="24" rx="12" fill="#6B7280" fill-opacity="0.15"/>
+  <text x="150" y="191" font-family="monospace" font-size="10" font-weight="700" fill="#6B7280">PLANO GRATUITO</text>
+  <g transform="translate(290,120)">
+    <rect width="64" height="32" rx="16" fill="#1B8C42"/>
+    <text x="32" y="21" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">Editar</text>
+  </g>
+
+  <!-- Savings card -->
+  <rect x="20" y="262" width="350" height="110" rx="24" fill="#1B8C42" filter="url(#pfCard)"/>
+  <g transform="translate(40,282)">
+    <rect width="40" height="40" rx="12" fill="white" fill-opacity="0.2"/>
+    <path d="M12 10 L20 18 L32 6" stroke="white" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="10" y1="28" x2="30" y2="28" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+  <text x="96" y="292" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="white" fill-opacity="0.8">economia acumulada</text>
+  <text x="96" y="326" font-family="Nunito, sans-serif" font-size="30" font-weight="800" letter-spacing="-1" fill="white">R$ 342,80</text>
+  <text x="96" y="348" font-family="Inter, sans-serif" font-size="11" fill="white" fill-opacity="0.7">em 12 compras comparadas</text>
+
+  <!-- Menu -->
+  <text x="24" y="400" font-family="Nunito, sans-serif" font-size="16" font-weight="800" fill="#111827">configurações e dados</text>
+
+  <!-- Menu item 1: Mercados Favoritos -->
+  <rect x="20" y="416" width="350" height="64" rx="18" fill="white" filter="url(#pfCard)"/>
+  <g transform="translate(36,432)">
+    <rect width="32" height="32" rx="10" fill="#1B8C42" fill-opacity="0.12"/>
+    <g transform="translate(6,6)">
+      <path d="M10 0 L20 6 L20 20 L0 20 L0 6 Z" fill="#1B8C42"/>
+      <rect x="7" y="11" width="6" height="9" fill="white"/>
+    </g>
+  </g>
+  <text x="80" y="444" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Mercados Favoritos</text>
+  <text x="80" y="462" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">Redes salvas e mercado principal</text>
+  <g transform="translate(338,438)">
+    <path d="M0 0 L6 6 L0 12" stroke="#6B7280" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Menu item 2: Historico -->
+  <rect x="20" y="490" width="350" height="64" rx="18" fill="white" filter="url(#pfCard)"/>
+  <g transform="translate(36,506)">
+    <rect width="32" height="32" rx="10" fill="#FF6B00" fill-opacity="0.12"/>
+    <g transform="translate(6,6)">
+      <rect x="0" y="0" width="20" height="20" rx="3" fill="none" stroke="#FF6B00" stroke-width="1.6"/>
+      <line x1="4" y1="6" x2="16" y2="6" stroke="#FF6B00" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="4" y1="11" x2="16" y2="11" stroke="#FF6B00" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="4" y1="16" x2="12" y2="16" stroke="#FF6B00" stroke-width="1.6" stroke-linecap="round"/>
+    </g>
+  </g>
+  <text x="80" y="518" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Histórico de Compras</text>
+  <text x="80" y="536" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">Compras fechadas e economias obtidas</text>
+  <g transform="translate(338,512)">
+    <path d="M0 0 L6 6 L0 12" stroke="#6B7280" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Menu item 3: Configuracoes OCR -->
+  <rect x="20" y="564" width="350" height="64" rx="18" fill="white" filter="url(#pfCard)"/>
+  <g transform="translate(36,580)">
+    <rect width="32" height="32" rx="10" fill="#6B7280" fill-opacity="0.12"/>
+    <g transform="translate(6,6)">
+      <rect x="2" y="4" width="16" height="12" rx="2" fill="none" stroke="#6B7280" stroke-width="1.6"/>
+      <circle cx="10" cy="10" r="3" fill="none" stroke="#6B7280" stroke-width="1.6"/>
+      <path d="M4 2 L4 6 M16 2 L16 6" stroke="#6B7280" stroke-width="1.6" stroke-linecap="round"/>
+    </g>
+  </g>
+  <text x="80" y="592" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Configurações do OCR</text>
+  <text x="80" y="610" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">Modo offline, flash, bip e backup</text>
+  <g transform="translate(338,586)">
+    <path d="M0 0 L6 6 L0 12" stroke="#6B7280" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Menu item 4: Ajuda -->
+  <rect x="20" y="638" width="350" height="64" rx="18" fill="white" filter="url(#pfCard)"/>
+  <g transform="translate(36,654)">
+    <rect width="32" height="32" rx="10" fill="#6B7280" fill-opacity="0.12"/>
+    <g transform="translate(6,6)">
+      <circle cx="10" cy="10" r="9" fill="none" stroke="#6B7280" stroke-width="1.6"/>
+      <text x="10" y="14" font-family="Nunito, sans-serif" font-size="12" font-weight="800" fill="#6B7280" text-anchor="middle">?</text>
+    </g>
+  </g>
+  <text x="80" y="666" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#111827">Ajuda e Suporte</text>
+  <text x="80" y="684" font-family="Inter, sans-serif" font-size="11" fill="#6B7280">FAQ, contato e termos de uso</text>
+  <g transform="translate(338,660)">
+    <path d="M0 0 L6 6 L0 12" stroke="#6B7280" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Bottom nav -->
+  <rect y="764" width="390" height="80" fill="white"/>
+  <line x1="0" y1="764" x2="390" y2="764" stroke="#111827" stroke-opacity="0.08" stroke-width="1"/>
+  <g transform="translate(34,778)">
+    <path d="M12 3 L22 10 V21 H14 V15 H10 V21 H2 V10 Z" fill="#6B7280"/>
+    <text x="-2" y="46" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#6B7280">Home</text>
+  </g>
+  <g transform="translate(104,778)">
+    <rect x="3" y="5" width="18" height="2" rx="1" fill="#6B7280"/>
+    <rect x="3" y="11" width="18" height="2" rx="1" fill="#6B7280"/>
+    <rect x="3" y="17" width="18" height="2" rx="1" fill="#6B7280"/>
+    <text x="2" y="46" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#6B7280">Listas</text>
+  </g>
+  <circle cx="195" cy="764" r="34" fill="#FF6B00">
+    <title>scan</title>
+  </circle>
+  <g transform="translate(183,752)">
+    <rect x="0" y="4" width="24" height="16" rx="3" fill="white"/>
+    <circle cx="12" cy="12" r="5" fill="#FF6B00"/>
+    <rect x="8" y="1" width="8" height="3" rx="1" fill="white"/>
+  </g>
+  <text x="195" y="812" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#FF6B00" text-anchor="middle">Escanear</text>
+  <g transform="translate(250,778)">
+    <path d="M4 5 H6 L8 16 H18 L20 8 H7" stroke="#6B7280" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="9" cy="19" r="1.6" fill="#6B7280"/>
+    <circle cx="17" cy="19" r="1.6" fill="#6B7280"/>
+    <text x="0" y="46" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#6B7280">Carrinho</text>
+  </g>
+  <g transform="translate(320,778)">
+    <circle cx="12" cy="8" r="4" fill="#1B8C42"/>
+    <path d="M4 21 C4 16 8 14 12 14 C16 14 20 16 20 21" fill="#1B8C42"/>
+    <text x="2" y="46" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#1B8C42">Perfil</text>
+  </g>
+</svg>
