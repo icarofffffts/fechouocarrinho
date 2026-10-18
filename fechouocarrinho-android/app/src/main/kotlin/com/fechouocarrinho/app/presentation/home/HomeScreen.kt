@@ -95,7 +95,8 @@ fun HomeScreen(
             // 1. Cabeçalho Organizado (Mockup 01)
             HomeHeaderCard(
                 selectedSupermarket = selectedSupermarket,
-                onNavigateToSupermarkets = onNavigateToSupermarkets
+                onNavigateToSupermarkets = onNavigateToSupermarkets,
+                onCheckUpdate = { viewModel.checkForUpdateManually() }
             )
 
             Spacer(modifier = Modifier.height(14.dp))
@@ -187,7 +188,8 @@ fun HomeScreen(
 @Composable
 private fun HomeHeaderCard(
     selectedSupermarket: String,
-    onNavigateToSupermarkets: () -> Unit
+    onNavigateToSupermarkets: () -> Unit,
+    onCheckUpdate: () -> Unit = {}
 ) {
     Card(
         modifier = Modifier
@@ -271,6 +273,10 @@ private fun HomeHeaderCard(
                             modifier = Modifier.size(16.dp)
                         )
                     }
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                IconButton(onClick = onCheckUpdate, modifier = Modifier.size(32.dp)) {
+                    Icon(Icons.Default.Refresh, contentDescription = "Verificar atualização", tint = SurfaceWhite, modifier = Modifier.size(18.dp))
                 }
             }
         }

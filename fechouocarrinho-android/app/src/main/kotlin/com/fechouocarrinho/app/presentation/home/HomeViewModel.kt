@@ -45,6 +45,10 @@ class HomeViewModel(
         }
     }
 
+    fun checkForUpdateManually() {
+        checkForUpdate()
+    }
+
     fun dismissUpdate() {
         _updateInfo.value = null
     }
