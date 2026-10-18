@@ -26,6 +26,8 @@ import com.fechouocarrinho.app.presentation.home.HomeScreen
 import com.fechouocarrinho.app.presentation.home.HomeViewModel
 import com.fechouocarrinho.app.presentation.list.PriceListScreen
 import com.fechouocarrinho.app.presentation.list.PriceListViewModel
+import com.fechouocarrinho.app.presentation.auth.AuthScreen
+import com.fechouocarrinho.app.presentation.auth.SyncScreen
 import com.fechouocarrinho.app.presentation.screens.CarrinhoFechadoScreenReal
 import com.fechouocarrinho.app.presentation.screens.ComparadorScreenReal
 import com.fechouocarrinho.app.presentation.screens.CorrecaoOcrScreenReal
@@ -100,6 +102,15 @@ class MainActivity : ComponentActivity() {
                         composable("manual") { ManualScreenReal() }
                         composable("correcao") { CorrecaoOcrScreenReal() }
                         composable("recibo") { ReciboScreenReal() }
+                        composable("auth") {
+                            AuthScreen(
+                                onContinueOffline = { navController.navigate("home") { popUpTo("auth") { inclusive = true } } },
+                                onGoogleSignIn = { navController.navigate("sync") },
+                                onCreateAccount = { _, _ -> navController.navigate("sync") },
+                                onLogin = { navController.navigate("sync") }
+                            )
+                        }
+                        composable("sync") { SyncScreen(onDisconnect = { navController.navigate("home") }) }
                     }
                 }
             }
