@@ -2470,26 +2470,32 @@
     <circle cx="10" cy="7" r="3" fill="#6B7280"/>
   </g>
 
-  <!-- Create account button -->
-  <rect x="40" y="540" width="310" height="52" rx="26" fill="#1B8C42"/>
-  <text x="195" y="572" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">Criar Conta</text>
+  <!-- Primary CTA: Criar Conta -->
+  <rect x="32" y="512" width="326" height="50" rx="25" fill="#1B8C42"/>
+  <text x="195" y="543" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="white" text-anchor="middle">Criar Conta Gratuita</text>
 
-  <!-- Skip / offline button (highlighted) -->
-  <rect x="40" y="608" width="310" height="52" rx="26" fill="#FF6B00" filter="url(#acBtn)"/>
-  <g transform="translate(66,622)">
-    <rect width="24" height="24" rx="6" fill="white" fill-opacity="0.25"/>
-    <g transform="translate(4,4)">
-      <path d="M8 0 L16 4 L16 12 L8 16 L0 12 L0 4 Z" fill="white"/>
-      <path d="M3 7 L6 10 L12 4" stroke="#FF6B00" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    </g>
+  <!-- Secondary Non-Friction Button: Pular por enquanto / 100% Offline (ZERO SOBREPOSIÇÃO) -->
+  <rect x="32" y="576" width="326" height="50" rx="25" fill="#FFF7ED" stroke="#FF6B00" stroke-width="1.8"/>
+  <g transform="translate(80, 591)">
+    <!-- Shield / Offline check icon -->
+    <path d="M8 0 L16 3.5 V9 C16 13.5 12.5 17 8 18 C3.5 17 0 13.5 0 9 V3.5 L8 0 Z" fill="#FF6B00"/>
+    <path d="M4.5 9 L7 11.5 L12 5.5" stroke="white" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Button text cleanly offset -->
+    <text x="24" y="14" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#FF6B00">Pular e Usar 100% Offline</text>
   </g>
-  <text x="195" y="640" font-family="Inter, sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">Pular por enquanto · Usar 100% Offline</text>
 
-  <!-- Footer -->
-  <text x="195" y="690" font-family="Inter, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">Ao continuar você concorda com os Termos de Uso</text>
-  <text x="195" y="708" font-family="Inter, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">e a Política de Privacidade.</text>
+  <!-- Privacy terms -->
+  <text x="195" y="654" font-family="Inter, sans-serif" font-size="11" fill="#9CA3AF" text-anchor="middle">Ao continuar você concorda com os Termos de Uso</text>
+  <text x="195" y="670" font-family="Inter, sans-serif" font-size="11" fill="#9CA3AF" text-anchor="middle">e a Política de Privacidade.</text>
 
-  <text x="195" y="760" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#1B8C42" text-anchor="middle">Já tem conta? Entrar</text>
+  <!-- Bottom Link: Already have account -->
+  <g transform="translate(32, 716)">
+    <rect width="326" height="42" rx="12" fill="white" fill-opacity="0.6"/>
+    <text x="163" y="26" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#1B8C42" text-anchor="middle">Já tem uma conta? Entrar</text>
+  </g>
+
+  <!-- Android Navigation Bar (Gesture Pill) -->
+  <rect x="145" y="826" width="100" height="4" rx="2" fill="#111827" fill-opacity="0.3"/>
 </svg></template>
 <template id="tpl-sincronizacao"><svg width="390" height="844" viewBox="0 0 390 844" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
