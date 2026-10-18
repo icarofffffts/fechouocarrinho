@@ -11,6 +11,7 @@
     <filter id="wShadowSm" x="-10%" y="-10%" width="120%" height="130%">
       <feDropShadow dx="0" dy="4" std-deviation="6" flood-color="#000000" flood-opacity="0.2"/>
     </filter>
+    <clipPath id="thumb28"><rect width="28" height="28" rx="6"/></clipPath>
   </defs>
 
   <!-- Wallpaper -->
@@ -95,26 +96,34 @@
     <g>
       <rect width="20" height="20" rx="6" fill="#1B8C42"/>
       <path d="M5 10 L8 13 L15 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      <text x="30" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111827">Arroz integral 5kg</text>
+      <rect x="28" y="-4" width="28" height="28" rx="6" fill="#EAE5DC"/>
+      <image href="products/arroz-tio-joao.jpg" xlink:href="products/arroz-tio-joao.jpg" x="28" y="-4" width="28" height="28" preserveAspectRatio="xMidYMid slice" clip-path="url(#thumb28)"/>
+      <text x="62" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111827">Arroz integral 5kg</text>
       <text x="326" y="15" font-family="Nunito, sans-serif" font-size="12" font-weight="700" fill="#111827" text-anchor="end">R$ 28,90</text>
     </g>
     <!-- item 2 checked -->
     <g transform="translate(0, 32)">
       <rect width="20" height="20" rx="6" fill="#1B8C42"/>
       <path d="M5 10 L8 13 L15 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      <text x="30" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111827">Feijão carioca 1kg</text>
+      <rect x="28" y="-4" width="28" height="28" rx="6" fill="#EAE5DC"/>
+      <image href="products/feijao-camil.jpg" xlink:href="products/feijao-camil.jpg" x="28" y="-4" width="28" height="28" preserveAspectRatio="xMidYMid slice" clip-path="url(#thumb28)"/>
+      <text x="62" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111827">Feijão carioca 1kg</text>
       <text x="326" y="15" font-family="Nunito, sans-serif" font-size="12" font-weight="700" fill="#111827" text-anchor="end">R$ 7,49</text>
     </g>
     <!-- item 3 unchecked -->
     <g transform="translate(0, 64)">
       <rect width="20" height="20" rx="6" fill="white" stroke="#6B7280" stroke-width="1.5"/>
-      <text x="30" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111827">Leite integral 1L</text>
+      <rect x="28" y="-4" width="28" height="28" rx="6" fill="#EAE5DC"/>
+      <image href="products/leite-itambe.jpg" xlink:href="products/leite-itambe.jpg" x="28" y="-4" width="28" height="28" preserveAspectRatio="xMidYMid slice" clip-path="url(#thumb28)"/>
+      <text x="62" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111827">Leite integral 1L</text>
       <text x="326" y="15" font-family="Nunito, sans-serif" font-size="12" font-weight="700" fill="#6B7280" text-anchor="end">R$ 19,96</text>
     </g>
     <!-- item 4 unchecked -->
     <g transform="translate(0, 96)">
       <rect width="20" height="20" rx="6" fill="white" stroke="#6B7280" stroke-width="1.5"/>
-      <text x="30" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111827">Café torrado 500g</text>
+      <rect x="28" y="-4" width="28" height="28" rx="6" fill="#EAE5DC"/>
+      <image href="products/cafe-pilao.jpg" xlink:href="products/cafe-pilao.jpg" x="28" y="-4" width="28" height="28" preserveAspectRatio="xMidYMid slice" clip-path="url(#thumb28)"/>
+      <text x="62" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111827">Café torrado 500g</text>
       <text x="326" y="15" font-family="Nunito, sans-serif" font-size="12" font-weight="700" fill="#6B7280" text-anchor="end">R$ 18,50</text>
     </g>
   </g>
