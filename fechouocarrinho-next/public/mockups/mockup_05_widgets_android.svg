@@ -1,0 +1,152 @@
+<svg width="390" height="844" viewBox="0 0 390 844" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wallpaper" x1="0" y1="0" x2="390" y2="844" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F3D24"/>
+      <stop offset="50%" stop-color="#1B8C42"/>
+      <stop offset="100%" stop-color="#0E4822"/>
+    </linearGradient>
+    <filter id="wShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="6" std-deviation="10" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+    <filter id="wShadowSm" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" std-deviation="6" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+    <clipPath id="thumb28"><rect width="28" height="28" rx="6"/></clipPath>
+  </defs>
+
+  <!-- Wallpaper -->
+  <rect width="390" height="844" fill="url(#wallpaper)"/>
+  <g fill="white" fill-opacity="0.06">
+    <circle cx="60" cy="200" r="120"/>
+    <circle cx="340" cy="600" r="160"/>
+    <circle cx="200" cy="420" r="90"/>
+  </g>
+  <g fill="#FF6B00" fill-opacity="0.08">
+    <circle cx="300" cy="120" r="80"/>
+    <circle cx="80" cy="700" r="100"/>
+  </g>
+
+  <!-- Status bar -->
+  <text x="24" y="28" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="white">9:41</text>
+  <g transform="translate(300, 14)">
+    <rect x="0" y="2" width="18" height="10" rx="2" fill="none" stroke="white" stroke-width="1.2"/>
+    <rect x="2" y="4" width="12" height="6" rx="1" fill="white"/>
+    <rect x="18" y="5" width="2" height="4" rx="1" fill="white"/>
+  </g>
+  <g transform="translate(326, 14)">
+    <path d="M0 12 L4 8 L8 10 L12 6 L16 4" stroke="white" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(348, 14)">
+    <rect x="0" y="4" width="3" height="8" rx="1" fill="white"/>
+    <rect x="5" y="2" width="3" height="10" rx="1" fill="white"/>
+    <rect x="10" y="0" width="3" height="12" rx="1" fill="white"/>
+  </g>
+
+  <!-- Clock / date -->
+  <text x="195" y="96" font-family="Nunito, sans-serif" font-size="56" font-weight="800" fill="white" text-anchor="middle">9:41</text>
+  <text x="195" y="120" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="white" fill-opacity="0.85" text-anchor="middle">sábado, 17 de outubro</text>
+
+  <!-- Widget A: Resumo de Orcamento (4x2) -->
+  <rect x="16" y="148" width="358" height="168" rx="24" fill="white" filter="url(#wShadow)"/>
+  <g transform="translate(32, 168)">
+    <!-- header -->
+    <g>
+      <rect width="28" height="28" rx="8" fill="#1B8C42"/>
+      <path d="M8 10 L14 16 L22 8" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="36" y="20" font-family="Nunito, sans-serif" font-size="14" font-weight="800" fill="#111827">Resumo de Orçamento</text>
+    <text x="326" y="20" font-family="Inter, sans-serif" font-size="11" fill="#6B7280" text-anchor="end">fechou</text>
+  </g>
+
+  <g transform="translate(32, 208)">
+    <text x="0" y="0" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#6B7280">total no carrinho</text>
+    <text x="0" y="30" font-family="Nunito, sans-serif" font-size="28" font-weight="800" letter-spacing="-1" fill="#111827">R$ 142,80</text>
+    <text x="220" y="0" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#6B7280">meta</text>
+    <text x="220" y="30" font-family="Nunito, sans-serif" font-size="20" font-weight="800" fill="#6B7280">R$ 200,00</text>
+  </g>
+
+  <g transform="translate(32, 252)">
+    <rect width="326" height="8" rx="4" fill="#EAE5DC"/>
+    <rect width="233" height="8" rx="4" fill="#1B8C42"/>
+    <text x="0" y="26" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#1B8C42">71% da meta · R$ 57,20 restantes</text>
+    <!-- scanner button -->
+    <rect x="236" y="-18" width="90" height="32" rx="16" fill="#FF6B00"/>
+    <g transform="translate(248, -12)">
+      <rect width="16" height="12" rx="2" fill="white"/>
+      <circle cx="8" cy="6" r="3" fill="#FF6B00"/>
+    </g>
+    <text x="270" y="4" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="white">Escanear</text>
+  </g>
+
+  <!-- Widget B: Lista Rapida (4x3) -->
+  <rect x="16" y="332" width="358" height="252" rx="24" fill="white" filter="url(#wShadow)"/>
+  <g transform="translate(32, 352)">
+    <rect width="28" height="28" rx="8" fill="#FF6B00"/>
+    <g transform="translate(6, 6)">
+      <rect x="0" y="2" width="16" height="2" rx="1" fill="white"/>
+      <rect x="0" y="8" width="16" height="2" rx="1" fill="white"/>
+      <rect x="0" y="14" width="16" height="2" rx="1" fill="white"/>
+    </g>
+    <text x="36" y="20" font-family="Nunito, sans-serif" font-size="14" font-weight="800" fill="#111827">Lista Rápida</text>
+    <text x="326" y="20" font-family="Inter, sans-serif" font-size="11" fill="#6B7280" text-anchor="end">4 itens</text>
+  </g>
+
+  <g transform="translate(32, 392)">
+    <!-- item 1 checked -->
+    <g>
+      <rect width="20" height="20" rx="6" fill="#1B8C42"/>
+      <path d="M5 10 L8 13 L15 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="28" y="-4" width="28" height="28" rx="6" fill="#EAE5DC"/>
+      <image href="products/arroz-tio-joao.jpg" xlink:href="products/arroz-tio-joao.jpg" x="28" y="-4" width="28" height="28" preserveAspectRatio="xMidYMid slice" clip-path="url(#thumb28)"/>
+      <text x="62" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111827">Arroz integral 5kg</text>
+      <text x="326" y="15" font-family="Nunito, sans-serif" font-size="12" font-weight="700" fill="#111827" text-anchor="end">R$ 28,90</text>
+    </g>
+    <!-- item 2 checked -->
+    <g transform="translate(0, 32)">
+      <rect width="20" height="20" rx="6" fill="#1B8C42"/>
+      <path d="M5 10 L8 13 L15 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="28" y="-4" width="28" height="28" rx="6" fill="#EAE5DC"/>
+      <image href="products/feijao-camil.jpg" xlink:href="products/feijao-camil.jpg" x="28" y="-4" width="28" height="28" preserveAspectRatio="xMidYMid slice" clip-path="url(#thumb28)"/>
+      <text x="62" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111827">Feijão carioca 1kg</text>
+      <text x="326" y="15" font-family="Nunito, sans-serif" font-size="12" font-weight="700" fill="#111827" text-anchor="end">R$ 7,49</text>
+    </g>
+    <!-- item 3 unchecked -->
+    <g transform="translate(0, 64)">
+      <rect width="20" height="20" rx="6" fill="white" stroke="#6B7280" stroke-width="1.5"/>
+      <rect x="28" y="-4" width="28" height="28" rx="6" fill="#EAE5DC"/>
+      <image href="products/leite-itambe.jpg" xlink:href="products/leite-itambe.jpg" x="28" y="-4" width="28" height="28" preserveAspectRatio="xMidYMid slice" clip-path="url(#thumb28)"/>
+      <text x="62" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111827">Leite integral 1L</text>
+      <text x="326" y="15" font-family="Nunito, sans-serif" font-size="12" font-weight="700" fill="#6B7280" text-anchor="end">R$ 19,96</text>
+    </g>
+    <!-- item 4 unchecked -->
+    <g transform="translate(0, 96)">
+      <rect width="20" height="20" rx="6" fill="white" stroke="#6B7280" stroke-width="1.5"/>
+      <rect x="28" y="-4" width="28" height="28" rx="6" fill="#EAE5DC"/>
+      <image href="products/cafe-pilao.jpg" xlink:href="products/cafe-pilao.jpg" x="28" y="-4" width="28" height="28" preserveAspectRatio="xMidYMid slice" clip-path="url(#thumb28)"/>
+      <text x="62" y="15" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#111827">Café torrado 500g</text>
+      <text x="326" y="15" font-family="Nunito, sans-serif" font-size="12" font-weight="700" fill="#6B7280" text-anchor="end">R$ 18,50</text>
+    </g>
+  </g>
+
+  <g transform="translate(32, 548)">
+    <rect width="326" height="24" rx="12" fill="#1B8C42" fill-opacity="0.1"/>
+    <text x="163" y="16" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#1B8C42" text-anchor="middle">Ver lista completa</text>
+  </g>
+
+  <!-- Widget C: Quick Scanner OCR (2x1) -->
+  <rect x="16" y="600" width="172" height="84" rx="24" fill="#FF6B00" filter="url(#wShadowSm)"/>
+  <g transform="translate(32, 620)">
+    <rect width="36" height="36" rx="12" fill="white" fill-opacity="0.25"/>
+    <g transform="translate(8, 8)">
+      <rect width="20" height="14" rx="3" fill="white"/>
+      <circle cx="10" cy="7" r="4" fill="#FF6B00"/>
+      <rect x="7" y="2" width="6" height="3" rx="1" fill="white"/>
+    </g>
+    <text x="44" y="16" font-family="Nunito, sans-serif" font-size="13" font-weight="800" fill="white">Scanner OCR</text>
+    <text x="44" y="32" font-family="Inter, sans-serif" font-size="10" fill="white" fill-opacity="0.85">1 toque</text>
+  </g>
+
+  <!-- Android nav bar (gesture pill) -->
+  <rect x="0" y="796" width="390" height="48" fill="black" fill-opacity="0.15"/>
+  <rect x="145" y="814" width="100" height="4" rx="2" fill="white" fill-opacity="0.6"/>
+</svg>
