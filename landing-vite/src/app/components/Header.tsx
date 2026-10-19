@@ -7,6 +7,7 @@ import { BrandLogo, Container } from "./ui"
 const links = [
   { label: "Como funciona", to: "/como-funciona" },
   { label: "Supermercados", to: "/supermercados" },
+  { label: "Comparador", to: "/comparador" },
   { label: "Ajuda", to: "/ajuda" },
 ]
 

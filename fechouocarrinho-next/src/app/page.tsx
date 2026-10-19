@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { fetchSupermarkets, isSupabaseConfigured, type Supermarket } from "@/lib/supabase";
 import MockupViewer from "@/components/MockupViewer";
+import BrandAndBannersSection from "@/components/BrandAndBannersSection";
 
 const MARKET_COLORS: Record<string, string> = {
   "epa-mg": "bg-emerald-600",
@@ -67,6 +68,7 @@ export default function Home() {
           <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
             <a href="/como-funciona" className="hover:text-[#1B8C42] transition">Como funciona</a>
             <a href="/supermercados" className="hover:text-[#1B8C42] transition">Supermercados</a>
+            <a href="/marca" className="hover:text-[#1B8C42] font-semibold text-[#1B8C42] transition">Identidade & Banners</a>
             <a href="/ajuda" className="hover:text-[#1B8C42] transition">Ajuda</a>
             <a href="#baixar" className="bg-[#111827] text-white px-5 py-2.5 rounded-full font-semibold hover:bg-black transition">Baixar APK</a>
           </nav>
@@ -310,6 +312,8 @@ export default function Home() {
         </div>
       </section>
 
+      <BrandAndBannersSection />
+
       <MockupViewer />
 
       <footer className="border-t border-zinc-200 py-8 bg-white">
@@ -322,7 +326,7 @@ export default function Home() {
             <p className="text-zinc-500 mt-2 max-w-sm leading-relaxed">Controle simples do total da sua compra. Escolha o mercado, some os itens e vá ao caixa com tranquilidade.</p>
           </div>
           <div className="flex gap-10 text-sm">
-            <div className="flex flex-col gap-2"><span className="font-bold">Navegação</span><a href="/como-funciona" className="text-zinc-600 hover:text-[#111827]">Como funciona</a><a href="/supermercados" className="text-zinc-600 hover:text-[#111827]">Supermercados</a><a href="/ajuda" className="text-zinc-600 hover:text-[#111827]">Ajuda</a></div>
+            <div className="flex flex-col gap-2"><span className="font-bold">Navegação</span><a href="/como-funciona" className="text-zinc-600 hover:text-[#111827]">Como funciona</a><a href="/supermercados" className="text-zinc-600 hover:text-[#111827]">Supermercados</a><a href="/marca" className="text-zinc-600 hover:text-[#111827]">Identidade & Banners</a><a href="/ajuda" className="text-zinc-600 hover:text-[#111827]">Ajuda</a></div>
             <div className="flex flex-col gap-2"><span className="font-bold">Contato</span><a href="mailto:contato@fechouocarrinho.site" className="text-zinc-600 hover:text-[#111827]">contato@fechouocarrinho.site</a><span className="text-zinc-500 text-xs">© 2026 Fechou o Carrinho</span></div>
           </div>
         </div>

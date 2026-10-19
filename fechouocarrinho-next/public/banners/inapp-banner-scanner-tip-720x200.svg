@@ -1,0 +1,10 @@
+<svg width="720" height="200" viewBox="0 0 720 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="200" rx="28" fill="#111827"/>
+  <g transform="translate(32, 32)">
+    <rect width="44" height="44" rx="14" fill="#FF6B00"/>
+    <text x="14" y="28" font-size="18">📷</text>
+    <text x="60" y="28" font-family="Nunito, sans-serif" font-size="22" font-weight="800" fill="white">Dica do leitor de preços</text>
+    <text x="0" y="75" font-family="Inter, sans-serif" font-size="15" fill="white" fill-opacity="0.8">Posicione a etiqueta amarela ou branca bem iluminada no centro do visor</text>
+    <text x="0" y="98" font-family="Inter, sans-serif" font-size="15" fill="white" fill-opacity="0.8">para captura instantânea sem precisar digitar centavos.</text>
+  </g>
+</svg>

@@ -83,9 +83,7 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate("home") {
                                         popUpTo("home") { inclusive = true }
                                     }
-                                },
-                                onNavigateToManual = { navController.navigate("manual") },
-                                onBack = { navController.popBackStack() }
+                                }
                             )
                         }
 
@@ -106,6 +104,7 @@ class MainActivity : ComponentActivity() {
                             val prices by repository.prices.collectAsState(initial = emptyList())
                             CarrinhoFechadoScreenReal(
                                 prices = prices,
+                                marketName = currentMarket,
                                 onFinalizar = { navController.navigate("recibo") },
                                 onCompartilhar = { navController.navigate("recibo") },
                                 onBack = { navController.popBackStack() }
