@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.fechouocarrinho.app.ocr.PriceExtractor
+import com.fechouocarrinho.app.presentation.components.WelcomeBanner
 
 private val BrandGreen = Color(0xFF1B8C42)
 private val BrandGreenDark = Color(0xFF146B32)
@@ -98,6 +99,11 @@ fun HomeScreen(
                 onNavigateToSupermarkets = onNavigateToSupermarkets,
                 onCheckUpdate = { viewModel.checkForUpdateManually() }
             )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Banner de Boas-vindas 720x240
+            WelcomeBanner(onAction = onNavigateToCamera)
 
             Spacer(modifier = Modifier.height(14.dp))
 

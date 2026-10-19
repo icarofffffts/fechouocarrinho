@@ -71,6 +71,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import com.fechouocarrinho.app.domain.model.Price
 import com.fechouocarrinho.app.ocr.PriceExtractor
+import com.fechouocarrinho.app.presentation.components.ScannerTipBanner
 import com.fechouocarrinho.app.presentation.theme.FechouOCarrinhoTheme
 import java.util.concurrent.Executors
 
@@ -197,6 +198,11 @@ private fun CameraPreviewWithOverlay(
             ) {
                 Text("100% Offline", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.SemiBold)
             }
+        }
+
+        // Banner tip scanner 720x200
+        Box(modifier = Modifier.align(Alignment.TopCenter).padding(top = 120.dp).padding(horizontal = 16.dp)) {
+            ScannerTipBanner()
         }
 
         // Viewfinder

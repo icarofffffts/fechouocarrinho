@@ -39,6 +39,11 @@ fun SyncScreen(
         Modifier.fillMaxSize().background(Color(0xFFFFF8F0)).padding(16.dp).padding(top = 8.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
+        // Banner Family Plan 720x200
+        com.fechouocarrinho.app.presentation.components.FamilyPlanBanner(onShare = {
+            val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            cm.setPrimaryClip(ClipData.newPlainText("code", shareCode))
+        })
         // Header
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Default.Sync, contentDescription = null, tint = Color(0xFF1B8C42), modifier = Modifier.size(20.dp))
