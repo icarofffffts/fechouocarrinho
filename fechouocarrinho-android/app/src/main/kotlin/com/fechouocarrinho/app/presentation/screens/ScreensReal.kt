@@ -28,6 +28,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
+import androidx.compose.animation.core.*
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.scale
+import com.fechouocarrinho.app.presentation.components.pressBounce
+import com.fechouocarrinho.app.presentation.components.SquircleMedium
+import com.fechouocarrinho.app.presentation.components.SquircleLarge
+import com.fechouocarrinho.app.presentation.components.SquircleSmall
+import com.fechouocarrinho.app.presentation.components.SquircleExtraLarge
 import com.fechouocarrinho.app.domain.model.Price
 import com.fechouocarrinho.app.ocr.PriceExtractor
 
@@ -67,6 +75,15 @@ fun CarrinhoFechadoScreenReal(
     val itemCount = prices.size
     val meta = 200.0
     val economiaReal = if (economia > 0.0) economia else (meta - total).coerceAtLeast(0.0)
+
+    val celebrationScale by animateFloatAsState(
+        targetValue = 1f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessLow
+        ),
+        label = "CelebrationScale"
+    )
 
     Box(
         modifier = Modifier
@@ -113,6 +130,7 @@ fun CarrinhoFechadoScreenReal(
             // Badge de celebração com círculo radiante
             Box(
                 modifier = Modifier
+                    .scale(celebrationScale)
                     .size(96.dp)
                     .clip(CircleShape)
                     .background(Color.White.copy(alpha = 0.15f)),
@@ -322,7 +340,8 @@ fun CarrinhoFechadoScreenReal(
                     onClick = onCompartilhar,
                     modifier = Modifier
                         .weight(1f)
-                        .height(50.dp),
+                        .height(50.dp)
+                        .pressBounce(onClick = onCompartilhar),
                     colors = ButtonDefaults.buttonColors(containerColor = SurfaceWhite),
                     shape = RoundedCornerShape(25.dp)
                 ) {
@@ -333,7 +352,8 @@ fun CarrinhoFechadoScreenReal(
                     onClick = onFinalizar,
                     modifier = Modifier
                         .weight(1f)
-                        .height(50.dp),
+                        .height(50.dp)
+                        .pressBounce(onClick = onFinalizar),
                     colors = ButtonDefaults.buttonColors(containerColor = AccentOrange),
                     shape = RoundedCornerShape(25.dp)
                 ) {

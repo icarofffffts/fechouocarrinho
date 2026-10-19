@@ -73,6 +73,10 @@ import androidx.core.content.ContextCompat
 import com.fechouocarrinho.app.domain.model.Price
 import com.fechouocarrinho.app.ocr.PriceExtractor
 import com.fechouocarrinho.app.presentation.components.ScannerTipBanner
+import com.fechouocarrinho.app.presentation.components.pressBounce
+import com.fechouocarrinho.app.presentation.components.SquircleLarge
+import com.fechouocarrinho.app.presentation.components.SquircleMedium
+import com.fechouocarrinho.app.presentation.components.SquircleSmall
 import com.fechouocarrinho.app.presentation.theme.FechouOCarrinhoTheme
 import java.util.concurrent.Executors
 
@@ -240,22 +244,25 @@ private fun CameraPreviewWithOverlay(
 
         // Capture button
         if (uiState is CameraUiState.Preview) {
-            Button(
-                onClick = {
-                    imageCapture?.let { capture ->
-                        takePhoto(context, capture, executor) { bitmap ->
-                            viewModel.onPhotoCaptured(bitmap)
-                        }
+            val takePhotoAction = {
+                imageCapture?.let { capture ->
+                    takePhoto(context, capture, executor) { bitmap ->
+                        viewModel.onPhotoCaptured(bitmap)
                     }
-                },
+                }
+            }
+            Button(
+                onClick = { takePhotoAction() },
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .padding(bottom = 32.dp)
-                    .size(72.dp),
+                    .size(76.dp)
+                    .pressBounce(scaleDown = 0.92f, onClick = { takePhotoAction() }),
                 shape = CircleShape,
-                colors = ButtonDefaults.buttonColors(containerColor = ScanOrange)
+                colors = ButtonDefaults.buttonColors(containerColor = ScanOrange),
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
             ) {
-                Text("Foto", color = Color.White, fontSize = 12.sp)
+                Text("Foto", color = Color.White, fontSize = 13.sp, fontWeight = FontWeight.Bold)
             }
         }
 
@@ -309,9 +316,9 @@ private fun CircleIconButton(
 ) {
     Box(
         modifier = Modifier
-            .size(32.dp)
-            .background(Color.White.copy(alpha = 0.12f), CircleShape)
-            .clickable { onClick() },
+            .size(36.dp)
+            .background(Color.White.copy(alpha = 0.15f), CircleShape)
+            .pressBounce(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
         content()
@@ -490,8 +497,8 @@ private fun CircleStepButton(text: String, filled: Boolean = false, onClick: () 
     Box(
         modifier = Modifier
             .size(44.dp)
-            .background(bg, RoundedCornerShape(12.dp))
-            .clickable { onClick() },
+            .background(bg, SquircleSmall)
+            .pressBounce(onClick = onClick),
         contentAlignment = Alignment.Center
     ) {
         Text(text, color = fg, fontSize = 20.sp, fontWeight = FontWeight.Bold)
