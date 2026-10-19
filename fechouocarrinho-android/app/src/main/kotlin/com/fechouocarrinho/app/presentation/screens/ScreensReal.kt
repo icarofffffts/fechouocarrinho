@@ -46,7 +46,8 @@ private val BorderLight = Color(0xFFEAE5DC)
 @Composable
 fun CarrinhoFechadoScreenReal(
     prices: List<Price> = emptyList(),
-    economia: Double = 27.60,
+    marketName: String = "Supermercados BH",
+    economia: Double = 0.0,
     onFinalizar: () -> Unit = {},
     onCompartilhar: () -> Unit = {},
     onBack: () -> Unit = {}
@@ -62,8 +63,10 @@ fun CarrinhoFechadoScreenReal(
         }
     }
 
-    val total = if (prices.isNotEmpty()) prices.sumOf { it.value } else 189.40
-    val itemCount = if (prices.isNotEmpty()) prices.size else 12
+    val total = prices.sumOf { it.value }
+    val itemCount = prices.size
+    val meta = 200.0
+    val economiaReal = if (economia > 0.0) economia else (meta - total).coerceAtLeast(0.0)
 
     Box(
         modifier = Modifier
@@ -179,7 +182,7 @@ fun CarrinhoFechadoScreenReal(
                         color = TextPrimary
                     )
                     Text(
-                        text = "$itemCount itens · Supermercados BH",
+                        text = "$itemCount itens · $marketName",
                         style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
                         color = TextSecondary
                     )
@@ -208,7 +211,7 @@ fun CarrinhoFechadoScreenReal(
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
-                                    text = "economia ${PriceExtractor.formatCurrency(economia)}",
+                                    text = "economia ${PriceExtractor.formatCurrency(economiaReal)}",
                                     style = MaterialTheme.typography.labelSmall.copy(
                                         color = BrandGreen,
                                         fontWeight = FontWeight.Bold
@@ -218,7 +221,7 @@ fun CarrinhoFechadoScreenReal(
                         }
 
                         Text(
-                            text = "vs. meta de R$ 200,00",
+                            text = "vs. meta de ${PriceExtractor.formatCurrency(meta)}",
                             style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp),
                             color = TextSecondary
                         )
@@ -241,13 +244,49 @@ fun CarrinhoFechadoScreenReal(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            val catList = listOf(
-                Triple("Mercearia (6 itens)", "R$ 98,40", Icons.Default.LocalGroceryStore),
-                Triple("Laticínios (3 itens)", "R$ 42,30", Icons.Default.LocalDrink),
-                Triple("Bebidas (3 itens)", "R$ 48,70", Icons.Default.LocalCafe)
-            )
+            // Breakdown real por categoria (dados do Room, sem mock)
+            val categoryOrder = listOf("Mercearia", "Laticínios", "Bebidas", "Hortifruti", "Limpeza", "Outros")
+            fun categoryOf(label: String): String {
+                val n = label.lowercase()
+                return when {
+                    n.contains("leite") || n.contains("queijo") || n.contains("iogurte") || n.contains("manteiga") -> "Laticínios"
+                    n.contains("cafe") || n.contains("café") || n.contains("suco") || n.contains("refrigerante") || n.contains("cerveja") || n.contains("agua") || n.contains("água") -> "Bebidas"
+                    n.contains("maca") || n.contains("maçã") || n.contains("banana") || n.contains("alface") || n.contains("tomate") || n.contains("horti") -> "Hortifruti"
+                    n.contains("detergente") || n.contains("sabao") || n.contains("sabão") || n.contains("limpeza") -> "Limpeza"
+                    else -> "Mercearia"
+                }
+            }
+            fun categoryIcon(cat: String) = when (cat) {
+                "Laticínios" -> Icons.Default.LocalDrink
+                "Bebidas" -> Icons.Default.LocalCafe
+                "Hortifruti" -> Icons.Default.Eco
+                "Limpeza" -> Icons.Default.CleaningServices
+                else -> Icons.Default.LocalGroceryStore
+            }
 
-            catList.forEach { (catName, catTotal, catIcon) ->
+            val grouped = prices.groupBy { categoryOf(it.label) }
+            val breakdown = categoryOrder.mapNotNull { cat ->
+                val items = grouped[cat] ?: return@mapNotNull null
+                if (items.isEmpty()) return@mapNotNull null
+                Triple("$cat (${items.size} ${if (items.size == 1) "item" else "itens"})", PriceExtractor.formatCurrency(items.sumOf { it.value }), categoryIcon(cat))
+            }
+
+            if (breakdown.isEmpty()) {
+                Card(
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                    shape = RoundedCornerShape(14.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.12f))
+                ) {
+                    Text(
+                        text = "Nenhum item registrado ainda.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.White,
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
+                    )
+                }
+            }
+
+            breakdown.forEach { (catName, catTotal, catIcon) ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()

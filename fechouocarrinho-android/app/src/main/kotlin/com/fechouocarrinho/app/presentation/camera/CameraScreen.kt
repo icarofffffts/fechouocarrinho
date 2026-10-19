@@ -14,32 +14,56 @@ import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview as CameraXPreview
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,23 +71,16 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import com.fechouocarrinho.app.domain.model.Price
 import com.fechouocarrinho.app.ocr.PriceExtractor
+import com.fechouocarrinho.app.presentation.theme.FechouOCarrinhoTheme
 import java.util.concurrent.Executors
 
-private val BrandGreen = Color(0xFF1B8C42)
-private val BrandGreenDark = Color(0xFF146B32)
-private val AccentOrange = Color(0xFFFF6B00)
-private val AppBackground = Color(0xFFFFF8F0)
-private val SurfaceWhite = Color(0xFFFFFFFF)
-private val TextPrimary = Color(0xFF111827)
-private val TextSecondary = Color(0xFF6B7280)
-private val BorderLight = Color(0xFFEAE5DC)
+private val ScanGreen = Color(0xFF1B8C42)
+private val ScanOrange = Color(0xFFFF6B00)
 
 @Composable
 fun CameraScreen(
     viewModel: CameraViewModel,
-    onNavigateToList: () -> Unit = {},
-    onNavigateToManual: () -> Unit = {},
-    onBack: () -> Unit = {}
+    onNavigateToList: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
@@ -75,68 +92,57 @@ fun CameraScreen(
     }
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
-    ) { granted ->
-        hasPermission = granted
-    }
+    ) { granted -> hasPermission = granted }
 
     LaunchedEffect(Unit) {
-        if (!hasPermission) {
-            launcher.launch(Manifest.permission.CAMERA)
-        }
+        if (!hasPermission) launcher.launch(Manifest.permission.CAMERA)
     }
 
-    DisposableEffect(Unit) {
-        val window = (context as? android.app.Activity)?.window
-        val insetsController = window?.let { androidx.core.view.WindowCompat.getInsetsController(it, window.decorView) }
-        insetsController?.isAppearanceLightStatusBars = false
-        onDispose {
-            insetsController?.isAppearanceLightStatusBars = true
-        }
-    }
+    var camera by remember { mutableStateOf<Camera?>(null) }
+    var torchOn by remember { mutableStateOf(false) }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black)
-    ) {
-        if (hasPermission) {
-            CameraContent(
-                uiState = uiState,
-                onPhotoCaptured = { bitmap -> viewModel.onPhotoCaptured(bitmap) },
-                onRetry = { viewModel.retry() },
-                onConfirmPrice = { price, qty ->
-                    viewModel.confirmPrice(price, qty, onSaved = onNavigateToList)
-                },
-                onNavigateToManual = onNavigateToManual,
-                onBack = onBack
-            )
-        } else {
-            PermissionDeniedView(
-                onRequestPermission = { launcher.launch(Manifest.permission.CAMERA) },
-                onBack = onBack
-            )
+    Scaffold(containerColor = Color.Black) { padding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+        ) {
+            if (hasPermission) {
+                CameraPreviewWithOverlay(
+                    onCameraReady = { camera = it },
+                    torchOn = torchOn,
+                    uiState = uiState,
+                    viewModel = viewModel,
+                    onNavigateToList = onNavigateToList,
+                    onTorchToggle = {
+                        torchOn = !torchOn
+                        camera?.cameraControl?.enableTorch(torchOn)
+                    }
+                )
+            } else {
+                PermissionDeniedContent(
+                    onRequestPermission = { launcher.launch(Manifest.permission.CAMERA) }
+                )
+            }
         }
     }
 }
 
 @Composable
-private fun CameraContent(
+private fun CameraPreviewWithOverlay(
+    onCameraReady: (Camera) -> Unit,
+    torchOn: Boolean,
     uiState: CameraUiState,
-    onPhotoCaptured: (Bitmap) -> Unit,
-    onRetry: () -> Unit,
-    onConfirmPrice: (Price, Int) -> Unit,
-    onNavigateToManual: () -> Unit,
-    onBack: () -> Unit
+    viewModel: CameraViewModel,
+    onNavigateToList: () -> Unit,
+    onTorchToggle: () -> Unit
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val executor = remember { Executors.newSingleThreadExecutor() }
     var imageCapture by remember { mutableStateOf<ImageCapture?>(null) }
-    var cameraInstance by remember { mutableStateOf<Camera?>(null) }
-    var isTorchOn by remember { mutableStateOf(false) }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        // Camera Preview
         AndroidView(
             factory = { ctx ->
                 val previewView = PreviewView(ctx).apply {
@@ -147,642 +153,329 @@ private fun CameraContent(
                     context = ctx,
                     lifecycleOwner = lifecycleOwner,
                     previewView = previewView,
-                    onCameraReady = { cam, capture ->
-                        cameraInstance = cam
-                        imageCapture = capture
-                    }
+                    onCameraReady = onCameraReady,
+                    onImageCaptureReady = { imageCapture = it }
                 )
                 previewView
             },
             modifier = Modifier.fillMaxSize()
         )
 
-        // Viewfinder Dark Mask & Green Corner Brackets
-        ViewfinderOverlay()
-
-        // Top Bar: Back button, Title, Torch toggle
+        // Top bar
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .statusBarsPadding()
-                .padding(horizontal = 20.dp, vertical = 12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+                .padding(horizontal = 20.dp, vertical = 56.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(
-                onClick = onBack,
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(CircleShape)
-                    .background(Color.White.copy(alpha = 0.2f))
-            ) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Voltar",
-                    tint = Color.White,
-                    modifier = Modifier.size(22.dp)
-                )
+            CircleIconButton(onClick = { /* close */ }) {
+                Text("X", color = Color.White, fontWeight = FontWeight.Bold)
             }
-
             Text(
-                text = "Escanear preço",
-                style = MaterialTheme.typography.titleMedium.copy(
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 18.sp
-                ),
-                color = Color.White
+                text = "Escanear preco",
+                color = Color.White,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.ExtraBold
             )
-
-            IconButton(
-                onClick = {
-                    val nextState = !isTorchOn
-                    cameraInstance?.cameraControl?.enableTorch(nextState)
-                    isTorchOn = nextState
-                },
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(CircleShape)
-                    .background(Color.White.copy(alpha = 0.2f))
-            ) {
-                Icon(
-                    imageVector = if (isTorchOn) Icons.Default.FlashOn else Icons.Default.FlashOff,
-                    contentDescription = "Lanterna",
-                    tint = if (isTorchOn) AccentOrange else Color.White,
-                    modifier = Modifier.size(22.dp)
-                )
+            CircleIconButton(onClick = onTorchToggle) {
+                Text(if (torchOn) "ON" else "OFF", color = Color.White, fontSize = 10.sp)
             }
         }
 
-        // Offline Badge
+        // Offline badge
+        Surface(
+            shape = RoundedCornerShape(13.dp),
+            color = ScanGreen,
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 92.dp)
+        ) {
+            Row(
+                modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text("100% Offline", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.SemiBold)
+            }
+        }
+
+        // Viewfinder
         Box(
             modifier = Modifier
-                .statusBarsPadding()
-                .padding(top = 56.dp)
                 .align(Alignment.TopCenter)
-                .clip(RoundedCornerShape(14.dp))
-                .background(BrandGreen)
-                .padding(horizontal = 14.dp, vertical = 6.dp)
+                .padding(top = 140.dp)
+                .size(330.dp, 220.dp)
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = Icons.Default.Check,
-                    contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier.size(14.dp)
-                )
-                Spacer(modifier = Modifier.width(6.dp))
-                Text(
-                    text = "100% Offline (Sem Internet)",
-                    style = MaterialTheme.typography.labelSmall.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 11.sp
-                    ),
-                    color = Color.White
-                )
-            }
+            ScannerFrame()
         }
 
-        // Shutter Button (only visible when in Preview state)
-        if (uiState is CameraUiState.Preview) {
-            Column(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .navigationBarsPadding()
-                    .padding(bottom = 24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                IconButton(
-                    onClick = {
-                        imageCapture?.let { capture ->
-                            takePhoto(context, capture, executor, onPhotoCaptured)
-                        }
-                    },
-                    modifier = Modifier
-                        .size(76.dp)
-                        .clip(CircleShape)
-                        .background(AccentOrange)
-                        .border(4.dp, Color.White, CircleShape)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.CameraAlt,
-                        contentDescription = "Capturar",
-                        tint = Color.White,
-                        modifier = Modifier.size(34.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "Toque para ler etiqueta",
-                    style = MaterialTheme.typography.labelSmall.copy(
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.SemiBold
-                    ),
-                    color = Color.White.copy(alpha = 0.9f)
-                )
-            }
-        }
-
-        // State Overlays: Processing, Success (Bottom Sheet), Error (Bottom Sheet)
-        when (uiState) {
-            is CameraUiState.Processing -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.Black.copy(alpha = 0.65f)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Card(
-                        shape = RoundedCornerShape(20.dp),
-                        colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-                        modifier = Modifier.padding(32.dp)
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(28.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            CircularProgressIndicator(color = AccentOrange, strokeWidth = 3.dp)
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = "Lendo etiqueta...",
-                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                                color = TextPrimary
-                            )
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text(
-                                text = "Processando OCR localmente",
-                                style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
-                                color = TextSecondary
-                            )
-                        }
-                    }
-                }
-            }
-
-            is CameraUiState.Success -> {
-                val prices = uiState.prices
-                if (prices.isNotEmpty()) {
-                    DetectedPriceBottomSheet(
-                        initialPrice = prices.first(),
-                        onConfirm = onConfirmPrice,
-                        onRetry = onRetry
-                    )
-                }
-            }
-
-            is CameraUiState.Error -> {
-                ScanErrorBottomSheet(
-                    message = uiState.message,
-                    onRetry = onRetry,
-                    onManual = onNavigateToManual
-                )
-            }
-
-            else -> Unit
-        }
-    }
-}
-
-@Composable
-private fun ViewfinderOverlay() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
+        // Hint
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.offset(y = (-40).dp)
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 380.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Viewfinder Frame (320 x 200 dp)
-            Box(
-                modifier = Modifier
-                    .size(width = 320.dp, height = 200.dp)
-                    .clip(RoundedCornerShape(20.dp))
-                    .background(Color.White.copy(alpha = 0.05f))
-                    .border(1.dp, Color.White.copy(alpha = 0.25f), RoundedCornerShape(20.dp))
-            ) {
-                // Canvas to draw the 4 green corner brackets (#1B8C42, 4dp stroke, 28dp length)
-                Canvas(modifier = Modifier.fillMaxSize()) {
-                    val stroke = 4.dp.toPx()
-                    val arm = 28.dp.toPx()
-                    val w = size.width
-                    val h = size.height
-
-                    // Top-Left corner
-                    drawLine(BrandGreen, Offset(0f, 0f), Offset(arm, 0f), strokeWidth = stroke)
-                    drawLine(BrandGreen, Offset(0f, 0f), Offset(0f, arm), strokeWidth = stroke)
-
-                    // Top-Right corner
-                    drawLine(BrandGreen, Offset(w, 0f), Offset(w - arm, 0f), strokeWidth = stroke)
-                    drawLine(BrandGreen, Offset(w, 0f), Offset(w, arm), strokeWidth = stroke)
-
-                    // Bottom-Left corner
-                    drawLine(BrandGreen, Offset(0f, h), Offset(arm, h), strokeWidth = stroke)
-                    drawLine(BrandGreen, Offset(0f, h), Offset(0f, h - arm), strokeWidth = stroke)
-
-                    // Bottom-Right corner
-                    drawLine(BrandGreen, Offset(w, h), Offset(w - arm, h), strokeWidth = stroke)
-                    drawLine(BrandGreen, Offset(w, h), Offset(w, h - arm), strokeWidth = stroke)
-
-                    // Subtle orange scan guide line in center
-                    drawLine(
-                        AccentOrange.copy(alpha = 0.85f),
-                        Offset(arm, h / 2),
-                        Offset(w - arm, h / 2),
-                        strokeWidth = 2.dp.toPx()
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(18.dp))
-
-            // Hint Text below the frame
             Text(
                 text = "Posicione a etiqueta no centro do quadro",
-                style = MaterialTheme.typography.bodyMedium.copy(
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 13.sp
-                ),
-                color = Color.White.copy(alpha = 0.9f)
+                color = Color.White.copy(alpha = 0.8f),
+                fontSize = 13.sp,
+                textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "A leitura é instantânea e 100% offline",
-                style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
-                color = Color.White.copy(alpha = 0.6f)
+                text = "A leitura e instantanea e 100% offline",
+                color = Color.White.copy(alpha = 0.5f),
+                fontSize = 11.sp,
+                textAlign = TextAlign.Center
             )
         }
-    }
-}
 
-@Composable
-private fun DetectedPriceBottomSheet(
-    initialPrice: Price,
-    onConfirm: (Price, Int) -> Unit,
-    onRetry: () -> Unit
-) {
-    var label by remember(initialPrice) { mutableStateOf(initialPrice.label) }
-    var priceValue by remember(initialPrice) { mutableStateOf(initialPrice.value) }
-    var priceText by remember(initialPrice) { mutableStateOf(String.format(java.util.Locale.US, "%.2f", initialPrice.value).replace(".", ",")) }
-    var quantity by remember { mutableIntStateOf(1) }
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.5f)),
-        contentAlignment = Alignment.BottomCenter
-    ) {
-        Card(
-            shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
-            colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-            modifier = Modifier
-                .fillMaxWidth()
-                .navigationBarsPadding()
-        ) {
-            Column(
-                modifier = Modifier.padding(horizontal = 24.dp, vertical = 20.dp)
+        // Capture button
+        if (uiState is CameraUiState.Preview) {
+            Button(
+                onClick = {
+                    imageCapture?.let { capture ->
+                        takePhoto(context, capture, executor) { bitmap ->
+                            viewModel.onPhotoCaptured(bitmap)
+                        }
+                    }
+                },
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 32.dp)
+                    .size(72.dp),
+                shape = CircleShape,
+                colors = ButtonDefaults.buttonColors(containerColor = ScanOrange)
             ) {
-                // Drag Handle
-                Box(
-                    modifier = Modifier
-                        .size(width = 40.dp, height = 4.dp)
-                        .clip(RoundedCornerShape(2.dp))
-                        .background(BorderLight)
-                        .align(Alignment.CenterHorizontally)
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = "Preço detectado",
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.ExtraBold,
-                        fontSize = 20.sp
-                    ),
-                    color = TextPrimary
-                )
-                Text(
-                    text = "Confirme ou edite antes de adicionar",
-                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
-                    color = TextSecondary
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                // Product Card preview
-                Card(
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = AppBackground),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(14.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(46.dp)
-                                .clip(RoundedCornerShape(12.dp))
-                                .background(BrandGreen.copy(alpha = 0.12f)),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.ShoppingBag,
-                                contentDescription = null,
-                                tint = BrandGreen,
-                                modifier = Modifier.size(24.dp)
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.width(12.dp))
-
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = label,
-                                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-                                color = TextPrimary
-                            )
-                            Text(
-                                text = "Etiqueta OCR (confiança 94%)",
-                                style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp),
-                                color = TextSecondary
-                            )
-                        }
-
-                        Text(
-                            text = PriceExtractor.formatCurrency(priceValue * quantity),
-                            style = MaterialTheme.typography.titleLarge.copy(
-                                fontWeight = FontWeight.ExtraBold,
-                                fontSize = 20.sp
-                            ),
-                            color = AccentOrange
-                        )
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(14.dp))
-
-                // Editable Fields: Label & Price
-                OutlinedTextField(
-                    value = label,
-                    onValueChange = { label = it },
-                    label = { Text("Nome do produto") },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    singleLine = true
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    OutlinedTextField(
-                        value = priceText,
-                        onValueChange = { v ->
-                            priceText = v
-                            val clean = v.replace("R$", "").replace(" ", "").replace(".", "").replace(",", ".")
-                            clean.toDoubleOrNull()?.let { priceValue = it }
-                        },
-                        label = { Text("Preço unitário (R$)") },
-                        modifier = Modifier.weight(1f),
-                        shape = RoundedCornerShape(12.dp),
-                        singleLine = true
-                    )
-
-                    // Quantity Stepper
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = "Qtd",
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp),
-                            color = TextSecondary
-                        )
-                        Spacer(modifier = Modifier.height(2.dp))
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(12.dp))
-                                .background(BorderLight)
-                                .padding(2.dp)
-                        ) {
-                            IconButton(
-                                onClick = { if (quantity > 1) quantity-- },
-                                modifier = Modifier.size(32.dp)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Remove,
-                                    contentDescription = "Diminuir",
-                                    tint = TextPrimary,
-                                    modifier = Modifier.size(16.dp)
-                                )
-                            }
-                            Text(
-                                text = "$quantity",
-                                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-                                modifier = Modifier.padding(horizontal = 8.dp)
-                            )
-                            IconButton(
-                                onClick = { quantity++ },
-                                modifier = Modifier
-                                    .size(32.dp)
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .background(BrandGreen)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Add,
-                                    contentDescription = "Aumentar",
-                                    tint = Color.White,
-                                    modifier = Modifier.size(16.dp)
-                                )
-                            }
-                        }
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                // Actions: Nova Foto & Confirmar Item
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    OutlinedButton(
-                        onClick = onRetry,
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(48.dp),
-                        shape = RoundedCornerShape(24.dp)
-                    ) {
-                        Text("Nova foto", color = TextPrimary)
-                    }
-
-                    Button(
-                        onClick = {
-                            val finalPrice = initialPrice.copy(
-                                label = label.ifBlank { "Produto" },
-                                value = priceValue,
-                                rawText = PriceExtractor.formatCurrency(priceValue)
-                            )
-                            onConfirm(finalPrice, quantity)
-                        },
-                        modifier = Modifier
-                            .weight(1.2f)
-                            .height(48.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = AccentOrange),
-                        shape = RoundedCornerShape(24.dp)
-                    ) {
-                        Text(
-                            text = "Confirmar Item",
-                            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                            color = Color.White
-                        )
-                    }
-                }
+                Text("Foto", color = Color.White, fontSize = 12.sp)
             }
         }
-    }
-}
 
-@Composable
-private fun ScanErrorBottomSheet(
-    message: String,
-    onRetry: () -> Unit,
-    onManual: () -> Unit
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.5f)),
-        contentAlignment = Alignment.BottomCenter
-    ) {
-        Card(
-            shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
-            colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-            modifier = Modifier
-                .fillMaxWidth()
-                .navigationBarsPadding()
-        ) {
+        if (uiState is CameraUiState.Processing) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(color = ScanOrange)
+            }
+        }
+
+        if (uiState is CameraUiState.Error) {
             Column(
-                modifier = Modifier.padding(24.dp),
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(width = 40.dp, height = 4.dp)
-                        .clip(RoundedCornerShape(2.dp))
-                        .background(BorderLight)
-                )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Box(
-                    modifier = Modifier
-                        .size(56.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFFFEE2E2)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Info,
-                        contentDescription = null,
-                        tint = Color(0xFFDC2626),
-                        modifier = Modifier.size(30.dp)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(14.dp))
-
                 Text(
-                    text = "Preço não detectado",
-                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                    color = TextPrimary
+                    text = (uiState as CameraUiState.Error).message,
+                    color = Color.White,
+                    textAlign = TextAlign.Center
                 )
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(onClick = { viewModel.retry() }) { Text("Tentar novamente") }
+            }
+        }
 
-                Spacer(modifier = Modifier.height(6.dp))
-
-                Text(
-                    text = message,
-                    style = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Center,
-                    color = TextSecondary
+        // Bottom sheet when detected
+        if (uiState is CameraUiState.Success) {
+            val prices = (uiState as CameraUiState.Success).prices
+            val detected = prices.firstOrNull()
+            if (detected != null) {
+                DetectedBottomSheet(
+                    detected = detected,
+                    onConfirm = { price, quantity ->
+                        viewModel.confirmPrice(price, quantity) { viewModel.retry() }
+                    },
+                    onEdit = { viewModel.retry() }
                 )
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                Button(
-                    onClick = onRetry,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(48.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = BrandGreen),
-                    shape = RoundedCornerShape(24.dp)
-                ) {
-                    Text("Tentar novamente com a câmera", fontWeight = FontWeight.Bold)
-                }
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                OutlinedButton(
-                    onClick = onManual,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(48.dp),
-                    shape = RoundedCornerShape(24.dp)
-                ) {
-                    Text("Digitar produto manualmente", color = TextPrimary)
-                }
             }
         }
     }
 }
 
 @Composable
-private fun PermissionDeniedView(
-    onRequestPermission: () -> Unit,
-    onBack: () -> Unit
+private fun CircleIconButton(
+    onClick: () -> Unit,
+    content: @Composable () -> Unit
 ) {
-    Column(
+    Box(
         modifier = Modifier
-            .fillMaxSize()
-            .background(AppBackground)
-            .padding(24.dp),
+            .size(32.dp)
+            .background(Color.White.copy(alpha = 0.12f), CircleShape)
+            .clickable { onClick() },
+        contentAlignment = Alignment.Center
+    ) {
+        content()
+    }
+}
+
+@Composable
+private fun ScannerFrame() {
+    Canvas(modifier = Modifier.fillMaxSize()) {
+        val stroke = 4.dp.toPx()
+        val corner = 30.dp.toPx()
+        // top-left
+        drawLine(ScanGreen, Offset(0f, 0f), Offset(corner, 0f), stroke, StrokeCap.Round)
+        drawLine(ScanGreen, Offset(0f, 0f), Offset(0f, corner), stroke, StrokeCap.Round)
+        // top-right
+        drawLine(ScanGreen, Offset(size.width, 0f), Offset(size.width - corner, 0f), stroke, StrokeCap.Round)
+        drawLine(ScanGreen, Offset(size.width, 0f), Offset(size.width, corner), stroke, StrokeCap.Round)
+        // bottom-left
+        drawLine(ScanGreen, Offset(0f, size.height), Offset(corner, size.height), stroke, StrokeCap.Round)
+        drawLine(ScanGreen, Offset(0f, size.height), Offset(0f, size.height - corner), stroke, StrokeCap.Round)
+        // bottom-right
+        drawLine(ScanGreen, Offset(size.width, size.height), Offset(size.width - corner, size.height), stroke, StrokeCap.Round)
+        drawLine(ScanGreen, Offset(size.width, size.height), Offset(size.width, size.height - corner), stroke, StrokeCap.Round)
+        // scanning line
+        val mid = size.height / 2f
+        drawLine(ScanOrange, Offset(16f, mid), Offset(size.width - 16f, mid), 2.dp.toPx())
+    }
+}
+
+@Composable
+private fun DetectedBottomSheet(
+    detected: Price,
+    onConfirm: (Price, Int) -> Unit,
+    onEdit: () -> Unit
+) {
+    var priceText by remember(detected) {
+        mutableStateOf(PriceExtractor.formatCurrency(detected.value).replace("R$", "").trim())
+    }
+    var quantity by remember { mutableStateOf(1) }
+
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp),
+        color = Color.White,
+        shadowElevation = 12.dp
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .padding(24.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .width(40.dp)
+                    .height(4.dp)
+                    .background(Color(0xFFEAE5DC), RoundedCornerShape(2.dp))
+                    .align(Alignment.CenterHorizontally)
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Text("Preco detectado", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF111827))
+            Text("Confirme ou edite antes de adicionar", fontSize = 12.sp, color = Color(0xFF6B7280))
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Card(
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFFFF8F0)),
+                shape = RoundedCornerShape(20.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(Color(0xFFEAE5DC), RoundedCornerShape(12.dp))
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(detected.label, fontWeight = FontWeight.SemiBold, fontSize = 13.sp, color = Color(0xFF111827))
+                        Text("Supermercado 1 un", fontSize = 11.sp, color = Color(0xFF6B7280))
+                    }
+                    Text(
+                        PriceExtractor.formatCurrency(detected.value),
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = ScanOrange
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+            Text("Preco unitario", fontSize = 12.sp, color = Color(0xFF6B7280))
+            OutlinedTextField(
+                value = priceText,
+                onValueChange = { priceText = it },
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(14.dp)
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+            Text("Quantidade", fontSize = 12.sp, color = Color(0xFF6B7280))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                CircleStepButton(text = "-", onClick = { if (quantity > 1) quantity-- })
+                Spacer(modifier = Modifier.width(8.dp))
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    border = androidx.compose.foundation.BorderStroke(1.5.dp, Color(0xFF111827).copy(alpha = 0.12f)),
+                    color = Color.White,
+                    modifier = Modifier.size(width = 60.dp, height = 40.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Text(quantity.toString(), fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
+                    }
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                CircleStepButton(text = "+", filled = true, onClick = { quantity++ })
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                Button(
+                    onClick = onEdit,
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEAE5DC), contentColor = Color(0xFF111827)),
+                    shape = RoundedCornerShape(22.dp),
+                    modifier = Modifier.weight(1f).height(44.dp)
+                ) { Text("Editar") }
+                Button(
+                    onClick = {
+                        val parsed = priceText.replace("R$", "").trim().replace(".", "").replace(",", ".").toDoubleOrNull()
+                            ?: detected.value
+                        val price = detected.copy(value = parsed, rawText = priceText.trim())
+                        onConfirm(price, quantity)
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = ScanOrange),
+                    shape = RoundedCornerShape(22.dp),
+                    modifier = Modifier.weight(1f).height(44.dp)
+                ) { Text("Confirmar", color = Color.White, fontWeight = FontWeight.Bold) }
+            }
+        }
+    }
+}
+
+@Composable
+private fun CircleStepButton(text: String, filled: Boolean = false, onClick: () -> Unit) {
+    val bg = if (filled) ScanGreen else Color(0xFFEAE5DC)
+    val fg = if (filled) Color.White else Color(0xFF111827)
+    Box(
+        modifier = Modifier
+            .size(44.dp)
+            .background(bg, RoundedCornerShape(12.dp))
+            .clickable { onClick() },
+        contentAlignment = Alignment.Center
+    ) {
+        Text(text, color = fg, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+    }
+}
+
+@Composable
+private fun PermissionDeniedContent(onRequestPermission: () -> Unit) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Icon(
-            imageVector = Icons.Default.CameraAlt,
-            contentDescription = null,
-            tint = BrandGreen,
-            modifier = Modifier.size(64.dp)
-        )
+        Text("Permissao de camera necessaria.", color = Color.White)
         Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = "Permissão da Câmera",
-            style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
-            color = TextPrimary
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = "Precisamos da câmera para ler os preços das etiquetas no supermercado 100% offline.",
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Center,
-            color = TextSecondary
-        )
-        Spacer(modifier = Modifier.height(24.dp))
-        Button(
-            onClick = onRequestPermission,
-            colors = ButtonDefaults.buttonColors(containerColor = BrandGreen),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Conceder Permissão")
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-        TextButton(onClick = onBack) {
-            Text("Voltar", color = TextSecondary)
-        }
+        Button(onClick = onRequestPermission) { Text("Conceder permissao") }
     }
 }
 
@@ -790,13 +483,14 @@ private fun startCamera(
     context: Context,
     lifecycleOwner: androidx.lifecycle.LifecycleOwner,
     previewView: PreviewView,
-    onCameraReady: (Camera, ImageCapture) -> Unit
+    onCameraReady: (Camera) -> Unit,
+    onImageCaptureReady: (ImageCapture) -> Unit
 ) {
     val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
     cameraProviderFuture.addListener({
         val cameraProvider = cameraProviderFuture.get()
 
-        val preview = CameraXPreview.Builder()
+        val preview = Preview.Builder()
             .build()
             .also { it.setSurfaceProvider(previewView.surfaceProvider) }
 
@@ -805,6 +499,8 @@ private fun startCamera(
             .setTargetResolution(Size(768, 1024))
             .setJpegQuality(85)
             .build()
+
+        onImageCaptureReady(imageCapture)
 
         val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
@@ -816,9 +512,9 @@ private fun startCamera(
                 preview,
                 imageCapture
             )
-            onCameraReady(camera, imageCapture)
+            onCameraReady(camera)
         } catch (exc: Exception) {
-            Log.e("CameraScreen", "Falha ao iniciar camera", exc)
+            Log.e(TAG, "Falha ao iniciar camera", exc)
         }
     }, ContextCompat.getMainExecutor(context))
 }
@@ -855,7 +551,7 @@ private fun takePhoto(
             }
 
             override fun onError(exception: ImageCaptureException) {
-                Log.e("CameraScreen", "Falha na captura", exception)
+                Log.e(TAG, "Falha na captura", exception)
             }
         }
     )
@@ -875,3 +571,5 @@ private fun Bitmap.scaleToMaxDimension(maxDimension: Int): Bitmap {
     val newHeight = (height * scale).toInt()
     return Bitmap.createScaledBitmap(this, newWidth, newHeight, true)
 }
+
+private const val TAG = "CameraScreen"
