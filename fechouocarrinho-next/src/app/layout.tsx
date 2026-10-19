@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Nunito, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -17,6 +17,18 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Fechou o Carrinho — Seu total sem sustos no caixa",
   description: "Aponte a câmera para a etiqueta, o app lê o preço e soma no total do carrinho em tempo real. Escolha seu supermercado e economize.",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "fechou o carrinho",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#1B8C42",
 };
 
 export default function RootLayout({

@@ -8,13 +8,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.animation.core.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -298,6 +301,15 @@ private fun BudgetCard(
     val pct = if (meta > 0) (total / meta * 100).toInt().coerceIn(0, 100) else 0
     val remaining = (meta - total).coerceAtLeast(0.0)
 
+    val animatedProgress by animateFloatAsState(
+        targetValue = (pct / 100f).coerceIn(0f, 1f),
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessLow
+        ),
+        label = "BudgetSpringProgress"
+    )
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -337,7 +349,7 @@ private fun BudgetCard(
             ) {
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth((pct / 100f).coerceIn(0f, 1f))
+                        .fillMaxWidth(animatedProgress)
                         .height(10.dp)
                         .clip(RoundedCornerShape(5.dp))
                         .background(BrandGreen)
@@ -376,9 +388,21 @@ private fun ShoppingItemRow(
     item: HomeListItem,
     onToggleCheck: () -> Unit
 ) {
+    val rowAlpha by animateFloatAsState(
+        targetValue = if (item.checked) 0.55f else 1f,
+        animationSpec = spring(stiffness = Spring.StiffnessMedium),
+        label = "ItemCheckAlpha"
+    )
+    val checkScale by animateFloatAsState(
+        targetValue = if (item.checked) 1f else 0f,
+        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
+        label = "CheckIconScale"
+    )
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .alpha(rowAlpha)
             .clickable { onToggleCheck() },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
@@ -403,12 +427,14 @@ private fun ShoppingItemRow(
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                if (item.checked) {
+                if (item.checked || checkScale > 0.05f) {
                     Icon(
                         imageVector = Icons.Default.Check,
                         contentDescription = null,
                         tint = SurfaceWhite,
-                        modifier = Modifier.size(14.dp)
+                        modifier = Modifier
+                            .size(14.dp)
+                            .scale(checkScale)
                     )
                 }
             }

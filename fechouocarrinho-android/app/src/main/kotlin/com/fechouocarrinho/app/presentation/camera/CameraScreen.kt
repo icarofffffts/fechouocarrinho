@@ -17,6 +17,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -319,6 +320,17 @@ private fun CircleIconButton(
 
 @Composable
 private fun ScannerFrame() {
+    val infiniteTransition = rememberInfiniteTransition(label = "ScannerLaser")
+    val laserProgress by infiniteTransition.animateFloat(
+        initialValue = 0.15f,
+        targetValue = 0.85f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1400, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "LaserProgress"
+    )
+
     Canvas(modifier = Modifier.fillMaxSize()) {
         val stroke = 4.dp.toPx()
         val corner = 30.dp.toPx()
@@ -334,9 +346,23 @@ private fun ScannerFrame() {
         // bottom-right
         drawLine(ScanGreen, Offset(size.width, size.height), Offset(size.width - corner, size.height), stroke, StrokeCap.Round)
         drawLine(ScanGreen, Offset(size.width, size.height), Offset(size.width, size.height - corner), stroke, StrokeCap.Round)
-        // scanning line
-        val mid = size.height / 2f
-        drawLine(ScanOrange, Offset(16f, mid), Offset(size.width - 16f, mid), 2.dp.toPx())
+        
+        // Dynamic scanning laser with subtle glow
+        val laserY = size.height * laserProgress
+        drawLine(
+            color = ScanOrange.copy(alpha = 0.35f),
+            start = Offset(12f, laserY),
+            end = Offset(size.width - 12f, laserY),
+            strokeWidth = 5.dp.toPx(),
+            cap = StrokeCap.Round
+        )
+        drawLine(
+            color = ScanOrange,
+            start = Offset(16f, laserY),
+            end = Offset(size.width - 16f, laserY),
+            strokeWidth = 2.dp.toPx(),
+            cap = StrokeCap.Round
+        )
     }
 }
 

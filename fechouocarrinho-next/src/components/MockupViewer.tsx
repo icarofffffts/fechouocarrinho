@@ -320,11 +320,11 @@ export default function MockupViewer() {
       {/* FULLSCREEN PREVIEW MODAL */}
       {selectedMockup && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-spring-backdrop"
           onClick={() => setSelectedMockup(null)}
         >
           <div
-            className="relative bg-white rounded-3xl max-w-xl w-full max-h-[92vh] overflow-hidden flex flex-col shadow-2xl"
+            className="relative bg-white rounded-3xl max-w-xl w-full max-h-[92vh] overflow-hidden flex flex-col shadow-2xl animate-spring-modal border border-white/20"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}

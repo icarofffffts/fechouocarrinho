@@ -714,6 +714,19 @@ export default function BrandAndBannersSection() {
             </div>
           </div>
         )}
+
+        {/* FLOATING SONNER-STYLE TOAST FEEDBACK */}
+        {copiedColor && (
+          <div className="fixed bottom-6 right-6 z-50 animate-spring-toast bg-[#111827] text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-white/15 flex items-center gap-3">
+            <span className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs font-bold">
+              ✓
+            </span>
+            <div className="text-xs">
+              <span className="font-bold">Código copiado: </span>
+              <span className="font-mono text-emerald-400 font-bold">{copiedColor}</span>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -12,9 +12,131 @@
 :root {
   --background: #FFF8F0;
   --foreground: #111827;
+  --spring-easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring-duration: 220ms;
+}
+
+/* ==========================================================================
+   MOBILE NATIVE & PLATFORM POLISH (emilkowalski/mobile-native)
+   ========================================================================== */
+
+/* 1. Kill tap highlight flash on mobile touch */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  /* Prevent horizontal bouncing and pull-to-refresh hijacking */
+  overscroll-behavior-y: none;
+  min-height: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  min-height: 100dvh;
+  /* Smooth text rendering on retina/OLED mobile displays */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* 2. Remove 300ms tap delay and disable text selection on interactive elements */
+button,
+a,
+input[type="button"],
+input[type="submit"],
+[role="button"],
+.interactive-tap {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+}
+
+button,
+[role="button"],
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* 3. Inputs at 16px minimum to prevent iOS safari auto-zoom on focus */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+/* ==========================================================================
+   EMIL KOWALSKI DESIGN ENGINEERING & SPRING MOTION (emil-design-eng / animate)
+   ========================================================================== */
+
+/* Active press scale: physical button feedback with custom spring curve */
+button:active:not(:disabled),
+a[href]:active,
+.btn-press:active {
+  transform: scale(0.97);
+  transition: transform 120ms var(--spring-easing);
+}
+
+/* Smooth transitions using targeted properties (never transition: all) */
+button,
+a,
+.card-hover {
+  transition: transform 180ms var(--spring-easing), opacity 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out, box-shadow 180ms var(--spring-easing);
+}
+
+/* Gate hover states strictly to devices that actually have a mouse pointer */
+@media (hover: hover) and (pointer: fine) {
+  .hover-elevate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -8px rgba(17, 24, 39, 0.12);
+  }
+}
+
+/* Modal Spring In Animation (never appears from scale(0)) */
+@keyframes springModalIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes springBackdropIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes springToastIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-spring-modal {
+  animation: springModalIn var(--spring-duration) var(--spring-easing) forwards;
+}
+
+.animate-spring-backdrop {
+  animation: springBackdropIn 180ms ease-out forwards;
+}
+
+.animate-spring-toast {
+  animation: springToastIn 240ms var(--spring-easing) forwards;
 }
