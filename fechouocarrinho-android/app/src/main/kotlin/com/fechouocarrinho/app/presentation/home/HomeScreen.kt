@@ -28,6 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.fechouocarrinho.app.ocr.PriceExtractor
 import com.fechouocarrinho.app.presentation.components.WelcomeBanner
+import com.fechouocarrinho.app.presentation.components.pressBounce
+import com.fechouocarrinho.app.presentation.components.SquircleLarge
+import com.fechouocarrinho.app.presentation.components.SquircleMedium
+import com.fechouocarrinho.app.presentation.components.SquircleSmall
 
 private val BrandGreen = Color(0xFF1B8C42)
 private val BrandGreenDark = Color(0xFF146B32)
@@ -204,7 +208,7 @@ private fun HomeHeaderCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
-        shape = RoundedCornerShape(22.dp),
+        shape = SquircleLarge,
         colors = CardDefaults.cardColors(containerColor = BrandGreen),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
@@ -260,9 +264,9 @@ private fun HomeHeaderCard(
                 // Seletor de supermercado interativo
                 Box(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(14.dp))
+                        .clip(SquircleSmall)
                         .background(SurfaceWhite.copy(alpha = 0.2f))
-                        .clickable { onNavigateToSupermarkets() }
+                        .pressBounce(onClick = onNavigateToSupermarkets)
                         .padding(horizontal = 10.dp, vertical = 6.dp)
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -314,7 +318,7 @@ private fun BudgetCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
-        shape = RoundedCornerShape(22.dp),
+        shape = SquircleLarge,
         colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
@@ -403,8 +407,8 @@ private fun ShoppingItemRow(
         modifier = Modifier
             .fillMaxWidth()
             .alpha(rowAlpha)
-            .clickable { onToggleCheck() },
-        shape = RoundedCornerShape(16.dp),
+            .pressBounce(onClick = onToggleCheck),
+        shape = SquircleMedium,
         colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
@@ -571,7 +575,7 @@ private fun HomeBottomBar(
                 containerColor = AccentOrange,
                 contentColor = SurfaceWhite,
                 shape = CircleShape,
-                modifier = Modifier.size(62.dp)
+                modifier = Modifier.size(62.dp).pressBounce(onClick = onNavigateToCamera)
             ) {
                 Icon(
                     imageVector = Icons.Default.CameraAlt,
@@ -602,8 +606,8 @@ private fun BottomNavItem(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .clip(RoundedCornerShape(8.dp))
-            .clickable { onClick() }
+            .clip(SquircleSmall)
+            .pressBounce(onClick = onClick)
             .padding(horizontal = 8.dp, vertical = 6.dp)
     ) {
         Icon(

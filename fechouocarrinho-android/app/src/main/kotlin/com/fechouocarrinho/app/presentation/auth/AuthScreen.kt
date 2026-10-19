@@ -1,10 +1,13 @@
 package com.fechouocarrinho.app.presentation.auth
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
@@ -22,8 +25,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.fechouocarrinho.app.presentation.components.SquircleLarge
+import com.fechouocarrinho.app.presentation.components.SquircleMedium
+import com.fechouocarrinho.app.presentation.components.pressBounce
 
 // Tela 16: Criar Conta / Login Opcional - Guest First - mockup_16_auth_cadastro.svg
 // Real: Supabase Auth (GoTrue) - email/senha + Google OneTap, com fallback 100% offline
@@ -40,51 +47,247 @@ fun AuthScreen(
     var showPass by remember { mutableStateOf(false) }
 
     Column(
-        Modifier.fillMaxSize().background(Brush.verticalGradient(listOf(Color(0xFFFFF8F0), Color(0xFFF7F2EB)))).padding(horizontal = 24.dp).padding(top = 16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Brush.verticalGradient(listOf(Color(0xFFFFF8F0), Color(0xFFF7F2EB))))
+            .statusBarsPadding()
+            .navigationBarsPadding()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 24.dp)
+            .padding(top = 16.dp, bottom = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Back + Brand
-        Box(Modifier.size(72.dp).clip(RoundedCornerShape(22.dp)).background(Color(0xFF1B8C42)), contentAlignment = Alignment.Center) {
-            Icon(Icons.Default.Security, contentDescription = null, tint = Color.White, modifier = Modifier.size(36.dp))
+        // Back + Brand Logo Badge
+        Box(
+            modifier = Modifier
+                .size(72.dp)
+                .clip(SquircleMedium)
+                .background(Color(0xFF1B8C42)),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = Icons.Default.Security,
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(36.dp)
+            )
         }
-        Spacer(Modifier.height(12.dp))
-        Text("Criar Conta (Opcional)", style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold, color = Color(0xFF111827)))
-        Text("Sincronize com a família e salve suas listas", style = MaterialTheme.typography.bodySmall.copy(color = Color(0xFF6B7280)))
-        Text("na nuvem. Ou use 100% offline.", style = MaterialTheme.typography.bodySmall.copy(color = Color(0xFF6B7280)))
-        Spacer(Modifier.height(20.dp))
-        // Google
-        Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = Color.White), elevation = CardDefaults.cardElevation(2.dp)) {
-            Row(Modifier.fillMaxWidth().padding(16.dp).clickableWithoutRipple { onGoogleSignIn() }, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
-                Box(Modifier.size(20.dp).clip(RoundedCornerShape(10.dp)).background(Color(0xFFF4F4F5)), contentAlignment = Alignment.Center) { Text("G", style = MaterialTheme.typography.labelMedium.copy(color = Color(0xFF4285F4), fontWeight = FontWeight.Bold)) }
-                Spacer(Modifier.width(8.dp))
-                Text("Continuar com Google", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold))
+
+        Spacer(Modifier.height(16.dp))
+
+        Text(
+            text = "Criar Conta (Opcional)",
+            style = MaterialTheme.typography.titleLarge.copy(
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 24.sp,
+                letterSpacing = (-0.5).sp,
+                color = Color(0xFF111827)
+            )
+        )
+        Spacer(Modifier.height(4.dp))
+        Text(
+            text = "Sincronize com a família e salve suas listas\nna nuvem. Ou use 100% offline.",
+            style = MaterialTheme.typography.bodySmall.copy(
+                color = Color(0xFF6B7280),
+                fontSize = 13.sp,
+                lineHeight = 18.sp
+            ),
+            textAlign = TextAlign.Center
+        )
+
+        Spacer(Modifier.height(24.dp))
+
+        // Botão Google com pressBounce físico
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .pressBounce(onClick = onGoogleSignIn),
+            shape = SquircleMedium,
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(2.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 14.dp, horizontal = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFFF4F4F5)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "G",
+                        style = MaterialTheme.typography.labelMedium.copy(
+                            color = Color(0xFF4285F4),
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+                Spacer(Modifier.width(10.dp))
+                Text(
+                    text = "Continuar com Google",
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFF111827)
+                    )
+                )
             }
         }
-        Spacer(Modifier.height(12.dp))
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-            Box(Modifier.weight(1f).height(1.dp).background(Color(0xFFEAE5DC))) 
-            Text("ou com e-mail", modifier = Modifier.padding(horizontal = 12.dp), style = MaterialTheme.typography.labelSmall.copy(color = Color(0xFF9CA3AF)))
-            Box(Modifier.weight(1f).height(1.dp).background(Color(0xFFEAE5DC)))
-        }
-        Spacer(Modifier.height(12.dp))
-        OutlinedTextField(value = email, onValueChange = { email = it }, label = { Text("E-mail") }, leadingIcon = { Icon(Icons.Default.Email, null, tint = Color(0xFF9CA3AF)) }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp), singleLine = true, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email))
-        Spacer(Modifier.height(8.dp))
-        OutlinedTextField(value = password, onValueChange = { password = it }, label = { Text("Senha") }, leadingIcon = { Icon(Icons.Default.Lock, null, tint = Color(0xFF9CA3AF)) }, trailingIcon = { IconButton(onClick = { showPass = !showPass }) { Icon(if (showPass) Icons.Default.VisibilityOff else Icons.Default.Visibility, null, tint = Color(0xFF9CA3AF)) } }, visualTransformation = if (showPass) VisualTransformation.None else PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(14.dp), singleLine = true)
+
         Spacer(Modifier.height(16.dp))
-        Button(onClick = { onCreateAccount(email, password) }, modifier = Modifier.fillMaxWidth().height(50.dp), shape = RoundedCornerShape(25.dp), colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1B8C42))) { Text("Criar Conta Gratuita", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold, color = Color.White)) }
-        Spacer(Modifier.height(12.dp))
-        // Pular 100% Offline - destacado laranja sem sobreposição
-        Button(onClick = onContinueOffline, modifier = Modifier.fillMaxWidth().height(50.dp), shape = RoundedCornerShape(25.dp), colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFF7ED), contentColor = Color(0xFFFF6B00)), border = androidx.compose.foundation.BorderStroke(1.8.dp, Color(0xFFFF6B00))) {
-            Icon(Icons.Default.Security, contentDescription = null, tint = Color(0xFFFF6B00), modifier = Modifier.size(16.dp))
-            Spacer(Modifier.width(8.dp))
-            Text("Pular e Usar 100% Offline", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold, color = Color(0xFFFF6B00)))
+
+        // Divisor editorial
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Box(Modifier.weight(1f).height(1.dp).background(Color(0xFFE5E7EB)))
+            Text(
+                text = "ou com e-mail",
+                modifier = Modifier.padding(horizontal = 12.dp),
+                style = MaterialTheme.typography.labelSmall.copy(
+                    color = Color(0xFF9CA3AF),
+                    fontWeight = FontWeight.Medium
+                )
+            )
+            Box(Modifier.weight(1f).height(1.dp).background(Color(0xFFE5E7EB)))
         }
+
+        Spacer(Modifier.height(16.dp))
+
+        // Campos de Input com Squircles e contraste
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("E-mail") },
+            leadingIcon = { Icon(Icons.Default.Email, null, tint = Color(0xFF9CA3AF)) },
+            modifier = Modifier.fillMaxWidth(),
+            shape = SquircleMedium,
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color(0xFF1B8C42),
+                unfocusedBorderColor = Color(0xFFE5E7EB),
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White
+            )
+        )
+
+        Spacer(Modifier.height(10.dp))
+
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Senha") },
+            leadingIcon = { Icon(Icons.Default.Lock, null, tint = Color(0xFF9CA3AF)) },
+            trailingIcon = {
+                IconButton(onClick = { showPass = !showPass }) {
+                    Icon(
+                        imageVector = if (showPass) Icons.Default.VisibilityOff else Icons.Default.Visibility,
+                        contentDescription = null,
+                        tint = Color(0xFF9CA3AF)
+                    )
+                }
+            },
+            visualTransformation = if (showPass) VisualTransformation.None else PasswordVisualTransformation(),
+            modifier = Modifier.fillMaxWidth(),
+            shape = SquircleMedium,
+            singleLine = true,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color(0xFF1B8C42),
+                unfocusedBorderColor = Color(0xFFE5E7EB),
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White
+            )
+        )
+
+        Spacer(Modifier.height(20.dp))
+
+        // Botão Primário com pressBounce
+        Button(
+            onClick = { onCreateAccount(email, password) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(52.dp)
+                .pressBounce(onClick = { onCreateAccount(email, password) }),
+            shape = SquircleLarge,
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1B8C42)),
+            elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
+        ) {
+            Text(
+                text = "Criar Conta Gratuita",
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 15.sp,
+                    color = Color.White
+                )
+            )
+        }
+
         Spacer(Modifier.height(12.dp))
-        Text("Já tem uma conta? Entrar", modifier = Modifier.clickableWithoutRipple { onLogin() }.padding(8.dp), style = MaterialTheme.typography.bodySmall.copy(color = Color(0xFF1B8C42), fontWeight = FontWeight.SemiBold))
+
+        // Pular 100% Offline - destacado laranja sem sobreposição com pressBounce
+        Button(
+            onClick = onContinueOffline,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(52.dp)
+                .pressBounce(onClick = onContinueOffline),
+            shape = SquircleLarge,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFFFF7ED),
+                contentColor = Color(0xFFFF6B00)
+            ),
+            border = androidx.compose.foundation.BorderStroke(1.8.dp, Color(0xFFFF6B00))
+        ) {
+            Icon(
+                imageVector = Icons.Default.Security,
+                contentDescription = null,
+                tint = Color(0xFFFF6B00),
+                modifier = Modifier.size(18.dp)
+            )
+            Spacer(Modifier.width(8.dp))
+            Text(
+                text = "Pular e Usar 100% Offline",
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
+                    color = Color(0xFFFF6B00)
+                )
+            )
+        }
+
+        Spacer(Modifier.height(16.dp))
+
+        // Já tem conta com feedback tátil
+        Text(
+            text = "Já tem uma conta? Entrar",
+            modifier = Modifier
+                .clip(SquircleSmall)
+                .pressBounce(onClick = onLogin)
+                .padding(horizontal = 12.dp, vertical = 8.dp),
+            style = MaterialTheme.typography.bodySmall.copy(
+                color = Color(0xFF1B8C42),
+                fontWeight = FontWeight.Bold,
+                fontSize = 13.sp
+            )
+        )
+
         Spacer(Modifier.height(8.dp))
-        Text("Ao continuar você concorda com os Termos e Política", style = MaterialTheme.typography.labelSmall.copy(color = Color(0xFF9CA3AF)), modifier = Modifier.padding(top = 8.dp))
+
+        Text(
+            text = "Ao continuar você concorda com os Termos e Política de Privacidade",
+            style = MaterialTheme.typography.labelSmall.copy(
+                color = Color(0xFF9CA3AF),
+                fontSize = 11.sp
+            ),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 16.dp)
+        )
     }
 }
-
-// Helper to avoid ripple
-private fun Modifier.clickableWithoutRipple(onClick: () -> Unit) = this.then(Modifier.clickable(onClick = onClick))
