@@ -65,19 +65,8 @@ fun HomeScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    // Itens padrão do mockup 01 combinados com itens escaneados pelo usuário
-    val baseMockupItems = remember {
-        mutableStateListOf(
-            HomeListItem("Arroz integral 5kg", 1, "R$ 28,90", "R$ 28,90", hasOcr = true, category = "MERCEARIA"),
-            HomeListItem("Feijão carioca 1kg", 2, "R$ 3,74", "R$ 7,49", hasOcr = false, category = "MERCEARIA"),
-            HomeListItem("Leite integral 1L", 4, "R$ 4,99", "R$ 19,96", hasOcr = false, category = "LATICÍNIOS"),
-            HomeListItem("Café torrado 500g", 1, "R$ 18,50", "R$ 18,50", hasOcr = false, category = "BEBIDAS")
-        )
-    }
-
-    // Calcula o total acumulado (base + escaneados reais)
-    val userScannedTotal = uiState.prices.sumOf { it.value }
-    val displayTotal = if (userScannedTotal > 0.0) userScannedTotal else 142.80
+    // Total real vindo do Room/Supabase - sem mock
+    val displayTotal = uiState.prices.sumOf { it.value }
 
     Scaffold(
         containerColor = AppBackground,
@@ -140,7 +129,7 @@ fun HomeScreen(
                     color = TextPrimary
                 )
                 Text(
-                    text = "${baseMockupItems.size + uiState.prices.size} itens",
+                    text = "${uiState.prices.size} itens",
                     style = MaterialTheme.typography.labelSmall.copy(fontSize = 12.sp),
                     color = TextSecondary
                 )
@@ -148,44 +137,39 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Itens escaneados recentemente pelo usuário (se houver)
-            if (uiState.prices.isNotEmpty()) {
-                CategoryHeader(title = "ESCANEADOS NO SUPERMERCADO")
-                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-                    uiState.prices.forEach { p ->
-                        val item = HomeListItem(
-                            name = p.label,
-                            quantity = 1,
-                            unitPrice = PriceExtractor.formatCurrency(p.value),
-                            total = PriceExtractor.formatCurrency(p.value),
-                            hasOcr = true,
-                            checked = false,
-                            category = "OCR"
-                        )
-                        ShoppingItemRow(item = item, onToggleCheck = {})
-                        Spacer(modifier = Modifier.height(8.dp))
+            // Lista real vinda do Room/Supabase
+            if (uiState.prices.isEmpty()) {
+                Column(
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text("Sua lista está vazia", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold, color = TextPrimary))
+                    Text("Toque em Escanear e aponte para a etiqueta", style = MaterialTheme.typography.bodySmall.copy(color = TextSecondary), textAlign = TextAlign.Center)
+                }
+            } else {
+                // Agrupa por categoria real inferida do label
+                val grouped = uiState.prices.groupBy { p ->
+                    val n = p.label.lowercase()
+                    when {
+                        n.contains("leite") || n.contains("queijo") -> "LATICÍNIOS"
+                        n.contains("cafe") || n.contains("café") -> "BEBIDAS"
+                        else -> "MERCEARIA"
                     }
                 }
-                Spacer(modifier = Modifier.height(12.dp))
-            }
-
-            // Categorias organizadas (Mockup 01)
-            val categories = listOf("MERCEARIA", "LATICÍNIOS", "BEBIDAS")
-            categories.forEach { cat ->
-                val itemsInCat = baseMockupItems.filter { it.category == cat }
-                if (itemsInCat.isNotEmpty()) {
+                grouped.forEach { (cat, items) ->
                     CategoryHeader(title = cat)
                     Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-                        itemsInCat.forEachIndexed { index, item ->
-                            ShoppingItemRow(
-                                item = item,
-                                onToggleCheck = {
-                                    val idx = baseMockupItems.indexOf(item)
-                                    if (idx != -1) {
-                                        baseMockupItems[idx] = item.copy(checked = !item.checked)
-                                    }
-                                }
+                        items.forEach { p ->
+                            val item = HomeListItem(
+                                name = p.label,
+                                quantity = 1,
+                                unitPrice = PriceExtractor.formatCurrency(p.value),
+                                total = PriceExtractor.formatCurrency(p.value),
+                                hasOcr = true,
+                                checked = false,
+                                category = cat
                             )
+                            ShoppingItemRow(item = item, onToggleCheck = {})
                             Spacer(modifier = Modifier.height(8.dp))
                         }
                     }
