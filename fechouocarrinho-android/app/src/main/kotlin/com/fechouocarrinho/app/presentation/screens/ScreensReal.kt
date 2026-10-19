@@ -1118,14 +1118,10 @@ fun ReciboScreenReal(
                 HorizontalDivider(color = TextPrimary.copy(alpha = 0.08f))
                 Spacer(modifier = Modifier.height(14.dp))
 
-                val sampleItems = if (prices.isNotEmpty()) prices else listOf(
-                    Price(label = "Arroz integral 5kg", value = 28.90, rawText = "R$ 28,90", syncStatus = "PENDING"),
-                    Price(label = "Feijão carioca 1kg (x2)", value = 7.49, rawText = "R$ 7,49", syncStatus = "PENDING"),
-                    Price(label = "Leite integral 1L (x4)", value = 19.96, rawText = "R$ 19,96", syncStatus = "PENDING"),
-                    Price(label = "Café torrado 500g", value = 18.50, rawText = "R$ 18,50", syncStatus = "PENDING")
-                )
-
-                sampleItems.forEach { p ->
+                if (prices.isEmpty()) {
+                    Text("Nenhum item na lista ainda. Escaneie o primeiro produto.", style = MaterialTheme.typography.bodyMedium, color = TextSecondary, modifier = Modifier.padding(vertical = 8.dp))
+                }
+                prices.forEach { p ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
