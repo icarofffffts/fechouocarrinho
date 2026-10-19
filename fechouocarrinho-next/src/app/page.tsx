@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { fetchSupermarkets, isSupabaseConfigured, type Supermarket } from "@/lib/supabase";
 import MockupViewer from "@/components/MockupViewer";
 import BrandAndBannersSection from "@/components/BrandAndBannersSection";
+import InteractiveHeroPhone from "@/components/InteractiveHeroPhone";
+import InteractiveCartSimulator from "@/components/InteractiveCartSimulator";
 
 const MARKET_COLORS: Record<string, string> = {
   "epa-mg": "bg-emerald-600",
@@ -82,37 +84,39 @@ export default function Home() {
           <div className="inline-flex items-center gap-2 bg-white border border-zinc-200 rounded-full px-3 py-1.5 text-xs font-semibold shadow-sm">
             <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> Funciona sem internet • Leve para qualquer celular
           </div>
-          <h1 className="font-display font-extrabold text-4xl md:text-[48px] leading-[0.95] mt-5" style={{ fontFamily: "var(--font-nunito)" }}>
+          <h1 className="font-display font-extrabold text-5xl sm:text-6xl lg:text-[68px] leading-[0.92] tracking-[-0.045em] mt-5" style={{ fontFamily: "var(--font-nunito)" }}>
             Seu total<br />
             <span className="text-[#1B8C42]">sem sustos</span><br />
             no caixa.
           </h1>
-          <p className="mt-4 text-zinc-600 text-lg leading-relaxed">Aponte a câmera para a etiqueta na prateleira. O app identifica o preço na hora e atualiza o total do seu carrinho — simples, rápido e sem complicação.</p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <a href="/downloads/fechouocarrinho.apk" className="inline-flex items-center gap-3 bg-[#1B8C42] text-white px-7 py-4 rounded-2xl font-display font-extrabold text-lg hover:bg-emerald-700 transition shadow-lg shadow-emerald-700/20" style={{ fontFamily: "var(--font-nunito)" }}>
+          <p className="mt-5 text-zinc-600 text-lg sm:text-xl leading-relaxed max-w-xl">
+            Aponte a câmera para a etiqueta na prateleira. O app identifica o preço instantaneamente e soma no total do seu carrinho — 100% offline, leve e sem complicação.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="/downloads/fechouocarrinho.apk" className="inline-flex items-center gap-3 bg-[#1B8C42] text-white px-8 py-4 rounded-2xl font-display font-extrabold text-lg hover:bg-emerald-700 transition shadow-xl shadow-emerald-700/25 active:scale-[0.98]" style={{ fontFamily: "var(--font-nunito)" }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 15V3M12 15l-4-4M12 15l4-4" /><path d="M2 17l1 4h18l1-4" /></svg>
-              Baixar APK
+              Baixar APK Grátis
             </a>
-            <a href="/como-funciona" className="inline-flex items-center gap-2 bg-white border border-zinc-200 px-6 py-4 rounded-2xl font-semibold hover:bg-zinc-50 transition">
+            <a href="/como-funciona" className="inline-flex items-center gap-2 bg-white border border-zinc-200 px-6 py-4 rounded-2xl font-semibold hover:bg-zinc-50 transition active:scale-[0.98]">
               Ver como funciona
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </a>
           </div>
           <p className="mt-3 text-xs text-zinc-500">Android 8 ou superior • Instalação em poucos segundos • <a href="/ajuda" className="underline hover:text-[#1B8C42]">Como instalar?</a></p>
           <div className="mt-8 grid grid-cols-3 gap-4 text-xs">
-            <div className="bg-white border border-zinc-100 rounded-2xl p-3 flex flex-col gap-2">
-              <div className="w-8 h-8 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#1B8C42]">
+            <div className="bg-white border border-zinc-100 rounded-2xl p-3.5 flex flex-col gap-2 shadow-sm">
+              <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#1B8C42]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
               </div>
               <span className="font-semibold leading-tight">Rápido e leve</span>
             </div>
-            <div className="bg-white border border-zinc-100 rounded-2xl p-3 flex flex-col gap-2">
+            <div className="bg-white border border-zinc-100 rounded-2xl p-3.5 flex flex-col gap-2 shadow-sm">
               <div className="w-8 h-8 rounded-full bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
               </div>
               <span className="font-semibold leading-tight">Sem internet no mercado</span>
             </div>
-            <div className="bg-white border border-zinc-100 rounded-2xl p-3 flex flex-col gap-2">
+            <div className="bg-white border border-zinc-100 rounded-2xl p-3.5 flex flex-col gap-2 shadow-sm">
               <div className="w-8 h-8 rounded-full bg-zinc-50 border border-zinc-200 flex items-center justify-center text-zinc-700">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="8.5" cy="7" r="4" /><path d="M20 8v6M23 11v2" /></svg>
               </div>
@@ -121,49 +125,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* PHONE MOCKUP */}
+        {/* INTERACTIVE PHONE SIMULATOR */}
         <div className="relative flex justify-center md:justify-end">
-          <div className="w-[300px] h-[620px] bg-zinc-900 rounded-[42px] p-3 shadow-2xl rotate-[-0.5deg]">
-            <div className="w-full h-full bg-white rounded-[32px] overflow-hidden flex flex-col">
-              <div className="h-7 bg-zinc-900 flex items-center justify-center"><div className="w-20 h-1.5 bg-zinc-700 rounded-full"></div></div>
-              <div className="bg-[#1B8C42] text-white px-4 py-3 flex items-center justify-between">
-                <span className="font-display font-extrabold" style={{ fontFamily: "var(--font-nunito)" }}>Meu Carrinho</span>
-                <span className="bg-white text-[#1B8C42] text-xs font-extrabold px-2.5 py-1 rounded-full">MG • EPA</span>
-              </div>
-              <div className="flex-1 relative bg-zinc-100">
-                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=500&fit=crop" className="w-full h-full object-cover opacity-60" alt="Prateleira" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-                  <div className="w-full bg-white rounded-2xl p-3 shadow-xl border-2 border-[#FF6B00]">
-                    <div className="text-[11px] font-bold text-zinc-500 tracking-widest">MIRE NA ETIQUETA</div>
-                    <div className="mt-2 border-2 border-dashed border-[#FF6B00] rounded-xl h-24 flex items-center justify-center bg-amber-50">
-                      <span className="font-mono font-extrabold text-xl">R$ 7,89</span>
-                    </div>
-                    <div className="mt-2 flex gap-2">
-                      <span className="flex-1 bg-[#111827] text-white text-center py-2 rounded-xl text-sm font-bold flex items-center justify-center gap-2">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" /><circle cx="12" cy="13" r="4" /></svg>
-                        Capturar
-                      </span>
-                      <span className="px-3 py-2 bg-white border rounded-xl text-sm flex items-center justify-center">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="p-3 bg-white border-t">
-                <div className="flex justify-between text-sm"><span className="text-zinc-500">Arroz Camil 5kg</span><span className="font-bold">R$ 29,90</span></div>
-                <div className="flex justify-between text-sm"><span className="text-zinc-500">Café Pilão 500g</span><span className="font-bold">R$ 15,49</span></div>
-                <div className="mt-3 bg-[#1B8C42] text-white rounded-xl px-4 py-3 flex justify-between items-center">
-                  <span className="font-semibold text-sm">TOTAL</span><span className="font-display font-extrabold text-xl" style={{ fontFamily: "var(--font-nunito)" }}>R$ 53,28</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="hidden md:block absolute -right-2 top-10 bg-white border border-zinc-200 rounded-2xl px-4 py-3 shadow-xl">
-            <div className="text-xs font-bold text-zinc-500 tracking-widest">VOCÊ ECONOMIZA</div>
-            <div className="font-display font-extrabold text-[#1B8C42] text-lg" style={{ fontFamily: "var(--font-nunito)" }}>R$ 34,00</div>
-            <div className="text-xs text-zinc-500">neste mês</div>
-          </div>
+          <InteractiveHeroPhone />
         </div>
       </section>
 
@@ -206,6 +170,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* SIMULADOR INTERATIVO DE COMPRA */}
+      <InteractiveCartSimulator />
 
       {/* SUPERMERCADOS */}
       <section className="max-w-6xl mx-auto px-4 py-14">
