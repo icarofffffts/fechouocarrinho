@@ -5,6 +5,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -17,7 +18,13 @@ class UpdateService(
 ) {
     suspend fun checkForUpdate(url: String = "https://fechouocarrinho.site/version.json"): UpdateInfoDto? = withContext(Dispatchers.IO) {
         try {
-            val request = Request.Builder().url(url).get().build()
+            // Evita que proxies/CDNs devolvam uma versão antiga do manifesto.
+            val freshUrl = if (url.contains("?")) "$url&v=${Random.nextLong()}" else "$url?v=${Random.nextLong()}"
+            val request = Request.Builder()
+                .url(freshUrl)
+                .header("Cache-Control", "no-cache")
+                .get()
+                .build()
             client.newCall(request).execute().use { response ->
                 if (!response.isSuccessful) return@withContext null
                 val body = response.body?.string() ?: return@withContext null
