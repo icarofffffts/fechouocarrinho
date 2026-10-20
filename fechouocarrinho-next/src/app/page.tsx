@@ -63,11 +63,7 @@ export default function Home() {
       <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-zinc-200/80 transition-all">
         <div className="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
           <a href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-2xl bg-[#1B8C42] flex items-center justify-center text-white shadow-md shadow-emerald-700/20 group-hover:scale-105 transition-transform">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12l5 5l10 -10" />
-              </svg>
-            </div>
+            <img src="/brand/logo-mark.svg" alt="" width="40" height="40" className="w-10 h-10 rounded-2xl shadow-md shadow-emerald-700/20 group-hover:scale-105 transition-transform" />
             <div>
               <span className="font-display font-extrabold text-xl tracking-tight block leading-none" style={{ fontFamily: "var(--font-nunito)" }}>
                 fechou o carrinho

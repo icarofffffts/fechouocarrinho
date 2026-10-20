@@ -14,9 +14,7 @@ export default function MarcaPage() {
       <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-zinc-100">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#1B8C42] flex items-center justify-center text-white">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l5 5l10 -10" /></svg>
-            </div>
+            <img src="/brand/logo-mark.svg" alt="" width="36" height="36" className="w-9 h-9 rounded-xl" />
             <span className="font-display font-extrabold text-xl tracking-tight" style={{ fontFamily: "var(--font-nunito)" }}>fechou o carrinho</span>
           </Link>
           <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
@@ -54,7 +52,7 @@ export default function MarcaPage() {
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-6 text-sm">
           <div>
             <div className="font-display font-extrabold flex items-center gap-2" style={{ fontFamily: "var(--font-nunito)" }}>
-              <div className="w-7 h-7 rounded-lg bg-[#1B8C42] flex items-center justify-center text-white"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M5 12l5 5l10 -10" /></svg></div>
+              <img src="/brand/logo-mark.svg" alt="" width="28" height="28" className="w-7 h-7 rounded-lg" />
               fechou o carrinho
             </div>
             <p className="text-zinc-500 mt-2 max-w-sm leading-relaxed">Controle simples do total da sua compra. Escolha o mercado, some os itens e vá ao caixa com tranquilidade.</p>
