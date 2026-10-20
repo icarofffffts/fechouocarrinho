@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.fechouocarrinho.app.presentation.components.SquircleLarge
 import com.fechouocarrinho.app.presentation.components.SquircleMedium
+import com.fechouocarrinho.app.presentation.components.SquircleSmall
 import com.fechouocarrinho.app.presentation.components.pressBounce
 
 // Tela 16: Criar Conta / Login Opcional - Guest First - mockup_16_auth_cadastro.svg
