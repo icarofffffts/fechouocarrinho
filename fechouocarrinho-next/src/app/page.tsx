@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { fetchSupermarkets, type Supermarket } from "@/lib/supabase";
-import MockupViewer from "@/components/MockupViewer";
 import BrandAndBannersSection from "@/components/BrandAndBannersSection";
 import InteractiveHeroPhone from "@/components/InteractiveHeroPhone";
 import InteractiveCartSimulator from "@/components/InteractiveCartSimulator";
@@ -83,8 +82,7 @@ export default function Home() {
             <a href="#como-funciona" className="hover:text-[#1B8C42] transition">Como funciona</a>
             <a href="#simulador" className="hover:text-[#1B8C42] transition">Simulador</a>
             <a href="#supermercados" className="hover:text-[#1B8C42] transition">Supermercados</a>
-            <a href="#telas" className="hover:text-[#1B8C42] transition">Telas (17)</a>
-            <a href="/marca" className="hover:text-[#1B8C42] text-[#1B8C42] font-bold transition">Identidade & Banners</a>
+                        <a href="/marca" className="hover:text-[#1B8C42] text-[#1B8C42] font-bold transition">Identidade & Banners</a>
             <a href="#ajuda" className="hover:text-[#1B8C42] transition">Dúvidas</a>
             <a
               href="#baixar"
@@ -350,9 +348,7 @@ export default function Home() {
       {/* 7. IDENTIDADE VISUAL & BANNERS */}
       <BrandAndBannersSection />
 
-      {/* 8. GALERIA COMPLETA DE TELAS (17 TELAS) */}
-      <MockupViewer />
-
+      
       {/* 9. SEÇÃO BAIXAR APK COM QR CODE */}
       <section id="baixar" className="max-w-6xl mx-auto px-4 py-16">
         <div className="bg-white border border-zinc-200 rounded-[2.5rem] p-8 md:p-12 grid lg:grid-cols-2 gap-10 items-center shadow-xl relative overflow-hidden">
@@ -452,8 +448,7 @@ export default function Home() {
               <a href="#como-funciona" className="text-zinc-600 hover:text-[#111827]">Como funciona</a>
               <a href="#simulador" className="text-zinc-600 hover:text-[#111827]">Simulador</a>
               <a href="#supermercados" className="text-zinc-600 hover:text-[#111827]">Supermercados</a>
-              <a href="#telas" className="text-zinc-600 hover:text-[#111827]">Galeria (17 Telas)</a>
-              <a href="/marca" className="text-zinc-600 hover:text-[#111827]">Identidade & Banners</a>
+                            <a href="/marca" className="text-zinc-600 hover:text-[#111827]">Identidade & Banners</a>
             </div>
 
             <div className="flex flex-col gap-2.5">
