@@ -16,6 +16,9 @@ build/
 local.properties
 *.keystore
 *.jks
+*.keystore
+signing-keystore-password.txt
+keystore.properties
 .idea/
 *.iml
 

@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -36,7 +38,16 @@ android {
                 "proguard-rules.pro"
             )
             // Ofuscação leve para manter stack traces úteis em low-end
-            signingConfig = signingConfigs.getByName("debug")
+            val signingProperties = rootProject.file("keystore.properties")
+            if (signingProperties.exists()) {
+                val props = Properties().apply { load(signingProperties.inputStream()) }
+                signingConfig = signingConfigs.create("releaseUpload") {
+                    storeFile = rootProject.file(props.getProperty("storeFile"))
+                    storePassword = props.getProperty("storePassword")
+                    keyAlias = props.getProperty("keyAlias")
+                    keyPassword = props.getProperty("keyPassword")
+                }
+            }
         }
         debug {
             isMinifyEnabled = false
