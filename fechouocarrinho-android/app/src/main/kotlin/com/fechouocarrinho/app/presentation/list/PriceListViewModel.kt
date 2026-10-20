@@ -55,4 +55,8 @@ class PriceListViewModel(
             _uiState.update { current.copy(isSyncing = false, message = message) }
         }
     }
+
+    fun delete(id: Long) {
+        viewModelScope.launch { repository.delete(id) }
+    }
 }

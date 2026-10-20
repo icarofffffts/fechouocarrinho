@@ -9,4 +9,5 @@ interface PriceRepository {
     suspend fun save(price: Price): Long
     suspend fun syncPending(): SyncResult
     suspend fun pendingCount(): Int
+    suspend fun delete(id: Long)
 }

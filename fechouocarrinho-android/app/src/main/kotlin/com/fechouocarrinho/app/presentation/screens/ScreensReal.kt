@@ -1,6 +1,7 @@
 package com.fechouocarrinho.app.presentation.screens
 
 import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -618,8 +619,8 @@ fun ListasScreenReal(
     onNovaLista: () -> Unit = {},
     onBack: () -> Unit = {}
 ) {
-    val total = if (prices.isNotEmpty()) prices.sumOf { it.value } else 142.80
-    val count = if (prices.isNotEmpty()) prices.size else 8
+    val total = prices.sumOf { it.value }
+    val count = prices.size
 
     Column(
         modifier = Modifier
@@ -686,7 +687,7 @@ fun ListasScreenReal(
                     Spacer(modifier = Modifier.width(12.dp))
                     Column(modifier = Modifier.weight(1f)) {
                         Text("Mês - Casa", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
-                        Text("Supermercados BH · atualizada hoje", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp), color = TextSecondary)
+                        Text(if (prices.isEmpty()) "Nenhuma lista ativa" else "Dados salvos neste aparelho", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp), color = TextSecondary)
                     }
                 }
 
@@ -733,7 +734,7 @@ fun ListasScreenReal(
                             .background(BrandGreen.copy(alpha = 0.1f))
                             .padding(horizontal = 14.dp, vertical = 6.dp)
                     ) {
-                        Text("71%", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = BrandGreen)
+                        Text(if (count == 0) "0%" else "Itens registrados", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = BrandGreen)
                     }
                 }
             }
@@ -761,8 +762,8 @@ fun ListasScreenReal(
                     }
                     Spacer(modifier = Modifier.width(12.dp))
                     Column(modifier = Modifier.weight(1f)) {
-                        Text("Churrasco de Domingo", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
-                        Text("EPA Supermercados · 18 itens", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp), color = TextSecondary)
+                        Text("Histórico de listas", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
+                        Text("Nenhuma lista arquivada", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp), color = TextSecondary)
                     }
                 }
                 Spacer(modifier = Modifier.height(14.dp))
@@ -771,14 +772,14 @@ fun ListasScreenReal(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("R$ 185,50", style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold), color = TextPrimary)
+                    Text("Nenhuma compra finalizada", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold), color = TextSecondary)
                     Box(
                         modifier = Modifier
                             .clip(RoundedCornerShape(14.dp))
                             .background(AccentOrange.copy(alpha = 0.1f))
                             .padding(horizontal = 12.dp, vertical = 5.dp)
                     ) {
-                        Text("100% FECHADA", style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold), color = AccentOrange)
+                    Text("SEM DADOS", style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold), color = AccentOrange)
                     }
                 }
             }
@@ -806,8 +807,8 @@ fun ListasScreenReal(
 // ---------------------------------------------------------------------------
 @Composable
 fun PerfilScreenReal(
-    totalEconomizado: Double = 342.80,
-    nome: String = "Maria Silva",
+    totalEconomizado: Double = 0.0,
+    nome: String = "Usuário offline",
     onBack: () -> Unit = {},
     onNavigateToAuth: () -> Unit = {}
 ) {
@@ -870,7 +871,7 @@ fun PerfilScreenReal(
                 Spacer(modifier = Modifier.width(16.dp))
                 Column(modifier = Modifier.weight(1f)) {
                     Text(nome, style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
-                    Text("maria.silva@email.com", style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                    Text("Sem conta conectada", style = MaterialTheme.typography.bodySmall, color = TextSecondary)
                     Spacer(modifier = Modifier.height(6.dp))
                     Box(
                         modifier = Modifier
@@ -897,7 +898,7 @@ fun PerfilScreenReal(
                 Text("economia acumulada", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp), color = Color.White.copy(alpha = 0.85f))
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    PriceExtractor.formatCurrency(if (totalEconomizado > 0) totalEconomizado else 342.80),
+                    PriceExtractor.formatCurrency(totalEconomizado),
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.ExtraBold, fontSize = 32.sp, color = Color.White)
                 )
                 Text("em 12 compras comparadas", style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp), color = Color.White.copy(alpha = 0.75f))
@@ -1090,7 +1091,8 @@ fun ReciboScreenReal(
     prices: List<Price> = emptyList(),
     onBack: () -> Unit = {}
 ) {
-    val total = if (prices.isNotEmpty()) prices.sumOf { it.value } else 189.40
+    val context = LocalContext.current
+    val total = prices.sumOf { it.value }
 
     Column(
         modifier = Modifier
@@ -1170,8 +1172,14 @@ fun ReciboScreenReal(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        Button(
-            onClick = {},
+         Button(
+             onClick = {
+                 val share = Intent(Intent.ACTION_SEND).apply {
+                     type = "text/plain"
+                     putExtra(Intent.EXTRA_TEXT, "Minha lista do Fechou o Carrinho: ${PriceExtractor.formatCurrency(total)}")
+                 }
+                 context.startActivity(Intent.createChooser(share, "Compartilhar recibo"))
+             },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF25D366)),
             shape = RoundedCornerShape(26.dp),
             modifier = Modifier
@@ -1240,6 +1248,7 @@ fun SplashScreenReal(onComeçar: () -> Unit = {}) {
 // ---------------------------------------------------------------------------
 @Composable
 fun ComparadorScreenReal(
+    prices: List<Price> = emptyList(),
     onRota: (String) -> Unit = {},
     onBack: () -> Unit = {}
 ) {
@@ -1267,11 +1276,15 @@ fun ComparadorScreenReal(
         }
         Spacer(modifier = Modifier.height(16.dp))
 
+        if (prices.isEmpty()) {
+            Text("Escaneie itens para comparar o total entre mercados.", color = TextSecondary)
+            return@Column
+        }
+        val currentTotal = prices.sumOf { it.value }
         val comparacoes = listOf(
-            Triple("Supermercados BH", 142.80, "Mais barato na sua região · 800m"),
-            Triple("Mart Minas", 148.50, "Economia no atacado (+3 un) · 3,1 km"),
-            Triple("EPA Supermercados / Zepa", 152.20, "Ofertas válidas até hoje · 1,8 km"),
-            Triple("Carrefour Hiper", 164.90, "Preço padrão de hipermercado · 4,2 km")
+            Triple("Supermercados BH", currentTotal, "Total dos itens escaneados"),
+            Triple("Mart Minas", currentTotal, "Sem dados de preços nesta rede"),
+            Triple("EPA Supermercados / Zepa", currentTotal, "Sem dados de preços nesta rede")
         )
 
         comparacoes.forEach { (mercado, valor, desc) ->

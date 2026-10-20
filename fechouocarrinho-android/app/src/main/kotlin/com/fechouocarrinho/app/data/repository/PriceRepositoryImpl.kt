@@ -83,4 +83,5 @@ class PriceRepositoryImpl(
     }
 
     override suspend fun pendingCount(): Int = priceDao.countByStatus(SyncStatus.PENDING)
+    override suspend fun delete(id: Long) = priceDao.deleteById(id)
 }

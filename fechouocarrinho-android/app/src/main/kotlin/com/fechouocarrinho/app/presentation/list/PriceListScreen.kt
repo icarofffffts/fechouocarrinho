@@ -92,7 +92,7 @@ fun PriceListScreen(
                 }
 
                 is PriceListUiState.Content -> {
-                    ContentList(state = state)
+                    ContentList(state = state, onDelete = viewModel::delete)
                     state.message?.let { message ->
                         LaunchedEffect(message) {
                             snackbarHostState.showSnackbar(message)
@@ -105,7 +105,7 @@ fun PriceListScreen(
 }
 
 @Composable
-private fun ContentList(state: PriceListUiState.Content) {
+private fun ContentList(state: PriceListUiState.Content, onDelete: (Long) -> Unit) {
     Column(modifier = Modifier.fillMaxSize()) {
         if (state.pendingCount > 0) {
             Text(
@@ -127,7 +127,7 @@ private fun ContentList(state: PriceListUiState.Content) {
         }
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(state.prices, key = { it.id }) { price ->
-                PriceItem(price = price)
+                PriceItem(price = price, onDelete = { onDelete(price.id) })
             }
         }
     }

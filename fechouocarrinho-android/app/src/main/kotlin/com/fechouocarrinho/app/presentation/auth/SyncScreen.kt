@@ -33,8 +33,8 @@ import com.fechouocarrinho.app.presentation.components.pressBounce
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SyncScreen(
-    userEmail: String = "maria.silva@email.com",
-    userName: String = "Maria Silva",
+    userEmail: String = "",
+    userName: String = "Usuário offline",
     isSyncEnabled: Boolean = true,
     onToggleSync: (Boolean) -> Unit = {},
     onDisconnect: () -> Unit = {},

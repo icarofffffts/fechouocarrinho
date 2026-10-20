@@ -112,7 +112,9 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable("comparador") {
+                            val prices by repository.prices.collectAsState(initial = emptyList())
                             ComparadorScreenReal(
+                                prices = prices,
                                 onRota = {},
                                 onBack = { navController.popBackStack() }
                             )

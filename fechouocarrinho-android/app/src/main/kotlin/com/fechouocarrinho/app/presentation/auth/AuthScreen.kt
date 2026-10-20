@@ -43,8 +43,8 @@ fun AuthScreen(
     onCreateAccount: (String, String) -> Unit = { _, _ -> },
     onLogin: () -> Unit = {}
 ) {
-    var email by remember { mutableStateOf("maria.silva@email.com") }
-    var password by remember { mutableStateOf("••••••••") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     var showPass by remember { mutableStateOf(false) }
 
     Column(
