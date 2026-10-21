@@ -14,9 +14,9 @@ android {
     defaultConfig {
         applicationId = "com.fechouocarrinho.app"
         minSdk = 24
-        targetSdk = 35
-        versionCode = 9
-        versionName = "1.0.8"
+        targetSdk = 36
+        versionCode = 10
+        versionName = "1.0.9"
 
         // Low-end: reduzir recursos nativos desnecessários
         vectorDrawables.useSupportLibrary = true
