@@ -175,7 +175,7 @@ private fun CameraPreviewWithOverlay(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            CircleIconButton(onClick = { /* close */ }) {
+            CircleIconButton(onClick = onNavigateToList) {
                 Text("X", color = Color.White, fontWeight = FontWeight.Bold)
             }
             Text(

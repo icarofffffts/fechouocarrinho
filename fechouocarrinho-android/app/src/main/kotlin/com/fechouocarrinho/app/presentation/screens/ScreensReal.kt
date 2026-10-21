@@ -75,7 +75,7 @@ fun CarrinhoFechadoScreenReal(
     val total = prices.sumOf { it.value }
     val itemCount = prices.size
     val meta = 200.0
-    val economiaReal = if (economia > 0.0) economia else (meta - total).coerceAtLeast(0.0)
+    val economiaReal = if (prices.isEmpty() || total <= 0.0) 0.0 else if (economia > 0.0) economia else (meta - total).coerceAtLeast(0.0)
 
     val celebrationScale by animateFloatAsState(
         targetValue = 1f,
@@ -686,7 +686,7 @@ fun ListasScreenReal(
                     }
                     Spacer(modifier = Modifier.width(12.dp))
                     Column(modifier = Modifier.weight(1f)) {
-                        Text("Mês - Casa", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
+                        Text(if (prices.isEmpty()) "Lista de Compras" else "Minha Lista", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
                         Text(if (prices.isEmpty()) "Nenhuma lista ativa" else "Dados salvos neste aparelho", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp), color = TextSecondary)
                     }
                 }
@@ -698,7 +698,7 @@ fun ListasScreenReal(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text("progresso", style = MaterialTheme.typography.labelSmall, color = TextSecondary)
-                    Text("$count/12 itens", style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold), color = BrandGreen)
+                    Text("$count ${if (count == 1) "item" else "itens"}", style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold), color = BrandGreen)
                 }
                 Spacer(modifier = Modifier.height(6.dp))
                 Box(
@@ -710,7 +710,7 @@ fun ListasScreenReal(
                 ) {
                     Box(
                         modifier = Modifier
-                            .fillMaxWidth(0.71f)
+                            .fillMaxWidth(if (count == 0) 0f else (count / 10f).coerceIn(0.05f, 1f))
                             .height(8.dp)
                             .clip(RoundedCornerShape(4.dp))
                             .background(BrandGreen)
@@ -901,7 +901,7 @@ fun PerfilScreenReal(
                     PriceExtractor.formatCurrency(totalEconomizado),
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.ExtraBold, fontSize = 32.sp, color = Color.White)
                 )
-                Text("em 12 compras comparadas", style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp), color = Color.White.copy(alpha = 0.75f))
+                Text(if (totalEconomizado > 0) "em compras registradas" else "nenhuma compra registrada ainda", style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp), color = Color.White.copy(alpha = 0.75f))
             }
         }
 

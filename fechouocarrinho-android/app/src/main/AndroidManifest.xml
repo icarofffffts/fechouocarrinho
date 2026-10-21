@@ -31,6 +31,19 @@
             </intent-filter>
         </activity>
 
+        <!-- Widget Orçamento (Glance) -->
+        <receiver
+            android:name=".widget.BudgetWidgetReceiver"
+            android:exported="true"
+            android:label="@string/widget_budget_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/budget_widget_info" />
+        </receiver>
+
         <!-- ML Kit via Play Services -->
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"

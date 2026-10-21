@@ -83,7 +83,6 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .background(AppBackground)
-                .statusBarsPadding()
                 .padding(padding)
                 .verticalScroll(rememberScrollState())
         ) {

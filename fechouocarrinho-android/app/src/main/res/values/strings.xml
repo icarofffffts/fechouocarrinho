@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Fechou o Carrinho</string>
+    <string name="widget_budget_name">Orçamento - Fechou o Carrinho</string>
+    <string name="widget_budget_description">Acompanhe seu orçamento e total gasto direto da tela inicial.</string>
 </resources>
