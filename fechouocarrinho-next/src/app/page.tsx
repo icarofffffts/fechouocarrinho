@@ -451,6 +451,7 @@ export default function Home() {
               <span className="font-bold text-zinc-900">Aplicativo</span>
               <a href="/downloads/fechouocarrinho.apk" className="text-zinc-600 hover:text-[#111827]">Baixar APK (Android)</a>
               <a href="/version.json" target="_blank" className="text-zinc-600 hover:text-[#111827]">Notas de Atualização</a>
+              <a href="/privacidade" className="text-zinc-600 hover:text-[#111827]">Política de Privacidade</a>
               <a href="#ajuda" className="text-zinc-600 hover:text-[#111827]">Perguntas Frequentes</a>
             </div>
 
