@@ -14,6 +14,7 @@ data class PriceEntity(
     val label: String,
     val value: Double,
     val rawText: String,
+    val listId: Long = 1L,
     val createdAt: Long = System.currentTimeMillis(),
     val syncStatus: SyncStatus = SyncStatus.PENDING,
     val syncedAt: Long? = null

@@ -38,6 +38,7 @@ import com.fechouocarrinho.app.presentation.components.SquircleLarge
 import com.fechouocarrinho.app.presentation.components.SquircleSmall
 import com.fechouocarrinho.app.presentation.components.SquircleExtraLarge
 import com.fechouocarrinho.app.domain.model.Price
+import com.fechouocarrinho.app.domain.model.ShoppingList
 import com.fechouocarrinho.app.ocr.PriceExtractor
 
 private val BrandGreen = Color(0xFF1B8C42)
@@ -616,9 +617,13 @@ fun SelecaoMercadoScreenReal(
 @Composable
 fun ListasScreenReal(
     prices: List<Price> = emptyList(),
-    onNovaLista: () -> Unit = {},
+    lists: List<ShoppingList> = emptyList(),
+    activeListId: Long = 1L,
+    onSelectList: (Long) -> Unit = {},
+    onNovaLista: (String) -> Unit = {},
     onBack: () -> Unit = {}
 ) {
+    var newListName by remember { mutableStateOf("") }
     val total = prices.sumOf { it.value }
     val count = prices.size
 
@@ -666,7 +671,28 @@ fun ListasScreenReal(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Card 1: Lista Atual
+        Text("suas listas", style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.ExtraBold), color = TextPrimary)
+        Spacer(Modifier.height(8.dp))
+        if (lists.isEmpty()) {
+            Text("Crie sua primeira lista para organizar a compra.", color = TextSecondary)
+        } else {
+            lists.forEach { list ->
+                Card(
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp).clickable { onSelectList(list.id) },
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = if (list.id == activeListId) BrandGreen else SurfaceWhite)
+                ) {
+                    Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.List, null, tint = if (list.id == activeListId) Color.White else BrandGreen)
+                        Spacer(Modifier.width(12.dp))
+                        Text(list.name, color = if (list.id == activeListId) Color.White else TextPrimary, fontWeight = FontWeight.Bold)
+                    }
+                }
+            }
+        }
+        Spacer(Modifier.height(12.dp))
+
+        // Lista ativa
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(24.dp),
@@ -787,8 +813,17 @@ fun ListasScreenReal(
 
         Spacer(modifier = Modifier.height(24.dp))
 
+        OutlinedTextField(
+            value = newListName,
+            onValueChange = { newListName = it },
+            label = { Text("Nome da nova lista") },
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true
+        )
+        Spacer(Modifier.height(8.dp))
+
         Button(
-            onClick = onNovaLista,
+            onClick = { if (newListName.isNotBlank()) { onNovaLista(newListName.trim()); newListName = "" } },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp),

@@ -26,7 +26,7 @@ class BudgetWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         val db = (context.applicationContext as? FechouOCarrinhoApplication)?.database
             ?: Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "fechouocarrinho_db").build()
-        val total = db.priceDao().totalValue()
+        val total = db.priceDao().totalValue(1L)
         val meta = 200.0
         provideContent {
             Box(modifier = GlanceModifier.fillMaxSize().background(ColorProvider(Color(0xFF1B8C42))).padding(12.dp), contentAlignment = Alignment.Center) {

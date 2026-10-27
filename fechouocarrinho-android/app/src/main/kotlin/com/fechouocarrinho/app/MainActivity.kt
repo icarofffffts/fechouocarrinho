@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
 
     private val database by lazy { (application as FechouOCarrinhoApplication).database }
-    private val repository by lazy { PriceRepositoryImpl(database.priceDao(), SupabaseService.create()) }
+    private val repository by lazy { PriceRepositoryImpl(database.priceDao(), SupabaseService.create(), database.shoppingListDao()) }
     private val textRecognition by lazy { TextRecognitionHelper(this) }
     private val priceExtractor by lazy { PriceExtractor() }
 
@@ -45,6 +45,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            LaunchedEffect(Unit) { repository.ensureDefaultList() }
             FechouOCarrinhoTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -122,9 +123,15 @@ class MainActivity : ComponentActivity() {
 
                         composable("listas") {
                             val prices by repository.prices.collectAsState(initial = emptyList())
+                            val lists by repository.lists.collectAsState(initial = emptyList())
+                            val activeListId by repository.activeListId.collectAsState()
+                            val scope = rememberCoroutineScope()
                             ListasScreenReal(
                                 prices = prices,
-                                onNovaLista = { navController.navigate("home") },
+                                lists = lists,
+                                activeListId = activeListId,
+                                onSelectList = { id -> scope.launch { repository.selectList(id) } },
+                                onNovaLista = { name -> scope.launch { repository.createList(name) } },
                                 onBack = { navController.popBackStack() }
                             )
                         }
