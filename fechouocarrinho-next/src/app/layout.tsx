@@ -1,22 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Nunito, Inter } from "next/font/google";
 import "./globals.css";
-
-const nunito = Nunito({
-  subsets: ["latin"],
-  variable: "--font-nunito",
-  weight: ["600", "700", "800"],
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "500", "600"],
-});
 
 export const metadata: Metadata = {
   title: "Fechou o Carrinho — Seu total sem sustos no caixa",
-  description: "Aponte a câmera para a etiqueta, o app lê o preço e soma no total do carrinho em tempo real. Escolha seu supermercado e economize.",
+  description:
+    "Fotografe a etiqueta e acompanhe o total da compra no próprio aparelho. Funciona sem internet dentro do mercado.",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -28,7 +16,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#1B8C42",
+  themeColor: "#FFF8F0",
 };
 
 export default function RootLayout({
@@ -37,8 +25,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className={`${nunito.variable} ${inter.variable}`}>
-      <body className="min-h-full flex flex-col antialiased bg-[#FFF8F0] text-[#111827]" style={{ fontFamily: "var(--font-inter)" }}>
+    <html lang="pt-BR">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+        />
+      </head>
+      <body className="min-h-full bg-[#FFF8F0] text-[#0B2B1F] antialiased">
         {children}
       </body>
     </html>

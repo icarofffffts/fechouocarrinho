@@ -4,16 +4,29 @@
   --color-fechado: #1B8C42;
   --color-laranja: #FF6B00;
   --color-creme: #FFF8F0;
-  --color-grafite: #111827;
-  --font-display: var(--font-nunito);
-  --font-body: var(--font-inter);
+  --color-grafite: #0B2B1F;
+  --font-display: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
   --background: #FFF8F0;
-  --foreground: #111827;
+  --foreground: #0B2B1F;
+  --font-nunito: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-inter: "Inter", ui-sans-serif, system-ui, sans-serif;
   --spring-easing: cubic-bezier(0.16, 1, 0.3, 1);
   --spring-duration: 220ms;
+}
+
+body {
+  font-family: var(--font-inter);
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-nunito);
 }
 
 /* ==========================================================================
