@@ -95,22 +95,14 @@ a[href]:active,
   transition: transform 120ms var(--spring-easing);
 }
 
-/* Smooth transitions using targeted properties (never transition: all) */
+/* Transicoes so nas propriedades nomeadas */
 button,
 a,
 .card-hover {
-  transition: transform 180ms var(--spring-easing), opacity 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out, box-shadow 180ms var(--spring-easing);
+  transition: transform 180ms var(--spring-easing), opacity 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out;
 }
 
-/* Gate hover states strictly to devices that actually have a mouse pointer */
-@media (hover: hover) and (pointer: fine) {
-  .hover-elevate:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px -8px rgba(17, 24, 39, 0.12);
-  }
-}
-
-/* Modal Spring In Animation (never appears from scale(0)) */
+/* Entrada do modal: comeca em 0.95, nunca do zero */
 @keyframes springModalIn {
   0% {
     opacity: 0;
@@ -152,4 +144,142 @@ a,
 
 .animate-spring-toast {
   animation: springToastIn 240ms var(--spring-easing) forwards;
+}
+
+/* ==========================================================================
+   Landing — cartaz de oferta (direcao "Loud and flat")
+   ========================================================================== */
+.poster {
+  --ink: #0b2b1f;
+  --paper: #ffffff;
+  --green: #1b8c42;
+  --green-deep: #146b32;
+  --mint: #d3eacb;
+  --mint-pale: #eaf6e4;
+  --accent: #ff6b00;
+  --margin: clamp(16px, 2.2vw, 32px);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-inter);
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.poster .display {
+  font-family: var(--font-nunito);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+}
+
+/* Hero: a linha que corre, com o quadrado de foto por baixo */
+.hero-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 360px;
+  height: clamp(150px, 15vw, 230px);
+  transform: translateY(-50%);
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: clamp(150px, 15vw, 230px);
+  line-height: 1;
+}
+.hero-line .marquee-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  align-items: center;
+  animation: marquee 70s linear infinite;
+}
+.hero-line .unit {
+  display: inline-flex;
+  align-items: center;
+  padding-right: 0.2em;
+}
+.hero-line .dot {
+  display: inline-block;
+  width: 0.28em;
+  height: 0.28em;
+  margin-left: 0.2em;
+  border-radius: 999px;
+  background: currentColor;
+}
+.hero-line .light-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: var(--paper);
+  pointer-events: none;
+  clip-path: inset(0 calc(50% - 9.5vw) 0 calc(50% - 9.5vw));
+}
+.hero-line .light-layer .marquee-track {
+  height: 100%;
+}
+.hero-square {
+  position: absolute;
+  left: 50%;
+  top: 360px;
+  width: 19vw;
+  height: 19vw;
+  transform: translate(-50%, -50%);
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (max-width: 720px) {
+  .hero-line {
+    top: 26%;
+    height: 34vw;
+    font-size: 34vw;
+  }
+  .hero-square {
+    top: 26%;
+    width: 46vw;
+    height: 46vw;
+  }
+  .hero-line .light-layer {
+    clip-path: inset(0 calc(50% - 23vw) 0 calc(50% - 23vw));
+  }
+}
+
+/* A home e branca: o corpo acompanha para nao aparecer creme nas bordas */
+html:has(.poster),
+body:has(.poster) {
+  background: #ffffff;
+}
+
+/* Entradas: fica visivel sem script; so esconde o que esta abaixo da dobra */
+[data-rv="armed"] {
+  opacity: 0;
+  transform: translateY(24px);
+}
+[data-rv="shown"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 600ms var(--ease) var(--d, 0ms),
+    transform 700ms var(--ease) var(--d, 0ms);
+}
+
+.rise-hover {
+  transition: transform 150ms var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .rise-hover:hover {
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-line .marquee-track {
+    animation: none;
+    transform: none;
+  }
+  [data-rv] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
