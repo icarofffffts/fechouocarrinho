@@ -38,6 +38,7 @@ import com.fechouocarrinho.app.presentation.components.SquircleLarge
 import com.fechouocarrinho.app.presentation.components.SquircleSmall
 import com.fechouocarrinho.app.presentation.components.SquircleExtraLarge
 import com.fechouocarrinho.app.domain.model.Market
+import com.fechouocarrinho.app.domain.model.ListSummary
 import com.fechouocarrinho.app.domain.model.Price
 import com.fechouocarrinho.app.domain.model.ShoppingList
 import com.fechouocarrinho.app.ocr.PriceExtractor
@@ -62,6 +63,7 @@ fun CarrinhoFechadoScreenReal(
     economia: Double = 0.0,
     onFinalizar: () -> Unit = {},
     onCompartilhar: () -> Unit = {},
+    onComparar: () -> Unit = {},
     onBack: () -> Unit = {}
 ) {
     val context = LocalContext.current
@@ -75,7 +77,7 @@ fun CarrinhoFechadoScreenReal(
         }
     }
 
-    val total = prices.sumOf { it.value }
+    val total = prices.sumOf { it.subtotal }
     val itemCount = prices.size
     val hasGoal = meta > 0.0
     val economiaReal = when {
@@ -303,7 +305,7 @@ fun CarrinhoFechadoScreenReal(
             val breakdown = categoryOrder.mapNotNull { cat ->
                 val items = grouped[cat] ?: return@mapNotNull null
                 if (items.isEmpty()) return@mapNotNull null
-                Triple("$cat (${items.size} ${if (items.size == 1) "item" else "itens"})", PriceExtractor.formatCurrency(items.sumOf { it.value }), categoryIcon(cat))
+                Triple("$cat (${items.size} ${if (items.size == 1) "item" else "itens"})", PriceExtractor.formatCurrency(items.sumOf { it.subtotal }), categoryIcon(cat))
             }
 
             if (breakdown.isEmpty()) {
@@ -377,6 +379,18 @@ fun CarrinhoFechadoScreenReal(
                     Text("Finalizar", fontWeight = FontWeight.Bold, color = Color.White)
                 }
             }
+
+            Spacer(modifier = Modifier.height(14.dp))
+
+            Text(
+                text = "Comparar com outros mercados",
+                modifier = Modifier
+                    .clip(RoundedCornerShape(14.dp))
+                    .pressBounce(onClick = onComparar)
+                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp, fontWeight = FontWeight.SemiBold),
+                color = Color.White
+            )
 
             Spacer(modifier = Modifier.height(14.dp))
 
@@ -665,20 +679,19 @@ fun SelecaoMercadoScreenReal(
 }
 
 // ---------------------------------------------------------------------------
-// Tela 06: Aba Minhas Listas (Mockup 06)
+// Tela 06: Aba Minhas Listas
 // ---------------------------------------------------------------------------
 @Composable
 fun ListasScreenReal(
-    prices: List<Price> = emptyList(),
-    lists: List<ShoppingList> = emptyList(),
+    summaries: List<ListSummary> = emptyList(),
     activeListId: Long = 1L,
     onSelectList: (Long) -> Unit = {},
     onNovaLista: (String) -> Unit = {},
+    onDeleteList: (Long) -> Unit = {},
     onBack: () -> Unit = {}
 ) {
     var newListName by remember { mutableStateOf("") }
-    val total = prices.sumOf { it.value }
-    val count = prices.size
+    var listToDelete by remember { mutableStateOf<ListSummary?>(null) }
 
     Column(
         modifier = Modifier
@@ -690,10 +703,7 @@ fun ListasScreenReal(
     ) {
         Spacer(modifier = Modifier.height(8.dp))
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             IconButton(
                 onClick = onBack,
                 modifier = Modifier
@@ -715,7 +725,7 @@ fun ListasScreenReal(
                     color = TextPrimary
                 )
                 Text(
-                    text = "Listas ativas e compras salvas offline",
+                    text = "Cada lista tem seu próprio total",
                     style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
                     color = TextSecondary
                 )
@@ -724,169 +734,157 @@ fun ListasScreenReal(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Text("suas listas", style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.ExtraBold), color = TextPrimary)
-        Spacer(Modifier.height(8.dp))
-        if (lists.isEmpty()) {
-            Text("Crie sua primeira lista para organizar a compra.", color = TextSecondary)
-        } else {
-            lists.forEach { list ->
-                Card(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp).clickable { onSelectList(list.id) },
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = if (list.id == activeListId) BrandGreen else SurfaceWhite)
-                ) {
-                    Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.List, null, tint = if (list.id == activeListId) Color.White else BrandGreen)
-                        Spacer(Modifier.width(12.dp))
-                        Text(list.name, color = if (list.id == activeListId) Color.White else TextPrimary, fontWeight = FontWeight.Bold)
-                    }
-                }
-            }
-        }
-        Spacer(Modifier.height(12.dp))
-
-        // Lista ativa
+        // Criar lista antes de ir ao mercado
         Card(
             modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(22.dp),
             colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
-            Column(modifier = Modifier.padding(20.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Box(
-                        modifier = Modifier
-                            .size(44.dp)
-                            .clip(RoundedCornerShape(14.dp))
-                            .background(BrandGreen),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(Icons.Default.ShoppingCart, contentDescription = null, tint = Color.White, modifier = Modifier.size(24.dp))
-                    }
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(if (prices.isEmpty()) "Lista de Compras" else "Minha Lista", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
-                        Text(if (prices.isEmpty()) "Nenhuma lista ativa" else "Dados salvos neste aparelho", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp), color = TextSecondary)
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+            Column(modifier = Modifier.padding(18.dp)) {
+                Text(
+                    text = "nova lista",
+                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.ExtraBold, fontSize = 15.sp),
+                    color = TextPrimary
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = "Dê um nome (ex: Compras da semana) e adicione os itens antes de sair.",
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
+                    color = TextSecondary
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                OutlinedTextField(
+                    value = newListName,
+                    onValueChange = { newListName = it },
+                    placeholder = { Text("Nome da lista") },
+                    singleLine = true,
+                    shape = RoundedCornerShape(14.dp),
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                Button(
+                    onClick = {
+                        if (newListName.isNotBlank()) {
+                            onNovaLista(newListName.trim())
+                            newListName = ""
+                        }
+                    },
+                    enabled = newListName.isNotBlank(),
+                    modifier = Modifier.fillMaxWidth().height(48.dp),
+                    shape = RoundedCornerShape(24.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = BrandGreen)
                 ) {
-                    Text("progresso", style = MaterialTheme.typography.labelSmall, color = TextSecondary)
-                    Text("$count ${if (count == 1) "item" else "itens"}", style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold), color = BrandGreen)
-                }
-                Spacer(modifier = Modifier.height(6.dp))
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(8.dp)
-                        .clip(RoundedCornerShape(4.dp))
-                        .background(BorderLight)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth(if (count == 0) 0f else (count / 10f).coerceIn(0.05f, 1f))
-                            .height(8.dp)
-                            .clip(RoundedCornerShape(4.dp))
-                            .background(BrandGreen)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.Bottom
-                ) {
-                    Column {
-                        Text("total estimado", style = MaterialTheme.typography.labelSmall, color = TextSecondary)
-                        Text(PriceExtractor.formatCurrency(total), style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold), color = TextPrimary)
-                    }
-                    Box(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(14.dp))
-                            .background(BrandGreen.copy(alpha = 0.1f))
-                            .padding(horizontal = 14.dp, vertical = 6.dp)
-                    ) {
-                        Text(if (count == 0) "0%" else "Itens registrados", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = BrandGreen)
-                    }
+                    Text("Criar lista", fontWeight = FontWeight.Bold, fontSize = 14.sp)
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(14.dp))
+        Spacer(modifier = Modifier.height(18.dp))
 
-        // Card 2: Lista Passada
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(24.dp),
-            colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-        ) {
-            Column(modifier = Modifier.padding(20.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Box(
-                        modifier = Modifier
-                            .size(44.dp)
-                            .clip(RoundedCornerShape(14.dp))
-                            .background(AccentOrange),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(Icons.Default.OutdoorGrill, contentDescription = null, tint = Color.White, modifier = Modifier.size(24.dp))
-                    }
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text("Histórico de listas", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
-                        Text("Nenhuma lista arquivada", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp), color = TextSecondary)
-                    }
-                }
-                Spacer(modifier = Modifier.height(14.dp))
+        Text(
+            text = "suas listas",
+            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.ExtraBold, fontSize = 15.sp),
+            color = TextPrimary
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+
+        if (summaries.isEmpty()) {
+            Text("Nenhuma lista ainda. Crie a primeira acima.", color = TextSecondary, fontSize = 13.sp)
+        }
+
+        summaries.forEach { summary ->
+            val ativa = summary.id == activeListId
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp)
+                    .clickable { onSelectList(summary.id) },
+                shape = RoundedCornerShape(18.dp),
+                colors = CardDefaults.cardColors(containerColor = if (ativa) BrandGreen else SurfaceWhite),
+                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+            ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("Nenhuma compra finalizada", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold), color = TextSecondary)
                     Box(
                         modifier = Modifier
-                            .clip(RoundedCornerShape(14.dp))
-                            .background(AccentOrange.copy(alpha = 0.1f))
-                            .padding(horizontal = 12.dp, vertical = 5.dp)
+                            .size(40.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(if (ativa) Color.White.copy(alpha = 0.2f) else BrandGreen.copy(alpha = 0.1f)),
+                        contentAlignment = Alignment.Center
                     ) {
-                    Text("SEM DADOS", style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold), color = AccentOrange)
+                        Icon(
+                            Icons.Default.List,
+                            contentDescription = null,
+                            tint = if (ativa) Color.White else BrandGreen,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = summary.name,
+                            maxLines = 1,
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
+                            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                            color = if (ativa) Color.White else TextPrimary
+                        )
+                        Text(
+                            text = buildString {
+                                append("${summary.itemCount} ${if (summary.itemCount == 1) "item" else "itens"}")
+                                if (summary.plannedCount > 0) append(" · ${summary.plannedCount} sem preço")
+                                append(" · ${PriceExtractor.formatCurrency(summary.total)}")
+                            },
+                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp),
+                            color = if (ativa) Color.White.copy(alpha = 0.8f) else TextSecondary
+                        )
+                    }
+                    if (ativa) {
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(Color.White)
+                                .padding(horizontal = 6.dp, vertical = 3.dp)
+                        ) {
+                            Text(
+                                "ATIVA",
+                                style = MaterialTheme.typography.labelSmall.copy(fontSize = 8.sp, fontWeight = FontWeight.Bold),
+                                color = BrandGreen
+                            )
+                        }
+                    }
+                    IconButton(onClick = { listToDelete = summary }) {
+                        Icon(
+                            Icons.Default.DeleteOutline,
+                            contentDescription = "Excluir lista",
+                            tint = if (ativa) Color.White.copy(alpha = 0.8f) else TextSecondary,
+                            modifier = Modifier.size(20.dp)
+                        )
                     }
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(28.dp))
+    }
 
-        OutlinedTextField(
-            value = newListName,
-            onValueChange = { newListName = it },
-            label = { Text("Nome da nova lista") },
-            modifier = Modifier.fillMaxWidth(),
-            singleLine = true
+    listToDelete?.let { alvo ->
+        AlertDialog(
+            onDismissRequest = { listToDelete = null },
+            title = { Text("Excluir lista?", fontWeight = FontWeight.ExtraBold) },
+            text = { Text("A lista \"${alvo.name}\" e seus ${alvo.itemCount} itens serão apagados deste aparelho.") },
+            confirmButton = {
+                TextButton(onClick = {
+                    onDeleteList(alvo.id)
+                    listToDelete = null
+                }) { Text("Excluir", color = AccentOrange, fontWeight = FontWeight.Bold) }
+            },
+            dismissButton = {
+                TextButton(onClick = { listToDelete = null }) { Text("Cancelar", color = TextSecondary) }
+            }
         )
-        Spacer(Modifier.height(8.dp))
-
-        Button(
-            onClick = { if (newListName.isNotBlank()) { onNovaLista(newListName.trim()); newListName = "" } },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(52.dp),
-            shape = RoundedCornerShape(26.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = AccentOrange)
-        ) {
-            Text("+ Criar Nova Lista", fontWeight = FontWeight.Bold, fontSize = 15.sp)
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
     }
 }
 
@@ -900,8 +898,11 @@ fun PerfilScreenReal(
     totalRegistrado: Double = 0.0,
     itemCount: Int = 0,
     listCount: Int = 0,
-    onBack: () -> Unit = {},
-    onNavigateToAuth: () -> Unit = {}
+    onNavigateToAuth: () -> Unit = {},
+    onNavigateToMarkets: () -> Unit = {},
+    onNavigateToLists: () -> Unit = {},
+    onShowOfflineInfo: () -> Unit = {},
+    onBack: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -1028,10 +1029,10 @@ fun PerfilScreenReal(
         Spacer(modifier = Modifier.height(10.dp))
 
         val menuItems = listOf(
-            Triple("Mercados Favoritos", "Redes salvas e mercado principal", Icons.Default.Storefront),
-            Triple("Histórico de Compras", "Recibos e totais anteriores", Icons.Default.ReceiptLong),
-            Triple("Sincronização Familiar", "Compartilhar listas por código de 6 dígitos", Icons.Default.Sync),
-            Triple("Preferências & Offline", "Armazenamento local e dados", Icons.Default.Settings)
+            Triple("Mercados favoritos", "Redes salvas e mercado principal", Icons.Default.Storefront),
+            Triple("Minhas listas", "Criar, trocar e excluir listas", Icons.Default.ReceiptLong),
+            Triple("Sincronização familiar", "Compartilhar listas por código de 6 dígitos", Icons.Default.Sync),
+            Triple("Preferências & offline", "Armazenamento local e dados", Icons.Default.Settings)
         )
 
         menuItems.forEach { (title, subtitle, icon) ->
@@ -1041,7 +1042,10 @@ fun PerfilScreenReal(
                     .padding(vertical = 4.dp)
                     .clickable {
                         when {
-                            title.contains("Sincronização") -> onNavigateToAuth()
+                            title.startsWith("Mercados") -> onNavigateToMarkets()
+                            title.startsWith("Minhas listas") -> onNavigateToLists()
+                            title.startsWith("Sincronização") -> onNavigateToAuth()
+                            else -> onShowOfflineInfo()
                         }
                     },
                 shape = RoundedCornerShape(18.dp),
@@ -1081,15 +1085,34 @@ fun PerfilScreenReal(
 // Tela 13: Adicionar Manual (Mockup 13)
 // ---------------------------------------------------------------------------
 @Composable
+private fun CategoryChip(label: String, selected: Boolean, onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .clip(RoundedCornerShape(12.dp))
+            .background(if (selected) BrandGreen else BorderLight)
+            .clickable(onClick = onClick)
+            .padding(horizontal = 12.dp, vertical = 8.dp)
+    ) {
+        Text(
+            label,
+            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+            color = if (selected) Color.White else TextPrimary
+        )
+    }
+}
+
+@Composable
 fun ManualScreenReal(
-    onSave: (String, Double) -> Unit = { _, _ -> },
+    onSave: (String, Double?, Int) -> Unit = { _, _, _ -> },
     onBack: () -> Unit = {}
 ) {
     var nome by remember { mutableStateOf("") }
     var preco by remember { mutableStateOf("") }
+    var qty by remember { mutableIntStateOf(1) }
     var selectedCategory by remember { mutableStateOf("MERCEARIA") }
+    var showError by remember { mutableStateOf(false) }
 
-    val categories = listOf("MERCEARIA", "LATIC├ìNIOS", "BEBIDAS", "HORTIFRUTI", "LIMPEZA")
+    val categories = listOf("MERCEARIA", "LATICÍNIOS", "BEBIDAS", "HORTIFRUTI", "LIMPEZA")
 
     Column(
         modifier = Modifier
@@ -1112,11 +1135,18 @@ fun ManualScreenReal(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar", tint = BrandGreen, modifier = Modifier.size(20.dp))
             }
             Spacer(modifier = Modifier.width(12.dp))
-            Text(
-                text = "Adicionar produto",
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold, fontSize = 22.sp),
-                color = TextPrimary
-            )
+            Column {
+                Text(
+                    text = "Adicionar item",
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold, fontSize = 22.sp),
+                    color = TextPrimary
+                )
+                Text(
+                    text = "Planeje a lista antes de sair de casa",
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                    color = TextSecondary
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -1132,8 +1162,9 @@ fun ManualScreenReal(
                 Spacer(modifier = Modifier.height(6.dp))
                 OutlinedTextField(
                     value = nome,
-                    onValueChange = { nome = it },
-                    placeholder = { Text("Ex: Arroz Tio Jo├úo 5kg") },
+                    onValueChange = { nome = it; showError = false },
+                    placeholder = { Text("Ex: Arroz 5kg") },
+                    isError = showError && nome.isBlank(),
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -1143,27 +1174,50 @@ fun ManualScreenReal(
                 Text("Categoria", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    categories.take(3).forEach { cat ->
-                        val isSel = cat == selectedCategory
-                        Box(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(12.dp))
-                                .background(if (isSel) BrandGreen else BorderLight)
-                                .clickable { selectedCategory = cat }
-                                .padding(horizontal = 12.dp, vertical = 8.dp)
-                        ) {
-                            Text(cat, style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold), color = if (isSel) Color.White else TextPrimary)
-                        }
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        categories.take(3).forEach { cat -> CategoryChip(cat, cat == selectedCategory) { selectedCategory = cat } }
+                    }
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        categories.drop(3).forEach { cat -> CategoryChip(cat, cat == selectedCategory) { selectedCategory = cat } }
                     }
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Text("Pre├ºo unit├írio (R$)", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
+                Text("Quantidade", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(
+                        modifier = Modifier
+                            .size(44.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(BorderLight)
+                            .clickable { if (qty > 1) qty-- },
+                        contentAlignment = Alignment.Center
+                    ) { Text("−", fontSize = 18.sp, fontWeight = FontWeight.Bold) }
+                    Box(
+                        modifier = Modifier
+                            .width(64.dp)
+                            .height(44.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(SurfaceWhite)
+                            .border(1.dp, BorderLight, RoundedCornerShape(12.dp)),
+                        contentAlignment = Alignment.Center
+                    ) { Text(qty.toString(), fontSize = 16.sp, fontWeight = FontWeight.Bold) }
+                    Box(
+                        modifier = Modifier
+                            .size(44.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(BrandGreen)
+                            .clickable { qty++ },
+                        contentAlignment = Alignment.Center
+                    ) { Text("+", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White) }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text("Preço unitário (opcional)", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
                 Spacer(modifier = Modifier.height(6.dp))
                 OutlinedTextField(
                     value = preco,
@@ -1172,15 +1226,24 @@ fun ManualScreenReal(
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 )
+                Spacer(modifier = Modifier.height(6.dp))
+                Text(
+                    text = "Deixe vazio para planejar agora e preencher o preço no mercado.",
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
+                    color = TextSecondary
+                )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
                     onClick = {
-                        val v = preco.replace("R$", "").replace(" ", "").replace(".", "").replace(",", ".").toDoubleOrNull() ?: 0.0
-                        if (nome.isNotBlank() && v > 0) {
-                            onSave(nome, v)
+                        if (nome.isBlank()) {
+                            showError = true
+                            return@Button
                         }
+                        val raw = preco.replace("R$", "").replace(" ", "")
+                        val v = if (raw.isBlank()) null else raw.replace(".", "").replace(",", ".").toDoubleOrNull()
+                        onSave(nome.trim(), v, qty)
                     },
                     modifier = Modifier
                         .fillMaxWidth()
@@ -1188,7 +1251,7 @@ fun ManualScreenReal(
                     colors = ButtonDefaults.buttonColors(containerColor = BrandGreen),
                     shape = RoundedCornerShape(25.dp)
                 ) {
-                    Text("Adicionar ao Carrinho", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                    Text("Adicionar à lista", fontWeight = FontWeight.Bold, fontSize = 15.sp)
                 }
             }
         }
@@ -1204,10 +1267,11 @@ fun ManualScreenReal(
 fun ReciboScreenReal(
     prices: List<Price> = emptyList(),
     marketName: String = "",
+    onRemoveItem: (Long) -> Unit = {},
     onBack: () -> Unit = {}
 ) {
     val context = LocalContext.current
-    val total = prices.sumOf { it.value }
+    val total = prices.sumOf { it.subtotal }
     val dateLabel = remember {
         java.text.SimpleDateFormat("dd/MM/yyyy 'às' HH:mm", java.util.Locale("pt", "BR"))
             .format(java.util.Date())
@@ -1271,10 +1335,30 @@ fun ReciboScreenReal(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 5.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(p.label, style = MaterialTheme.typography.bodyMedium, color = TextPrimary)
-                        Text(PriceExtractor.formatCurrency(p.value), fontWeight = FontWeight.Bold, color = TextPrimary)
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(p.label, style = MaterialTheme.typography.bodyMedium, color = TextPrimary)
+                            Text(
+                                text = if (p.planned) "preço a definir" else "${p.qty} × ${PriceExtractor.formatCurrency(p.value)}",
+                                style = MaterialTheme.typography.labelSmall.copy(fontSize = 10.sp),
+                                color = TextSecondary
+                            )
+                        }
+                        Text(
+                            text = if (p.planned) "—" else PriceExtractor.formatCurrency(p.subtotal),
+                            fontWeight = FontWeight.Bold,
+                            color = if (p.planned) AccentOrange else TextPrimary
+                        )
+                        IconButton(onClick = { onRemoveItem(p.id) }, modifier = Modifier.size(32.dp)) {
+                            Icon(
+                                Icons.Default.DeleteOutline,
+                                contentDescription = "Remover item",
+                                tint = TextSecondary,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        }
                     }
                 }
 

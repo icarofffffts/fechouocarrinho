@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [PriceEntity::class, ShoppingListEntity::class, SupermarketEntity::class],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @androidx.room.TypeConverters(Converters::class)

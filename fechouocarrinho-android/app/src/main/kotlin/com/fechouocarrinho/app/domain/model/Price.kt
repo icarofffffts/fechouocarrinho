@@ -8,5 +8,9 @@ data class Price(
     val createdAt: Long = System.currentTimeMillis(),
     val syncStatus: String,
     val marketId: String? = null,
-    val marketName: String? = null
-)
+    val marketName: String? = null,
+    val qty: Int = 1,
+    val planned: Boolean = false
+) {
+    val subtotal: Double get() = value * qty.coerceAtLeast(1)
+}

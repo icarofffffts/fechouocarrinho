@@ -5,8 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -23,6 +26,8 @@ import com.fechouocarrinho.app.domain.usecase.SyncPricesUseCase
 import com.fechouocarrinho.app.ocr.PriceExtractor
 import com.fechouocarrinho.app.ocr.TextRecognitionHelper
 import com.fechouocarrinho.app.presentation.auth.AuthScreen
+import com.fechouocarrinho.app.presentation.auth.AuthState
+import com.fechouocarrinho.app.presentation.auth.AuthViewModel
 import com.fechouocarrinho.app.presentation.auth.SyncScreen
 import com.fechouocarrinho.app.presentation.camera.CameraScreen
 import com.fechouocarrinho.app.presentation.camera.CameraViewModel
@@ -108,7 +113,8 @@ class MainActivity : ComponentActivity() {
                                 onNavigateToHelp = { navController.navigate("splash") },
                                 selectedSupermarket = selectedMarketName,
                                 budgetGoal = budgetGoal,
-                                onSetBudgetGoal = { settings.setBudgetGoal(it) }
+                                onSetBudgetGoal = { settings.setBudgetGoal(it) },
+                                onSetPrice = { id, value -> scope.launch { repository.setPrice(id, value) } }
                             )
                         }
 
@@ -151,6 +157,7 @@ class MainActivity : ComponentActivity() {
                                 meta = budgetGoal,
                                 onFinalizar = { navController.navigate("recibo") },
                                 onCompartilhar = { navController.navigate("recibo") },
+                                onComparar = { navController.navigate("comparador") },
                                 onBack = { navController.popBackStack() }
                             )
                         }
@@ -165,15 +172,14 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable("listas") {
-                            val prices by repository.prices.collectAsState(initial = emptyList())
-                            val lists by repository.lists.collectAsState(initial = emptyList())
+                            val summaries by repository.summaries.collectAsState(initial = emptyList())
                             val activeListId by repository.activeListId.collectAsState()
                             ListasScreenReal(
-                                prices = prices,
-                                lists = lists,
+                                summaries = summaries,
                                 activeListId = activeListId,
                                 onSelectList = { id -> scope.launch { repository.selectList(id) } },
                                 onNovaLista = { name -> scope.launch { repository.createList(name) } },
+                                onDeleteList = { id -> scope.launch { repository.deleteList(id) } },
                                 onBack = { navController.popBackStack() }
                             )
                         }
@@ -181,15 +187,46 @@ class MainActivity : ComponentActivity() {
                         composable("perfil") {
                             val prices by repository.prices.collectAsState(initial = emptyList())
                             val lists by repository.lists.collectAsState(initial = emptyList())
+                            var showOfflineInfo by remember { mutableStateOf(false) }
                             PerfilScreenReal(
                                 nome = userEmail?.substringBefore("@") ?: "Convidado",
                                 accountLabel = userEmail ?: "Sem conta conectada · modo offline",
-                                totalRegistrado = prices.sumOf { it.value },
+                                totalRegistrado = prices.sumOf { it.subtotal },
                                 itemCount = prices.size,
                                 listCount = lists.size,
-                                onBack = { navController.popBackStack() },
-                                onNavigateToAuth = { navController.navigate("auth") }
+                                onNavigateToAuth = { navController.navigate("auth") },
+                                onNavigateToMarkets = { navController.navigate("selecao") },
+                                onNavigateToLists = { navController.navigate("listas") },
+                                onShowOfflineInfo = { showOfflineInfo = true },
+                                onBack = { navController.popBackStack() }
                             )
+                            if (showOfflineInfo) {
+                                AlertDialog(
+                                    onDismissRequest = { showOfflineInfo = false },
+                                    title = {
+                                        Text(
+                                            text = "Preferências & offline",
+                                            fontWeight = androidx.compose.ui.text.font.FontWeight.ExtraBold
+                                        )
+                                    },
+                                    text = {
+                                        Text(
+                                            "Suas ${lists.size} listas e ${prices.size} itens ficam no banco local deste aparelho. " +
+                                                "Sem conta conectada, nada é enviado para a nuvem. " +
+                                                "A meta de orçamento e o mercado selecionado também ficam salvos aqui."
+                                        )
+                                    },
+                                    confirmButton = {
+                                        TextButton(onClick = { showOfflineInfo = false }) {
+                                            Text(
+                                                text = "Entendi",
+                                                color = androidx.compose.ui.graphics.Color(0xFF1B8C42),
+                                                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                                            )
+                                        }
+                                    }
+                                )
+                            }
                         }
 
                         composable("splash") {
@@ -220,14 +257,16 @@ class MainActivity : ComponentActivity() {
                         composable("manual") {
                             val scope = rememberCoroutineScope()
                             ManualScreenReal(
-                                onSave = { nome, valor ->
+                                onSave = { nome, valor, qty ->
                                     scope.launch {
                                         repository.save(
                                             Price(
                                                 label = nome,
-                                                value = valor,
-                                                rawText = PriceExtractor.formatCurrency(valor),
-                                                syncStatus = "PENDING"
+                                                value = valor ?: 0.0,
+                                                rawText = valor?.let { PriceExtractor.formatCurrency(it) } ?: "",
+                                                syncStatus = "PENDING",
+                                                qty = qty,
+                                                planned = valor == null
                                             )
                                         )
                                         navController.popBackStack()
@@ -254,29 +293,70 @@ class MainActivity : ComponentActivity() {
                             ReciboScreenReal(
                                 prices = prices,
                                 marketName = selectedMarketName,
+                                onRemoveItem = { id -> scope.launch { repository.delete(id) } },
                                 onBack = { navController.popBackStack() }
                             )
                         }
 
                         composable("auth") {
+                            val authViewModel: AuthViewModel = viewModel { AuthViewModel() }
+                            val authState by authViewModel.state.collectAsState()
+                            var showGoogleInfo by remember { mutableStateOf(false) }
+
                             AuthScreen(
+                                isLoading = authState is AuthState.Loading,
+                                errorMessage = (authState as? AuthState.Error)?.message,
                                 onContinueOffline = {
                                     settings.setUserEmail(null)
                                     navController.navigate("home") {
                                         popUpTo("auth") { inclusive = true }
                                     }
                                 },
-                                onGoogleSignIn = { navController.navigate("sync") },
-                                onCreateAccount = { _, _ -> navController.navigate("sync") },
-                                onLogin = { navController.navigate("sync") }
+                                onGoogleSignIn = { showGoogleInfo = true },
+                                onCreateAccount = { email, password ->
+                                    authViewModel.signUp(email, password) {
+                                        settings.setUserEmail(email)
+                                        navController.navigate("home") {
+                                            popUpTo("auth") { inclusive = true }
+                                        }
+                                    }
+                                },
+                                onLogin = { email, password ->
+                                    authViewModel.signIn(email, password) {
+                                        settings.setUserEmail(email)
+                                        navController.navigate("home") {
+                                            popUpTo("auth") { inclusive = true }
+                                        }
+                                    }
+                                }
                             )
+
+                            if (showGoogleInfo) {
+                                AlertDialog(
+                                    onDismissRequest = { showGoogleInfo = false },
+                                    title = { Text("Login com Google", fontWeight = androidx.compose.ui.text.font.FontWeight.ExtraBold) },
+                                    text = { Text("O login com Google ainda não está disponível nesta versão. Use e-mail e senha ou continue offline.") },
+                                    confirmButton = {
+                                        TextButton(onClick = { showGoogleInfo = false }) {
+                                            Text("Ok", color = androidx.compose.ui.graphics.Color(0xFF1B8C42), fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                                        }
+                                    }
+                                )
+                            }
                         }
 
                         composable("sync") {
+                            val syncEnabled by settings.syncEnabled.collectAsState()
                             SyncScreen(
                                 userEmail = userEmail.orEmpty(),
+                                userName = userEmail?.substringBefore("@") ?: "Convidado",
+                                isSyncEnabled = syncEnabled,
+                                onToggleSync = { enabled ->
+                                    settings.setSyncEnabled(enabled)
+                                },
                                 onDisconnect = {
                                     settings.setUserEmail(null)
+                                    settings.setSyncEnabled(false)
                                     navController.navigate("home") {
                                         popUpTo("sync") { inclusive = true }
                                     }

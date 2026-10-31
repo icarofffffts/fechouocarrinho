@@ -28,6 +28,9 @@ class SettingsStore(context: Context) {
     private val _userEmail = MutableStateFlow(prefs.getString(KEY_USER_EMAIL, null))
     val userEmail: StateFlow<String?> = _userEmail.asStateFlow()
 
+    private val _syncEnabled = MutableStateFlow(prefs.getBoolean(KEY_SYNC_ENABLED, false))
+    val syncEnabled: StateFlow<Boolean> = _syncEnabled.asStateFlow()
+
     fun setMarket(id: String, name: String) {
         prefs.edit().putString(KEY_MARKET_ID, id).putString(KEY_MARKET_NAME, name).apply()
         _marketId.value = id
@@ -46,6 +49,11 @@ class SettingsStore(context: Context) {
         _budgetGoal.value = safe
     }
 
+    fun setSyncEnabled(enabled: Boolean) {
+        prefs.edit().putBoolean(KEY_SYNC_ENABLED, enabled).apply()
+        _syncEnabled.value = enabled
+    }
+
     fun setUserEmail(email: String?) {
         prefs.edit().apply {
             if (email.isNullOrBlank()) remove(KEY_USER_EMAIL) else putString(KEY_USER_EMAIL, email)
@@ -58,5 +66,6 @@ class SettingsStore(context: Context) {
         const val KEY_MARKET_NAME = "selected_market_name"
         const val KEY_BUDGET_GOAL = "budget_goal"
         const val KEY_USER_EMAIL = "user_email"
+        const val KEY_SYNC_ENABLED = "sync_enabled"
     }
 }

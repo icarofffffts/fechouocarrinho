@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.fechouocarrinho.app.domain.model.Price
 import com.fechouocarrinho.app.ocr.PriceExtractor
 import com.fechouocarrinho.app.presentation.components.pressBounce
 import com.fechouocarrinho.app.presentation.components.SquircleLarge
@@ -65,13 +66,15 @@ fun HomeScreen(
     onNavigateToHelp: () -> Unit = {},
     selectedSupermarket: String = "",
     budgetGoal: Double = 0.0,
-    onSetBudgetGoal: (Double) -> Unit = {}
+    onSetBudgetGoal: (Double) -> Unit = {},
+    onSetPrice: (Long, Double) -> Unit = { _, _ -> }
 ) {
     val uiState by viewModel.uiState.collectAsState()
     var showGoalDialog by remember { mutableStateOf(false) }
+    var priceTarget by remember { mutableStateOf<Price?>(null) }
     var checkedIds by remember { mutableStateOf(setOf<Long>()) }
 
-    val displayTotal = uiState.prices.sumOf { it.value }
+    val displayTotal = uiState.prices.sumOf { it.subtotal }
     val hasGoal = budgetGoal > 0.0
     val remaining = (budgetGoal - displayTotal).coerceAtLeast(0.0)
     val progress = if (hasGoal) (displayTotal / budgetGoal).toFloat().coerceIn(0f, 1f) else 0f
@@ -215,19 +218,26 @@ fun HomeScreen(
             } else {
                 uiState.prices.forEachIndexed { index, p ->
                     val checked = checkedIds.contains(p.id)
+                    val subtitle = buildString {
+                        append("${p.qty} ${if (p.qty == 1) "un" else "uns"}")
+                        append(" · ")
+                        append(if (p.planned) "definir preço" else categoryOf(p.label).lowercase())
+                    }
                     ShoppingItemRow(
                         item = HomeListItem(
                             name = p.label,
-                            quantity = 1,
-                            unitPrice = PriceExtractor.formatCurrency(p.value),
-                            total = PriceExtractor.formatCurrency(p.value),
-                            hasOcr = true,
+                            quantity = p.qty,
+                            unitPrice = if (p.planned) "a definir" else PriceExtractor.formatCurrency(p.value),
+                            total = if (p.planned) "—" else PriceExtractor.formatCurrency(p.subtotal),
+                            hasOcr = !p.planned,
                             checked = checked,
                             category = categoryOf(p.label)
                         ),
-                        subtitle = "${p.marketName ?: "sem mercado"} · ${categoryOf(p.label).lowercase()}",
+                        subtitle = subtitle,
+                        planned = p.planned,
                         onToggleCheck = {
-                            checkedIds = if (checked) checkedIds - p.id else checkedIds + p.id
+                            if (p.planned) priceTarget = p
+                            else checkedIds = if (checked) checkedIds - p.id else checkedIds + p.id
                         }
                     )
                     if (index < uiState.prices.lastIndex) {
@@ -285,6 +295,62 @@ fun HomeScreen(
             }
         )
     }
+
+    priceTarget?.let { alvo ->
+        SetPriceDialog(
+            item = alvo,
+            onDismiss = { priceTarget = null },
+            onConfirm = { value ->
+                onSetPrice(alvo.id, value)
+                priceTarget = null
+            }
+        )
+    }
+}
+
+@Composable
+private fun SetPriceDialog(
+    item: Price,
+    onDismiss: () -> Unit,
+    onConfirm: (Double) -> Unit
+) {
+    var text by remember { mutableStateOf("") }
+    val parsed = text.replace("R$", "").replace(" ", "")
+        .let { if (it.contains(",")) it.replace(".", "").replace(",", ".") else it }
+        .toDoubleOrNull()
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(item.label, fontWeight = FontWeight.ExtraBold) },
+        text = {
+            Column {
+                Text(
+                    text = "Quanto custa no mercado? O item entra no total assim que você salvar.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = TextSecondary
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                OutlinedTextField(
+                    value = text,
+                    onValueChange = { text = it },
+                    singleLine = true,
+                    label = { Text("Preço unitário em R$") },
+                    placeholder = { Text("0,00") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(14.dp)
+                )
+            }
+        },
+        confirmButton = {
+            TextButton(
+                enabled = parsed != null && parsed > 0,
+                onClick = { parsed?.let(onConfirm) }
+            ) { Text("Salvar preço", fontWeight = FontWeight.Bold, color = BrandGreen) }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text("Depois", color = TextSecondary) }
+        }
+    )
 }
 
 @Composable
@@ -505,6 +571,7 @@ private fun categoryOf(label: String): String {
 private fun ShoppingItemRow(
     item: HomeListItem,
     subtitle: String,
+    planned: Boolean = false,
     onToggleCheck: () -> Unit
 ) {
     val rowAlpha by animateFloatAsState(
@@ -593,7 +660,7 @@ private fun ShoppingItemRow(
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 15.sp
             ),
-            color = TextPrimary,
+            color = if (planned) AccentOrange else TextPrimary,
             textAlign = TextAlign.End
         )
     }

@@ -16,7 +16,7 @@ class FechouOCarrinhoApplication : Application() {
             AppDatabase::class.java,
             "fechouocarrinho_db"
         )
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
             .build()
     }
 
@@ -49,6 +49,13 @@ class FechouOCarrinhoApplication : Application() {
                         "PRIMARY KEY(id)" +
                         ")"
                 )
+            }
+        }
+
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE prices ADD COLUMN qty INTEGER NOT NULL DEFAULT 1")
+                db.execSQL("ALTER TABLE prices ADD COLUMN planned INTEGER NOT NULL DEFAULT 0")
             }
         }
 

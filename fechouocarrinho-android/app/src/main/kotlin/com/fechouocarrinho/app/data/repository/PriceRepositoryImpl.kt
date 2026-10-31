@@ -8,6 +8,7 @@ import com.fechouocarrinho.app.data.local.ShoppingListDao
 import com.fechouocarrinho.app.data.local.ShoppingListEntity
 import com.fechouocarrinho.app.data.remote.SupabaseApi
 import com.fechouocarrinho.app.data.remote.dto.PriceDto
+import com.fechouocarrinho.app.domain.model.ListSummary
 import com.fechouocarrinho.app.domain.model.Price
 import com.fechouocarrinho.app.domain.model.ShoppingList
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,9 +17,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import com.fechouocarrinho.app.domain.repository.PriceRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.text.SimpleDateFormat
 import java.util.Locale
-import java.util.TimeZone
 
 class PriceRepositoryImpl(
     private val priceDao: PriceDao,
@@ -28,8 +27,13 @@ class PriceRepositoryImpl(
 ) : PriceRepository {
     private val _activeListId = MutableStateFlow(1L)
     override val activeListId = _activeListId.asStateFlow()
+
     override val lists: Flow<List<ShoppingList>> = shoppingListDao.observeAll().map { rows ->
         rows.map { ShoppingList(it.id, it.name, it.createdAt, it.archived) }
+    }
+
+    override val summaries: Flow<List<ListSummary>> = shoppingListDao.observeSummaries().map { rows ->
+        rows.map { ListSummary(it.id, it.name, it.itemCount, it.plannedCount, it.total) }
     }
 
     override val prices: Flow<List<Price>> = _activeListId.flatMapLatest { listId -> priceDao.observeAll(listId) }.map { list ->
@@ -42,7 +46,9 @@ class PriceRepositoryImpl(
                 createdAt = entity.createdAt,
                 syncStatus = entity.syncStatus.name,
                 marketId = entity.marketId,
-                marketName = entity.marketName
+                marketName = entity.marketName,
+                qty = entity.qty,
+                planned = entity.planned
             )
         }
     }
@@ -59,9 +65,23 @@ class PriceRepositoryImpl(
             syncStatus = SyncStatus.PENDING,
             listId = _activeListId.value,
             marketId = price.marketId ?: marketId,
-            marketName = price.marketName ?: marketName
+            marketName = price.marketName ?: marketName,
+            qty = price.qty.coerceAtLeast(1),
+            planned = price.planned
         )
         return priceDao.insert(entity)
+    }
+
+    override suspend fun setPrice(id: Long, value: Double) {
+        val current = priceDao.findById(id) ?: return
+        priceDao.update(
+            current.copy(
+                value = value,
+                planned = false,
+                rawText = String.format(Locale.US, "%.2f", value),
+                syncStatus = SyncStatus.PENDING
+            )
+        )
     }
 
     override suspend fun syncPending(): SyncResult {
@@ -73,7 +93,7 @@ class PriceRepositoryImpl(
                 price = entity.value,
                 productName = entity.label,
                 supermarketId = entity.marketId,
-                source = "manual"
+                source = if (entity.planned) "manual" else "ocr_scan"
             )
         }
 
@@ -81,12 +101,7 @@ class PriceRepositoryImpl(
             onSuccess = {
                 val now = System.currentTimeMillis()
                 pending.forEach { entity ->
-                    priceDao.update(
-                        entity.copy(
-                            syncStatus = SyncStatus.SYNCED,
-                            syncedAt = now
-                        )
-                    )
+                    priceDao.update(entity.copy(syncStatus = SyncStatus.SYNCED, syncedAt = now))
                 }
                 SyncResult.Success(pending.size)
             },
@@ -107,6 +122,27 @@ class PriceRepositoryImpl(
         _activeListId.value = id
         return id
     }
+
+    override suspend fun renameList(id: Long, name: String) {
+        if (name.isBlank()) return
+        shoppingListDao.rename(id, name.trim())
+    }
+
+    override suspend fun deleteList(id: Long) {
+        shoppingListDao.clearItems(id)
+        shoppingListDao.delete(id)
+        if (_activeListId.value == id) {
+            val next = shoppingListDao.firstId()
+            if (next != null) {
+                _activeListId.value = next
+            } else {
+                ensureDefaultList()
+                _activeListId.value = 1L
+            }
+        }
+    }
+
+    override suspend fun clearList(id: Long) = shoppingListDao.clearItems(id)
 
     override suspend fun selectList(id: Long) { _activeListId.value = id }
 

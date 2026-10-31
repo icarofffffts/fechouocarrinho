@@ -41,11 +41,14 @@ fun AuthScreen(
     onContinueOffline: () -> Unit,
     onGoogleSignIn: () -> Unit = {},
     onCreateAccount: (String, String) -> Unit = { _, _ -> },
-    onLogin: () -> Unit = {}
+    onLogin: (String, String) -> Unit = { _, _ -> },
+    isLoading: Boolean = false,
+    errorMessage: String? = null
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var showPass by remember { mutableStateOf(false) }
+    var loginMode by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -77,7 +80,7 @@ fun AuthScreen(
         Spacer(Modifier.height(16.dp))
 
         Text(
-            text = "Criar Conta (Opcional)",
+            text = if (loginMode) "Entrar na sua conta" else "Criar conta (opcional)",
             style = MaterialTheme.typography.titleLarge.copy(
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 24.sp,
@@ -87,7 +90,11 @@ fun AuthScreen(
         )
         Spacer(Modifier.height(4.dp))
         Text(
-            text = "Sincronize com a família e salve suas listas\nna nuvem. Ou use 100% offline.",
+            text = if (loginMode) {
+                "Entre para recuperar suas listas\nem outro aparelho."
+            } else {
+                "Sincronize com a família e salve suas listas\nna nuvem. Ou use 100% offline."
+            },
             style = MaterialTheme.typography.bodySmall.copy(
                 color = Color(0xFF5A6B63),
                 fontSize = 13.sp,
@@ -209,25 +216,48 @@ fun AuthScreen(
 
         Spacer(Modifier.height(20.dp))
 
+        if (errorMessage != null) {
+            Text(
+                text = errorMessage,
+                modifier = Modifier.fillMaxWidth(),
+                style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                color = Color(0xFFDC2626)
+            )
+            Spacer(Modifier.height(10.dp))
+        }
+
         // Botão Primário com pressBounce
         Button(
-            onClick = { onCreateAccount(email, password) },
+            enabled = !isLoading && email.isNotBlank() && password.length >= 6,
+            onClick = { if (loginMode) onLogin(email.trim(), password) else onCreateAccount(email.trim(), password) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(52.dp)
-                .pressBounce(onClick = { onCreateAccount(email, password) }),
+                .pressBounce {
+                    if (!isLoading && email.isNotBlank() && password.length >= 6) {
+                        if (loginMode) onLogin(email.trim(), password) else onCreateAccount(email.trim(), password)
+                    }
+                },
             shape = SquircleLarge,
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1B8C42)),
             elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
         ) {
-            Text(
-                text = "Criar Conta Gratuita",
-                style = MaterialTheme.typography.bodyMedium.copy(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 15.sp,
+            if (isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(20.dp),
+                    strokeWidth = 2.dp,
                     color = Color.White
                 )
-            )
+            } else {
+                Text(
+                    text = if (loginMode) "Entrar" else "Criar conta gratuita",
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 15.sp,
+                        color = Color.White
+                    )
+                )
+            }
         }
 
         Spacer(Modifier.height(12.dp))
@@ -265,12 +295,12 @@ fun AuthScreen(
 
         Spacer(Modifier.height(16.dp))
 
-        // Já tem conta com feedback tátil
+        // Alternar entre criar conta e entrar
         Text(
-            text = "Já tem uma conta? Entrar",
+            text = if (loginMode) "Não tem conta? Criar agora" else "Já tem uma conta? Entrar",
             modifier = Modifier
                 .clip(SquircleSmall)
-                .pressBounce(onClick = onLogin)
+                .pressBounce(onClick = { loginMode = !loginMode })
                 .padding(horizontal = 12.dp, vertical = 8.dp),
             style = MaterialTheme.typography.bodySmall.copy(
                 color = Color(0xFF1B8C42),

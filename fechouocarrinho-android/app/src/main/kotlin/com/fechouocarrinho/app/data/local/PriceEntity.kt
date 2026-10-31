@@ -17,6 +17,8 @@ data class PriceEntity(
     val listId: Long = 1L,
     val marketId: String? = null,
     val marketName: String? = null,
+    val qty: Int = 1,
+    val planned: Boolean = false,
     val createdAt: Long = System.currentTimeMillis(),
     val syncStatus: SyncStatus = SyncStatus.PENDING,
     val syncedAt: Long? = null
