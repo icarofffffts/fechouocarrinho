@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Política de Privacidade — Fechou o Carrinho",
@@ -10,55 +12,30 @@ export const metadata: Metadata = {
 
 export default function PrivacidadePage() {
   return (
-    <div className="bg-[#FFF8F0] min-h-screen text-[#111827]">
-      {/* Topbar */}
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-zinc-200/80">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 rounded-xl bg-[#1B8C42] flex items-center justify-center text-white shadow-sm shadow-[#1B8C42]/20 transition-transform group-hover:scale-105">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12l5 5l10 -10"/>
-              </svg>
-            </div>
-            <span className="font-extrabold text-xl tracking-tight text-[#111827]" style={{ fontFamily: "var(--font-nunito)" }}>
-              fechou o carrinho
-            </span>
-          </a>
-          <a
-            href="/"
-            className="text-xs sm:text-sm font-semibold text-zinc-600 hover:text-[#1B8C42] px-3.5 py-1.5 rounded-full border border-zinc-200 hover:border-[#1B8C42]/40 bg-white transition-colors"
-          >
-            ← Voltar ao site
-          </a>
-        </div>
-      </header>
+    <main className="bg-[#FFF8F0] min-h-screen text-[#0B2B1F]">
+      <SiteHeader />
 
-      {/* Main Content */}
-      <main className="max-w-[820px] mx-auto px-4 sm:px-6 py-10 sm:py-14">
-        {/* Header */}
+      <div className="max-w-[900px] mx-auto px-5 sm:px-10 py-12 sm:py-16">
         <div className="mb-8 sm:mb-10">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#1B8C42] mb-2.5">
-            Documento Legal
+          <p className="text-[12px] font-semibold uppercase tracking-[.16em] text-[#1B8C42] mb-3">
+            Legal
           </p>
-          <h1
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#111827] leading-[1.12]"
-            style={{ fontFamily: "var(--font-nunito)" }}
-          >
-            Política de Privacidade
+          <h1 className="text-[clamp(2.2rem,5.2vw,3.4rem)] font-semibold tracking-[-.05em] text-[#0B2B1F] leading-[.98]">
+            Política de privacidade.
           </h1>
-          <p className="text-zinc-500 text-sm mt-3">
+          <p className="text-[#5A6B63] text-sm mt-4">
             Última atualização: 21 de outubro de 2026 · Versão 1.0
           </p>
         </div>
 
         {/* Card Principal */}
-        <article className="bg-white border border-zinc-200/90 rounded-3xl p-6 sm:p-10 shadow-sm shadow-zinc-900/5 space-y-8 text-zinc-700 leading-relaxed text-[15px]">
+        <article className="space-y-8 text-[#3E5347] leading-relaxed text-[15px]">
           {/* Índice / Nesta página */}
-          <nav className="bg-[#F8FAF9] border border-zinc-200/80 rounded-2xl p-5 sm:p-6" aria-label="Índice da página">
-            <p className="text-xs font-bold text-zinc-900 uppercase tracking-wider mb-3">
+          <nav className="border-y border-[#0B2B1F]/12 py-5" aria-label="Índice da página">
+            <p className="text-[12px] font-semibold text-[#0B2B1F] uppercase tracking-[.16em] mb-3">
               Nesta página
             </p>
-            <ol className="grid sm:grid-cols-2 gap-y-1.5 gap-x-6 text-sm text-zinc-600 list-decimal pl-5">
+            <ol className="grid sm:grid-cols-2 gap-y-1.5 gap-x-6 text-sm text-[#5A6B63] list-decimal pl-5">
               <li><a href="#quem-somos" className="hover:text-[#1B8C42] hover:underline">Quem somos</a></li>
               <li><a href="#principio" className="hover:text-[#1B8C42] hover:underline">Nosso princípio: 100% offline</a></li>
               <li><a href="#camera" className="hover:text-[#1B8C42] hover:underline">Uso da Câmera (Leitor OCR)</a></li>
@@ -394,26 +371,9 @@ export default function PrivacidadePage() {
             </div>
           </section>
         </article>
-      </main>
+      </div>
 
-      {/* Footer */}
-      <footer className="border-t border-zinc-200/80 bg-white py-10 mt-14">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
-          <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded-md bg-[#1B8C42] flex items-center justify-center text-white">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                <path d="M5 12l5 5l10 -10"/>
-              </svg>
-            </div>
-            <span>© 2026 Fechou o Carrinho · Todos os direitos reservados</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <a href="/" className="hover:text-[#1B8C42]">Início</a>
-            <a href="/privacidade" className="text-[#1B8C42] font-semibold">Política de Privacidade</a>
-            <a href="mailto:contato@fechouocarrinho.site" className="hover:text-[#1B8C42]">Contato</a>
-          </div>
-        </div>
-      </footer>
-    </div>
+      <SiteFooter />
+    </main>
   );
 }

@@ -1,25 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import { fetchSupermarkets, insertMarketSuggestion, isSupabaseConfigured, type Supermarket } from "@/lib/supabase";
-
-const MARKET_COLORS: Record<string, string> = {
-  "epa-mg": "bg-emerald-600",
-  "mart-minas-mg": "bg-orange-500",
-  "bh-supermercados-mg": "bg-zinc-900",
-  "supernosso-mg": "bg-red-600",
-  "verdemar-mg": "bg-teal-600",
-  "carrefour-mg": "bg-blue-600",
-  "apoio-mineiro-mg": "bg-amber-600",
-};
-
-function marketColor(slug: string) {
-  return MARKET_COLORS[slug] ?? "bg-emerald-600";
-}
 
 const STATES = ["MG", "SP", "RJ", "BA", "RS", "PR", "SC", "GO", "DF", "ES", "MT", "MS", "PE", "CE", "PB", "RN", "AL", "SE", "PI", "MA", "PA", "AM", "RO", "RR", "AP", "AC", "TO"];
 
 type Status = "idle" | "loading" | "ok" | "error";
+
+function monogram(name: string) {
+  const parts = name.split(" ").filter(Boolean);
+  const first = parts[0] ?? "";
+  if (parts.length === 1) return first.slice(0, 2).toUpperCase();
+  if (first.length <= 3) return first.toUpperCase();
+  return (first[0] + parts[1][0]).toUpperCase();
+}
 
 export default function Supermercados() {
   const [selectedState, setSelectedState] = useState("MG");
@@ -90,47 +86,25 @@ export default function Supermercados() {
   }
 
   return (
-    <div className="bg-[#FFF8F0] min-h-screen">
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-zinc-100">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#1B8C42] flex items-center justify-center text-white">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-                <path d="M5 12l5 5l10 -10" />
-              </svg>
-            </div>
-            <span className="font-display font-extrabold text-xl" style={{ fontFamily: "var(--font-nunito)" }}>
-              fechou o carrinho
-            </span>
-          </a>
-          <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
-            <a href="/como-funciona" className="hover:text-[#1B8C42]">Como funciona</a>
-            <a href="/supermercados" className="text-[#1B8C42] font-bold">Supermercados</a>
-            <a href="/ajuda" className="hover:text-[#1B8C42]">Ajuda</a>
-            <a href="/#baixar" className="bg-[#111827] text-white px-5 py-2.5 rounded-full font-semibold">Baixar APK</a>
-          </nav>
-        </div>
-      </header>
+    <main className="min-h-screen bg-[#FFF8F0] text-[#0B2B1F]">
+      <SiteHeader ativo="Supermercados" />
 
-      <main className="max-w-6xl mx-auto px-4 py-10">
-        <a href="/" className="text-sm font-medium text-zinc-600 hover:text-[#111827] inline-flex items-center gap-1.5">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M19 12H5M12 19l-7-7 7-7" />
-          </svg>
-          Voltar
-        </a>
-        <h1 className="font-display font-extrabold text-4xl mt-4" style={{ fontFamily: "var(--font-nunito)" }}>
-          Supermercados disponíveis
+      <section className="mx-auto max-w-[1320px] px-5 pt-14 pb-8 md:px-10 md:pt-20">
+        <p className="text-[12px] font-semibold uppercase tracking-[.16em] text-[#1B8C42]">Cobertura</p>
+        <h1 className="mt-4 text-[clamp(2.4rem,6vw,4rem)] font-semibold leading-[.95] tracking-[-.05em]">
+          Onde você compra.
         </h1>
-        <p className="text-zinc-600 mt-3 max-w-2xl leading-relaxed">
-          Escolha o estado e depois o mercado onde você costuma comprar. Se o seu não aparecer, sugira — avaliamos e adicionamos para todos.
+        <p className="mt-5 max-w-[62ch] text-[17px] leading-7 text-[#3E5347]">
+          Escolha o estado e encontre a rede onde você costuma comprar. Se o seu mercado não aparecer, sugira — avaliamos
+          e adicionamos para todos.
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-3 items-center">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
           <select
             value={selectedState}
             onChange={(e) => setSelectedState(e.target.value)}
-            className="border border-zinc-200 rounded-xl px-4 py-2.5 font-semibold bg-white"
+            aria-label="Estado"
+            className="h-12 rounded-2xl border border-[#0B2B1F]/15 bg-white px-4 text-[15px] font-semibold"
           >
             {STATES.map((s) => (
               <option key={s} value={s}>
@@ -141,119 +115,108 @@ export default function Supermercados() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Buscar supermercado..."
-            className="border border-zinc-200 rounded-xl px-4 py-2.5 font-medium bg-white min-w-[220px]"
+            placeholder="Buscar supermercado"
+            className="h-12 w-full max-w-[380px] rounded-2xl border border-[#0B2B1F]/15 bg-white px-4 text-[15px] font-medium"
           />
-          <button
-            onClick={() => (document.getElementById("suggest") as HTMLDialogElement)?.showModal()}
-            className="bg-[#1B8C42] text-white px-5 py-2.5 rounded-xl font-bold hover:bg-emerald-700 transition"
+          <a
+            href="#sugerir"
+            className="flex h-12 items-center rounded-full bg-[#1B8C42] px-6 text-[15px] font-semibold text-white transition hover:bg-[#146B32]"
           >
             Sugerir supermercado
-          </button>
+          </a>
           {!isSupabaseConfigured && (
-            <span className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2">
+            <span className="rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-700">
               Supabase não configurado — exibindo dados locais
             </span>
           )}
         </div>
 
         {fetchError && (
-          <p className="mt-4 text-sm font-semibold text-red-700 bg-red-50 border border-red-200 rounded-xl px-3 py-2">
+          <p className="mt-4 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">
             Erro ao carregar: {fetchError}
           </p>
         )}
+      </section>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
-          {loading && markets.length === 0 && (
-            <p className="text-sm text-zinc-500 col-span-full">Carregando...</p>
-          )}
+      <section className="mx-auto max-w-[1320px] px-5 pb-16 md:px-10 md:pb-20">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {loading && markets.length === 0 && <p className="col-span-full text-sm text-[#5A6B63]">Carregando…</p>}
           {!loading && markets.length === 0 && (
-            <p className="text-sm text-zinc-500 col-span-full">Nenhum supermercado encontrado.</p>
+            <p className="col-span-full text-sm text-[#5A6B63]">
+              Nenhum supermercado encontrado para esse estado e busca.
+            </p>
           )}
           {markets.map((m) => (
-            <div key={m.slug} className="bg-white border border-zinc-200 rounded-2xl p-4 hover:shadow-md transition">
+            <article
+              key={m.slug}
+              className="rounded-3xl border border-[#0B2B1F]/12 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-[0_12px_24px_-8px_rgba(17,24,39,.12)]"
+            >
               <div className="flex items-center gap-3">
-                <div
-                  className={`w-11 h-11 rounded-xl ${marketColor(m.slug)} text-white flex items-center justify-center font-display font-extrabold text-sm shrink-0`}
-                  style={{ fontFamily: "var(--font-nunito)" }}
-                >
-                  {m.name.slice(0, 2).toUpperCase()}
-                </div>
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#1B8C42]/10 text-[13px] font-bold text-[#1B8C42]">
+                  {monogram(m.name)}
+                </span>
                 <div className="min-w-0">
-                  <div className="font-display font-extrabold leading-none truncate" style={{ fontFamily: "var(--font-nunito)" }}>
-                    {m.name}
-                  </div>
-                  <div className="text-xs text-zinc-500 mt-1">{m.city}</div>
+                  <h2 className="truncate text-[16px] font-semibold tracking-[-.02em]">{m.name}</h2>
+                  <p className="truncate text-[13px] text-[#5A6B63]">{m.city}</p>
                 </div>
-                <span className={`w-2 h-2 rounded-full shrink-0 ml-auto ${m.is_verified ? "bg-emerald-500" : "bg-amber-400"}`} />
               </div>
-              <button disabled className="mt-4 w-full bg-zinc-100 text-zinc-400 text-sm font-semibold py-2.5 rounded-xl cursor-not-allowed">
-                Preços em breve
-              </button>
-            </div>
+              <span className="mt-5 inline-flex rounded-full border border-[#0B2B1F]/15 px-3 py-1 text-[11px] font-medium text-[#5A6B63]">
+                {m.is_verified ? "Rede verificada · preços em breve" : "Preços em breve"}
+              </span>
+            </article>
           ))}
         </div>
-        <p className="text-xs text-zinc-500 mt-6">
-          Cobertura: todos os mercados listados atendem várias cidades do estado, não apenas a capital.
+        <p className="mt-6 max-w-[70ch] text-[13px] text-[#5A6B63]">
+          Cobertura: os mercados listados atendem várias cidades do estado, não apenas a capital.
         </p>
-      </main>
+      </section>
 
-      <dialog id="suggest" className="rounded-2xl p-0 backdrop:bg-black/50">
-        <form onSubmit={handleSubmit} className="p-6 w-[360px]">
-          <h3 className="font-display font-extrabold text-lg" style={{ fontFamily: "var(--font-nunito)" }}>
-            Sugerir supermercado
-          </h3>
-          <p className="text-sm text-zinc-600 mt-1">Preencha os dados. Vamos analisar e adicionar.</p>
-
-          <input
-            value={marketName}
-            onChange={(e) => setMarketName(e.target.value)}
-            placeholder="Nome do supermercado"
-            className="mt-4 w-full border border-zinc-200 rounded-xl px-3 py-2.5"
-          />
-          <input
-            value={cityState}
-            onChange={(e) => setCityState(e.target.value)}
-            placeholder="Cidade — Estado (ex: Juiz de Fora — MG)"
-            className="mt-2 w-full border border-zinc-200 rounded-xl px-3 py-2.5"
-          />
-
-          {status === "ok" && (
-            <p className="mt-3 text-sm font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2">
-              Sugestão enviada. Obrigado!
+      <section id="sugerir" className="bg-[#0B2B1F] px-5 py-20 text-[#F4F3EF] md:px-10 md:py-24">
+        <div className="mx-auto grid max-w-[1320px] gap-10 lg:grid-cols-[.9fr_1.1fr] lg:gap-16">
+          <div>
+            <h2 className="max-w-[16ch] text-[clamp(2rem,4.6vw,3rem)] font-semibold leading-[.95] tracking-[-.045em]">
+              Não achou seu mercado?
+            </h2>
+            <p className="mt-4 max-w-[42ch] text-[16px] leading-7 text-white/65">
+              Conte o nome da rede e a cidade. Analisamos e liberamos para todos que usam o app.
             </p>
-          )}
-          {status === "error" && (
-            <p className="mt-3 text-sm font-semibold text-red-700 bg-red-50 border border-red-200 rounded-xl px-3 py-2">
-              {errorMsg}
-            </p>
-          )}
+          </div>
 
-          <div className="mt-4 flex gap-2">
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <input
+              value={marketName}
+              onChange={(e) => setMarketName(e.target.value)}
+              placeholder="Nome do supermercado"
+              className="h-12 w-full rounded-2xl border border-white/25 bg-transparent px-4 text-[15px] text-white placeholder:text-white/45"
+            />
+            <input
+              value={cityState}
+              onChange={(e) => setCityState(e.target.value)}
+              placeholder="Cidade — Estado (ex: Juiz de Fora — MG)"
+              className="h-12 w-full rounded-2xl border border-white/25 bg-transparent px-4 text-[15px] text-white placeholder:text-white/45"
+            />
+            {status === "ok" && (
+              <p className="rounded-xl border border-emerald-300/40 bg-emerald-400/10 px-3 py-2 text-sm font-semibold text-emerald-200">
+                Sugestão enviada. Obrigado!
+              </p>
+            )}
+            {status === "error" && (
+              <p className="rounded-xl border border-red-300/40 bg-red-400/10 px-3 py-2 text-sm font-semibold text-red-200">
+                {errorMsg}
+              </p>
+            )}
             <button
               type="submit"
               disabled={status === "loading"}
-              className="flex-1 bg-[#1B8C42] text-white py-2.5 rounded-xl font-bold hover:bg-emerald-700 disabled:opacity-60 disabled:cursor-not-allowed transition"
+              className="h-12 rounded-full bg-[#1B8C42] px-7 text-[15px] font-semibold text-white transition hover:bg-[#146B32] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {status === "loading" ? "Enviando..." : "Enviar"}
+              {status === "loading" ? "Enviando…" : "Enviar sugestão"}
             </button>
-            <button
-              type="button"
-              onClick={() => (document.getElementById("suggest") as HTMLDialogElement)?.close()}
-              className="px-5 border border-zinc-200 rounded-xl font-semibold hover:bg-zinc-50 transition"
-            >
-              Cancelar
-            </button>
-          </div>
-        </form>
-      </dialog>
-
-      <footer className="border-t border-zinc-200 py-8 bg-white mt-10">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-4 text-sm text-zinc-500">
-          <span>© 2026 Fechou o Carrinho</span>
-          <a href="mailto:contato@fechouocarrinho.site" className="underline">contato@fechouocarrinho.site</a>
+          </form>
         </div>
-      </footer>
-    </div>
+      </section>
+
+      <SiteFooter />
+    </main>
   );
 }

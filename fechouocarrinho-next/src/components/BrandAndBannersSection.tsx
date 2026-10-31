@@ -18,7 +18,7 @@ export default function BrandAndBannersSection() {
     { name: "Verde Fechado (Primária)", hex: "#1B8C42", usage: "Botões principais, barras de topo, acerto e status total" },
     { name: "Laranja Acento (Ação)", hex: "#FF6B00", usage: "Scanner OCR, mira de captura, destaques de economia" },
     { name: "Creme Quente (Superfície)", hex: "#FFF8F0", usage: "Fundo suave do app, cartões secundários e conforto visual" },
-    { name: "Grafite Escuro (Texto)", hex: "#111827", usage: "Textos de alto contraste, cartões dark e botões contrastantes" },
+    { name: "Grafite Escuro (Texto)", hex: "#0B2B1F", usage: "Textos de alto contraste, cartões dark e botões contrastantes" },
     { name: "Cinza Suave (Muted)", hex: "#6B7280", usage: "Legendas secundárias, contornos e metadados" },
   ];
 
@@ -27,42 +27,42 @@ export default function BrandAndBannersSection() {
       id: "logo-horizontal",
       title: "Logo Horizontal (Fundo Claro)",
       file: "/brand/logo-horizontal.svg",
-      bgClass: "bg-white border-zinc-200",
+      bgClass: "bg-white border-[#0B2B1F]/12",
       description: "Aplicação principal em sites, cabeçalhos, documentos e materiais com fundo branco ou creme.",
     },
     {
       id: "logo-horizontal-dark",
       title: "Logo Horizontal (Fundo Escuro)",
       file: "/brand/logo-horizontal-dark.svg",
-      bgClass: "bg-[#111827] border-zinc-800 text-white",
+      bgClass: "bg-[#0B2B1F] border-zinc-800 text-white",
       description: "Aplicação sobre fundos escuros, telas de login dark, banners noturnos e rodapés.",
     },
     {
       id: "logo-vertical",
       title: "Logo Vertical (Fundo Claro)",
       file: "/brand/logo-vertical.svg",
-      bgClass: "bg-white border-zinc-200",
+      bgClass: "bg-white border-[#0B2B1F]/12",
       description: "Aplicação empilhada para telas de abertura (Splash), cartões verticais e crachás.",
     },
     {
       id: "logo-vertical-dark",
       title: "Logo Vertical (Fundo Escuro)",
       file: "/brand/logo-vertical-dark.svg",
-      bgClass: "bg-[#111827] border-zinc-800 text-white",
+      bgClass: "bg-[#0B2B1F] border-zinc-800 text-white",
       description: "Versão empilhada para fundos escuros e telas de transição.",
     },
     {
       id: "logo-mark",
       title: "Brand Mark (Símbolo / Ícone)",
       file: "/brand/logo-mark.svg",
-      bgClass: "bg-white border-zinc-200",
+      bgClass: "bg-white border-[#0B2B1F]/12",
       description: "Ícone isolado da sacola com check do fechou o carrinho. Usado como favicon e avatar.",
     },
     {
       id: "logo-monochrome",
       title: "Logo Monocromático",
       file: "/brand/logo-monochrome.svg",
-      bgClass: "bg-zinc-50 border-zinc-200",
+      bgClass: "bg-[#FFF8F0] border-[#0B2B1F]/12",
       description: "Versão para impressões em preto e branco, recibos térmicos ou materiais sem cor.",
     },
   ];
@@ -119,7 +119,7 @@ export default function BrandAndBannersSection() {
   ];
 
   return (
-    <section id="marca" className="bg-[#FFF8F0] border-t border-zinc-200 py-16">
+    <section id="marca" className="bg-[#FFF8F0] border-t border-[#0B2B1F]/12 py-16">
       <div className="max-w-6xl mx-auto px-4">
         {/* SECTION HEADER */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -127,10 +127,10 @@ export default function BrandAndBannersSection() {
             <div className="inline-flex items-center gap-2 bg-emerald-100 border border-emerald-300 text-[#1B8C42] rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider">
               Identidade Visual & Marketing Oficial
             </div>
-            <h2 className="font-display font-extrabold text-3xl md:text-5xl mt-3 tracking-tight" style={{ fontFamily: "var(--font-nunito)" }}>
+            <h2 className="font-display font-semibold text-3xl md:text-5xl mt-3 tracking-[-.03em]" style={{ fontFamily: "var(--font-nunito)" }}>
               Logos, Banners & Campanhas
             </h2>
-            <p className="text-zinc-600 mt-2 max-w-2xl text-base leading-relaxed">
+            <p className="text-[#5A6B63] mt-2 max-w-2xl text-base leading-relaxed">
               Aqui estão todos os banners promocionais, logotipos oficiais vetoriais, peças para Google Play e campanhas de redes sociais do <b>fechou o carrinho</b>.
             </p>
           </div>
@@ -139,7 +139,7 @@ export default function BrandAndBannersSection() {
             <a
               href="/brand/brand-tokens.json"
               download="brand-tokens.json"
-              className="inline-flex items-center gap-2 bg-white border border-zinc-200 px-4 py-2.5 rounded-xl text-xs font-bold hover:bg-zinc-50 transition shadow-sm"
+              className="inline-flex items-center gap-2 bg-white border border-[#0B2B1F]/12 px-4 py-2.5 rounded-xl text-xs font-bold hover:bg-[#FFF8F0] transition shadow-sm"
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -152,13 +152,13 @@ export default function BrandAndBannersSection() {
         </div>
 
         {/* NAVIGATION TABS */}
-        <div className="mt-8 flex flex-wrap gap-2 border-b border-zinc-200 pb-4">
+        <div className="mt-8 flex flex-wrap gap-2 border-b border-[#0B2B1F]/12 pb-4">
           <button
             onClick={() => setActiveTab("todos")}
             className={`px-4 py-2 rounded-xl text-sm font-semibold transition ${
               activeTab === "todos"
-                ? "bg-[#111827] text-white shadow-sm"
-                : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-50"
+                ? "bg-[#0B2B1F] text-white shadow-sm"
+                : "bg-white text-[#5A6B63] border border-[#0B2B1F]/12 hover:bg-[#FFF8F0]"
             }`}
           >
             Todos os Materiais
@@ -168,7 +168,7 @@ export default function BrandAndBannersSection() {
             className={`px-4 py-2 rounded-xl text-sm font-semibold transition ${
               activeTab === "logos"
                 ? "bg-[#1B8C42] text-white shadow-sm"
-                : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-50"
+                : "bg-white text-[#5A6B63] border border-[#0B2B1F]/12 hover:bg-[#FFF8F0]"
             }`}
           >
             Logos Oficiais & Cores
@@ -178,7 +178,7 @@ export default function BrandAndBannersSection() {
             className={`px-4 py-2 rounded-xl text-sm font-semibold transition ${
               activeTab === "inapp"
                 ? "bg-[#1B8C42] text-white shadow-sm"
-                : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-50"
+                : "bg-white text-[#5A6B63] border border-[#0B2B1F]/12 hover:bg-[#FFF8F0]"
             }`}
           >
             Banners do Aplicativo (In-App)
@@ -188,7 +188,7 @@ export default function BrandAndBannersSection() {
             className={`px-4 py-2 rounded-xl text-sm font-semibold transition ${
               activeTab === "campanhas"
                 ? "bg-[#FF6B00] text-white shadow-sm"
-                : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-50"
+                : "bg-white text-[#5A6B63] border border-[#0B2B1F]/12 hover:bg-[#FFF8F0]"
             }`}
           >
             Campanhas & Redes Sociais
@@ -197,8 +197,8 @@ export default function BrandAndBannersSection() {
             onClick={() => setActiveTab("playstore")}
             className={`px-4 py-2 rounded-xl text-sm font-semibold transition ${
               activeTab === "playstore"
-                ? "bg-[#111827] text-white shadow-sm"
-                : "bg-white text-zinc-600 border border-zinc-200 hover:bg-zinc-50"
+                ? "bg-[#0B2B1F] text-white shadow-sm"
+                : "bg-white text-[#5A6B63] border border-[#0B2B1F]/12 hover:bg-[#FFF8F0]"
             }`}
           >
             Google Play Store
@@ -208,32 +208,32 @@ export default function BrandAndBannersSection() {
         {/* 1. PALETA DE CORES & TOKENS */}
         {(activeTab === "todos" || activeTab === "logos") && (
           <div className="mt-12">
-            <h3 className="font-display font-extrabold text-2xl text-zinc-900" style={{ fontFamily: "var(--font-nunito)" }}>
+            <h3 className="font-display font-semibold text-2xl text-[#0B2B1F]" style={{ fontFamily: "var(--font-nunito)" }}>
               Paleta Oficial de Cores (Design Tokens)
             </h3>
-            <p className="text-zinc-600 text-sm mt-1">Toque em qualquer cor para copiar o código hexadecimal.</p>
+            <p className="text-[#5A6B63] text-sm mt-1">Toque em qualquer cor para copiar o código hexadecimal.</p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-6">
               {COLOR_TOKENS.map((c) => (
                 <div
                   key={c.hex}
                   onClick={() => copyToClipboard(c.hex)}
-                  className="bg-white border border-zinc-200 rounded-2xl p-4 shadow-sm hover:shadow-md transition cursor-pointer flex flex-col justify-between"
+                  className="bg-white border border-[#0B2B1F]/12 rounded-2xl p-4 shadow-sm hover:shadow-md transition cursor-pointer flex flex-col justify-between"
                 >
                   <div
                     className="w-full h-16 rounded-xl shadow-inner border border-black/5 flex items-end justify-end p-2"
                     style={{ backgroundColor: c.hex }}
                   >
                     {copiedColor === c.hex && (
-                      <span className="bg-white text-zinc-900 font-bold text-[10px] px-2 py-0.5 rounded-full shadow">
+                      <span className="bg-white text-[#0B2B1F] font-bold text-[10px] px-2 py-0.5 rounded-full shadow">
                         Copiado!
                       </span>
                     )}
                   </div>
                   <div className="mt-3">
                     <span className="font-mono font-bold text-xs text-zinc-800">{c.hex}</span>
-                    <p className="font-bold text-xs text-zinc-900 mt-0.5">{c.name}</p>
-                    <p className="text-[11px] text-zinc-500 mt-1 leading-snug">{c.usage}</p>
+                    <p className="font-bold text-xs text-[#0B2B1F] mt-0.5">{c.name}</p>
+                    <p className="text-[11px] text-[#5A6B63] mt-1 leading-snug">{c.usage}</p>
                   </div>
                 </div>
               ))}
@@ -246,29 +246,29 @@ export default function BrandAndBannersSection() {
           <div className="mt-12">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-display font-extrabold text-2xl text-zinc-900" style={{ fontFamily: "var(--font-nunito)" }}>
+                <h3 className="font-display font-semibold text-2xl text-[#0B2B1F]" style={{ fontFamily: "var(--font-nunito)" }}>
                   Logotipos Oficiais (SVG Vetorial)
                 </h3>
-                <p className="text-zinc-600 text-sm mt-1">Todos em SVG escalável, prontos para uso em alta resolução.</p>
+                <p className="text-[#5A6B63] text-sm mt-1">Todos em SVG escalável, prontos para uso em alta resolução.</p>
               </div>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
               {LOGO_ITEMS.map((item) => (
-                <div key={item.id} className="bg-white border border-zinc-200 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
+                <div key={item.id} className="bg-white border border-[#0B2B1F]/12 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
                   <div>
                     <div className={`w-full h-36 rounded-2xl border flex items-center justify-center p-6 ${item.bgClass}`}>
                       <img src={item.file} alt={item.title} className="max-h-20 max-w-[85%] object-contain" />
                     </div>
-                    <h4 className="font-display font-extrabold text-base text-zinc-900 mt-4" style={{ fontFamily: "var(--font-nunito)" }}>
+                    <h4 className="font-display font-semibold text-base text-[#0B2B1F] mt-4" style={{ fontFamily: "var(--font-nunito)" }}>
                       {item.title}
                     </h4>
-                    <p className="text-xs text-zinc-500 mt-1 leading-relaxed">
+                    <p className="text-xs text-[#5A6B63] mt-1 leading-relaxed">
                       {item.description}
                     </p>
                   </div>
-                  <div className="mt-5 pt-3 border-t border-zinc-100 flex items-center justify-between">
-                    <span className="font-mono text-[11px] text-zinc-400">.svg vetorial</span>
+                  <div className="mt-5 pt-3 border-t border-[#0B2B1F]/10 flex items-center justify-between">
+                    <span className="font-mono text-[11px] text-[#5A6B63]">.svg vetorial</span>
                     <a
                       href={item.file}
                       download
@@ -291,34 +291,34 @@ export default function BrandAndBannersSection() {
         {/* 3. BANNERS IN-APP */}
         {(activeTab === "todos" || activeTab === "inapp") && (
           <div className="mt-14">
-            <h3 className="font-display font-extrabold text-2xl text-zinc-900" style={{ fontFamily: "var(--font-nunito)" }}>
+            <h3 className="font-display font-semibold text-2xl text-[#0B2B1F]" style={{ fontFamily: "var(--font-nunito)" }}>
               Banners Promocionais In-App (Dentro do Aplicativo)
             </h3>
-            <p className="text-zinc-600 text-sm mt-1">Banners desenhados para a tela inicial, dicas e recursos de família do app mobile.</p>
+            <p className="text-[#5A6B63] text-sm mt-1">Banners desenhados para a tela inicial, dicas e recursos de família do app mobile.</p>
 
             <div className="grid md:grid-cols-3 gap-6 mt-6">
               {IN_APP_BANNERS.map((banner) => (
-                <div key={banner.id} className="bg-white border border-zinc-200 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
+                <div key={banner.id} className="bg-white border border-[#0B2B1F]/12 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
                   <div>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF6B00] bg-orange-50 border border-orange-200 px-2 py-0.5 rounded-md">
                       {banner.tag}
                     </span>
-                    <h4 className="font-display font-extrabold text-base text-zinc-900 mt-2" style={{ fontFamily: "var(--font-nunito)" }}>
+                    <h4 className="font-display font-semibold text-base text-[#0B2B1F] mt-2" style={{ fontFamily: "var(--font-nunito)" }}>
                       {banner.title}
                     </h4>
-                    <div className="mt-3 bg-zinc-50 border border-zinc-100 rounded-2xl overflow-hidden p-2 flex items-center justify-center">
+                    <div className="mt-3 bg-[#FFF8F0] border border-[#0B2B1F]/10 rounded-2xl overflow-hidden p-2 flex items-center justify-center">
                       <img src={banner.file} alt={banner.title} className="w-full h-auto rounded-xl shadow-sm" />
                     </div>
-                    <p className="text-xs text-zinc-600 mt-3 leading-relaxed">
+                    <p className="text-xs text-[#5A6B63] mt-3 leading-relaxed">
                       {banner.description}
                     </p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between">
+                  <div className="mt-4 pt-3 border-t border-[#0B2B1F]/10 flex items-center justify-between">
                     <a
                       href={banner.file}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-semibold text-zinc-500 hover:text-[#1B8C42]"
+                      className="text-xs font-semibold text-[#5A6B63] hover:text-[#1B8C42]"
                     >
                       Visualizar
                     </a>
@@ -344,20 +344,20 @@ export default function BrandAndBannersSection() {
         {/* 4. GOOGLE PLAY STORE ASSETS */}
         {(activeTab === "todos" || activeTab === "playstore") && (
           <div className="mt-14">
-            <h3 className="font-display font-extrabold text-2xl text-zinc-900" style={{ fontFamily: "var(--font-nunito)" }}>
+            <h3 className="font-display font-semibold text-2xl text-[#0B2B1F]" style={{ fontFamily: "var(--font-nunito)" }}>
               Peças Oficiais da Google Play Store
             </h3>
-            <p className="text-zinc-600 text-sm mt-1">Materiais formatados nas especificações exatas exigidas pela Google Play Console.</p>
+            <p className="text-[#5A6B63] text-sm mt-1">Materiais formatados nas especificações exatas exigidas pela Google Play Console.</p>
 
             <div className="mt-6 space-y-6">
               {/* Feature graphic 1024x500 */}
-              <div className="bg-white border border-zinc-200 rounded-3xl p-6 shadow-sm">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-zinc-100">
+              <div className="bg-white border border-[#0B2B1F]/12 rounded-3xl p-6 shadow-sm">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-[#0B2B1F]/10">
                   <div>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#1B8C42] bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-md">
                       Play Store Header
                     </span>
-                    <h4 className="font-display font-extrabold text-lg text-zinc-900 mt-1" style={{ fontFamily: "var(--font-nunito)" }}>
+                    <h4 className="font-display font-semibold text-lg text-[#0B2B1F] mt-1" style={{ fontFamily: "var(--font-nunito)" }}>
                       {PLAY_STORE_ITEMS[0].title}
                     </h4>
                   </div>
@@ -377,31 +377,31 @@ export default function BrandAndBannersSection() {
                 <div className="mt-4 rounded-2xl overflow-hidden bg-zinc-900 shadow-lg">
                   <img src={PLAY_STORE_ITEMS[0].file} alt={PLAY_STORE_ITEMS[0].title} className="w-full h-auto" />
                 </div>
-                <p className="text-xs text-zinc-600 mt-3">{PLAY_STORE_ITEMS[0].description}</p>
+                <p className="text-xs text-[#5A6B63] mt-3">{PLAY_STORE_ITEMS[0].description}</p>
               </div>
 
               {/* Screenshots 1080x2400 */}
               <div className="grid md:grid-cols-3 gap-6">
                 {PLAY_STORE_ITEMS.slice(1).map((shot) => (
-                  <div key={shot.file} className="bg-white border border-zinc-200 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
+                  <div key={shot.file} className="bg-white border border-[#0B2B1F]/12 rounded-3xl p-5 shadow-sm flex flex-col justify-between">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 bg-zinc-100 px-2 py-0.5 rounded-md">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#5A6B63] bg-[#FFF8F0] px-2 py-0.5 rounded-md">
                         Screenshot 1080 × 2400
                       </span>
-                      <h4 className="font-display font-extrabold text-sm text-zinc-900 mt-2" style={{ fontFamily: "var(--font-nunito)" }}>
+                      <h4 className="font-display font-semibold text-sm text-[#0B2B1F] mt-2" style={{ fontFamily: "var(--font-nunito)" }}>
                         {shot.title}
                       </h4>
-                      <div className="mt-3 rounded-2xl overflow-hidden border border-zinc-200 shadow-sm bg-zinc-100">
+                      <div className="mt-3 rounded-2xl overflow-hidden border border-[#0B2B1F]/12 shadow-sm bg-[#FFF8F0]">
                         <img src={shot.file} alt={shot.title} className="w-full h-auto" />
                       </div>
-                      <p className="text-xs text-zinc-600 mt-2 leading-relaxed">{shot.description}</p>
+                      <p className="text-xs text-[#5A6B63] mt-2 leading-relaxed">{shot.description}</p>
                     </div>
-                    <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between">
-                      <span className="font-mono text-[10px] text-zinc-400">Play Store Vertical</span>
+                    <div className="mt-4 pt-3 border-t border-[#0B2B1F]/10 flex items-center justify-between">
+                      <span className="font-mono text-[10px] text-[#5A6B63]">Play Store Vertical</span>
                       <a
                         href={shot.file}
                         download
-                        className="inline-flex items-center gap-1 bg-[#111827] text-white px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-black transition"
+                        className="inline-flex items-center gap-1 bg-[#0B2B1F] text-white px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-black transition"
                       >
                         Baixar
                       </a>
@@ -416,10 +416,10 @@ export default function BrandAndBannersSection() {
         {/* 5. CAMPANHAS DE MARKETING & REDES SOCIAIS */}
         {(activeTab === "todos" || activeTab === "campanhas") && (
           <div className="mt-14">
-            <h3 className="font-display font-extrabold text-2xl text-zinc-900" style={{ fontFamily: "var(--font-nunito)" }}>
+            <h3 className="font-display font-semibold text-2xl text-[#0B2B1F]" style={{ fontFamily: "var(--font-nunito)" }}>
               Campanhas de Marketing & Redes Sociais
             </h3>
-            <p className="text-zinc-600 text-sm mt-1">
+            <p className="text-[#5A6B63] text-sm mt-1">
               Peças criadas pela equipe de identidade visual para anúncios no Instagram, Facebook, banners horizontais e Stories.
             </p>
 
@@ -433,7 +433,7 @@ export default function BrandAndBannersSection() {
                       Campanha Horizontal · 1200 × 628
                     </div>
                     <p className="font-mono text-xs uppercase tracking-widest text-emerald-200 mt-4">Compra mais leve</p>
-                    <h3 className="font-display font-extrabold text-4xl md:text-6xl leading-[0.95] mt-2" style={{ fontFamily: "var(--font-nunito)" }}>
+                    <h3 className="font-display font-semibold text-4xl md:text-6xl leading-[0.95] mt-2" style={{ fontFamily: "var(--font-nunito)" }}>
                       Seu total<br />sem sustos.
                     </h3>
                     <p className="text-emerald-100 text-base mt-4 max-w-md leading-relaxed">
@@ -442,7 +442,7 @@ export default function BrandAndBannersSection() {
                     <div className="mt-6 flex flex-wrap items-center gap-3">
                       <a
                         href="/downloads/fechouocarrinho.apk"
-                        className="bg-[#FF6B00] text-white px-6 py-3 rounded-xl font-display font-extrabold text-base hover:bg-orange-600 transition shadow-lg"
+                        className="bg-[#FF6B00] text-white px-6 py-3 rounded-xl font-display font-semibold text-base hover:bg-orange-600 transition shadow-lg"
                         style={{ fontFamily: "var(--font-nunito)" }}
                       >
                         Baixar APK
@@ -452,15 +452,15 @@ export default function BrandAndBannersSection() {
                   </div>
 
                   {/* Visual card */}
-                  <div className="bg-white rounded-3xl p-6 text-[#111827] shadow-2xl rotate-1 border-4 border-emerald-400/30">
-                    <div className="text-[11px] font-bold text-zinc-400 uppercase tracking-widest">Mire na etiqueta</div>
+                  <div className="bg-white rounded-3xl p-6 text-[#0B2B1F] shadow-2xl rotate-1 border-4 border-emerald-400/30">
+                    <div className="text-[11px] font-bold text-[#5A6B63] uppercase tracking-widest">Mire na etiqueta</div>
                     <div className="mt-3 border-2 border-dashed border-[#FF6B00] rounded-2xl p-5 bg-[#FFF8F0] text-center">
-                      <span className="font-mono font-extrabold text-3xl text-zinc-900">R$ 7,89</span>
+                      <span className="font-mono font-semibold text-3xl text-[#0B2B1F]">R$ 7,89</span>
                       <span className="block text-[11px] font-bold text-[#1B8C42] mt-1">✓ Preço Reconhecido</span>
                     </div>
-                    <div className="mt-4 bg-[#111827] text-white p-4 rounded-2xl flex items-center justify-between">
+                    <div className="mt-4 bg-[#0B2B1F] text-white p-4 rounded-2xl flex items-center justify-between">
                       <span className="text-xs text-zinc-300">Total acumulado</span>
-                      <strong className="font-display font-extrabold text-2xl text-emerald-400" style={{ fontFamily: "var(--font-nunito)" }}>R$ 53,28</strong>
+                      <strong className="font-display font-semibold text-2xl text-emerald-400" style={{ fontFamily: "var(--font-nunito)" }}>R$ 53,28</strong>
                     </div>
                   </div>
                 </div>
@@ -493,7 +493,7 @@ export default function BrandAndBannersSection() {
                         <path d="M5 12l5 5l10 -10" />
                       </svg>
                     </div>
-                    <h3 className="font-display font-extrabold text-4xl sm:text-5xl leading-[0.95]" style={{ fontFamily: "var(--font-nunito)" }}>
+                    <h3 className="font-display font-semibold text-4xl sm:text-5xl leading-[0.95]" style={{ fontFamily: "var(--font-nunito)" }}>
                       O mercado<br />
                       pode ficar sem sinal.<br />
                       Sua lista, não.
@@ -507,7 +507,7 @@ export default function BrandAndBannersSection() {
                 </article>
 
                 {/* BANNER 03 - POST DE PRODUTO OCR 1080x1080 */}
-                <article className="relative overflow-hidden rounded-[2rem] bg-[#111827] p-8 md:p-10 text-white shadow-xl flex flex-col justify-between aspect-square">
+                <article className="relative overflow-hidden rounded-[2rem] bg-[#0B2B1F] p-8 md:p-10 text-white shadow-xl flex flex-col justify-between aspect-square">
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-xs uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full">
                       Post de Produto · 1080 × 1080
@@ -518,19 +518,19 @@ export default function BrandAndBannersSection() {
                   <div className="my-auto">
                     <div className="bg-white/5 border border-white/15 rounded-3xl p-6 mb-6">
                       <div className="border-2 border-dashed border-[#FF6B00] rounded-2xl py-6 text-center">
-                        <span className="font-mono text-xs uppercase text-zinc-400 tracking-widest block">preço lido na prateleira</span>
-                        <span className="font-mono font-extrabold text-5xl text-white mt-1 block">R$ 7,89</span>
+                        <span className="font-mono text-xs uppercase text-[#5A6B63] tracking-widest block">preço lido na prateleira</span>
+                        <span className="font-mono font-semibold text-5xl text-white mt-1 block">R$ 7,89</span>
                         <span className="inline-block mt-3 bg-[#1B8C42] text-white text-xs font-bold px-3 py-1 rounded-full">
                           ✓ Adicionado ao carrinho
                         </span>
                       </div>
                     </div>
-                    <h3 className="font-display font-extrabold text-4xl sm:text-5xl leading-tight" style={{ fontFamily: "var(--font-nunito)" }}>
+                    <h3 className="font-display font-semibold text-4xl sm:text-5xl leading-tight" style={{ fontFamily: "var(--font-nunito)" }}>
                       Aponte. Capture. Some.
                     </h3>
                   </div>
 
-                  <div className="border-t border-white/15 pt-4 flex items-center justify-between text-sm text-zinc-400">
+                  <div className="border-t border-white/15 pt-4 flex items-center justify-between text-sm text-[#5A6B63]">
                     <span>Sem digitar nada</span>
                     <span className="font-bold text-white">fechou o carrinho</span>
                   </div>
@@ -538,16 +538,16 @@ export default function BrandAndBannersSection() {
               </div>
 
               {/* BANNER 04 - CAMPANHA DE PLANOS 1200x628 */}
-              <article className="relative overflow-hidden rounded-[2rem] bg-[#111827] p-8 md:p-12 text-white shadow-xl">
+              <article className="relative overflow-hidden rounded-[2rem] bg-[#0B2B1F] p-8 md:p-12 text-white shadow-xl">
                 <div className="grid lg:grid-cols-[1fr_1.3fr] gap-8 items-center">
                   <div>
                     <span className="font-mono text-xs uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full">
                       Campanha de Planos · 1200 × 628
                     </span>
-                    <h3 className="font-display font-extrabold text-3xl md:text-5xl leading-[0.95] mt-4" style={{ fontFamily: "var(--font-nunito)" }}>
+                    <h3 className="font-display font-semibold text-3xl md:text-5xl leading-[0.95] mt-4" style={{ fontFamily: "var(--font-nunito)" }}>
                       Um plano para cada carrinho.
                     </h3>
-                    <p className="text-zinc-400 text-sm mt-3 leading-relaxed">
+                    <p className="text-[#5A6B63] text-sm mt-3 leading-relaxed">
                       Comece 100% grátis e offline. Quando quiser sincronizar com a família, ative o plano compartilhado em um toque.
                     </p>
                     <a
@@ -560,12 +560,12 @@ export default function BrandAndBannersSection() {
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     {/* Plano Essencial */}
-                    <div className="bg-white text-[#111827] rounded-3xl p-6 flex flex-col justify-between shadow-lg">
+                    <div className="bg-white text-[#0B2B1F] rounded-3xl p-6 flex flex-col justify-between shadow-lg">
                       <div>
                         <span className="font-mono text-[10px] font-bold text-[#1B8C42] uppercase tracking-wider">Para Começar</span>
-                        <h4 className="font-display font-extrabold text-2xl mt-1" style={{ fontFamily: "var(--font-nunito)" }}>Essencial</h4>
-                        <div className="font-display font-extrabold text-3xl text-zinc-900 mt-2" style={{ fontFamily: "var(--font-nunito)" }}>Grátis</div>
-                        <ul className="mt-4 space-y-2 text-xs text-zinc-600 font-medium">
+                        <h4 className="font-display font-semibold text-2xl mt-1" style={{ fontFamily: "var(--font-nunito)" }}>Essencial</h4>
+                        <div className="font-display font-semibold text-3xl text-[#0B2B1F] mt-2" style={{ fontFamily: "var(--font-nunito)" }}>Grátis</div>
+                        <ul className="mt-4 space-y-2 text-xs text-[#5A6B63] font-medium">
                           <li className="flex items-center gap-2"><span className="text-[#1B8C42] font-bold">✓</span> Lista de compras</li>
                           <li className="flex items-center gap-2"><span className="text-[#1B8C42] font-bold">✓</span> Leitura OCR sem internet</li>
                           <li className="flex items-center gap-2"><span className="text-[#1B8C42] font-bold">✓</span> Total em tempo real</li>
@@ -579,8 +579,8 @@ export default function BrandAndBannersSection() {
                     <div className="bg-[#1B8C42] text-white rounded-3xl p-6 flex flex-col justify-between shadow-lg">
                       <div>
                         <span className="font-mono text-[10px] font-bold text-emerald-200 uppercase tracking-wider">Para Compartilhar</span>
-                        <h4 className="font-display font-extrabold text-2xl mt-1" style={{ fontFamily: "var(--font-nunito)" }}>Família</h4>
-                        <div className="font-display font-extrabold text-3xl text-white mt-2" style={{ fontFamily: "var(--font-nunito)" }}>Em Breve</div>
+                        <h4 className="font-display font-semibold text-2xl mt-1" style={{ fontFamily: "var(--font-nunito)" }}>Família</h4>
+                        <div className="font-display font-semibold text-3xl text-white mt-2" style={{ fontFamily: "var(--font-nunito)" }}>Em Breve</div>
                         <ul className="mt-4 space-y-2 text-xs text-emerald-100 font-medium">
                           <li className="flex items-center gap-2"><span className="text-[#FF6B00] font-bold">★</span> Sincronização em tempo real</li>
                           <li className="flex items-center gap-2"><span className="text-[#FF6B00] font-bold">★</span> Código familiar 6 dígitos</li>
@@ -612,7 +612,7 @@ export default function BrandAndBannersSection() {
 
                   <div className="my-auto">
                     <span className="font-mono text-xs uppercase text-emerald-200 tracking-wider">Novidade no app</span>
-                    <h3 className="font-display font-extrabold text-3xl sm:text-5xl leading-[0.95] mt-2" style={{ fontFamily: "var(--font-nunito)" }}>
+                    <h3 className="font-display font-semibold text-3xl sm:text-5xl leading-[0.95] mt-2" style={{ fontFamily: "var(--font-nunito)" }}>
                       Promoção boa é promoção que entra na lista.
                     </h3>
                     <p className="text-emerald-100 text-sm mt-4 leading-relaxed">
@@ -627,9 +627,9 @@ export default function BrandAndBannersSection() {
                 </article>
 
                 {/* BANNER 06 - BANNER DE LANÇAMENTO 1080x1080 */}
-                <article className="relative overflow-hidden rounded-[2rem] bg-white border border-zinc-200 p-8 md:p-10 text-[#111827] shadow-xl flex flex-col justify-between aspect-square">
+                <article className="relative overflow-hidden rounded-[2rem] bg-white border border-[#0B2B1F]/12 p-8 md:p-10 text-[#0B2B1F] shadow-xl flex flex-col justify-between aspect-square">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs uppercase tracking-widest bg-zinc-100 px-3 py-1 rounded-full text-zinc-600">
+                    <span className="font-mono text-xs uppercase tracking-widest bg-[#FFF8F0] px-3 py-1 rounded-full text-[#5A6B63]">
                       Lançamento · 1080 × 1080
                     </span>
                     <span className="w-10 h-10 rounded-2xl bg-[#FF6B00] text-white flex items-center justify-center font-bold shadow-md">
@@ -639,20 +639,20 @@ export default function BrandAndBannersSection() {
 
                   <div className="my-auto">
                     <span className="font-mono text-xs font-bold uppercase text-[#1B8C42] tracking-wider">Nova Versão 1.0.4</span>
-                    <h3 className="font-display font-extrabold text-3xl sm:text-5xl leading-[0.95] mt-2 text-[#111827]" style={{ fontFamily: "var(--font-nunito)" }}>
+                    <h3 className="font-display font-semibold text-3xl sm:text-5xl leading-[0.95] mt-2 text-[#0B2B1F]" style={{ fontFamily: "var(--font-nunito)" }}>
                       Comece grátis.<br />
                       Continue no controle.
                     </h3>
-                    <p className="text-zinc-600 text-sm mt-4 leading-relaxed">
+                    <p className="text-[#5A6B63] text-sm mt-4 leading-relaxed">
                       Lista, scanner OCR inteligente e totalizador em tempo real em um só aplicativo sem anúncios chatos.
                     </p>
                   </div>
 
-                  <div className="border-t border-zinc-100 pt-4 flex items-center justify-between">
-                    <span className="text-xs text-zinc-500">Disponível para Android 8+</span>
+                  <div className="border-t border-[#0B2B1F]/10 pt-4 flex items-center justify-between">
+                    <span className="text-xs text-[#5A6B63]">Disponível para Android 8+</span>
                     <a
                       href="/downloads/fechouocarrinho.apk"
-                      className="bg-[#111827] text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-black transition"
+                      className="bg-[#0B2B1F] text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-black transition"
                     >
                       Baixar Agora
                     </a>
@@ -661,9 +661,9 @@ export default function BrandAndBannersSection() {
               </div>
 
               {/* BANNER 07 - STORY VERTICAL 1080x1920 */}
-              <article className="relative overflow-hidden rounded-[2rem] bg-[#F0E4D3] border border-amber-200 p-8 md:p-12 text-[#111827] shadow-xl max-w-xl mx-auto">
+              <article className="relative overflow-hidden rounded-[2rem] bg-[#F0E4D3] border border-amber-200 p-8 md:p-12 text-[#0B2B1F] shadow-xl max-w-xl mx-auto">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs uppercase tracking-widest bg-white/70 px-3 py-1 rounded-full text-zinc-700">
+                  <span className="font-mono text-xs uppercase tracking-widest bg-white/70 px-3 py-1 rounded-full text-[#3E5347]">
                     Story Vertical · 1080 × 1920
                   </span>
                   <div className="w-8 h-8 rounded-xl bg-[#1B8C42] text-white flex items-center justify-center">
@@ -673,7 +673,7 @@ export default function BrandAndBannersSection() {
 
                 <div className="pt-10 pb-8 text-center sm:text-left">
                   <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#1B8C42]">Compra com clareza</span>
-                  <h3 className="font-display font-extrabold text-4xl sm:text-5xl leading-[0.9] mt-3 tracking-tight" style={{ fontFamily: "var(--font-nunito)" }}>
+                  <h3 className="font-display font-semibold text-4xl sm:text-5xl leading-[0.9] mt-3 tracking-[-.03em]" style={{ fontFamily: "var(--font-nunito)" }}>
                     Você compra.<br />
                     A lista faz<br />
                     as contas.
@@ -690,7 +690,7 @@ export default function BrandAndBannersSection() {
                   </div>
                   <div className="mt-4 flex items-baseline justify-between">
                     <span className="text-sm text-emerald-100">Valor a pagar</span>
-                    <span className="font-display font-extrabold text-4xl" style={{ fontFamily: "var(--font-nunito)" }}>
+                    <span className="font-display font-semibold text-4xl" style={{ fontFamily: "var(--font-nunito)" }}>
                       R$ 147,82
                     </span>
                   </div>
@@ -703,12 +703,12 @@ export default function BrandAndBannersSection() {
                 <div className="mt-8 text-center">
                   <a
                     href="/downloads/fechouocarrinho.apk"
-                    className="inline-flex items-center gap-2 bg-[#FF6B00] text-white px-8 py-3.5 rounded-2xl font-display font-extrabold text-base hover:bg-orange-600 transition shadow-lg"
+                    className="inline-flex items-center gap-2 bg-[#FF6B00] text-white px-8 py-3.5 rounded-2xl font-display font-semibold text-base hover:bg-orange-600 transition shadow-lg"
                     style={{ fontFamily: "var(--font-nunito)" }}
                   >
                     Arraste para cima para Baixar
                   </a>
-                  <p className="text-[11px] text-zinc-500 mt-2">fechouocarrinho.site · 100% Gratuito</p>
+                  <p className="text-[11px] text-[#5A6B63] mt-2">fechouocarrinho.site · 100% Gratuito</p>
                 </div>
               </article>
             </div>
@@ -717,7 +717,7 @@ export default function BrandAndBannersSection() {
 
         {/* FLOATING SONNER-STYLE TOAST FEEDBACK */}
         {copiedColor && (
-          <div className="fixed bottom-6 right-6 z-50 animate-spring-toast bg-[#111827] text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-white/15 flex items-center gap-3">
+          <div className="fixed bottom-6 right-6 z-50 animate-spring-toast bg-[#0B2B1F] text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-white/15 flex items-center gap-3">
             <span className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs font-bold">
               ✓
             </span>

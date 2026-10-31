@@ -1,28 +1,83 @@
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+
+export const metadata = {
+  title: "Ajuda — Fechou o Carrinho",
+  description: "Instalação, leitura da etiqueta e listas. O que você precisa para começar a usar o app.",
+};
+
+const FAQ = [
+  {
+    q: "Como instalar o APK?",
+    a: "Baixe pelo botão, toque em Abrir e depois em Instalar. Se o sistema pedir, permita a instalação apenas para este arquivo. O processo leva segundos.",
+  },
+  {
+    q: "Preciso de internet no mercado?",
+    a: "Não. A leitura da etiqueta acontece no próprio aparelho, ideal para quando o sinal falha dentro do mercado.",
+  },
+  {
+    q: "Posso corrigir um preço?",
+    a: "Sim. Se a leitura não ficar perfeita, toque no valor e digite manualmente antes de adicionar à lista.",
+  },
+  {
+    q: "Meu mercado não está na lista. O que faço?",
+    a: "Na página de supermercados, clique em Sugerir supermercado e informe nome e cidade. Analisamos e liberamos para todos.",
+  },
+  {
+    q: "Onde ficam minhas listas?",
+    a: "No próprio aparelho. Se você conectou uma conta, as listas também podem ser sincronizadas com a nuvem.",
+  },
+];
+
 export default function Ajuda() {
   return (
-    <div className="bg-[#FFF8F0] min-h-screen">
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-zinc-100">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-[#1B8C42] flex items-center justify-center text-white"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M5 12l5 5l10 -10"/></svg></div><span className="font-display font-extrabold text-xl" style={{fontFamily:"var(--font-nunito)"}}>fechou o carrinho</span></a>
-          <nav className="hidden md:flex items-center gap-7 text-sm font-medium"><a href="/como-funciona" className="hover:text-[#1B8C42]">Como funciona</a><a href="/supermercados" className="hover:text-[#1B8C42]">Supermercados</a><a href="/ajuda" className="text-[#1B8C42] font-bold">Ajuda</a><a href="/#baixar" className="bg-[#111827] text-white px-5 py-2.5 rounded-full font-semibold">Baixar APK</a></nav>
+    <main className="min-h-screen bg-[#FFF8F0] text-[#0B2B1F]">
+      <SiteHeader ativo="Ajuda" />
+
+      <section className="mx-auto max-w-[1320px] px-5 pt-14 pb-8 md:px-10 md:pt-20">
+        <p className="text-[12px] font-semibold uppercase tracking-[.16em] text-[#1B8C42]">Ajuda</p>
+        <h1 className="mt-4 text-[clamp(2.4rem,6vw,4rem)] font-semibold leading-[.95] tracking-[-.05em]">Ajuda.</h1>
+        <p className="mt-5 max-w-[54ch] text-[17px] leading-7 text-[#3E5347]">
+          Instalação, leitura da etiqueta e listas. O que você precisa para começar sem tropeço.
+        </p>
+      </section>
+
+      <section className="mx-auto max-w-[1320px] px-5 pb-16 md:px-10 md:pb-24">
+        <div className="space-y-3">
+          {FAQ.map((item, i) => (
+            <details
+              key={item.q}
+              open={i === 0}
+              className="group rounded-[20px] border border-[#0B2B1F]/12 bg-white px-7 py-5"
+            >
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-[18px] font-semibold tracking-[-.02em]">
+                {item.q}
+                <span className="text-xl text-[#5A6B63] transition group-open:rotate-45">+</span>
+              </summary>
+              <p className="mt-3 max-w-[70ch] text-[15px] leading-6 text-[#5A6B63]">{item.a}</p>
+            </details>
+          ))}
         </div>
-      </header>
-      <main className="max-w-3xl mx-auto px-4 py-10">
-        <a href="/" className="text-sm font-medium text-zinc-600 hover:text-[#111827] inline-flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Voltar</a>
-        <h1 className="font-display font-extrabold text-4xl mt-4" style={{fontFamily:"var(--font-nunito)"}}>Ajuda</h1>
-        <p className="text-zinc-600 mt-3 leading-relaxed">Tire suas dúvidas sobre instalação e uso.</p>
-        <div className="mt-8 bg-white border border-zinc-200 rounded-3xl divide-y divide-zinc-100">
-          <details className="p-6 group" open><summary className="font-display font-bold cursor-pointer list-none flex items-center justify-between" style={{fontFamily:"var(--font-nunito)"}}>Como instalar o APK?<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg></summary><p className="text-sm text-zinc-600 mt-3 leading-relaxed">Baixe pelo botão, toque em Abrir e depois em Instalar. Se o sistema pedir, permita a instalação apenas para este arquivo. O processo leva segundos.</p></details>
-          <details className="p-6 group"><summary className="font-display font-bold cursor-pointer list-none flex items-center justify-between" style={{fontFamily:"var(--font-nunito)"}}>Preciso de internet no mercado?<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg></summary><p className="text-sm text-zinc-600 mt-3 leading-relaxed">Não. A leitura da etiqueta acontece no próprio aparelho, ideal para quando o sinal falha dentro do mercado.</p></details>
-          <details className="p-6 group"><summary className="font-display font-bold cursor-pointer list-none flex items-center justify-between" style={{fontFamily:"var(--font-nunito)"}}>Posso corrigir um preço?<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg></summary><p className="text-sm text-zinc-600 mt-3 leading-relaxed">Sim. Se a leitura não ficar perfeita, toque no valor e digite manualmente antes de adicionar à lista.</p></details>
-          <details className="p-6 group"><summary className="font-display font-bold cursor-pointer list-none flex items-center justify-between" style={{fontFamily:"var(--font-nunito)"}}>Meu mercado não está na lista. O que faço?<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-open:rotate-180 transition"><path d="M6 9l6 6 6-6"/></svg></summary><p className="text-sm text-zinc-600 mt-3 leading-relaxed">Na página de supermercados, clique em Sugerir supermercado e informe nome e cidade. Analisamos e liberamos para todos.</p></details>
+      </section>
+
+      <section className="bg-[#0B2B1F] px-5 py-20 text-[#F4F3EF] md:px-10 md:py-24">
+        <div className="mx-auto max-w-[1320px]">
+          <h2 className="max-w-[18ch] text-[clamp(2rem,4.6vw,3rem)] font-semibold leading-[.95] tracking-[-.045em]">
+            Ainda precisa de ajuda?
+          </h2>
+          <p className="mt-4 max-w-[46ch] text-[16px] leading-7 text-white/65">
+            Fale com a gente por e-mail. Respondemos em até dois dias úteis.
+          </p>
+          <a
+            href="mailto:contato@fechouocarrinho.site"
+            className="mt-8 inline-flex h-12 items-center rounded-full bg-[#1B8C42] px-6 text-[15px] font-semibold text-white transition hover:bg-[#146B32]"
+          >
+            contato@fechouocarrinho.site
+          </a>
         </div>
-        <div className="mt-8 bg-white border border-zinc-200 rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div><h3 className="font-display font-bold" style={{fontFamily:"var(--font-nunito)"}}>Ainda precisa de ajuda?</h3><p className="text-sm text-zinc-600 mt-1">Fale com a gente por e-mail.</p></div>
-          <a href="mailto:contato@fechouocarrinho.site" className="bg-[#111827] text-white px-6 py-3 rounded-xl font-semibold">contato@fechouocarrinho.site</a>
-        </div>
-      </main>
-      <footer className="border-t border-zinc-200 py-8 bg-white mt-10"><div className="max-w-6xl mx-auto px-4 flex justify-between text-sm text-zinc-500"><span>© 2026 Fechou o Carrinho</span><a href="mailto:contato@fechouocarrinho.site" className="underline">contato@fechouocarrinho.site</a></div></footer>
-    </div>
+      </section>
+
+      <SiteFooter />
+    </main>
   );
 }

@@ -1,44 +1,107 @@
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+
+const STEPS = [
+  {
+    n: "01",
+    title: "Escolha o mercado",
+    text: "Defina onde vai comprar e dê um nome à lista. Cada lista guarda seus próprios itens e seu próprio total.",
+    bullets: ["Lista separada por mercado", "Troque de mercado quando quiser", "Sugira uma rede que ainda não está"],
+  },
+  {
+    n: "02",
+    title: "Fotografe a etiqueta",
+    text: "Aponte a câmera para o preço na prateleira. A leitura é feita no próprio aparelho, sem depender do sinal.",
+    bullets: ["Uma foto por item", "Se falhar, digite o valor", "Funciona offline"],
+  },
+  {
+    n: "03",
+    title: "Confirme e siga",
+    text: "Confira o valor, ajuste a quantidade e veja o total se atualizar na hora. Você sempre sabe quanto já gastou.",
+    bullets: ["Total por lista", "Ajuste de quantidade", "Recibo para compartilhar"],
+  },
+];
+
+export const metadata = {
+  title: "Como funciona — Fechou o Carrinho",
+  description:
+    "Escolha o mercado, fotografe a etiqueta e acompanhe o total da compra. A leitura acontece no aparelho, mesmo sem internet.",
+};
+
 export default function ComoFunciona() {
   return (
-    <div className="bg-[#FFF8F0] min-h-screen">
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-zinc-100">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3"><div className="w-9 h-9 rounded-xl bg-[#1B8C42] flex items-center justify-center text-white"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M5 12l5 5l10 -10"/></svg></div><span className="font-display font-extrabold text-xl" style={{fontFamily:"var(--font-nunito)"}}>fechou o carrinho</span></a>
-          <nav className="hidden md:flex items-center gap-7 text-sm font-medium"><a href="/como-funciona" className="text-[#1B8C42] font-bold">Como funciona</a><a href="/supermercados" className="hover:text-[#1B8C42]">Supermercados</a><a href="/ajuda" className="hover:text-[#1B8C42]">Ajuda</a><a href="/#baixar" className="bg-[#111827] text-white px-5 py-2.5 rounded-full font-semibold">Baixar APK</a></nav>
-        </div>
-      </header>
-      <main className="max-w-6xl mx-auto px-4 py-10">
-        <a href="/" className="text-sm font-medium text-zinc-600 hover:text-[#111827] inline-flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Voltar</a>
-        <h1 className="font-display font-extrabold text-4xl mt-4" style={{fontFamily:"var(--font-nunito)"}}>Como funciona</h1>
-        <p className="text-zinc-600 mt-3 max-w-2xl leading-relaxed">Tudo acontece em poucos toques. Sem cadastro complicado, sem internet obrigatória dentro do mercado.</p>
+    <main className="min-h-screen bg-[#FFF8F0] text-[#0B2B1F]">
+      <SiteHeader ativo="Como funciona" />
 
-        <div className="grid md:grid-cols-3 gap-6 mt-10">
-          <section id="mercado" className="bg-white border border-zinc-200 rounded-3xl p-6">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#1B8C42]"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <h2 className="font-display font-extrabold text-xl mt-4" style={{fontFamily:"var(--font-nunito)"}}>Escolha onde vai comprar</h2>
-            <p className="text-sm text-zinc-600 mt-2 leading-relaxed">Selecione o estado e o supermercado antes de começar. Isso ajuda a organizar sua lista e, no futuro, a comparar valores da sua região.</p>
-            <ul className="mt-4 text-sm text-zinc-600 list-disc pl-5 space-y-1"><li>Lista separada por mercado</li><li>Sugira um mercado que ainda não está lá</li><li>Troque de mercado a qualquer momento</li></ul>
-            <a href="/supermercados" className="inline-flex mt-6 text-sm font-bold text-[#1B8C42] hover:underline">Ver mercados disponíveis →</a>
-          </section>
-          <section id="camera" className="bg-white border border-zinc-200 rounded-3xl p-6">
-            <div className="w-12 h-12 rounded-2xl bg-zinc-900 flex items-center justify-center text-white"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-            <h2 className="font-display font-extrabold text-xl mt-4" style={{fontFamily:"var(--font-nunito)"}}>Aponte para a etiqueta</h2>
-            <p className="text-sm text-zinc-600 mt-2 leading-relaxed">Mire a câmera na etiqueta de preço da prateleira e capture. O app identifica o valor e já deixa pronto para adicionar.</p>
-            <ul className="mt-4 text-sm text-zinc-600 list-disc pl-5 space-y-1"><li>Uma foto por item — não precisa filmar</li><li>Se a leitura falhar, digite o valor manualmente</li><li>Funciona mesmo sem sinal no mercado</li></ul>
-          </section>
-          <section id="total" className="bg-white border border-zinc-200 rounded-3xl p-6">
-            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-            <h2 className="font-display font-extrabold text-xl mt-4" style={{fontFamily:"var(--font-nunito)"}}>Acompanhe o total</h2>
-            <p className="text-sm text-zinc-600 mt-2 leading-relaxed">Cada item entra na sua lista com quantidade e preço. O total é atualizado na hora para você decidir o que levar.</p>
-            <ul className="mt-4 text-sm text-zinc-600 list-disc pl-5 space-y-1"><li>Ajuste quantidade com um toque</li><li>Veja o total por mercado</li><li>Salve e volte depois</li></ul>
-          </section>
+      <section className="mx-auto max-w-[1320px] px-5 pt-14 pb-6 md:px-10 md:pt-20">
+        <p className="text-[12px] font-semibold uppercase tracking-[.16em] text-[#1B8C42]">Como funciona</p>
+        <h1 className="mt-4 max-w-[16ch] text-[clamp(2.4rem,6vw,4rem)] font-semibold leading-[.95] tracking-[-.05em]">
+          Três gestos. Nenhuma surpresa.
+        </h1>
+        <p className="mt-5 max-w-[58ch] text-[17px] leading-7 text-[#3E5347]">
+          Escolha o mercado, fotografe a etiqueta e acompanhe o total. A conta acontece no aparelho, mesmo sem sinal
+          dentro da loja.
+        </p>
+      </section>
+
+      <section className="mx-auto max-w-[1320px] px-5 pb-16 md:px-10 md:pb-24">
+        {STEPS.map((step) => (
+          <div key={step.n} className="grid gap-6 border-t border-[#0B2B1F]/15 py-8 md:grid-cols-[120px_1fr_480px] md:gap-10 md:py-10">
+            <span className="text-[clamp(2rem,4vw,3rem)] font-semibold leading-none text-[#1B8C42]">{step.n}</span>
+            <div>
+              <h2 className="text-[26px] font-semibold leading-tight tracking-[-.03em]">{step.title}</h2>
+              <p className="mt-3 max-w-[46ch] text-[16px] leading-7 text-[#5A6B63]">{step.text}</p>
+            </div>
+            <ul className="rounded-3xl border border-[#0B2B1F]/12 bg-white p-6">
+              {step.bullets.map((b) => (
+                <li key={b} className="flex items-start gap-3 py-2 text-[15px] text-[#3E5347]">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1B8C42]" />
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      <section className="bg-[#0B2B1F] px-5 py-20 text-[#F4F3EF] md:px-10 md:py-24">
+        <div className="mx-auto max-w-[1320px]">
+          <h2 className="max-w-[14ch] text-[clamp(2rem,4.6vw,3.4rem)] font-semibold leading-[.95] tracking-[-.045em]">
+            O que fica no seu aparelho.
+          </h2>
+          <div className="mt-12 grid gap-10 sm:grid-cols-3">
+            {[
+              ["Listas", "Criadas por você, com nome e total próprios. Sem cadastro obrigatório."],
+              ["Preços", "Lidos na etiqueta e somados localmente. Nada é enviado sem você mandar."],
+              ["Sincronização", "Opcional. Quando ativa, sua conta guarda as listas para continuar em outro aparelho."],
+            ].map(([t, d]) => (
+              <div key={t}>
+                <h3 className="text-lg font-semibold">{t}</h3>
+                <p className="mt-2 max-w-[34ch] text-[15px] leading-7 text-white/65">{d}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="mt-10 bg-[#111827] text-white rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div><h3 className="font-display font-extrabold text-xl" style={{fontFamily:"var(--font-nunito)"}}>Pronto para testar?</h3><p className="text-zinc-400 text-sm mt-1">Baixe o app e faça sua primeira lista em menos de um minuto.</p></div>
-          <a href="/#baixar" className="bg-[#1B8C42] text-white px-7 py-3.5 rounded-2xl font-display font-extrabold hover:bg-emerald-700 whitespace-nowrap" style={{fontFamily:"var(--font-nunito)"}}>Baixar APK</a>
+      </section>
+
+      <section className="bg-[#1B8C42] px-5 py-20 text-white md:px-10">
+        <div className="mx-auto max-w-[1320px]">
+          <h2 className="max-w-[18ch] text-[clamp(2rem,4.6vw,3rem)] font-semibold leading-[.96] tracking-[-.045em]">
+            Pronto para testar?
+          </h2>
+          <p className="mt-4 max-w-[46ch] text-[16px] leading-7 text-white/80">
+            Baixe o app e faça sua primeira lista em menos de um minuto.
+          </p>
+          <a
+            href="/downloads/fechouocarrinho.apk"
+            className="mt-8 inline-flex h-12 items-center rounded-full bg-white px-6 text-[15px] font-semibold text-[#1B8C42] transition hover:bg-[#FFF8F0]"
+          >
+            Baixar para Android
+          </a>
         </div>
-      </main>
-      <footer className="border-t border-zinc-200 py-8 bg-white mt-10"><div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-4 text-sm text-zinc-500"><span>© 2026 Fechou o Carrinho</span><a href="mailto:contato@fechouocarrinho.site" className="underline">contato@fechouocarrinho.site</a></div></footer>
-    </div>
+      </section>
+
+      <SiteFooter />
+    </main>
   );
 }
