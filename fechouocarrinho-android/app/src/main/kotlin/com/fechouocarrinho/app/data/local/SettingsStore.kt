@@ -28,6 +28,9 @@ class SettingsStore(context: Context) {
     private val _userEmail = MutableStateFlow(prefs.getString(KEY_USER_EMAIL, null))
     val userEmail: StateFlow<String?> = _userEmail.asStateFlow()
 
+    private val _activeListId = MutableStateFlow(prefs.getLong(KEY_ACTIVE_LIST, 1L))
+    val activeListId: StateFlow<Long> = _activeListId.asStateFlow()
+
     private val _syncEnabled = MutableStateFlow(prefs.getBoolean(KEY_SYNC_ENABLED, false))
     val syncEnabled: StateFlow<Boolean> = _syncEnabled.asStateFlow()
 
@@ -49,6 +52,11 @@ class SettingsStore(context: Context) {
         _budgetGoal.value = safe
     }
 
+    fun setActiveListId(id: Long) {
+        prefs.edit().putLong(KEY_ACTIVE_LIST, id).apply()
+        _activeListId.value = id
+    }
+
     fun setSyncEnabled(enabled: Boolean) {
         prefs.edit().putBoolean(KEY_SYNC_ENABLED, enabled).apply()
         _syncEnabled.value = enabled
@@ -67,5 +75,6 @@ class SettingsStore(context: Context) {
         const val KEY_BUDGET_GOAL = "budget_goal"
         const val KEY_USER_EMAIL = "user_email"
         const val KEY_SYNC_ENABLED = "sync_enabled"
+        const val KEY_ACTIVE_LIST = "active_list_id"
     }
 }

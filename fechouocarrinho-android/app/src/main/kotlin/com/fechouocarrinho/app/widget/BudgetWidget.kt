@@ -19,24 +19,53 @@ import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
 import com.fechouocarrinho.app.FechouOCarrinhoApplication
-import com.fechouocarrinho.app.data.local.AppDatabase
-import androidx.room.Room
+import java.util.Locale
 
 class BudgetWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: Context, id: GlanceId) {
-        val db = (context.applicationContext as? FechouOCarrinhoApplication)?.database
-            ?: Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "fechouocarrinho_db").build()
-        val total = db.priceDao().totalValue(1L)
-        val meta = 200.0
+        val app = context.applicationContext as? FechouOCarrinhoApplication
+        val listId = app?.settings?.activeListId?.value ?: 1L
+        val meta = app?.settings?.budgetGoal?.value ?: 0.0
+        val total = app?.database?.priceDao()?.totalValue(listId) ?: 0.0
+        val marketName = app?.settings?.marketName?.value.orEmpty()
+
+        val totalLabel = formatBRL(total)
+        val metaLabel = if (meta > 0) "de ${formatBRL(meta)}" else "sem meta definida"
+
         provideContent {
-            Box(modifier = GlanceModifier.fillMaxSize().background(ColorProvider(Color(0xFF1B8C42))).padding(12.dp), contentAlignment = Alignment.Center) {
+            Box(
+                modifier = GlanceModifier
+                    .fillMaxSize()
+                    .background(ColorProvider(Color(0xFF1B8C42)))
+                    .padding(14.dp),
+                contentAlignment = Alignment.Center
+            ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("Fechou o Carrinho", style = TextStyle(color = ColorProvider(Color.White)))
-                    Text("R$ ${String.format("%.2f", total)} / R$ ${String.format("%.2f", meta)}", style = TextStyle(color = ColorProvider(Color.White)))
+                    Text(
+                        text = "fechou o carrinho",
+                        style = TextStyle(color = ColorProvider(Color.White), fontSize = 12.sp)
+                    )
+                    Text(
+                        text = totalLabel,
+                        style = TextStyle(color = ColorProvider(Color.White), fontSize = 22.sp)
+                    )
+                    Text(
+                        text = metaLabel,
+                        style = TextStyle(color = ColorProvider(Color(0xFFD9F2E1)), fontSize = 12.sp)
+                    )
+                    if (marketName.isNotBlank()) {
+                        Text(
+                            text = marketName,
+                            style = TextStyle(color = ColorProvider(Color(0xFFD9F2E1)), fontSize = 10.sp)
+                        )
+                    }
                 }
             }
         }
     }
+
+    private fun formatBRL(value: Double): String =
+        String.format(Locale.forLanguageTag("pt-BR"), "R$ %.2f", value)
 }
 
 class BudgetWidgetReceiver : GlanceAppWidgetReceiver() {

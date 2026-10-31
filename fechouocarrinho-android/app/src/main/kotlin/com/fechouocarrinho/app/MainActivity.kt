@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.glance.appwidget.updateAll
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -37,6 +38,7 @@ import com.fechouocarrinho.app.presentation.list.PriceListScreen
 import com.fechouocarrinho.app.presentation.list.PriceListViewModel
 import com.fechouocarrinho.app.presentation.screens.*
 import com.fechouocarrinho.app.presentation.theme.FechouOCarrinhoTheme
+import com.fechouocarrinho.app.widget.BudgetWidget
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -75,6 +77,11 @@ class MainActivity : ComponentActivity() {
                     val selectedMarketName by marketRepository.selectedMarketName.collectAsState()
                     val budgetGoal by settings.budgetGoal.collectAsState()
                     val userEmail by settings.userEmail.collectAsState()
+                    val widgetPrices by repository.prices.collectAsState(initial = emptyList())
+
+                    LaunchedEffect(widgetPrices, budgetGoal) {
+                        BudgetWidget().updateAll(applicationContext)
+                    }
 
                     var marketsLoading by remember { mutableStateOf(false) }
                     var marketsError by remember { mutableStateOf<String?>(null) }

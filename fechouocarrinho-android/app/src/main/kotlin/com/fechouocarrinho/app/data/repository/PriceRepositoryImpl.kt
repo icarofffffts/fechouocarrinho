@@ -25,7 +25,7 @@ class PriceRepositoryImpl(
     private val shoppingListDao: ShoppingListDao,
     private val settings: SettingsStore
 ) : PriceRepository {
-    private val _activeListId = MutableStateFlow(1L)
+    private val _activeListId = MutableStateFlow(settings.activeListId.value)
     override val activeListId = _activeListId.asStateFlow()
 
     override val lists: Flow<List<ShoppingList>> = shoppingListDao.observeAll().map { rows ->
@@ -120,6 +120,7 @@ class PriceRepositoryImpl(
     override suspend fun createList(name: String): Long {
         val id = shoppingListDao.insert(ShoppingListEntity(name = name.trim()))
         _activeListId.value = id
+        settings.setActiveListId(id)
         return id
     }
 
@@ -144,7 +145,10 @@ class PriceRepositoryImpl(
 
     override suspend fun clearList(id: Long) = shoppingListDao.clearItems(id)
 
-    override suspend fun selectList(id: Long) { _activeListId.value = id }
+    override suspend fun selectList(id: Long) {
+        _activeListId.value = id
+        settings.setActiveListId(id)
+    }
 
     override suspend fun ensureDefaultList() {
         if (shoppingListDao.count() == 0) shoppingListDao.insert(ShoppingListEntity(id = 1L, name = "Minha lista"))
