@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import AppFilm from "@/components/AppFilm";
 import AppTour from "@/components/AppTour";
 import StorySteps from "@/components/StorySteps";
 import CartSimulator from "@/components/CartSimulator";
@@ -240,6 +241,25 @@ export default function Home() {
           <div className="mt-10">
             <AppTour />
           </div>
+        </div>
+      </section>
+
+      <section id="filme" className="bg-[#EAF6E4] px-5 py-20 md:px-10 md:py-28">
+        <div className="mx-auto grid max-w-[1320px] items-center gap-12 lg:grid-cols-[1fr_320px] lg:gap-20">
+          <div>
+            <h2 className="max-w-[14ch] text-[clamp(2rem,4.6vw,3.4rem)] font-semibold leading-[.95] tracking-[-.045em]">
+              O app, de verdade.
+            </h2>
+            <p className="mt-5 max-w-[46ch] text-[16px] leading-7 text-[#3E5347]">
+              Quinze segundos do leitor de etiquetas ao total na meta. As telas são as do aplicativo, com dados de exemplo.
+            </p>
+            <ul className="mt-8 grid max-w-[420px] gap-3 text-[15px] text-[#0B2B1F]">
+              <li className="flex gap-3"><span className="font-semibold text-[#1B8C42]">1.</span> Aponte a câmera para a etiqueta</li>
+              <li className="flex gap-3"><span className="font-semibold text-[#1B8C42]">2.</span> Veja o total crescer na hora</li>
+              <li className="flex gap-3"><span className="font-semibold text-[#1B8C42]">3.</span> Chegue ao caixa sabendo</li>
+            </ul>
+          </div>
+          <AppFilm />
         </div>
       </section>
 
