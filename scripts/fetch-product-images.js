@@ -3,7 +3,7 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 
-const PRODUCTS_DIR = path.join(__dirname, "..", "design-system", "mockups", "products");
+const PRODUCTS_DIR = path.join(__dirname, "..", "materiais", "04-marca", "mockups", "products");
 if (!fs.existsSync(PRODUCTS_DIR)) {
   fs.mkdirSync(PRODUCTS_DIR, { recursive: true });
 }

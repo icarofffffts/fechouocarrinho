@@ -16,7 +16,7 @@ const baseSvg = (w, h, rx) => `<svg width="${w}" height="${h}" viewBox="0 0 40 4
 </svg>`;
 
 const ROOT_DIR = process.cwd();
-const iconsDir = path.join(ROOT_DIR, 'design-system', 'icons');
+const iconsDir = path.join(ROOT_DIR, 'materiais', '04-marca', 'icons');
 const publicDir = path.join(ROOT_DIR, 'landing-page-repo', 'public', 'design-assets');
 
 const sizes = [

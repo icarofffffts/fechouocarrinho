@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 const PORT = 3333;
-const ROOT = path.join(__dirname, "..", "design-system", "mockups");
+const ROOT = path.join(__dirname, "..", "materiais", "04-marca", "mockups");
 
 const MIME = {
   ".html": "text/html; charset=utf-8",

@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const ROOT_DIR = process.cwd();
-const DESIGN_DIR = path.join(ROOT_DIR, 'design-system');
+const DESIGN_DIR = path.join(ROOT_DIR, 'materiais', '04-marca');
 const PUBLIC_ASSETS = path.join(ROOT_DIR, 'landing-page-repo', 'public', 'design-assets');
 
 [
@@ -472,7 +472,7 @@ const icLauncherForegroundXml = `<?xml version="1.0" encoding="utf-8"?>
     </group>
 </vector>`;
 
-// Write all assets to design-system and public/design-assets
+// Write all assets to materiais/04-marca and public/design-assets
 const fileMap = [
   // Brand
   { path: path.join(DESIGN_DIR, 'brand', 'logo-mark.svg'), content: logoMarkSvg },

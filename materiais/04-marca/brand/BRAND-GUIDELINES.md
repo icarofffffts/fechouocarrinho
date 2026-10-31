@@ -248,7 +248,7 @@ Para versões antigas do Android que não suportam vetores adaptativos, exportar
 - **Dimensões:** `512 x 512 px`.
 - **Formato:** PNG de 32 bits (com canal alfa) ou SVG plano.
 - **Keyline / Margem:** Elemento central de `384 x 384 px` (margem livre de 64 px em todos os lados).
-- **Arquivo Oficial de Produção:** `design-system/icons/ic_launcher_playstore_flat.svg`.
+- **Arquivo Oficial de Produção:** `materiais/04-marca/icons/ic_launcher_playstore_flat.svg`.
 
 ### 7.4 Splash Screen Oficial (Android 12+)
 Configuração no arquivo `res/values/themes.xml`:
@@ -337,7 +337,7 @@ Para preservar a autoridade e o reconhecimento da marca, as seguintes aplicaçõ
 
 Todos os assets foram homologados e estão organizados nos seguintes diretórios do repositório:
 
-### 10.1 Marca (`design-system/brand/`)
+### 10.1 Marca (`materiais/04-marca/brand/`)
 - [`brand-tokens.json`](file:///C:/Users/usuario/orca/projects/.maestri/floors/scanlist--identidadevisual/design-system/brand/brand-tokens.json): Tokens em JSON com paleta cromática, especificações de tipografia e resoluções padrão.
 - [`logo-mark.svg`](file:///C:/Users/usuario/orca/projects/.maestri/floors/scanlist--identidadevisual/design-system/brand/logo-mark.svg): Símbolo vetorial isolado em squircle verde (256 x 256).
 - [`logo-horizontal.svg`](file:///C:/Users/usuario/orca/projects/.maestri/floors/scanlist--identidadevisual/design-system/brand/logo-horizontal.svg): Versão horizontal completa para fundos claros (460 x 80).
@@ -345,7 +345,7 @@ Todos os assets foram homologados e estão organizados nos seguintes diretórios
 - [`logo-monochrome.svg`](file:///C:/Users/usuario/orca/projects/.maestri/floors/scanlist--identidadevisual/design-system/brand/logo-monochrome.svg): Versão em uma cor só (`#111827`) para notas fiscais e impressoras térmicas (460 x 80).
 - [`BRAND-GUIDELINES.md`](file:///C:/Users/usuario/orca/projects/.maestri/floors/scanlist--identidadevisual/design-system/brand/BRAND-GUIDELINES.md): Este documento oficial.
 
-### 10.2 Ícones e Sistema Operacional (`design-system/icons/`)
+### 10.2 Ícones e Sistema Operacional (`materiais/04-marca/icons/`)
 - [`favicon.svg`](file:///C:/Users/usuario/orca/projects/.maestri/floors/scanlist--identidadevisual/design-system/icons/favicon.svg): Favicon vetorial padrão para navegadores modernos.
 - [`favicon-16x16.svg`](file:///C:/Users/usuario/orca/projects/.maestri/floors/scanlist--identidadevisual/design-system/icons/favicon-16x16.svg): Versão compactada para abas de navegadores.
 - [`favicon-32x32.svg`](file:///C:/Users/usuario/orca/projects/.maestri/floors/scanlist--identidadevisual/design-system/icons/favicon-32x32.svg): Versão padrão para bookmarks e barras de ferramentas.
