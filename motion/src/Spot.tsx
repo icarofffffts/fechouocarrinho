@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Img, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {BODY, COLOR, DISPLAY, EASE, brl, p, s, win} from './lib/brand';
 
 export const SPOT_FRAMES = s(15);
@@ -221,7 +221,19 @@ export const Spot: React.FC<SpotProps> = ({voiceover}) => {
       <Chip frame={frame} at={s(5.2)} until={s(7)} x={90} y={640} dot={COLOR.orange} big="+ R$ 28,90" small="etiqueta lida agora" />
       <Chip frame={frame} at={s(8)} until={s(11)} x={540} y={450} dot={COLOR.green} big={brl(total)} small="71% da meta de R$ 200" />
       <Closing frame={frame} />
-      {voiceover ? <Audio src={staticFile('vo/spot1.mp3')} /> : null}
+      {voiceover ? (
+        <>
+          <Sequence from={s(0.3)}>
+            <Audio src={staticFile('vo/spot1-hook.mp3')} />
+          </Sequence>
+          <Sequence from={s(3.4)}>
+            <Audio src={staticFile('vo/spot1-scan.mp3')} />
+          </Sequence>
+          <Sequence from={s(11.7)}>
+            <Audio src={staticFile('vo/spot1-end.mp3')} />
+          </Sequence>
+        </>
+      ) : null}
     </AbsoluteFill>
   );
 };

@@ -8,6 +8,7 @@
     "prep": "node scripts/inline-mockups.mjs",
     "typecheck": "tsc -p .",
     "render:spot": "remotion render src/index.ts --port=3200 Spot15Vertical out/spot-15-vertical.mp4",
+    "render:spot:vo": "remotion render src/index.ts --port=3200 --props=vo-props.json Spot15Vertical out/spot-15-vertical-vo.mp4",
     "still:poster": "remotion still src/index.ts --port=3200 Spot15Vertical out/spot-15-poster.png --frame=200"
   },
   "dependencies": {

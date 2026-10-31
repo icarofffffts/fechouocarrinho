@@ -21,10 +21,15 @@ const VOICE = 'RGymW84CSmfVugnA5tvA';
 const MODEL = 'eleven_v4';
 const OUT_DIR = path.resolve('public', 'vo');
 
-/** Uma fala por video. A chave e o nome do arquivo (spot1.mp3). Alvo: ~14 s. */
+/**
+ * Uma fala por cena, para entrar na hora certa do video (ver Spot.tsx).
+ * A chave e o nome do arquivo (spot1-hook.mp3).
+ */
 export const LINES = {
-  spot1:
-    '[confident] Seu total, antes do caixa. [curious] Aponte a câmera para a etiqueta… [warmly] e veja o carrinho crescer, na hora. Sem internet, sem susto. [confident] Fechou o Carrinho.',
+  'spot1-hook': '[confident] Seu total, antes do caixa.',
+  'spot1-scan':
+    '[curious] Aponte a câmera para a etiqueta… [warmly] e veja o carrinho crescer, na hora. Sem internet, sem susto.',
+  'spot1-end': '[confident] Chegue ao caixa sabendo. Fechou o Carrinho.',
 };
 
 const [id, outArg] = process.argv.slice(2);
