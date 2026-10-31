@@ -34,11 +34,11 @@ import com.fechouocarrinho.app.presentation.components.pressBounce
 @Composable
 fun SyncScreen(
     userEmail: String = "",
-    userName: String = "Usuário offline",
+    userName: String = "Convidado",
     isSyncEnabled: Boolean = true,
     onToggleSync: (Boolean) -> Unit = {},
     onDisconnect: () -> Unit = {},
-    shareCode: String = "A7K9Q2"
+    shareCode: String = ""
 ) {
     val context = LocalContext.current
     var copied by remember { mutableStateOf(false) }
@@ -291,7 +291,9 @@ fun SyncScreen(
                     )
                 )
                 Text(
-                    text = "Envie o código de 6 dígitos para a família",
+                    text = if (shareCode.isBlank())
+                        "Sincronização em tempo real ainda não está ativa: suas listas ficam neste aparelho"
+                    else "Envie o código de 6 dígitos para a família",
                     style = MaterialTheme.typography.bodySmall.copy(
                         color = Color.White.copy(alpha = 0.85f),
                         fontSize = 12.sp
@@ -308,7 +310,7 @@ fun SyncScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = shareCode,
+                            text = shareCode.ifBlank { "······" },
                             style = MaterialTheme.typography.titleLarge.copy(
                                 color = Color.White,
                                 fontWeight = FontWeight.ExtraBold,
@@ -319,6 +321,7 @@ fun SyncScreen(
                     }
                     Spacer(Modifier.width(12.dp))
                     Button(
+                        enabled = shareCode.isNotBlank(),
                         onClick = {
                             val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                             cm.setPrimaryClip(ClipData.newPlainText("code", shareCode))
@@ -326,11 +329,13 @@ fun SyncScreen(
                         },
                         shape = SquircleMedium,
                         colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                        modifier = Modifier.pressBounce(onClick = {
-                            val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                            cm.setPrimaryClip(ClipData.newPlainText("code", shareCode))
-                            copied = true
-                        })
+                        modifier = Modifier.pressBounce {
+                            if (shareCode.isNotBlank()) {
+                                val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                                cm.setPrimaryClip(ClipData.newPlainText("code", shareCode))
+                                copied = true
+                            }
+                        }
                     ) {
                         Icon(
                             imageVector = Icons.Default.ContentCopy,

@@ -6,5 +6,7 @@ data class Price(
     val value: Double,
     val rawText: String,
     val createdAt: Long = System.currentTimeMillis(),
-    val syncStatus: String
+    val syncStatus: String,
+    val marketId: String? = null,
+    val marketName: String? = null
 )

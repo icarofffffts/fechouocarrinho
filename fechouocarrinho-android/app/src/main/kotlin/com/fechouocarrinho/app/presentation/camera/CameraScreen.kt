@@ -86,7 +86,8 @@ private val ScanOrange = Color(0xFFFF6B00)
 @Composable
 fun CameraScreen(
     viewModel: CameraViewModel,
-    onNavigateToList: () -> Unit
+    onNavigateToList: () -> Unit,
+    marketName: String = ""
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
@@ -120,6 +121,7 @@ fun CameraScreen(
                     uiState = uiState,
                     viewModel = viewModel,
                     onNavigateToList = onNavigateToList,
+                    marketName = marketName,
                     onTorchToggle = {
                         torchOn = !torchOn
                         camera?.cameraControl?.enableTorch(torchOn)
@@ -141,6 +143,7 @@ private fun CameraPreviewWithOverlay(
     uiState: CameraUiState,
     viewModel: CameraViewModel,
     onNavigateToList: () -> Unit,
+    marketName: String = "",
     onTorchToggle: () -> Unit
 ) {
     val context = LocalContext.current
@@ -299,6 +302,7 @@ private fun CameraPreviewWithOverlay(
             if (detected != null) {
                 DetectedBottomSheet(
                     detected = detected,
+                    marketName = marketName,
                     onConfirm = { price, quantity ->
                         viewModel.confirmPrice(price, quantity) { viewModel.retry() }
                     },
@@ -376,6 +380,7 @@ private fun ScannerFrame() {
 @Composable
 private fun DetectedBottomSheet(
     detected: Price,
+    marketName: String = "",
     onConfirm: (Price, Int) -> Unit,
     onEdit: () -> Unit
 ) {
@@ -427,7 +432,7 @@ private fun DetectedBottomSheet(
                     Spacer(modifier = Modifier.width(12.dp))
                     Column(modifier = Modifier.weight(1f)) {
                         Text(detected.label, fontWeight = FontWeight.SemiBold, fontSize = 13.sp, color = Color(0xFF111827))
-                        Text("Supermercado 1 un", fontSize = 11.sp, color = Color(0xFF6B7280))
+                        Text("${marketName.ifBlank { "mercado não selecionado" }} · 1 un", fontSize = 11.sp, color = Color(0xFF6B7280))
                     }
                     Text(
                         PriceExtractor.formatCurrency(detected.value),

@@ -4,12 +4,13 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [PriceEntity::class, ShoppingListEntity::class],
-    version = 2,
+    entities = [PriceEntity::class, ShoppingListEntity::class, SupermarketEntity::class],
+    version = 3,
     exportSchema = false
 )
 @androidx.room.TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun priceDao(): PriceDao
     abstract fun shoppingListDao(): ShoppingListDao
+    abstract fun supermarketDao(): SupermarketDao
 }

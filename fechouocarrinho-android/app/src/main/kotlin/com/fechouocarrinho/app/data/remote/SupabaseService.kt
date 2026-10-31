@@ -2,6 +2,9 @@ package com.fechouocarrinho.app.data.remote
 
 import com.fechouocarrinho.app.BuildConfig
 import com.fechouocarrinho.app.data.remote.dto.PriceDto
+import com.fechouocarrinho.app.data.remote.dto.SupermarketDto
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -17,8 +20,8 @@ class SupabaseService private constructor(
     private val json: Json
 ) : SupabaseApi {
 
-    override suspend fun postPrices(prices: List<PriceDto>): Result<Unit> {
-        if (prices.isEmpty()) return Result.success(Unit)
+    override suspend fun postPrices(prices: List<PriceDto>): Result<Unit> = withContext(Dispatchers.IO) {
+        if (prices.isEmpty()) return@withContext Result.success(Unit)
 
         val body = json.encodeToString(prices)
             .toRequestBody("application/json".toMediaType())
@@ -35,7 +38,7 @@ class SupabaseService private constructor(
             .header("Prefer", "return=representation")
             .build()
 
-        return try {
+        try {
             httpClient.newCall(request).execute().use { response ->
                 if (response.isSuccessful) {
                     Result.success(Unit)
@@ -50,7 +53,39 @@ class SupabaseService private constructor(
         }
     }
 
+    override suspend fun getSupermarkets(): Result<List<SupermarketDto>> = withContext(Dispatchers.IO) {
+        val request = Request.Builder()
+            .url(
+                "${BuildConfig.SUPABASE_URL}/rest/v1/supermarkets" +
+                    "?select=id,slug,name,city,state,logo_url,is_verified&order=name.asc"
+            )
+            .get()
+            .header("apikey", BuildConfig.SUPABASE_KEY)
+            .header("Authorization", "Bearer ${BuildConfig.SUPABASE_KEY}")
+            .header("Accept", "application/json")
+            .header("Accept-Profile", BuildConfig.SUPABASE_PROFILE)
+            .build()
+
+        try {
+            httpClient.newCall(request).execute().use { response ->
+                val raw = response.body?.string().orEmpty()
+                if (!response.isSuccessful) {
+                    Result.failure(
+                        IOException("Supabase GET /supermarkets falhou: ${response.code} ${response.message}")
+                    )
+                } else {
+                    Result.success(json.decodeFromString(ListSerializer, raw))
+                }
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     companion object {
+        private val ListSerializer =
+            kotlinx.serialization.builtins.ListSerializer(SupermarketDto.serializer())
+
         fun create(): SupabaseApi {
             val logging = HttpLoggingInterceptor().apply {
                 level = if (BuildConfig.DEBUG) {

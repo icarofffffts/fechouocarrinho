@@ -13,8 +13,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.fechouocarrinho.app.data.local.AppDatabase
 import com.fechouocarrinho.app.data.remote.SupabaseService
+import com.fechouocarrinho.app.data.repository.MarketRepositoryImpl
 import com.fechouocarrinho.app.data.repository.PriceRepositoryImpl
 import com.fechouocarrinho.app.domain.model.Price
 import com.fechouocarrinho.app.domain.usecase.ExtractPricesUseCase
@@ -37,7 +37,18 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
 
     private val database by lazy { (application as FechouOCarrinhoApplication).database }
-    private val repository by lazy { PriceRepositoryImpl(database.priceDao(), SupabaseService.create(), database.shoppingListDao()) }
+    private val settings by lazy { (application as FechouOCarrinhoApplication).settings }
+    private val marketRepository by lazy {
+        MarketRepositoryImpl(database.supermarketDao(), SupabaseService.create(), settings)
+    }
+    private val repository by lazy {
+        PriceRepositoryImpl(
+            database.priceDao(),
+            SupabaseService.create(),
+            database.shoppingListDao(),
+            settings
+        )
+    }
     private val textRecognition by lazy { TextRecognitionHelper(this) }
     private val priceExtractor by lazy { PriceExtractor() }
 
@@ -52,7 +63,34 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    var currentMarket by remember { mutableStateOf("Supermercados BH") }
+                    val scope = rememberCoroutineScope()
+
+                    val markets by marketRepository.markets.collectAsState(initial = emptyList())
+                    val selectedMarketId by marketRepository.selectedMarketId.collectAsState()
+                    val selectedMarketName by marketRepository.selectedMarketName.collectAsState()
+                    val budgetGoal by settings.budgetGoal.collectAsState()
+                    val userEmail by settings.userEmail.collectAsState()
+
+                    var marketsLoading by remember { mutableStateOf(false) }
+                    var marketsError by remember { mutableStateOf<String?>(null) }
+
+                    val refreshMarkets: () -> Unit = {
+                        scope.launch {
+                            marketsLoading = true
+                            marketsError = null
+                            val result = marketRepository.refresh()
+                            marketsError = result.exceptionOrNull()?.message
+                            marketsLoading = false
+                        }
+                    }
+
+                    // Primeira carga: sincroniza as redes reais do Supabase (cache em Room).
+                    LaunchedEffect(Unit) {
+                        marketsLoading = true
+                        val result = marketRepository.refresh()
+                        marketsError = result.exceptionOrNull()?.message
+                        marketsLoading = false
+                    }
 
                     NavHost(navController = navController, startDestination = "home") {
                         composable("home") {
@@ -67,7 +105,9 @@ class MainActivity : ComponentActivity() {
                                 onNavigateToPerfil = { navController.navigate("perfil") },
                                 onNavigateToSupermarkets = { navController.navigate("selecao") },
                                 onNavigateToHelp = { navController.navigate("splash") },
-                                selectedSupermarket = currentMarket
+                                selectedSupermarket = selectedMarketName,
+                                budgetGoal = budgetGoal,
+                                onSetBudgetGoal = { settings.setBudgetGoal(it) }
                             )
                         }
 
@@ -80,6 +120,7 @@ class MainActivity : ComponentActivity() {
                             }
                             CameraScreen(
                                 viewModel = viewModel,
+                                marketName = selectedMarketName,
                                 onNavigateToList = {
                                     navController.navigate("home") {
                                         popUpTo("home") { inclusive = true }
@@ -105,7 +146,8 @@ class MainActivity : ComponentActivity() {
                             val prices by repository.prices.collectAsState(initial = emptyList())
                             CarrinhoFechadoScreenReal(
                                 prices = prices,
-                                marketName = currentMarket,
+                                marketName = selectedMarketName,
+                                meta = budgetGoal,
                                 onFinalizar = { navController.navigate("recibo") },
                                 onCompartilhar = { navController.navigate("recibo") },
                                 onBack = { navController.popBackStack() }
@@ -125,7 +167,6 @@ class MainActivity : ComponentActivity() {
                             val prices by repository.prices.collectAsState(initial = emptyList())
                             val lists by repository.lists.collectAsState(initial = emptyList())
                             val activeListId by repository.activeListId.collectAsState()
-                            val scope = rememberCoroutineScope()
                             ListasScreenReal(
                                 prices = prices,
                                 lists = lists,
@@ -138,9 +179,13 @@ class MainActivity : ComponentActivity() {
 
                         composable("perfil") {
                             val prices by repository.prices.collectAsState(initial = emptyList())
+                            val lists by repository.lists.collectAsState(initial = emptyList())
                             PerfilScreenReal(
-                                totalEconomizado = prices.sumOf { it.value },
-                                nome = "Usuário",
+                                nome = userEmail?.substringBefore("@") ?: "Convidado",
+                                accountLabel = userEmail ?: "Sem conta conectada · modo offline",
+                                totalRegistrado = prices.sumOf { it.value },
+                                itemCount = prices.size,
+                                listCount = lists.size,
                                 onBack = { navController.popBackStack() },
                                 onNavigateToAuth = { navController.navigate("auth") }
                             )
@@ -158,9 +203,13 @@ class MainActivity : ComponentActivity() {
 
                         composable("selecao") {
                             SelecaoMercadoScreenReal(
-                                currentMarket = currentMarket,
+                                markets = markets,
+                                selectedMarketId = selectedMarketId,
+                                isLoading = marketsLoading,
+                                errorMessage = marketsError,
+                                onRefresh = refreshMarkets,
                                 onSelectMarket = { market ->
-                                    currentMarket = market
+                                    scope.launch { marketRepository.select(market) }
                                     navController.popBackStack()
                                 },
                                 onBack = { navController.popBackStack() }
@@ -188,8 +237,13 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable("correcao") {
+                            val scope = rememberCoroutineScope()
                             CorrecaoOcrScreenReal(
-                                onConfirm = { navController.popBackStack() },
+                                preco = null,
+                                onConfirm = { price ->
+                                    scope.launch { repository.save(price) }
+                                    navController.popBackStack()
+                                },
                                 onBack = { navController.popBackStack() }
                             )
                         }
@@ -198,6 +252,7 @@ class MainActivity : ComponentActivity() {
                             val prices by repository.prices.collectAsState(initial = emptyList())
                             ReciboScreenReal(
                                 prices = prices,
+                                marketName = selectedMarketName,
                                 onBack = { navController.popBackStack() }
                             )
                         }
@@ -205,6 +260,7 @@ class MainActivity : ComponentActivity() {
                         composable("auth") {
                             AuthScreen(
                                 onContinueOffline = {
+                                    settings.setUserEmail(null)
                                     navController.navigate("home") {
                                         popUpTo("auth") { inclusive = true }
                                     }
@@ -217,7 +273,9 @@ class MainActivity : ComponentActivity() {
 
                         composable("sync") {
                             SyncScreen(
+                                userEmail = userEmail.orEmpty(),
                                 onDisconnect = {
+                                    settings.setUserEmail(null)
                                     navController.navigate("home") {
                                         popUpTo("sync") { inclusive = true }
                                     }

@@ -66,12 +66,4 @@ class HomeViewModel(
             }
         }
     }
-
-    fun selectStore(slug: String) {
-        _uiState.value = _uiState.value.copy(selectedStoreSlug = slug)
-    }
-
-    fun selectState(state: String) {
-        _uiState.value = _uiState.value.copy(selectedState = state)
-    }
 }

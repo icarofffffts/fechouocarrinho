@@ -61,9 +61,12 @@ fun HomeScreen(
     onNavigateToPerfil: () -> Unit = {},
     onNavigateToSupermarkets: () -> Unit = {},
     onNavigateToHelp: () -> Unit = {},
-    selectedSupermarket: String = "Supermercados BH"
+    selectedSupermarket: String = "",
+    budgetGoal: Double = 0.0,
+    onSetBudgetGoal: (Double) -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    var showGoalDialog by remember { mutableStateOf(false) }
 
     // Total real vindo do Room/Supabase - sem mock
     val displayTotal = uiState.prices.sumOf { it.value }
@@ -105,8 +108,9 @@ fun HomeScreen(
             // 2. Card de Orçamento (Mockup 01)
             BudgetCard(
                 total = displayTotal,
-                meta = 200.0,
-                pendingCount = uiState.pendingCount
+                meta = budgetGoal,
+                pendingCount = uiState.pendingCount,
+                onEditGoal = { showGoalDialog = true }
             )
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -179,6 +183,68 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(36.dp))
         }
     }
+
+    if (showGoalDialog) {
+        BudgetGoalDialog(
+            currentGoal = budgetGoal,
+            onDismiss = { showGoalDialog = false },
+            onConfirm = { goal ->
+                onSetBudgetGoal(goal)
+                showGoalDialog = false
+            }
+        )
+    }
+}
+
+@Composable
+private fun BudgetGoalDialog(
+    currentGoal: Double,
+    onDismiss: () -> Unit,
+    onConfirm: (Double) -> Unit
+) {
+    var text by remember {
+        mutableStateOf(if (currentGoal > 0) PriceExtractor.formatCurrency(currentGoal).replace("R$", "").trim() else "")
+    }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Text(
+                text = "meta de orçamento",
+                fontWeight = FontWeight.ExtraBold
+            )
+        },
+        text = {
+            Column {
+                Text(
+                    text = "Defina quanto você pretende gastar nesta compra. Deixe vazio para remover a meta.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = TextSecondary
+                )
+                Spacer(modifier = Modifier.height(12.dp))
+                OutlinedTextField(
+                    value = text,
+                    onValueChange = { text = it },
+                    singleLine = true,
+                    label = { Text("Valor em R$") },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(14.dp)
+                )
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                val parsed = text.replace("R$", "").replace(" ", "")
+                    .replace(".", "")
+                    .replace(",", ".")
+                    .toDoubleOrNull()
+                onConfirm(parsed?.coerceAtLeast(0.0) ?: 0.0)
+            }) { Text("Salvar", fontWeight = FontWeight.Bold, color = BrandGreen) }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text("Cancelar", color = TextSecondary) }
+        }
+    )
 }
 
 @Composable
@@ -254,7 +320,9 @@ private fun HomeHeaderCard(
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            text = selectedSupermarket,
+                            text = selectedSupermarket.ifBlank { "escolher mercado" },
+                            maxLines = 1,
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis,
                             style = MaterialTheme.typography.labelSmall.copy(
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold
@@ -283,9 +351,11 @@ private fun HomeHeaderCard(
 private fun BudgetCard(
     total: Double,
     meta: Double,
-    pendingCount: Int = 0
+    pendingCount: Int = 0,
+    onEditGoal: () -> Unit = {}
 ) {
-    val pct = if (meta > 0) (total / meta * 100).toInt().coerceIn(0, 100) else 0
+    val hasGoal = meta > 0
+    val pct = if (hasGoal) (total / meta * 100).toInt().coerceIn(0, 100) else 0
     val remaining = (meta - total).coerceAtLeast(0.0)
 
     val animatedProgress by animateFloatAsState(
@@ -300,17 +370,29 @@ private fun BudgetCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = 16.dp)
+            .clickable(onClick = onEditGoal),
         shape = SquircleLarge,
         colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
-            Text(
-                text = "orçamento da compra",
-                style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
-                color = TextSecondary
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "orçamento da compra",
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                    color = TextSecondary
+                )
+                Text(
+                    text = if (hasGoal) "editar meta" else "definir meta",
+                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold, fontSize = 11.sp),
+                    color = BrandGreen
+                )
+            }
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = PriceExtractor.formatCurrency(total),
@@ -321,36 +403,44 @@ private fun BudgetCard(
                 ),
                 color = TextPrimary
             )
-            Text(
-                text = "de ${PriceExtractor.formatCurrency(meta)} (meta)",
-                style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp),
-                color = TextSecondary
-            )
-            Spacer(modifier = Modifier.height(14.dp))
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(10.dp)
-                    .clip(RoundedCornerShape(5.dp))
-                    .background(BorderLight)
-            ) {
+            if (hasGoal) {
+                Text(
+                    text = "de ${PriceExtractor.formatCurrency(meta)} (meta)",
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp),
+                    color = TextSecondary
+                )
+                Spacer(modifier = Modifier.height(14.dp))
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth(animatedProgress)
+                        .fillMaxWidth()
                         .height(10.dp)
                         .clip(RoundedCornerShape(5.dp))
-                        .background(BrandGreen)
+                        .background(BorderLight)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth(animatedProgress)
+                            .height(10.dp)
+                            .clip(RoundedCornerShape(5.dp))
+                            .background(BrandGreen)
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "$pct% da meta · ${PriceExtractor.formatCurrency(remaining)} restantes" + if (pendingCount > 0) " · $pendingCount pendente(s)" else "",
+                    style = MaterialTheme.typography.labelMedium.copy(
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold
+                    ),
+                    color = BrandGreen
+                )
+            } else {
+                Text(
+                    text = "Toque para definir quanto pretende gastar." + if (pendingCount > 0) " · $pendingCount pendente(s)" else "",
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 13.sp),
+                    color = TextSecondary
                 )
             }
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "$pct% da meta · ${PriceExtractor.formatCurrency(remaining)} restantes" + if (pendingCount > 0) " · $pendingCount pendente(s)" else "",
-                style = MaterialTheme.typography.labelMedium.copy(
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.SemiBold
-                ),
-                color = BrandGreen
-            )
         }
     }
 }

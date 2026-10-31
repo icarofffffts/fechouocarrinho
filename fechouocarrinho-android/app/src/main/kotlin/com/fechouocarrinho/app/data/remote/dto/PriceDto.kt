@@ -15,6 +15,8 @@ data class PriceDto(
     val state: String? = null,
     @SerialName("city")
     val city: String? = null,
+    @SerialName("supermarket_id")
+    val supermarketId: String? = null,
     @SerialName("source")
     val source: String = "manual",
     @SerialName("scan_image_hash")

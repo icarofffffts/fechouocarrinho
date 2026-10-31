@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "prices",
-    indices = [Index(value = ["syncStatus"])]
+    indices = [Index(value = ["syncStatus"]), Index(value = ["marketId"])]
 )
 data class PriceEntity(
     @PrimaryKey(autoGenerate = true)
@@ -15,6 +15,8 @@ data class PriceEntity(
     val value: Double,
     val rawText: String,
     val listId: Long = 1L,
+    val marketId: String? = null,
+    val marketName: String? = null,
     val createdAt: Long = System.currentTimeMillis(),
     val syncStatus: SyncStatus = SyncStatus.PENDING,
     val syncedAt: Long? = null

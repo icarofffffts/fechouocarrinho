@@ -37,6 +37,7 @@ import com.fechouocarrinho.app.presentation.components.SquircleMedium
 import com.fechouocarrinho.app.presentation.components.SquircleLarge
 import com.fechouocarrinho.app.presentation.components.SquircleSmall
 import com.fechouocarrinho.app.presentation.components.SquircleExtraLarge
+import com.fechouocarrinho.app.domain.model.Market
 import com.fechouocarrinho.app.domain.model.Price
 import com.fechouocarrinho.app.domain.model.ShoppingList
 import com.fechouocarrinho.app.ocr.PriceExtractor
@@ -56,7 +57,8 @@ private val BorderLight = Color(0xFFEAE5DC)
 @Composable
 fun CarrinhoFechadoScreenReal(
     prices: List<Price> = emptyList(),
-    marketName: String = "Supermercados BH",
+    marketName: String = "",
+    meta: Double = 0.0,
     economia: Double = 0.0,
     onFinalizar: () -> Unit = {},
     onCompartilhar: () -> Unit = {},
@@ -75,8 +77,13 @@ fun CarrinhoFechadoScreenReal(
 
     val total = prices.sumOf { it.value }
     val itemCount = prices.size
-    val meta = 200.0
-    val economiaReal = if (prices.isEmpty() || total <= 0.0) 0.0 else if (economia > 0.0) economia else (meta - total).coerceAtLeast(0.0)
+    val hasGoal = meta > 0.0
+    val economiaReal = when {
+        total <= 0.0 -> 0.0
+        economia > 0.0 -> economia
+        hasGoal -> (meta - total).coerceAtLeast(0.0)
+        else -> 0.0
+    }
 
     val celebrationScale by animateFloatAsState(
         targetValue = 1f,
@@ -202,7 +209,7 @@ fun CarrinhoFechadoScreenReal(
                         color = TextPrimary
                     )
                     Text(
-                        text = "$itemCount itens · $marketName",
+                        text = "$itemCount itens · ${marketName.ifBlank { "mercado não selecionado" }}",
                         style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
                         color = TextSecondary
                     )
@@ -216,35 +223,43 @@ fun CarrinhoFechadoScreenReal(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(14.dp))
-                                .background(BrandGreen.copy(alpha = 0.12f))
-                                .padding(horizontal = 12.dp, vertical = 6.dp)
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(
-                                    imageVector = Icons.Default.Check,
-                                    contentDescription = null,
-                                    tint = BrandGreen,
-                                    modifier = Modifier.size(14.dp)
-                                )
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Text(
-                                    text = "economia ${PriceExtractor.formatCurrency(economiaReal)}",
-                                    style = MaterialTheme.typography.labelSmall.copy(
-                                        color = BrandGreen,
-                                        fontWeight = FontWeight.Bold
+                        if (hasGoal) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(14.dp))
+                                    .background(BrandGreen.copy(alpha = 0.12f))
+                                    .padding(horizontal = 12.dp, vertical = 6.dp)
+                            ) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        imageVector = Icons.Default.Check,
+                                        contentDescription = null,
+                                        tint = BrandGreen,
+                                        modifier = Modifier.size(14.dp)
                                     )
-                                )
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text(
+                                        text = "economia ${PriceExtractor.formatCurrency(economiaReal)}",
+                                        style = MaterialTheme.typography.labelSmall.copy(
+                                            color = BrandGreen,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    )
+                                }
                             }
-                        }
 
-                        Text(
-                            text = "vs. meta de ${PriceExtractor.formatCurrency(meta)}",
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp),
-                            color = TextSecondary
-                        )
+                            Text(
+                                text = "vs. meta de ${PriceExtractor.formatCurrency(meta)}",
+                                style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp),
+                                color = TextSecondary
+                            )
+                        } else {
+                            Text(
+                                text = "sem meta definida · toque no orçamento da tela inicial para definir",
+                                style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp),
+                                color = TextSecondary
+                            )
+                        }
                     }
                 }
             }
@@ -378,25 +393,18 @@ fun CarrinhoFechadoScreenReal(
 }
 
 // ---------------------------------------------------------------------------
-// Tela 12: Seleção de Mercado (Mockup 12)
+// Tela 12: Seleção de Mercado — dados reais do Supabase (cache em Room)
 // ---------------------------------------------------------------------------
 @Composable
 fun SelecaoMercadoScreenReal(
-    currentMarket: String = "Supermercados BH",
-    onSelectMarket: (String) -> Unit = {},
+    markets: List<Market> = emptyList(),
+    selectedMarketId: String = "",
+    isLoading: Boolean = false,
+    errorMessage: String? = null,
+    onRefresh: () -> Unit = {},
+    onSelectMarket: (Market) -> Unit = {},
     onBack: () -> Unit = {}
 ) {
-    var selected by remember { mutableStateOf(currentMarket) }
-
-    data class RedeItem(val name: String, val subtitle: String, val distance: String, val isPrimary: Boolean)
-    val redes = listOf(
-        RedeItem("Supermercados BH", "12 lojas na região", "2,4 km", true),
-        RedeItem("EPA Supermercados / Zepa", "8 lojas na região", "1,8 km", false),
-        RedeItem("Mart Minas Atacado e Varejo", "5 lojas na região", "3,1 km", false),
-        RedeItem("Carrefour Hipermercado", "3 lojas na região", "4,2 km", false),
-        RedeItem("Super Nosso Gourmet", "4 lojas na região", "2,9 km", false)
-    )
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -406,7 +414,6 @@ fun SelecaoMercadoScreenReal(
     ) {
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Top bar
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
@@ -426,7 +433,7 @@ fun SelecaoMercadoScreenReal(
                 )
             }
             Spacer(modifier = Modifier.width(12.dp))
-            Column {
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = "Selecionar mercado",
                     style = MaterialTheme.typography.titleLarge.copy(
@@ -437,59 +444,30 @@ fun SelecaoMercadoScreenReal(
                     color = TextPrimary
                 )
                 Text(
-                    text = "Escolha sua cidade e rede preferida",
+                    text = "Redes cadastradas na base do Fechou o Carrinho",
                     style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
                     color = TextSecondary
                 )
             }
-        }
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        // Card de Cidade
-        Text(
-            text = "sua cidade",
-            style = MaterialTheme.typography.titleSmall.copy(
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 15.sp
-            ),
-            color = TextPrimary
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(18.dp),
-            colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
-            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(38.dp)
-                        .clip(CircleShape)
-                        .background(BrandGreen.copy(alpha = 0.12f)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(Icons.Default.LocationOn, contentDescription = null, tint = BrandGreen, modifier = Modifier.size(20.dp))
+            IconButton(onClick = onRefresh, enabled = !isLoading) {
+                if (isLoading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(18.dp),
+                        strokeWidth = 2.dp,
+                        color = BrandGreen
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Default.Refresh,
+                        contentDescription = "Atualizar lista de mercados",
+                        tint = BrandGreen
+                    )
                 }
-                Spacer(modifier = Modifier.width(12.dp))
-                Column(modifier = Modifier.weight(1f)) {
-                    Text("Belo Horizonte · MG", fontWeight = FontWeight.Bold, color = TextPrimary)
-                    Text("Minas Gerais, Brasil", style = MaterialTheme.typography.bodySmall, color = TextSecondary)
-                }
-                Icon(Icons.Default.ChevronRight, contentDescription = null, tint = TextSecondary)
             }
         }
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Lista de Redes
         Text(
             text = "redes disponíveis",
             style = MaterialTheme.typography.titleSmall.copy(
@@ -499,115 +477,190 @@ fun SelecaoMercadoScreenReal(
             color = TextPrimary
         )
         Text(
-            text = "${redes.size} supermercados na sua região",
+            text = when {
+                isLoading && markets.isEmpty() -> "sincronizando com o Supabase…"
+                markets.isNotEmpty() -> "${markets.size} ${if (markets.size == 1) "supermercado" else "supermercados"} na base"
+                else -> "nenhum supermercado sincronizado ainda"
+            },
             style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
             color = TextSecondary
         )
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        LazyColumn(modifier = Modifier.weight(1f)) {
-            items(redes) { rede ->
-                val isSelected = rede.name == selected
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 5.dp)
-                        .clickable { selected = rede.name },
-                    shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = if (isSelected) BrandGreen else SurfaceWhite
-                    ),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(44.dp)
-                                .clip(RoundedCornerShape(12.dp))
-                                .background(
-                                    if (isSelected) Color.White.copy(alpha = 0.2f)
-                                    else BrandGreen.copy(alpha = 0.1f)
-                                ),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Storefront,
-                                contentDescription = null,
-                                tint = if (isSelected) Color.White else BrandGreen,
-                                modifier = Modifier.size(24.dp)
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.width(14.dp))
-
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = rede.name,
-                                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                                color = if (isSelected) Color.White else TextPrimary
-                            )
-                            Text(
-                                text = "${rede.distance} · ${rede.subtitle}",
-                                style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
-                                color = if (isSelected) Color.White.copy(alpha = 0.85f) else TextSecondary
-                            )
-                            if (isSelected) {
-                                Spacer(modifier = Modifier.height(4.dp))
-                                Box(
-                                    modifier = Modifier
-                                        .clip(RoundedCornerShape(8.dp))
-                                        .background(Color.White)
-                                        .padding(horizontal = 8.dp, vertical = 2.dp)
-                                ) {
-                                    Text(
-                                        text = "SELECIONADO",
-                                        style = MaterialTheme.typography.labelSmall.copy(
-                                            fontFamily = FontFamily.Monospace,
-                                            fontSize = 9.sp,
-                                            fontWeight = FontWeight.Bold
-                                        ),
-                                        color = BrandGreen
-                                    )
-                                }
-                            }
-                        }
-
-                        Box(
-                            modifier = Modifier
-                                .size(24.dp)
-                                .clip(CircleShape)
-                                .background(if (isSelected) Color.White else BorderLight),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            if (isSelected) {
-                                Icon(Icons.Default.Check, contentDescription = null, tint = BrandGreen, modifier = Modifier.size(16.dp))
-                            }
-                        }
+        if (errorMessage != null) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 10.dp),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = AccentOrange.copy(alpha = 0.10f))
+            ) {
+                Column(modifier = Modifier.padding(14.dp)) {
+                    Text(
+                        text = "Não foi possível atualizar agora",
+                        style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                        color = TextPrimary
+                    )
+                    Text(
+                        text = if (markets.isEmpty()) {
+                            "Sem conexão e sem cache local. Conecte-se e toque em atualizar."
+                        } else {
+                            "Mostrando as redes salvas no aparelho. $errorMessage"
+                        },
+                        style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                        color = TextSecondary
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    TextButton(onClick = onRefresh) {
+                        Text("Tentar novamente", color = BrandGreen, fontWeight = FontWeight.Bold)
                     }
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(14.dp))
+        when {
+            isLoading && markets.isEmpty() -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 40.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator(color = BrandGreen)
+                }
+            }
 
-        Button(
-            onClick = { onSelectMarket(selected) },
-            colors = ButtonDefaults.buttonColors(containerColor = BrandGreen),
-            shape = RoundedCornerShape(26.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(52.dp)
-        ) {
-            Text("Confirmar mercado", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+            markets.isEmpty() -> {
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(18.dp),
+                    colors = CardDefaults.cardColors(containerColor = SurfaceWhite)
+                ) {
+                    Column(modifier = Modifier.padding(20.dp)) {
+                        Text(
+                            text = "Nenhuma rede para escolher",
+                            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                            color = TextPrimary
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = "O app não inventa mercados: a lista vem do servidor. Conecte-se à internet e atualize para selecionar a rede onde você está comprando.",
+                            style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                            color = TextSecondary
+                        )
+                    }
+                }
+            }
+
+            else -> {
+                LazyColumn(modifier = Modifier.weight(1f)) {
+                    items(markets) { market ->
+                        val isSelected = market.id == selectedMarketId
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 5.dp)
+                                .clickable { onSelectMarket(market) },
+                            shape = RoundedCornerShape(20.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = if (isSelected) BrandGreen else SurfaceWhite
+                            ),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(44.dp)
+                                        .clip(RoundedCornerShape(12.dp))
+                                        .background(
+                                            if (isSelected) Color.White.copy(alpha = 0.2f)
+                                            else BrandGreen.copy(alpha = 0.1f)
+                                        ),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Storefront,
+                                        contentDescription = null,
+                                        tint = if (isSelected) Color.White else BrandGreen,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
+
+                                Spacer(modifier = Modifier.width(14.dp))
+
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Text(
+                                            text = market.name,
+                                            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                                            color = if (isSelected) Color.White else TextPrimary
+                                        )
+                                        if (market.isVerified) {
+                                            Spacer(modifier = Modifier.width(6.dp))
+                                            Icon(
+                                                imageVector = Icons.Default.Verified,
+                                                contentDescription = "Rede verificada",
+                                                tint = if (isSelected) Color.White else BrandGreen,
+                                                modifier = Modifier.size(14.dp)
+                                            )
+                                        }
+                                    }
+                                    Text(
+                                        text = market.locationLabel,
+                                        style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                                        color = if (isSelected) Color.White.copy(alpha = 0.85f) else TextSecondary
+                                    )
+                                    if (isSelected) {
+                                        Spacer(modifier = Modifier.height(4.dp))
+                                        Box(
+                                            modifier = Modifier
+                                                .clip(RoundedCornerShape(8.dp))
+                                                .background(Color.White)
+                                                .padding(horizontal = 8.dp, vertical = 2.dp)
+                                        ) {
+                                            Text(
+                                                text = "SELECIONADO",
+                                                style = MaterialTheme.typography.labelSmall.copy(
+                                                    fontFamily = FontFamily.Monospace,
+                                                    fontSize = 9.sp,
+                                                    fontWeight = FontWeight.Bold
+                                                ),
+                                                color = BrandGreen
+                                            )
+                                        }
+                                    }
+                                }
+
+                                Box(
+                                    modifier = Modifier
+                                        .size(24.dp)
+                                        .clip(CircleShape)
+                                        .background(if (isSelected) Color.White else BorderLight),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    if (isSelected) {
+                                        Icon(
+                                            Icons.Default.Check,
+                                            contentDescription = null,
+                                            tint = BrandGreen,
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    item { Spacer(modifier = Modifier.height(16.dp)) }
+                }
+            }
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
@@ -838,12 +891,15 @@ fun ListasScreenReal(
 }
 
 // ---------------------------------------------------------------------------
-// Tela 07: Aba Perfil (Mockup 07)
+// Tela 07: Aba Perfil — identidade e números reais do aparelho
 // ---------------------------------------------------------------------------
 @Composable
 fun PerfilScreenReal(
-    totalEconomizado: Double = 0.0,
-    nome: String = "Usuário offline",
+    nome: String = "Convidado",
+    accountLabel: String = "Sem conta conectada · modo offline",
+    totalRegistrado: Double = 0.0,
+    itemCount: Int = 0,
+    listCount: Int = 0,
     onBack: () -> Unit = {},
     onNavigateToAuth: () -> Unit = {}
 ) {
@@ -906,23 +962,14 @@ fun PerfilScreenReal(
                 Spacer(modifier = Modifier.width(16.dp))
                 Column(modifier = Modifier.weight(1f)) {
                     Text(nome, style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
-                    Text("Sem conta conectada", style = MaterialTheme.typography.bodySmall, color = TextSecondary)
-                    Spacer(modifier = Modifier.height(6.dp))
-                    Box(
-                        modifier = Modifier
-                            .clip(RoundedCornerShape(8.dp))
-                            .background(TextSecondary.copy(alpha = 0.12f))
-                            .padding(horizontal = 8.dp, vertical = 2.dp)
-                    ) {
-                        Text("PLANO GRATUITO", style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold), color = TextSecondary)
-                    }
+                    Text(accountLabel, style = MaterialTheme.typography.bodySmall, color = TextSecondary)
                 }
             }
         }
 
         Spacer(modifier = Modifier.height(14.dp))
 
-        // Savings Card Verde
+        // Números reais do Room: nada de economia inventada
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(24.dp),
@@ -930,13 +977,43 @@ fun PerfilScreenReal(
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
-                Text("economia acumulada", style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp), color = Color.White.copy(alpha = 0.85f))
+                Text(
+                    text = "total registrado",
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                    color = Color.White.copy(alpha = 0.85f)
+                )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    PriceExtractor.formatCurrency(totalEconomizado),
+                    PriceExtractor.formatCurrency(totalRegistrado),
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.ExtraBold, fontSize = 32.sp, color = Color.White)
                 )
-                Text(if (totalEconomizado > 0) "em compras registradas" else "nenhuma compra registrada ainda", style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp), color = Color.White.copy(alpha = 0.75f))
+                Spacer(modifier = Modifier.height(10.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(24.dp)) {
+                    Column {
+                        Text(
+                            itemCount.toString(),
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.ExtraBold),
+                            color = Color.White
+                        )
+                        Text(
+                            if (itemCount == 1) "item na lista" else "itens na lista",
+                            style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
+                            color = Color.White.copy(alpha = 0.8f)
+                        )
+                    }
+                    Column {
+                        Text(
+                            listCount.toString(),
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.ExtraBold),
+                            color = Color.White
+                        )
+                        Text(
+                            if (listCount == 1) "lista criada" else "listas criadas",
+                            style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
+                            color = Color.White.copy(alpha = 0.8f)
+                        )
+                    }
+                }
             }
         }
 
@@ -963,7 +1040,9 @@ fun PerfilScreenReal(
                     .fillMaxWidth()
                     .padding(vertical = 4.dp)
                     .clickable {
-                        if (title.contains("Sincronização")) onNavigateToAuth()
+                        when {
+                            title.contains("Sincronização") -> onNavigateToAuth()
+                        }
                     },
                 shape = RoundedCornerShape(18.dp),
                 colors = CardDefaults.cardColors(containerColor = SurfaceWhite),
@@ -1010,7 +1089,7 @@ fun ManualScreenReal(
     var preco by remember { mutableStateOf("") }
     var selectedCategory by remember { mutableStateOf("MERCEARIA") }
 
-    val categories = listOf("MERCEARIA", "LATICÍNIOS", "BEBIDAS", "HORTIFRUTI", "LIMPEZA")
+    val categories = listOf("MERCEARIA", "LATIC├ìNIOS", "BEBIDAS", "HORTIFRUTI", "LIMPEZA")
 
     Column(
         modifier = Modifier
@@ -1054,7 +1133,7 @@ fun ManualScreenReal(
                 OutlinedTextField(
                     value = nome,
                     onValueChange = { nome = it },
-                    placeholder = { Text("Ex: Arroz Tio João 5kg") },
+                    placeholder = { Text("Ex: Arroz Tio Jo├úo 5kg") },
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -1084,7 +1163,7 @@ fun ManualScreenReal(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                Text("Preço unitário (R$)", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
+                Text("Pre├ºo unit├írio (R$)", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = TextPrimary)
                 Spacer(modifier = Modifier.height(6.dp))
                 OutlinedTextField(
                     value = preco,
@@ -1124,10 +1203,15 @@ fun ManualScreenReal(
 @Composable
 fun ReciboScreenReal(
     prices: List<Price> = emptyList(),
+    marketName: String = "",
     onBack: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val total = prices.sumOf { it.value }
+    val dateLabel = remember {
+        java.text.SimpleDateFormat("dd/MM/yyyy 'às' HH:mm", java.util.Locale("pt", "BR"))
+            .format(java.util.Date())
+    }
 
     Column(
         modifier = Modifier
@@ -1168,7 +1252,11 @@ fun ReciboScreenReal(
         ) {
             Column(modifier = Modifier.padding(24.dp)) {
                 Text("Fechou o Carrinho", fontWeight = FontWeight.ExtraBold, fontSize = 22.sp, color = BrandGreen)
-                Text("Supermercados BH · Belo Horizonte, MG", style = MaterialTheme.typography.bodySmall, color = TextSecondary)
+                Text(
+                    text = "${marketName.ifBlank { "Mercado não selecionado" }} · $dateLabel",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = TextSecondary
+                )
                 Text("Cupom digital gerado offline", style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp), color = TextSecondary)
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -1279,7 +1367,7 @@ fun SplashScreenReal(onComeçar: () -> Unit = {}) {
 }
 
 // ---------------------------------------------------------------------------
-// Tela 04: Comparador de Mercados (Mockup 04)
+// Tela 04: Comparador de Mercados — só com preços reais por rede
 // ---------------------------------------------------------------------------
 @Composable
 fun ComparadorScreenReal(
@@ -1312,18 +1400,57 @@ fun ComparadorScreenReal(
         Spacer(modifier = Modifier.height(16.dp))
 
         if (prices.isEmpty()) {
-            Text("Escaneie itens para comparar o total entre mercados.", color = TextSecondary)
+            Text(
+                text = "Escaneie itens para comparar o total entre mercados.",
+                color = TextSecondary
+            )
             return@Column
         }
-        val currentTotal = prices.sumOf { it.value }
-        val comparacoes = listOf(
-            Triple("Supermercados BH", currentTotal, "Total dos itens escaneados"),
-            Triple("Mart Minas", currentTotal, "Sem dados de preços nesta rede"),
-            Triple("EPA Supermercados / Zepa", currentTotal, "Sem dados de preços nesta rede")
-        )
 
-        comparacoes.forEach { (mercado, valor, desc) ->
-            val isBest = mercado.contains("BH")
+        // Agrupa os itens realmente escaneados por mercado de origem.
+        val byMarket = prices.groupBy { it.marketName?.takeIf { name -> name.isNotBlank() } }
+        val withMarket = byMarket.filterKeys { it != null }
+        val withoutMarket = byMarket[null].orEmpty()
+
+        if (withMarket.isEmpty()) {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(18.dp),
+                colors = CardDefaults.cardColors(containerColor = SurfaceWhite)
+            ) {
+                Column(modifier = Modifier.padding(18.dp)) {
+                    Text(
+                        text = "Nenhum item vinculado a um mercado",
+                        style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                        color = TextPrimary
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Selecione o mercado na tela inicial antes de escanear. Assim cada preço fica ligado à rede onde foi coletado e a comparação é real.",
+                        style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                        color = TextSecondary
+                    )
+                }
+            }
+            if (withoutMarket.isNotEmpty()) {
+                Spacer(modifier = Modifier.height(12.dp))
+                Text(
+                    text = "${withoutMarket.size} ${if (withoutMarket.size == 1) "item sem mercado" else "itens sem mercado"} · total ${PriceExtractor.formatCurrency(withoutMarket.sumOf { it.value })}",
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                    color = TextSecondary
+                )
+            }
+            Spacer(modifier = Modifier.height(24.dp))
+            return@Column
+        }
+
+        val ranking = withMarket
+            .map { (market, items) -> Triple(market!!, items.sumOf { it.value }, items.size) }
+            .sortedBy { it.second }
+        val lowestTotal = ranking.first().second
+
+        ranking.forEach { (market, valor, count) ->
+            val isBest = ranking.size > 1 && valor == lowestTotal
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -1339,18 +1466,43 @@ fun ComparadorScreenReal(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
-                        Text(mercado, fontWeight = FontWeight.Bold, color = TextPrimary)
-                        Text(desc, style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp), color = TextSecondary)
+                        Text(market, fontWeight = FontWeight.Bold, color = TextPrimary)
+                        Text(
+                            text = "$count ${if (count == 1) "item escaneado" else "itens escaneados"} nesta rede",
+                            style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
+                            color = TextSecondary
+                        )
                     }
                     Column(horizontalAlignment = Alignment.End) {
                         Text(PriceExtractor.formatCurrency(valor), fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = if (isBest) BrandGreen else AccentOrange)
                         if (isBest) {
-                            Text("MENOR VALOR", style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold, fontSize = 9.sp), color = BrandGreen)
+                            Text("MENOR TOTAL", style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold, fontSize = 9.sp), color = BrandGreen)
                         }
                     }
                 }
             }
         }
+
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(
+            text = if (ranking.size == 1) {
+                "Comparação disponível quando você tiver itens em mais de um mercado."
+            } else {
+                "Comparação feita apenas com os itens que você escaneou em cada rede."
+            },
+            style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
+            color = TextSecondary
+        )
+
+        if (withoutMarket.isNotEmpty()) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "${withoutMarket.size} ${if (withoutMarket.size == 1) "item" else "itens"} sem mercado informado · ${PriceExtractor.formatCurrency(withoutMarket.sumOf { it.value })}",
+                style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
+                color = TextSecondary
+            )
+        }
+
         Spacer(modifier = Modifier.height(24.dp))
     }
 }
@@ -1360,11 +1512,12 @@ fun ComparadorScreenReal(
 // ---------------------------------------------------------------------------
 @Composable
 fun CorrecaoOcrScreenReal(
-    preco: Double = 28.90,
-    onConfirm: (Double) -> Unit = {},
+    preco: Double? = null,
+    label: String = "Item escaneado",
+    onConfirm: (Price) -> Unit = {},
     onBack: () -> Unit = {}
 ) {
-    var textVal by remember { mutableStateOf(PriceExtractor.formatCurrency(preco)) }
+    var textVal by remember { mutableStateOf(preco?.let { PriceExtractor.formatCurrency(it) } ?: "") }
 
     Column(
         modifier = Modifier
@@ -1395,38 +1548,33 @@ fun CorrecaoOcrScreenReal(
             colors = CardDefaults.cardColors(containerColor = SurfaceWhite)
         ) {
             Column(modifier = Modifier.padding(20.dp)) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(130.dp)
-                        .clip(RoundedCornerShape(14.dp))
-                        .background(BorderLight),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text("Recorte da foto da etiqueta", color = TextSecondary)
-                }
-                Spacer(modifier = Modifier.height(12.dp))
-                Box(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(BrandGreen.copy(alpha = 0.12f))
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                ) {
-                    Text("Confiança do OCR: 94%", style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold), color = BrandGreen)
-                }
+                Text(
+                    text = "Confira o preço lido na etiqueta e corrija se precisar.",
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 12.sp),
+                    color = TextSecondary
+                )
                 Spacer(modifier = Modifier.height(16.dp))
                 OutlinedTextField(
                     value = textVal,
                     onValueChange = { textVal = it },
-                    label = { Text("Preço detectado") },
+                    label = { Text("Preço") },
+                    placeholder = { Text("0,00") },
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 Button(
+                    enabled = textVal.toDoubleOrNullCompat() != null,
                     onClick = {
-                        val v = textVal.replace("R$", "").replace(" ", "").replace(".", "").replace(",", ".").toDoubleOrNull() ?: preco
-                        onConfirm(v)
+                        val v = textVal.toDoubleOrNullCompat() ?: return@Button
+                        onConfirm(
+                            Price(
+                                label = label,
+                                value = v,
+                                rawText = textVal.trim(),
+                                syncStatus = "PENDING"
+                            )
+                        )
                     },
                     modifier = Modifier.fillMaxWidth().height(50.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BrandGreen),
@@ -1438,3 +1586,8 @@ fun CorrecaoOcrScreenReal(
         }
     }
 }
+
+private fun String.toDoubleOrNullCompat(): Double? =
+    replace("R$", "").replace(" ", "")
+        .let { if (it.contains(",")) it.replace(".", "").replace(",", ".") else it }
+        .toDoubleOrNull()

@@ -2,6 +2,7 @@ package com.fechouocarrinho.app.data.repository
 
 import com.fechouocarrinho.app.data.local.PriceDao
 import com.fechouocarrinho.app.data.local.PriceEntity
+import com.fechouocarrinho.app.data.local.SettingsStore
 import com.fechouocarrinho.app.data.local.SyncStatus
 import com.fechouocarrinho.app.data.local.ShoppingListDao
 import com.fechouocarrinho.app.data.local.ShoppingListEntity
@@ -16,14 +17,14 @@ import com.fechouocarrinho.app.domain.repository.PriceRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
 class PriceRepositoryImpl(
     private val priceDao: PriceDao,
     private val supabaseApi: SupabaseApi,
-    private val shoppingListDao: ShoppingListDao
+    private val shoppingListDao: ShoppingListDao,
+    private val settings: SettingsStore
 ) : PriceRepository {
     private val _activeListId = MutableStateFlow(1L)
     override val activeListId = _activeListId.asStateFlow()
@@ -38,14 +39,17 @@ class PriceRepositoryImpl(
                 label = entity.label,
                 value = entity.value,
                 rawText = entity.rawText,
-                
                 createdAt = entity.createdAt,
-                syncStatus = entity.syncStatus.name
+                syncStatus = entity.syncStatus.name,
+                marketId = entity.marketId,
+                marketName = entity.marketName
             )
         }
     }
 
     override suspend fun save(price: Price): Long {
+        val marketId = settings.marketId.value.takeIf { it.isNotBlank() }
+        val marketName = settings.marketName.value.takeIf { it.isNotBlank() }
         val entity = PriceEntity(
             id = price.id,
             label = price.label,
@@ -53,7 +57,9 @@ class PriceRepositoryImpl(
             rawText = price.rawText,
             createdAt = price.createdAt,
             syncStatus = SyncStatus.PENDING,
-            listId = _activeListId.value
+            listId = _activeListId.value,
+            marketId = price.marketId ?: marketId,
+            marketName = price.marketName ?: marketName
         )
         return priceDao.insert(entity)
     }
@@ -62,14 +68,11 @@ class PriceRepositoryImpl(
         val pending = priceDao.getByStatus(SyncStatus.PENDING, _activeListId.value)
         if (pending.isEmpty()) return SyncResult.NothingToSync
 
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US).apply {
-            timeZone = TimeZone.getTimeZone("UTC")
-        }
         val dtos = pending.map { entity ->
             PriceDto(
                 price = entity.value,
                 productName = entity.label,
-                state = "MG",
+                supermarketId = entity.marketId,
                 source = "manual"
             )
         }
