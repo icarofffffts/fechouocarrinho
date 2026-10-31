@@ -1,6 +1,6 @@
 # Guia de Peças Promocionais — fechou o carrinho
 
-> Documento mantido por **Aura (Marketing & Promo Banners)**. Complementa `design-system/brand/brand-tokens.json`, a nota `Guia-Identidade-Visual` e a seção **05 — Banners e campanhas** de `landing-page-repo/src/app/pages/BrandIdentityPage.tsx`.
+> Documento mantido por **Aura (Marketing & Promo Banners)**. Complementa `materiais/04-marca/brand/brand-tokens.json`, a nota `Guia-Identidade-Visual` e a seção **05 — Banners e campanhas** de `landing-page-repo/src/app/pages/BrandIdentityPage.tsx`.
 
 ## 1. Objetivo
 
@@ -146,7 +146,7 @@ Exemplos:
 - `banner-square-aponte-capture-some-1080x1080.svg`
 - `banner-story-voce-compra-lista-faz-contas-1080x1920.svg`
 
-Localização: `design-system/banners-promo/` (origem) e espelho em `landing-page-repo/public/design-assets/`.
+Localização: `materiais/04-marca/banners-promo/` (origem) e espelho em `landing-page-repo/public/design-assets/`.
 
 ## 10. Checklist de produção
 

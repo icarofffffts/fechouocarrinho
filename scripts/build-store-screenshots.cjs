@@ -6,7 +6,7 @@ const { execFileSync } = require("child_process");
 
 const ROOT = path.resolve(__dirname, "..");
 const SCREENS = path.join(ROOT, "design", "app-screens");
-const OUT = path.join(ROOT, "playstore-assets", "screens");
+const OUT = path.join(ROOT, "materiais", "01-play-store", "screens");
 const TMP = path.join(ROOT, ".store-tmp");
 const EDGE = [
   "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",

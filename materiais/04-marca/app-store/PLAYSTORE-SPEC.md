@@ -14,7 +14,7 @@
 - **Slogan principal:** *Levou. Somou. Fechou.*
 - **Público-alvo:** compradores de supermercado que querem controle de gasto no carrinho, em especial em ambientes com sinal fraco (subsolo/estacionamento).
 
-Tokens de marca aplicados (ver `design-system/brand/brand-tokens.json`):
+Tokens de marca aplicados (ver `materiais/04-marca/brand/brand-tokens.json`):
 
 | Token | Hex | Uso |
 |---|---|---|
@@ -48,7 +48,7 @@ Tipografia: **Nunito 800** (display/títulos) · **Inter 400/500/600** (corpo/UI
 
 ## 3. Ícone do app (512 × 512)
 
-**Arquivo gerado:** `design-system/icons/ic_launcher_playstore.svg` (512×512).
+**Arquivo gerado:** `materiais/04-marca/icons/ic_launcher_playstore.svg` (512×512).
 
 Composição:
 - Fundo: gradiente diagonal `#1E9B49 → #146B32`.
@@ -66,7 +66,7 @@ Safe zone do ícone adaptativo Android (foreground 108×108 dp):
 
 ## 4. Feature Graphic (1024 × 500)
 
-**Arquivo gerado:** `design-system/app-store/playstore-feature-graphic-1024x500.svg`.
+**Arquivo gerado:** `materiais/04-marca/app-store/playstore-feature-graphic-1024x500.svg`.
 
 ### 4.1 Análise de composição
 
@@ -124,9 +124,9 @@ Regras:
 ## 5. Screenshots (1080 × 2400, 9:16)
 
 **Arquivos gerados:**
-- `design-system/app-store/screenshot-1-total-tempo-real-1080x2400.svg` — *Total da compra em tempo real.*
-- `design-system/app-store/screenshot-2-leitor-etiquetas-1080x2400.svg` — *Aponte a câmera, capture o preço.*
-- `design-system/app-store/screenshot-3-funciona-offline-1080x2400.svg` — *Funciona 100% sem conexão.*
+- `materiais/04-marca/app-store/screenshot-1-total-tempo-real-1080x2400.svg` — *Total da compra em tempo real.*
+- `materiais/04-marca/app-store/screenshot-2-leitor-etiquetas-1080x2400.svg` — *Aponte a câmera, capture o preço.*
+- `materiais/04-marca/app-store/screenshot-3-funciona-offline-1080x2400.svg` — *Funciona 100% sem conexão.*
 
 Template comum (`createPlaystoreScreenshot`):
 - Canvas 1080×2400, fundo colorido (verde / verde médio `#165D30` / verde escuro `#254E33`).
@@ -209,7 +209,7 @@ Para cobrir a exibição em tablets/Chromebooks e carrosséis horizontais, gerar
 
 ## 7. In-app banners
 
-**Diretório:** `design-system/in-app-banners/`. Estes banners não são da Play Store, mas são assets de UI interna do app Android (Compose). Documentados aqui por serem de responsabilidade de Canvas.
+**Diretório:** `materiais/04-marca/in-app-banners/`. Estes banners não são da Play Store, mas são assets de UI interna do app Android (Compose). Documentados aqui por serem de responsabilidade de Canvas.
 
 | Arquivo | Dimensão | Proporção | Raio | Uso sugerido |
 |---|---|---|---|---|
@@ -336,10 +336,10 @@ Retenção / upsell
 
 ## 11. Referências cruzadas
 
-- `design-system/brand/brand-tokens.json` — tokens de cor/tipo/espaçamento.
-- `design-system/icons/ic_launcher_playstore.svg` — ícone 512×512.
-- `design-system/app-store/*.svg` — feature graphic + 3 screenshots.
-- `design-system/in-app-banners/*.svg` — banners in-app.
+- `materiais/04-marca/brand/brand-tokens.json` — tokens de cor/tipo/espaçamento.
+- `materiais/04-marca/icons/ic_launcher_playstore.svg` — ícone 512×512.
+- `materiais/04-marca/app-store/*.svg` — feature graphic + 3 screenshots.
+- `materiais/04-marca/in-app-banners/*.svg` — banners in-app.
 - `scripts/generate-assets.js` — gerador dos SVGs (fonte de verdade).
 - `landing-page-repo/src/app/pages/BrandIdentityPage.tsx` — vitrine dos assets.
 - Nota Maestri: `Guia-Identidade-Visual`, `Roadmap-Assets-Design`.

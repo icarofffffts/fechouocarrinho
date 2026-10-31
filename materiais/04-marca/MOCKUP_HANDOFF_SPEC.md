@@ -4,14 +4,14 @@
 - **Destinatário:** Tales Head Tech & Squads de Engenharia (Volt - Android Kotlin, Lumen - Next.js)
 - **Status:** **APROVADO PELA DIRETORIA** (17/10/2026)
 - **Commit Base:** `229fe7a` (Master Ground: `C:\Users\usuario\orca\projects\ScanList`)
-- **Visualizador Interativo:** `design-system/mockups/index.html` (Servidor local: `http://localhost:3333`)
+- **Visualizador Interativo:** `materiais/04-marca/mockups/index.html` (Servidor local: `http://localhost:3333`)
 
 ---
 
 ## 1. Diretrizes Globais do Design System
 
 1. **Zero Emojis:** Todos os símbolos e ações utilizam estritamente iconografia vetorial SVG limpa (sem caracteres unicode/emojis).
-2. **Fotografia Real de Produtos:** Os itens de lista e reconhecimento visual utilizam fotografias reais em proporção 1:1 com bordas arredondadas (`clip-path` com raio de 8px). Localizadas em `design-system/mockups/products/`.
+2. **Fotografia Real de Produtos:** Os itens de lista e reconhecimento visual utilizam fotografias reais em proporção 1:1 com bordas arredondadas (`clip-path` com raio de 8px). Localizadas em `materiais/04-marca/mockups/products/`.
 3. **Cores Oficiais:**
    - Primária / Ação Positiva / Brand: `#1B8C42` (Verde Feira)
    - Secundária / Destaque / Alerta / Scanner: `#FF6B00` (Laranja Ação)
@@ -28,7 +28,7 @@
 ## 2. Mapa das 10 Telas & Especificações para Implementação
 
 ### Tela 01: Home / Dashboard da Lista Ativa
-- **Arquivo:** `design-system/mockups/mockup_01_home_dashboard.svg`
+- **Arquivo:** `materiais/04-marca/mockups/mockup_01_home_dashboard.svg`
 - **Componentes-Chave:**
   - Header fixo com logo e status da conexão ("100% Offline").
   - Card de Orçamento Dinâmico: Valor gasto acumulado (`R$ 142,80`), Meta definida (`R$ 200,00`) e barra de progresso visual colorida.
@@ -37,7 +37,7 @@
   - Bottom Navigation com Floating Action Button central em `#FF6B00` para abertura do Scanner.
 
 ### Tela 02: Scanner OCR de Preço na Gôndola
-- **Arquivo:** `design-system/mockups/mockup_02_scanner_ocr.svg`
+- **Arquivo:** `materiais/04-marca/mockups/mockup_02_scanner_ocr.svg`
 - **Componentes-Chave:**
   - Viewfinder de câmera em tela cheia com cantos guias em `#1B8C42`.
   - Caixa delimitadora (Bounding Box) destacando o preço na etiqueta de gôndola em tempo real.
@@ -46,7 +46,7 @@
   - Badge de segurança: "Processamento 100% Local (ML Kit Offline)".
 
 ### Tela 03: Carrinho Fechado (Total sem Sustos)
-- **Arquivo:** `design-system/mockups/mockup_03_carrinho_fechado.svg`
+- **Arquivo:** `materiais/04-marca/mockups/mockup_03_carrinho_fechado.svg`
 - **Componentes-Chave:**
   - Hero card de celebração com ilustração vetorial de check.
   - Grande display numérico: `R$ 189,40` (Total Calculado exato para conferência no caixa).
@@ -55,7 +55,7 @@
   - Ações primárias: Botão de "Finalizar Compra" e botão secundário "Compartilhar Recibo".
 
 ### Tela 04: Comparador de Redes de Supermercados
-- **Arquivo:** `design-system/mockups/mockup_04_comparador_mercados.svg`
+- **Arquivo:** `materiais/04-marca/mockups/mockup_04_comparador_mercados.svg`
 - **Componentes-Chave:**
   - Seletor do carrinho ativo.
   - Cards de redes concorrentes:
@@ -65,14 +65,14 @@
   - Ação: "Calcular rota" / "Ver no mapa".
 
 ### Tela 05: Widgets Android para a Home Screen
-- **Arquivo:** `design-system/mockups/mockup_05_widgets_android.svg`
+- **Arquivo:** `materiais/04-marca/mockups/mockup_05_widgets_android.svg`
 - **Especificação para Android (Glance / AppWidgetProvider):**
   - **Widget A (4×2 - Resumo de Orçamento):** Exibe total gasto, meta, barra de progresso visual e botão de atalho rápido para o Scanner.
   - **Widget B (4×3 - Lista Rápida Interativa):** Checkboxes clicáveis diretamente na tela inicial do Android, miniaturas dos produtos e contador de itens pendentes.
   - **Widget C (2×1 - Acesso Rápido OCR):** Botão de toque único em `#FF6B00` que inicializa a câmera diretamente em modo de reconhecimento de etiquetas.
 
 ### Tela 06: Aba de Gestão de Múltiplas Listas
-- **Arquivo:** `design-system/mockups/mockup_06_aba_listas.svg`
+- **Arquivo:** `materiais/04-marca/mockups/mockup_06_aba_listas.svg`
 - **Componentes-Chave:**
   - Abas/Filtros: "Todas as Listas", "Ativas", "Arquivadas".
   - Cards de listas:
@@ -83,7 +83,7 @@
   - FAB fixo inferior direito "+ Nova Lista".
 
 ### Tela 07: Aba de Perfil Principal
-- **Arquivo:** `design-system/mockups/mockup_07_aba_perfil.svg`
+- **Arquivo:** `materiais/04-marca/mockups/mockup_07_aba_perfil.svg`
 - **Componentes-Chave:**
   - Header de identificação com avatar vetorial e tag "Plano Gratuito".
   - Banner em destaque com a métrica de impacto: "R$ 342,80 Economizados no total".
@@ -94,21 +94,21 @@
     - Ajuda e Suporte.
 
 ### Tela 08: Opção de Perfil - Mercados Favoritos
-- **Arquivo:** `design-system/mockups/mockup_08_perfil_mercados.svg`
+- **Arquivo:** `materiais/04-marca/mockups/mockup_08_perfil_mercados.svg`
 - **Componentes-Chave:**
   - Controle de raio de busca por geolocalização (Slider de distância em km: 1km a 20km).
   - Lista de supermercados cadastrados com toggle de "Mercado Padrão".
   - Adição de novos estabelecimentos por proximidade ou busca de CEP.
 
 ### Tela 09: Opção de Perfil - Histórico de Compras
-- **Arquivo:** `design-system/mockups/mockup_09_perfil_historico.svg`
+- **Arquivo:** `materiais/04-marca/mockups/mockup_09_perfil_historico.svg`
 - **Componentes-Chave:**
   - Linha do tempo agrupada por mês.
   - Cards de compras finalizadas com data, supermercado visitado, total pago e economia apurada.
   - Botão para visualizar comprovante detalhado ou duplicar lista para uma nova compra.
 
 ### Tela 10: Opção de Perfil - Configurações & OCR
-- **Arquivo:** `design-system/mockups/mockup_10_perfil_configuracoes.svg`
+- **Arquivo:** `materiais/04-marca/mockups/mockup_10_perfil_configuracoes.svg`
 - **Componentes-Chave:**
   - Switches / Toggles:
     - "Modo 100% Offline": Garante que nenhum dado transite fora do dispositivo.
