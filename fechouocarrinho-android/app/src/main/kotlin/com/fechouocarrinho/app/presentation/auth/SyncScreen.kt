@@ -86,13 +86,13 @@ fun SyncScreen(
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.ExtraBold,
                         fontSize = 19.sp,
-                        color = Color(0xFF111827)
+                        color = Color(0xFF0B2B1F)
                     )
                 )
                 Text(
                     text = "Compartilhe listas com sua família em tempo real",
                     style = MaterialTheme.typography.bodySmall.copy(
-                        color = Color(0xFF6B7280),
+                        color = Color(0xFF5A6B63),
                         fontSize = 12.sp
                     )
                 )
@@ -132,13 +132,13 @@ fun SyncScreen(
                         style = MaterialTheme.typography.titleSmall.copy(
                             fontWeight = FontWeight.Bold,
                             fontSize = 16.sp,
-                            color = Color(0xFF111827)
+                            color = Color(0xFF0B2B1F)
                         )
                     )
                     Text(
                         text = userEmail,
                         style = MaterialTheme.typography.bodySmall.copy(
-                            color = Color(0xFF6B7280),
+                            color = Color(0xFF5A6B63),
                             fontSize = 13.sp
                         )
                     )
@@ -193,13 +193,13 @@ fun SyncScreen(
                         text = "Sincronização em tempo real",
                         style = MaterialTheme.typography.bodyMedium.copy(
                             fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF111827)
+                            color = Color(0xFF0B2B1F)
                         )
                     )
                     Text(
                         text = "Atualiza a lista em todos os aparelhos",
                         style = MaterialTheme.typography.bodySmall.copy(
-                            color = Color(0xFF6B7280),
+                            color = Color(0xFF5A6B63),
                             fontSize = 12.sp
                         )
                     )
@@ -230,13 +230,13 @@ fun SyncScreen(
                     modifier = Modifier
                         .size(38.dp)
                         .clip(SquircleSmall)
-                        .background(Color(0xFF6B7280).copy(alpha = 0.12f)),
+                        .background(Color(0xFF5A6B63).copy(alpha = 0.12f)),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         imageVector = Icons.Default.CloudDone,
                         contentDescription = null,
-                        tint = Color(0xFF6B7280)
+                        tint = Color(0xFF5A6B63)
                     )
                 }
                 Spacer(Modifier.width(12.dp))
@@ -245,13 +245,13 @@ fun SyncScreen(
                         text = "Backup na nuvem",
                         style = MaterialTheme.typography.bodyMedium.copy(
                             fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFF111827)
+                            color = Color(0xFF0B2B1F)
                         )
                     )
                     Text(
                         text = "Último backup: hoje, 09:41",
                         style = MaterialTheme.typography.bodySmall.copy(
-                            color = Color(0xFF6B7280),
+                            color = Color(0xFF5A6B63),
                             fontSize = 12.sp
                         )
                     )

@@ -29,8 +29,8 @@ import com.fechouocarrinho.app.presentation.theme.FechouOCarrinhoTheme
 private val BrandGreen = Color(0xFF1B8C42)
 private val AccentOrange = Color(0xFFFF6B00)
 private val AppBackground = Color(0xFFFFF8F0)
-private val TextPrimary = Color(0xFF111827)
-private val TextSecondary = Color(0xFF6B7280)
+private val TextPrimary = Color(0xFF0B2B1F)
+private val TextSecondary = Color(0xFF5A6B63)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

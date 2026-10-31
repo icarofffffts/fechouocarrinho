@@ -32,6 +32,6 @@ private fun ScreenShell(title: String) {
     Column(Modifier.fillMaxSize().background(AppBackground).padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
         Text(title, color = BrandGreen, style = MaterialTheme.typography.headlineMedium)
         Spacer(Modifier.height(8.dp))
-        Text("Em desenvolvimento", color = Color(0xFF6B7280))
+        Text("Em desenvolvimento", color = Color(0xFF5A6B63))
     }
 }

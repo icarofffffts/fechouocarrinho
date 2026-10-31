@@ -38,8 +38,8 @@ private val BrandGreenDark = Color(0xFF146B32)
 private val AccentOrange = Color(0xFFFF6B00)
 private val AppBackground = Color(0xFFFFF8F0)
 private val SurfaceWhite = Color(0xFFFFFFFF)
-private val TextPrimary = Color(0xFF111827)
-private val TextSecondary = Color(0xFF6B7280)
+private val TextPrimary = Color(0xFF0B2B1F)
+private val TextSecondary = Color(0xFF5A6B63)
 private val BorderLight = Color(0xFFEAE5DC)
 
 data class HomeListItem(

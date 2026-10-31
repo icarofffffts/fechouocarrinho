@@ -48,7 +48,7 @@ fun ScannerTipBanner() {
             Spacer(Modifier.width(12.dp))
             Column {
                 Text("Aponte para a etiqueta", style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold))
-                Text("Leitura instantânea 100% offline", style = MaterialTheme.typography.bodySmall.copy(color = Color(0xFF6B7280)))
+                Text("Leitura instantânea 100% offline", style = MaterialTheme.typography.bodySmall.copy(color = Color(0xFF5A6B63)))
             }
         }
     }

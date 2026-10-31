@@ -82,14 +82,14 @@ fun AuthScreen(
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 24.sp,
                 letterSpacing = (-0.5).sp,
-                color = Color(0xFF111827)
+                color = Color(0xFF0B2B1F)
             )
         )
         Spacer(Modifier.height(4.dp))
         Text(
             text = "Sincronize com a família e salve suas listas\nna nuvem. Ou use 100% offline.",
             style = MaterialTheme.typography.bodySmall.copy(
-                color = Color(0xFF6B7280),
+                color = Color(0xFF5A6B63),
                 fontSize = 13.sp,
                 lineHeight = 18.sp
             ),
@@ -134,7 +134,7 @@ fun AuthScreen(
                     text = "Continuar com Google",
                     style = MaterialTheme.typography.bodyMedium.copy(
                         fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFF111827)
+                        color = Color(0xFF0B2B1F)
                     )
                 )
             }

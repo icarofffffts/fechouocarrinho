@@ -409,8 +409,8 @@ private fun DetectedBottomSheet(
                     .align(Alignment.CenterHorizontally)
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Text("Preco detectado", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF111827))
-            Text("Confirme ou edite antes de adicionar", fontSize = 12.sp, color = Color(0xFF6B7280))
+            Text("Preco detectado", fontSize = 20.sp, fontWeight = FontWeight.ExtraBold, color = Color(0xFF0B2B1F))
+            Text("Confirme ou edite antes de adicionar", fontSize = 12.sp, color = Color(0xFF5A6B63))
             Spacer(modifier = Modifier.height(12.dp))
 
             Card(
@@ -431,8 +431,8 @@ private fun DetectedBottomSheet(
                     )
                     Spacer(modifier = Modifier.width(12.dp))
                     Column(modifier = Modifier.weight(1f)) {
-                        Text(detected.label, fontWeight = FontWeight.SemiBold, fontSize = 13.sp, color = Color(0xFF111827))
-                        Text("${marketName.ifBlank { "mercado não selecionado" }} · 1 un", fontSize = 11.sp, color = Color(0xFF6B7280))
+                        Text(detected.label, fontWeight = FontWeight.SemiBold, fontSize = 13.sp, color = Color(0xFF0B2B1F))
+                        Text("${marketName.ifBlank { "mercado não selecionado" }} · 1 un", fontSize = 11.sp, color = Color(0xFF5A6B63))
                     }
                     Text(
                         PriceExtractor.formatCurrency(detected.value),
@@ -444,7 +444,7 @@ private fun DetectedBottomSheet(
             }
 
             Spacer(modifier = Modifier.height(12.dp))
-            Text("Preco unitario", fontSize = 12.sp, color = Color(0xFF6B7280))
+            Text("Preco unitario", fontSize = 12.sp, color = Color(0xFF5A6B63))
             OutlinedTextField(
                 value = priceText,
                 onValueChange = { priceText = it },
@@ -453,13 +453,13 @@ private fun DetectedBottomSheet(
             )
 
             Spacer(modifier = Modifier.height(12.dp))
-            Text("Quantidade", fontSize = 12.sp, color = Color(0xFF6B7280))
+            Text("Quantidade", fontSize = 12.sp, color = Color(0xFF5A6B63))
             Row(verticalAlignment = Alignment.CenterVertically) {
                 CircleStepButton(text = "-", onClick = { if (quantity > 1) quantity-- })
                 Spacer(modifier = Modifier.width(8.dp))
                 Surface(
                     shape = RoundedCornerShape(12.dp),
-                    border = androidx.compose.foundation.BorderStroke(1.5.dp, Color(0xFF111827).copy(alpha = 0.12f)),
+                    border = androidx.compose.foundation.BorderStroke(1.5.dp, Color(0xFF0B2B1F).copy(alpha = 0.12f)),
                     color = Color.White,
                     modifier = Modifier.size(width = 60.dp, height = 40.dp)
                 ) {
@@ -475,7 +475,7 @@ private fun DetectedBottomSheet(
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 Button(
                     onClick = onEdit,
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEAE5DC), contentColor = Color(0xFF111827)),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEAE5DC), contentColor = Color(0xFF0B2B1F)),
                     shape = RoundedCornerShape(22.dp),
                     modifier = Modifier.weight(1f).height(44.dp)
                 ) { Text("Editar") }
@@ -498,7 +498,7 @@ private fun DetectedBottomSheet(
 @Composable
 private fun CircleStepButton(text: String, filled: Boolean = false, onClick: () -> Unit) {
     val bg = if (filled) ScanGreen else Color(0xFFEAE5DC)
-    val fg = if (filled) Color.White else Color(0xFF111827)
+    val fg = if (filled) Color.White else Color(0xFF0B2B1F)
     Box(
         modifier = Modifier
             .size(44.dp)
