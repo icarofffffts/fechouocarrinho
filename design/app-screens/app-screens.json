@@ -1,6 +1,6 @@
 {
   "name": "Fechou o Carrinho — app (12 telas)",
-  "lastModified": "2026-10-31T06:28:32.103Z",
+  "lastModified": "2026-10-31T13:03:28.751Z",
   "thumbnailUrl": "",
   "version": "1",
   "role": "owner",
@@ -11,7 +11,7 @@
     "type": "DOCUMENT",
     "children": [
       {
-        "id": "1:55",
+        "id": "1:61",
         "name": "01 Home",
         "type": "CANVAS",
         "backgroundColor": {
@@ -22,7 +22,7 @@
         },
         "children": [
           {
-            "id": "1:56",
+            "id": "1:62",
             "name": "01 Home",
             "type": "FRAME",
             "absoluteBoundingBox": {
@@ -112,13 +112,13 @@
               },
               {
                 "id": "1:3",
-                "name": "header verde",
+                "name": "logo mark",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
-                  "x": 16,
-                  "y": 40,
-                  "width": 358,
-                  "height": 74
+                  "x": 20,
+                  "y": 44,
+                  "width": 40,
+                  "height": 40
                 },
                 "fills": [
                   {
@@ -132,17 +132,27 @@
                     "opacity": 1
                   }
                 ],
-                "cornerRadius": 24
+                "cornerRadius": 12
               },
               {
                 "id": "1:4",
-                "name": "logo mark",
-                "type": "RECTANGLE",
+                "name": "logo check",
+                "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 34,
-                  "y": 56,
-                  "width": 42,
-                  "height": 42
+                  "x": 20,
+                  "y": 52,
+                  "width": 40,
+                  "height": 24
+                },
+                "characters": "✓",
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 700,
+                  "fontSize": 16,
+                  "lineHeightPx": 22,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "CENTER",
+                  "textAlignVertical": "TOP"
                 },
                 "fills": [
                   {
@@ -155,51 +165,17 @@
                     },
                     "opacity": 1
                   }
-                ],
-                "cornerRadius": 13
-              },
-              {
-                "id": "1:5",
-                "name": "logo check",
-                "type": "TEXT",
-                "absoluteBoundingBox": {
-                  "x": 34,
-                  "y": 64,
-                  "width": 42,
-                  "height": 26
-                },
-                "characters": "✓",
-                "style": {
-                  "fontFamily": "Inter",
-                  "fontWeight": 700,
-                  "fontSize": 17,
-                  "lineHeightPx": 24,
-                  "letterSpacing": 0,
-                  "textAlignHorizontal": "CENTER",
-                  "textAlignVertical": "TOP"
-                },
-                "fills": [
-                  {
-                    "type": "SOLID",
-                    "color": {
-                      "r": 0.10588235294117647,
-                      "g": 0.5490196078431373,
-                      "b": 0.25882352941176473,
-                      "a": 1
-                    },
-                    "opacity": 1
-                  }
                 ]
               },
               {
-                "id": "1:6",
+                "id": "1:5",
                 "name": "marca",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 88,
-                  "y": 58,
-                  "width": 150,
-                  "height": 18
+                  "x": 70,
+                  "y": 50,
+                  "width": 160,
+                  "height": 20
                 },
                 "characters": "fechou o carrinho",
                 "style": {
@@ -207,122 +183,9 @@
                   "fontWeight": 700,
                   "fontSize": 15,
                   "lineHeightPx": 21,
-                  "letterSpacing": 0,
+                  "letterSpacing": -0.4,
                   "textAlignHorizontal": "LEFT",
                   "textAlignVertical": "TOP"
-                },
-                "fills": [
-                  {
-                    "type": "SOLID",
-                    "color": {
-                      "r": 1,
-                      "g": 1,
-                      "b": 1,
-                      "a": 1
-                    },
-                    "opacity": 1
-                  }
-                ]
-              },
-              {
-                "id": "1:7",
-                "name": "sub",
-                "type": "TEXT",
-                "absoluteBoundingBox": {
-                  "x": 88,
-                  "y": 78,
-                  "width": 150,
-                  "height": 16
-                },
-                "characters": "olá, bora às compras?",
-                "style": {
-                  "fontFamily": "Inter",
-                  "fontWeight": 400,
-                  "fontSize": 10,
-                  "lineHeightPx": 14,
-                  "letterSpacing": 0,
-                  "textAlignHorizontal": "LEFT",
-                  "textAlignVertical": "TOP"
-                },
-                "fills": [
-                  {
-                    "type": "SOLID",
-                    "color": {
-                      "r": 1,
-                      "g": 1,
-                      "b": 1,
-                      "a": 1
-                    },
-                    "opacity": 1
-                  }
-                ]
-              },
-              {
-                "id": "1:8",
-                "name": "pill mercado",
-                "type": "RECTANGLE",
-                "absoluteBoundingBox": {
-                  "x": 226,
-                  "y": 64,
-                  "width": 144,
-                  "height": 26
-                },
-                "fills": [
-                  {
-                    "type": "SOLID",
-                    "color": {
-                      "r": 1,
-                      "g": 1,
-                      "b": 1,
-                      "a": 1
-                    },
-                    "opacity": 0.2
-                  }
-                ],
-                "cornerRadius": 10
-              },
-              {
-                "id": "1:9",
-                "name": "pill texto",
-                "type": "TEXT",
-                "absoluteBoundingBox": {
-                  "x": 232,
-                  "y": 70,
-                  "width": 132,
-                  "height": 14
-                },
-                "characters": "escolher mercado",
-                "style": {
-                  "fontFamily": "Inter",
-                  "fontWeight": 600,
-                  "fontSize": 9,
-                  "lineHeightPx": 13,
-                  "letterSpacing": 0,
-                  "textAlignHorizontal": "CENTER",
-                  "textAlignVertical": "TOP"
-                },
-                "fills": [
-                  {
-                    "type": "SOLID",
-                    "color": {
-                      "r": 1,
-                      "g": 1,
-                      "b": 1,
-                      "a": 1
-                    },
-                    "opacity": 1
-                  }
-                ]
-              },
-              {
-                "id": "1:10",
-                "name": "banner boas-vindas",
-                "type": "RECTANGLE",
-                "absoluteBoundingBox": {
-                  "x": 16,
-                  "y": 126,
-                  "width": 358,
-                  "height": 74
                 },
                 "fills": [
                   {
@@ -335,8 +198,31 @@
                     },
                     "opacity": 1
                   }
+                ]
+              },
+              {
+                "id": "1:6",
+                "name": "chip mercado",
+                "type": "RECTANGLE",
+                "absoluteBoundingBox": {
+                  "x": 222,
+                  "y": 48,
+                  "width": 148,
+                  "height": 32
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "opacity": 1
+                  }
                 ],
-                "cornerRadius": 22,
+                "cornerRadius": 16,
                 "strokes": [
                   {
                     "type": "SOLID",
@@ -346,30 +232,153 @@
                       "b": 0.12156862745098039,
                       "a": 1
                     },
-                    "opacity": 0.1
+                    "opacity": 0.15
                   }
                 ],
                 "strokeWeight": 1,
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:11",
-                "name": "banner titulo",
+                "id": "1:7",
+                "name": "chip texto",
+                "type": "TEXT",
+                "absoluteBoundingBox": {
+                  "x": 234,
+                  "y": 57,
+                  "width": 118,
+                  "height": 14
+                },
+                "characters": "BH Supermercados",
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 600,
+                  "fontSize": 9,
+                  "lineHeightPx": 13,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP"
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.043137254901960784,
+                      "g": 0.16862745098039217,
+                      "b": 0.12156862745098039,
+                      "a": 1
+                    },
+                    "opacity": 1
+                  }
+                ]
+              },
+              {
+                "id": "1:8",
+                "name": "chip caret",
+                "type": "TEXT",
+                "absoluteBoundingBox": {
+                  "x": 354,
+                  "y": 55,
+                  "width": 10,
+                  "height": 14
+                },
+                "characters": "▾",
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 400,
+                  "fontSize": 8,
+                  "lineHeightPx": 11,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP"
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.35294117647058826,
+                      "g": 0.4196078431372549,
+                      "b": 0.38823529411764707,
+                      "a": 1
+                    },
+                    "opacity": 1
+                  }
+                ]
+              },
+              {
+                "id": "1:9",
+                "name": "hero",
+                "type": "RECTANGLE",
+                "absoluteBoundingBox": {
+                  "x": 16,
+                  "y": 104,
+                  "width": 358,
+                  "height": 152
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.043137254901960784,
+                      "g": 0.16862745098039217,
+                      "b": 0.12156862745098039,
+                      "a": 1
+                    },
+                    "opacity": 1
+                  }
+                ],
+                "cornerRadius": 26
+              },
+              {
+                "id": "1:10",
+                "name": "hero label",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 36,
-                  "y": 144,
-                  "width": 220,
-                  "height": 20
+                  "y": 124,
+                  "width": 200,
+                  "height": 14
                 },
-                "characters": "Escaneie e saiba o total",
+                "characters": "ORÇAMENTO DA COMPRA",
                 "style": {
-                  "fontFamily": "Nunito",
+                  "fontFamily": "Inter",
                   "fontWeight": 700,
-                  "fontSize": 14,
-                  "lineHeightPx": 20,
-                  "letterSpacing": 0,
+                  "fontSize": 8,
+                  "lineHeightPx": 11,
+                  "letterSpacing": 1.4,
                   "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP"
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "opacity": 1
+                  }
+                ]
+              },
+              {
+                "id": "1:11",
+                "name": "hero editar",
+                "type": "TEXT",
+                "absoluteBoundingBox": {
+                  "x": 270,
+                  "y": 124,
+                  "width": 84,
+                  "height": 14
+                },
+                "characters": "editar meta",
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 600,
+                  "fontSize": 9,
+                  "lineHeightPx": 13,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "RIGHT",
                   "textAlignVertical": "TOP"
                 },
                 "fills": [
@@ -387,21 +396,21 @@
               },
               {
                 "id": "1:12",
-                "name": "banner texto",
+                "name": "hero total",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 36,
-                  "y": 166,
-                  "width": 240,
-                  "height": 24
+                  "y": 144,
+                  "width": 260,
+                  "height": 46
                 },
-                "characters": "Aponte para a etiqueta. A conta é feita aqui.",
+                "characters": "R$ 58,85",
                 "style": {
-                  "fontFamily": "Inter",
-                  "fontWeight": 400,
-                  "fontSize": 9,
-                  "lineHeightPx": 13,
-                  "letterSpacing": 0,
+                  "fontFamily": "Nunito",
+                  "fontWeight": 700,
+                  "fontSize": 38,
+                  "lineHeightPx": 53,
+                  "letterSpacing": -1.8,
                   "textAlignHorizontal": "LEFT",
                   "textAlignVertical": "TOP"
                 },
@@ -420,110 +429,15 @@
               },
               {
                 "id": "1:13",
-                "name": "banner botao",
-                "type": "RECTANGLE",
-                "absoluteBoundingBox": {
-                  "x": 284,
-                  "y": 150,
-                  "width": 74,
-                  "height": 28
-                },
-                "fills": [
-                  {
-                    "type": "SOLID",
-                    "color": {
-                      "r": 1,
-                      "g": 1,
-                      "b": 1,
-                      "a": 1
-                    },
-                    "opacity": 1
-                  }
-                ],
-                "cornerRadius": 14
-              },
-              {
-                "id": "1:14",
-                "name": "banner botao texto",
+                "name": "hero meta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 284,
-                  "y": 157,
-                  "width": 74,
+                  "x": 36,
+                  "y": 192,
+                  "width": 180,
                   "height": 14
                 },
-                "characters": "Escanear",
-                "style": {
-                  "fontFamily": "Inter",
-                  "fontWeight": 600,
-                  "fontSize": 9,
-                  "lineHeightPx": 13,
-                  "letterSpacing": 0,
-                  "textAlignHorizontal": "CENTER",
-                  "textAlignVertical": "TOP"
-                },
-                "fills": [
-                  {
-                    "type": "SOLID",
-                    "color": {
-                      "r": 0.10588235294117647,
-                      "g": 0.5490196078431373,
-                      "b": 0.25882352941176473,
-                      "a": 1
-                    },
-                    "opacity": 1
-                  }
-                ]
-              },
-              {
-                "id": "1:15",
-                "name": "card orcamento",
-                "type": "RECTANGLE",
-                "absoluteBoundingBox": {
-                  "x": 16,
-                  "y": 216,
-                  "width": 358,
-                  "height": 116
-                },
-                "fills": [
-                  {
-                    "type": "SOLID",
-                    "color": {
-                      "r": 1,
-                      "g": 1,
-                      "b": 1,
-                      "a": 1
-                    },
-                    "opacity": 1
-                  }
-                ],
-                "cornerRadius": 18,
-                "strokes": [
-                  {
-                    "type": "SOLID",
-                    "color": {
-                      "r": 0.043137254901960784,
-                      "g": 0.16862745098039217,
-                      "b": 0.12156862745098039,
-                      "a": 1
-                    },
-                    "opacity": 0.1
-                  }
-                ],
-                "strokeWeight": 1,
-                "strokeAlign": "INSIDE"
-              },
-              {
-                "id": "1:16",
-                "name": "orcamento label",
-                "type": "TEXT",
-                "absoluteBoundingBox": {
-                  "x": 34,
-                  "y": 232,
-                  "width": 200,
-                  "height": 14
-                },
-                "characters": "orçamento da compra",
+                "characters": "de R$ 200,00",
                 "style": {
                   "fontFamily": "Inter",
                   "fontWeight": 400,
@@ -537,9 +451,9 @@
                   {
                     "type": "SOLID",
                     "color": {
-                      "r": 0.35294117647058826,
-                      "g": 0.4196078431372549,
-                      "b": 0.38823529411764707,
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
                       "a": 1
                     },
                     "opacity": 1
@@ -547,87 +461,21 @@
                 ]
               },
               {
-                "id": "1:17",
-                "name": "orcamento total",
+                "id": "1:14",
+                "name": "hero falta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 34,
-                  "y": 248,
-                  "width": 240,
-                  "height": 34
-                },
-                "characters": "R$ 53,28",
-                "style": {
-                  "fontFamily": "Nunito",
-                  "fontWeight": 700,
-                  "fontSize": 28,
-                  "lineHeightPx": 39,
-                  "letterSpacing": -1,
-                  "textAlignHorizontal": "LEFT",
-                  "textAlignVertical": "TOP"
-                },
-                "fills": [
-                  {
-                    "type": "SOLID",
-                    "color": {
-                      "r": 0.043137254901960784,
-                      "g": 0.16862745098039217,
-                      "b": 0.12156862745098039,
-                      "a": 1
-                    },
-                    "opacity": 1
-                  }
-                ]
-              },
-              {
-                "id": "1:18",
-                "name": "orcamento meta",
-                "type": "TEXT",
-                "absoluteBoundingBox": {
-                  "x": 34,
-                  "y": 282,
-                  "width": 240,
+                  "x": 196,
+                  "y": 192,
+                  "width": 158,
                   "height": 14
                 },
-                "characters": "de R$ 200,00 (meta)",
-                "style": {
-                  "fontFamily": "Inter",
-                  "fontWeight": 400,
-                  "fontSize": 11,
-                  "lineHeightPx": 15,
-                  "letterSpacing": 0,
-                  "textAlignHorizontal": "LEFT",
-                  "textAlignVertical": "TOP"
-                },
-                "fills": [
-                  {
-                    "type": "SOLID",
-                    "color": {
-                      "r": 0.35294117647058826,
-                      "g": 0.4196078431372549,
-                      "b": 0.38823529411764707,
-                      "a": 1
-                    },
-                    "opacity": 1
-                  }
-                ]
-              },
-              {
-                "id": "1:19",
-                "name": "orcamento editar",
-                "type": "TEXT",
-                "absoluteBoundingBox": {
-                  "x": 286,
-                  "y": 232,
-                  "width": 70,
-                  "height": 14
-                },
-                "characters": "editar meta",
+                "characters": "faltam R$ 141,15",
                 "style": {
                   "fontFamily": "Inter",
                   "fontWeight": 600,
-                  "fontSize": 9,
-                  "lineHeightPx": 13,
+                  "fontSize": 10,
+                  "lineHeightPx": 14,
                   "letterSpacing": 0,
                   "textAlignHorizontal": "RIGHT",
                   "textAlignVertical": "TOP"
@@ -636,9 +484,9 @@
                   {
                     "type": "SOLID",
                     "color": {
-                      "r": 0.10588235294117647,
-                      "g": 0.5490196078431373,
-                      "b": 0.25882352941176473,
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
                       "a": 1
                     },
                     "opacity": 1
@@ -646,14 +494,238 @@
                 ]
               },
               {
-                "id": "1:20",
-                "name": "barra fundo",
+                "id": "1:15",
+                "name": "hero trilha",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
-                  "x": 34,
-                  "y": 304,
-                  "width": 290,
+                  "x": 36,
+                  "y": 216,
+                  "width": 318,
+                  "height": 6
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "opacity": 0.18
+                  }
+                ],
+                "cornerRadius": 3
+              },
+              {
+                "id": "1:16",
+                "name": "hero progresso",
+                "type": "RECTANGLE",
+                "absoluteBoundingBox": {
+                  "x": 36,
+                  "y": 216,
+                  "width": 94,
+                  "height": 6
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.20784313725490197,
+                      "g": 0.7254901960784313,
+                      "b": 0.41568627450980394,
+                      "a": 1
+                    },
+                    "opacity": 1
+                  }
+                ],
+                "cornerRadius": 3
+              },
+              {
+                "id": "1:17",
+                "name": "cta escanear",
+                "type": "RECTANGLE",
+                "absoluteBoundingBox": {
+                  "x": 16,
+                  "y": 272,
+                  "width": 250,
+                  "height": 54
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1,
+                      "g": 0.4196078431372549,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "opacity": 1
+                  }
+                ],
+                "cornerRadius": 27
+              },
+              {
+                "id": "1:18",
+                "name": "cta camera corpo",
+                "type": "RECTANGLE",
+                "absoluteBoundingBox": {
+                  "x": 38,
+                  "y": 291,
+                  "width": 20,
+                  "height": 15
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "opacity": 1
+                  }
+                ],
+                "cornerRadius": 4
+              },
+              {
+                "id": "1:19",
+                "name": "cta camera topo",
+                "type": "RECTANGLE",
+                "absoluteBoundingBox": {
+                  "x": 43,
+                  "y": 288,
+                  "width": 10,
+                  "height": 5
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "opacity": 1
+                  }
+                ],
+                "cornerRadius": 2
+              },
+              {
+                "id": "1:20",
+                "name": "cta camera lente",
+                "type": "ELLIPSE",
+                "absoluteBoundingBox": {
+                  "x": 44,
+                  "y": 294,
+                  "width": 8,
                   "height": 8
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1,
+                      "g": 0.4196078431372549,
+                      "b": 0,
+                      "a": 1
+                    },
+                    "opacity": 1
+                  }
+                ]
+              },
+              {
+                "id": "1:21",
+                "name": "cta texto",
+                "type": "TEXT",
+                "absoluteBoundingBox": {
+                  "x": 66,
+                  "y": 291,
+                  "width": 180,
+                  "height": 18
+                },
+                "characters": "Escanear etiqueta",
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 700,
+                  "fontSize": 13,
+                  "lineHeightPx": 18,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP"
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "opacity": 1
+                  }
+                ]
+              },
+              {
+                "id": "1:22",
+                "name": "cta manual",
+                "type": "RECTANGLE",
+                "absoluteBoundingBox": {
+                  "x": 278,
+                  "y": 272,
+                  "width": 96,
+                  "height": 54
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1,
+                      "a": 1
+                    },
+                    "opacity": 1
+                  }
+                ],
+                "cornerRadius": 27,
+                "strokes": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.043137254901960784,
+                      "g": 0.16862745098039217,
+                      "b": 0.12156862745098039,
+                      "a": 1
+                    },
+                    "opacity": 0.15
+                  }
+                ],
+                "strokeWeight": 1,
+                "strokeAlign": "INSIDE"
+              },
+              {
+                "id": "1:23",
+                "name": "cta manual texto",
+                "type": "TEXT",
+                "absoluteBoundingBox": {
+                  "x": 278,
+                  "y": 291,
+                  "width": 96,
+                  "height": 18
+                },
+                "characters": "+ Manual",
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 600,
+                  "fontSize": 11,
+                  "lineHeightPx": 15,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "CENTER",
+                  "textAlignVertical": "TOP"
                 },
                 "fills": [
                   {
@@ -664,38 +736,13 @@
                       "b": 0.12156862745098039,
                       "a": 1
                     },
-                    "opacity": 0.1
-                  }
-                ],
-                "cornerRadius": 4
-              },
-              {
-                "id": "1:21",
-                "name": "barra fill",
-                "type": "RECTANGLE",
-                "absoluteBoundingBox": {
-                  "x": 34,
-                  "y": 304,
-                  "width": null,
-                  "height": 8
-                },
-                "fills": [
-                  {
-                    "type": "SOLID",
-                    "color": {
-                      "r": 0.10588235294117647,
-                      "g": 0.5490196078431373,
-                      "b": 0.25882352941176473,
-                      "a": 1
-                    },
                     "opacity": 1
                   }
-                ],
-                "cornerRadius": 4
+                ]
               },
               {
-                "id": "1:22",
-                "name": "secao lista de compras",
+                "id": "1:24",
+                "name": "secao lista",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 20,
@@ -727,8 +774,8 @@
                 ]
               },
               {
-                "id": "1:23",
-                "name": "secao meta lista de compras",
+                "id": "1:25",
+                "name": "secao meta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 250,
@@ -760,14 +807,37 @@
                 ]
               },
               {
-                "id": "1:24",
-                "name": "item Arroz branco 5kg",
+                "id": "1:26",
+                "name": "divisor 0",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
-                  "x": 16,
-                  "y": 392,
-                  "width": 358,
-                  "height": 62
+                  "x": 20,
+                  "y": 454,
+                  "width": 350,
+                  "height": 1
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.043137254901960784,
+                      "g": 0.16862745098039217,
+                      "b": 0.12156862745098039,
+                      "a": 1
+                    },
+                    "opacity": 0.1
+                  }
+                ]
+              },
+              {
+                "id": "1:27",
+                "name": "check 0",
+                "type": "RECTANGLE",
+                "absoluteBoundingBox": {
+                  "x": 20,
+                  "y": 404,
+                  "width": 24,
+                  "height": 24
                 },
                 "fills": [
                   {
@@ -781,7 +851,7 @@
                     "opacity": 1
                   }
                 ],
-                "cornerRadius": 16,
+                "cornerRadius": 12,
                 "strokes": [
                   {
                     "type": "SOLID",
@@ -791,21 +861,21 @@
                       "b": 0.12156862745098039,
                       "a": 1
                     },
-                    "opacity": 0.1
+                    "opacity": 0.25
                   }
                 ],
                 "strokeWeight": 1,
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:25",
-                "name": "thumb Arroz branco 5kg",
+                "id": "1:28",
+                "name": "thumb 0",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
-                  "x": 28,
-                  "y": 403,
-                  "width": 40,
-                  "height": 40
+                  "x": 56,
+                  "y": 394,
+                  "width": 44,
+                  "height": 44
                 },
                 "fills": [
                   {
@@ -816,20 +886,20 @@
                       "b": 0.12156862745098039,
                       "a": 1
                     },
-                    "opacity": 0.08
+                    "opacity": 0.07
                   }
                 ],
-                "cornerRadius": 11
+                "cornerRadius": 12
               },
               {
-                "id": "1:26",
-                "name": "nome Arroz branco 5kg",
+                "id": "1:29",
+                "name": "nome 0",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 80,
-                  "y": 406,
+                  "x": 112,
+                  "y": 396,
                   "width": 190,
-                  "height": 16
+                  "height": 18
                 },
                 "characters": "Arroz branco 5kg",
                 "style": {
@@ -855,13 +925,13 @@
                 ]
               },
               {
-                "id": "1:27",
-                "name": "qtd Arroz branco 5kg",
+                "id": "1:30",
+                "name": "qtd 0",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 80,
-                  "y": 426,
-                  "width": 160,
+                  "x": 112,
+                  "y": 416,
+                  "width": 190,
                   "height": 14
                 },
                 "characters": "1 un · Mercearia",
@@ -888,21 +958,21 @@
                 ]
               },
               {
-                "id": "1:28",
-                "name": "preco Arroz branco 5kg",
+                "id": "1:31",
+                "name": "preco 0",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 264,
-                  "y": 414,
-                  "width": 90,
-                  "height": 18
+                  "x": 252,
+                  "y": 404,
+                  "width": 118,
+                  "height": 20
                 },
                 "characters": "R$ 28,90",
                 "style": {
                   "fontFamily": "Nunito",
                   "fontWeight": 700,
-                  "fontSize": 13,
-                  "lineHeightPx": 18,
+                  "fontSize": 14,
+                  "lineHeightPx": 20,
                   "letterSpacing": 0,
                   "textAlignHorizontal": "RIGHT",
                   "textAlignVertical": "TOP"
@@ -921,14 +991,37 @@
                 ]
               },
               {
-                "id": "1:29",
-                "name": "item Feijão carioca 1kg",
+                "id": "1:32",
+                "name": "divisor 1",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
-                  "x": 16,
-                  "y": 464,
-                  "width": 358,
-                  "height": 62
+                  "x": 20,
+                  "y": 528,
+                  "width": 350,
+                  "height": 1
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.043137254901960784,
+                      "g": 0.16862745098039217,
+                      "b": 0.12156862745098039,
+                      "a": 1
+                    },
+                    "opacity": 0.1
+                  }
+                ]
+              },
+              {
+                "id": "1:33",
+                "name": "check 1",
+                "type": "RECTANGLE",
+                "absoluteBoundingBox": {
+                  "x": 20,
+                  "y": 478,
+                  "width": 24,
+                  "height": 24
                 },
                 "fills": [
                   {
@@ -942,7 +1035,7 @@
                     "opacity": 1
                   }
                 ],
-                "cornerRadius": 16,
+                "cornerRadius": 12,
                 "strokes": [
                   {
                     "type": "SOLID",
@@ -952,21 +1045,21 @@
                       "b": 0.12156862745098039,
                       "a": 1
                     },
-                    "opacity": 0.1
+                    "opacity": 0.25
                   }
                 ],
                 "strokeWeight": 1,
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:30",
-                "name": "thumb Feijão carioca 1kg",
+                "id": "1:34",
+                "name": "thumb 1",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
-                  "x": 28,
-                  "y": 475,
-                  "width": 40,
-                  "height": 40
+                  "x": 56,
+                  "y": 468,
+                  "width": 44,
+                  "height": 44
                 },
                 "fills": [
                   {
@@ -977,20 +1070,20 @@
                       "b": 0.12156862745098039,
                       "a": 1
                     },
-                    "opacity": 0.08
+                    "opacity": 0.07
                   }
                 ],
-                "cornerRadius": 11
+                "cornerRadius": 12
               },
               {
-                "id": "1:31",
-                "name": "nome Feijão carioca 1kg",
+                "id": "1:35",
+                "name": "nome 1",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 80,
-                  "y": 478,
+                  "x": 112,
+                  "y": 470,
                   "width": 190,
-                  "height": 16
+                  "height": 18
                 },
                 "characters": "Feijão carioca 1kg",
                 "style": {
@@ -1016,13 +1109,13 @@
                 ]
               },
               {
-                "id": "1:32",
-                "name": "qtd Feijão carioca 1kg",
+                "id": "1:36",
+                "name": "qtd 1",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 80,
-                  "y": 498,
-                  "width": 160,
+                  "x": 112,
+                  "y": 490,
+                  "width": 190,
                   "height": 14
                 },
                 "characters": "2 un · Mercearia",
@@ -1049,21 +1142,21 @@
                 ]
               },
               {
-                "id": "1:33",
-                "name": "preco Feijão carioca 1kg",
+                "id": "1:37",
+                "name": "preco 1",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 264,
-                  "y": 486,
-                  "width": 90,
-                  "height": 18
+                  "x": 252,
+                  "y": 478,
+                  "width": 118,
+                  "height": 20
                 },
                 "characters": "R$ 14,98",
                 "style": {
                   "fontFamily": "Nunito",
                   "fontWeight": 700,
-                  "fontSize": 13,
-                  "lineHeightPx": 18,
+                  "fontSize": 14,
+                  "lineHeightPx": 20,
                   "letterSpacing": 0,
                   "textAlignHorizontal": "RIGHT",
                   "textAlignVertical": "TOP"
@@ -1082,14 +1175,37 @@
                 ]
               },
               {
-                "id": "1:34",
-                "name": "item Leite integral 1L",
+                "id": "1:38",
+                "name": "divisor 2",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
-                  "x": 16,
-                  "y": 536,
-                  "width": 358,
-                  "height": 62
+                  "x": 20,
+                  "y": 602,
+                  "width": 350,
+                  "height": 1
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.043137254901960784,
+                      "g": 0.16862745098039217,
+                      "b": 0.12156862745098039,
+                      "a": 1
+                    },
+                    "opacity": 0.1
+                  }
+                ]
+              },
+              {
+                "id": "1:39",
+                "name": "check 2",
+                "type": "RECTANGLE",
+                "absoluteBoundingBox": {
+                  "x": 20,
+                  "y": 552,
+                  "width": 24,
+                  "height": 24
                 },
                 "fills": [
                   {
@@ -1103,7 +1219,7 @@
                     "opacity": 1
                   }
                 ],
-                "cornerRadius": 16,
+                "cornerRadius": 12,
                 "strokes": [
                   {
                     "type": "SOLID",
@@ -1113,21 +1229,21 @@
                       "b": 0.12156862745098039,
                       "a": 1
                     },
-                    "opacity": 0.1
+                    "opacity": 0.25
                   }
                 ],
                 "strokeWeight": 1,
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:35",
-                "name": "thumb Leite integral 1L",
+                "id": "1:40",
+                "name": "thumb 2",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
-                  "x": 28,
-                  "y": 547,
-                  "width": 40,
-                  "height": 40
+                  "x": 56,
+                  "y": 542,
+                  "width": 44,
+                  "height": 44
                 },
                 "fills": [
                   {
@@ -1138,20 +1254,20 @@
                       "b": 0.12156862745098039,
                       "a": 1
                     },
-                    "opacity": 0.08
+                    "opacity": 0.07
                   }
                 ],
-                "cornerRadius": 11
+                "cornerRadius": 12
               },
               {
-                "id": "1:36",
-                "name": "nome Leite integral 1L",
+                "id": "1:41",
+                "name": "nome 2",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 80,
-                  "y": 550,
+                  "x": 112,
+                  "y": 544,
                   "width": 190,
-                  "height": 16
+                  "height": 18
                 },
                 "characters": "Leite integral 1L",
                 "style": {
@@ -1177,13 +1293,13 @@
                 ]
               },
               {
-                "id": "1:37",
-                "name": "qtd Leite integral 1L",
+                "id": "1:42",
+                "name": "qtd 2",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 80,
-                  "y": 570,
-                  "width": 160,
+                  "x": 112,
+                  "y": 564,
+                  "width": 190,
                   "height": 14
                 },
                 "characters": "3 un · Bebidas",
@@ -1210,21 +1326,21 @@
                 ]
               },
               {
-                "id": "1:38",
-                "name": "preco Leite integral 1L",
+                "id": "1:43",
+                "name": "preco 2",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 264,
-                  "y": 558,
-                  "width": 90,
-                  "height": 18
+                  "x": 252,
+                  "y": 552,
+                  "width": 118,
+                  "height": 20
                 },
                 "characters": "R$ 14,97",
                 "style": {
                   "fontFamily": "Nunito",
                   "fontWeight": 700,
-                  "fontSize": 13,
-                  "lineHeightPx": 18,
+                  "fontSize": 14,
+                  "lineHeightPx": 20,
                   "letterSpacing": 0,
                   "textAlignHorizontal": "RIGHT",
                   "textAlignVertical": "TOP"
@@ -1243,46 +1359,46 @@
                 ]
               },
               {
-                "id": "1:39",
-                "name": "total bar",
+                "id": "1:44",
+                "name": "botao finalizar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
                   "x": 16,
-                  "y": 620,
+                  "y": 624,
                   "width": 358,
-                  "height": 52
+                  "height": 54
                 },
                 "fills": [
                   {
                     "type": "SOLID",
                     "color": {
-                      "r": 0.043137254901960784,
-                      "g": 0.16862745098039217,
-                      "b": 0.12156862745098039,
+                      "r": 0.10588235294117647,
+                      "g": 0.5490196078431373,
+                      "b": 0.25882352941176473,
                       "a": 1
                     },
                     "opacity": 1
                   }
                 ],
-                "cornerRadius": 18
+                "cornerRadius": 27
               },
               {
-                "id": "1:40",
-                "name": "total label",
+                "id": "1:45",
+                "name": "finalizar label",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 36,
-                  "y": 638,
-                  "width": 100,
-                  "height": 14
+                  "x": 34,
+                  "y": 643,
+                  "width": 140,
+                  "height": 16
                 },
-                "characters": "TOTAL",
+                "characters": "Finalizar compra",
                 "style": {
                   "fontFamily": "Inter",
                   "fontWeight": 700,
-                  "fontSize": 9,
-                  "lineHeightPx": 13,
-                  "letterSpacing": 1.4,
+                  "fontSize": 12,
+                  "lineHeightPx": 17,
+                  "letterSpacing": 0,
                   "textAlignHorizontal": "LEFT",
                   "textAlignVertical": "TOP"
                 },
@@ -1300,21 +1416,21 @@
                 ]
               },
               {
-                "id": "1:41",
-                "name": "total valor",
+                "id": "1:46",
+                "name": "finalizar valor",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 220,
-                  "y": 632,
+                  "y": 640,
                   "width": 150,
-                  "height": 24
+                  "height": 20
                 },
                 "characters": "R$ 58,85",
                 "style": {
                   "fontFamily": "Nunito",
                   "fontWeight": 700,
-                  "fontSize": 18,
-                  "lineHeightPx": 25,
+                  "fontSize": 15,
+                  "lineHeightPx": 21,
                   "letterSpacing": 0,
                   "textAlignHorizontal": "RIGHT",
                   "textAlignVertical": "TOP"
@@ -1333,7 +1449,7 @@
                 ]
               },
               {
-                "id": "1:42",
+                "id": "1:47",
                 "name": "nav fundo",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -1356,7 +1472,7 @@
                 ]
               },
               {
-                "id": "1:43",
+                "id": "1:48",
                 "name": "nav linha",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -1379,14 +1495,38 @@
                 ]
               },
               {
-                "id": "1:44",
-                "name": "nav icone Início",
+                "id": "1:49",
+                "name": "nav ativo",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
-                  "x": 25,
-                  "y": 812,
-                  "width": 28,
-                  "height": 28
+                  "x": 18,
+                  "y": 806,
+                  "width": 76,
+                  "height": 38
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.10588235294117647,
+                      "g": 0.5490196078431373,
+                      "b": 0.25882352941176473,
+                      "a": 1
+                    },
+                    "opacity": 0.12
+                  }
+                ],
+                "cornerRadius": 19
+              },
+              {
+                "id": "1:50",
+                "name": "nav icone 0",
+                "type": "RECTANGLE",
+                "absoluteBoundingBox": {
+                  "x": 44,
+                  "y": 816,
+                  "width": 16,
+                  "height": 16
                 },
                 "fills": [
                   {
@@ -1400,26 +1540,26 @@
                     "opacity": 1
                   }
                 ],
-                "cornerRadius": 9
+                "cornerRadius": 4
               },
               {
-                "id": "1:45",
-                "name": "nav label Início",
+                "id": "1:51",
+                "name": "nav label 0",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
-                  "x": 5,
-                  "y": 846,
-                  "width": 68,
-                  "height": 14
+                  "x": 62,
+                  "y": 818,
+                  "width": 40,
+                  "height": 12
                 },
                 "characters": "Início",
                 "style": {
                   "fontFamily": "Inter",
-                  "fontWeight": 600,
+                  "fontWeight": 700,
                   "fontSize": 9,
                   "lineHeightPx": 13,
                   "letterSpacing": 0,
-                  "textAlignHorizontal": "CENTER",
+                  "textAlignHorizontal": "LEFT",
                   "textAlignVertical": "TOP"
                 },
                 "fills": [
@@ -1436,38 +1576,47 @@
                 ]
               },
               {
-                "id": "1:46",
-                "name": "nav icone Listas",
-                "type": "RECTANGLE",
+                "id": "1:52",
+                "name": "nav glyph Listas",
+                "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 103,
                   "y": 812,
                   "width": 28,
-                  "height": 28
+                  "height": 20
+                },
+                "characters": "▤",
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 400,
+                  "fontSize": 13,
+                  "lineHeightPx": 18,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "CENTER",
+                  "textAlignVertical": "TOP"
                 },
                 "fills": [
                   {
                     "type": "SOLID",
                     "color": {
-                      "r": 0.043137254901960784,
-                      "g": 0.16862745098039217,
-                      "b": 0.12156862745098039,
+                      "r": 0.35294117647058826,
+                      "g": 0.4196078431372549,
+                      "b": 0.38823529411764707,
                       "a": 1
                     },
-                    "opacity": 0.14
+                    "opacity": 1
                   }
-                ],
-                "cornerRadius": 9
+                ]
               },
               {
-                "id": "1:47",
+                "id": "1:53",
                 "name": "nav label Listas",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 83,
-                  "y": 846,
+                  "y": 834,
                   "width": 68,
-                  "height": 14
+                  "height": 12
                 },
                 "characters": "Listas",
                 "style": {
@@ -1493,38 +1642,47 @@
                 ]
               },
               {
-                "id": "1:48",
-                "name": "nav icone Escanear",
-                "type": "RECTANGLE",
+                "id": "1:54",
+                "name": "nav glyph Escanear",
+                "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 181,
                   "y": 812,
                   "width": 28,
-                  "height": 28
+                  "height": 20
+                },
+                "characters": "◎",
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 400,
+                  "fontSize": 13,
+                  "lineHeightPx": 18,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "CENTER",
+                  "textAlignVertical": "TOP"
                 },
                 "fills": [
                   {
                     "type": "SOLID",
                     "color": {
-                      "r": 0.043137254901960784,
-                      "g": 0.16862745098039217,
-                      "b": 0.12156862745098039,
+                      "r": 0.35294117647058826,
+                      "g": 0.4196078431372549,
+                      "b": 0.38823529411764707,
                       "a": 1
                     },
-                    "opacity": 0.14
+                    "opacity": 1
                   }
-                ],
-                "cornerRadius": 9
+                ]
               },
               {
-                "id": "1:49",
+                "id": "1:55",
                 "name": "nav label Escanear",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 161,
-                  "y": 846,
+                  "y": 834,
                   "width": 68,
-                  "height": 14
+                  "height": 12
                 },
                 "characters": "Escanear",
                 "style": {
@@ -1550,38 +1708,47 @@
                 ]
               },
               {
-                "id": "1:50",
-                "name": "nav icone Carrinho",
-                "type": "RECTANGLE",
+                "id": "1:56",
+                "name": "nav glyph Carrinho",
+                "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 259,
                   "y": 812,
                   "width": 28,
-                  "height": 28
+                  "height": 20
+                },
+                "characters": "▦",
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 400,
+                  "fontSize": 13,
+                  "lineHeightPx": 18,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "CENTER",
+                  "textAlignVertical": "TOP"
                 },
                 "fills": [
                   {
                     "type": "SOLID",
                     "color": {
-                      "r": 0.043137254901960784,
-                      "g": 0.16862745098039217,
-                      "b": 0.12156862745098039,
+                      "r": 0.35294117647058826,
+                      "g": 0.4196078431372549,
+                      "b": 0.38823529411764707,
                       "a": 1
                     },
-                    "opacity": 0.14
+                    "opacity": 1
                   }
-                ],
-                "cornerRadius": 9
+                ]
               },
               {
-                "id": "1:51",
+                "id": "1:57",
                 "name": "nav label Carrinho",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 239,
-                  "y": 846,
+                  "y": 834,
                   "width": 68,
-                  "height": 14
+                  "height": 12
                 },
                 "characters": "Carrinho",
                 "style": {
@@ -1607,38 +1774,47 @@
                 ]
               },
               {
-                "id": "1:52",
-                "name": "nav icone Perfil",
-                "type": "RECTANGLE",
+                "id": "1:58",
+                "name": "nav glyph Perfil",
+                "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 337,
                   "y": 812,
                   "width": 28,
-                  "height": 28
+                  "height": 20
+                },
+                "characters": "◔",
+                "style": {
+                  "fontFamily": "Inter",
+                  "fontWeight": 400,
+                  "fontSize": 13,
+                  "lineHeightPx": 18,
+                  "letterSpacing": 0,
+                  "textAlignHorizontal": "CENTER",
+                  "textAlignVertical": "TOP"
                 },
                 "fills": [
                   {
                     "type": "SOLID",
                     "color": {
-                      "r": 0.043137254901960784,
-                      "g": 0.16862745098039217,
-                      "b": 0.12156862745098039,
+                      "r": 0.35294117647058826,
+                      "g": 0.4196078431372549,
+                      "b": 0.38823529411764707,
                       "a": 1
                     },
-                    "opacity": 0.14
+                    "opacity": 1
                   }
-                ],
-                "cornerRadius": 9
+                ]
               },
               {
-                "id": "1:53",
+                "id": "1:59",
                 "name": "nav label Perfil",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
                   "x": 317,
-                  "y": 846,
+                  "y": 834,
                   "width": 68,
-                  "height": 14
+                  "height": 12
                 },
                 "characters": "Perfil",
                 "style": {
@@ -1664,7 +1840,7 @@
                 ]
               },
               {
-                "id": "1:54",
+                "id": "1:60",
                 "name": "home indicator",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -1692,7 +1868,7 @@
         ]
       },
       {
-        "id": "1:84",
+        "id": "1:90",
         "name": "02 Câmera",
         "type": "CANVAS",
         "backgroundColor": {
@@ -1703,7 +1879,7 @@
         },
         "children": [
           {
-            "id": "1:85",
+            "id": "1:91",
             "name": "02 Câmera",
             "type": "FRAME",
             "absoluteBoundingBox": {
@@ -1726,7 +1902,7 @@
             ],
             "children": [
               {
-                "id": "1:57",
+                "id": "1:63",
                 "name": "fundo camera",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -1749,7 +1925,7 @@
                 ]
               },
               {
-                "id": "1:58",
+                "id": "1:64",
                 "name": "titulo camera",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -1782,7 +1958,7 @@
                 ]
               },
               {
-                "id": "1:59",
+                "id": "1:65",
                 "name": "fechar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -1806,7 +1982,7 @@
                 "cornerRadius": 16
               },
               {
-                "id": "1:60",
+                "id": "1:66",
                 "name": "mira topo",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -1844,7 +2020,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:61",
+                "id": "1:67",
                 "name": "mira texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -1877,7 +2053,7 @@
                 ]
               },
               {
-                "id": "1:62",
+                "id": "1:68",
                 "name": "sheet",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -1901,7 +2077,7 @@
                 "cornerRadius": 28
               },
               {
-                "id": "1:63",
+                "id": "1:69",
                 "name": "grabber",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -1925,7 +2101,7 @@
                 "cornerRadius": 2
               },
               {
-                "id": "1:64",
+                "id": "1:70",
                 "name": "sheet titulo",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -1958,7 +2134,7 @@
                 ]
               },
               {
-                "id": "1:65",
+                "id": "1:71",
                 "name": "sheet sub",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -1991,7 +2167,7 @@
                 ]
               },
               {
-                "id": "1:66",
+                "id": "1:72",
                 "name": "item detectado",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -2029,7 +2205,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:67",
+                "id": "1:73",
                 "name": "thumb detectado",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -2053,7 +2229,7 @@
                 "cornerRadius": 10
               },
               {
-                "id": "1:68",
+                "id": "1:74",
                 "name": "nome detectado",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2086,7 +2262,7 @@
                 ]
               },
               {
-                "id": "1:69",
+                "id": "1:75",
                 "name": "mercado detectado",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2119,7 +2295,7 @@
                 ]
               },
               {
-                "id": "1:70",
+                "id": "1:76",
                 "name": "preco detectado",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2152,7 +2328,7 @@
                 ]
               },
               {
-                "id": "1:71",
+                "id": "1:77",
                 "name": "label campo",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2185,7 +2361,7 @@
                 ]
               },
               {
-                "id": "1:72",
+                "id": "1:78",
                 "name": "campo preco",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -2223,7 +2399,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:73",
+                "id": "1:79",
                 "name": "campo preco valor",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2256,7 +2432,7 @@
                 ]
               },
               {
-                "id": "1:74",
+                "id": "1:80",
                 "name": "label qtd",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2289,7 +2465,7 @@
                 ]
               },
               {
-                "id": "1:75",
+                "id": "1:81",
                 "name": "menos",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -2313,7 +2489,7 @@
                 "cornerRadius": 12
               },
               {
-                "id": "1:76",
+                "id": "1:82",
                 "name": "menos sinal",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2346,7 +2522,7 @@
                 ]
               },
               {
-                "id": "1:77",
+                "id": "1:83",
                 "name": "qtd caixa",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -2384,7 +2560,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:78",
+                "id": "1:84",
                 "name": "qtd valor",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2417,7 +2593,7 @@
                 ]
               },
               {
-                "id": "1:79",
+                "id": "1:85",
                 "name": "mais",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -2441,7 +2617,7 @@
                 "cornerRadius": 12
               },
               {
-                "id": "1:80",
+                "id": "1:86",
                 "name": "mais sinal",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2474,7 +2650,7 @@
                 ]
               },
               {
-                "id": "1:81",
+                "id": "1:87",
                 "name": "botao confirmar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -2498,7 +2674,7 @@
                 "cornerRadius": 24
               },
               {
-                "id": "1:82",
+                "id": "1:88",
                 "name": "botao confirmar texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2531,7 +2707,7 @@
                 ]
               },
               {
-                "id": "1:83",
+                "id": "1:89",
                 "name": "home indicator",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -2559,7 +2735,7 @@
         ]
       },
       {
-        "id": "1:133",
+        "id": "1:139",
         "name": "03 Seleção de mercado",
         "type": "CANVAS",
         "backgroundColor": {
@@ -2570,7 +2746,7 @@
         },
         "children": [
           {
-            "id": "1:134",
+            "id": "1:140",
             "name": "03 Seleção de mercado",
             "type": "FRAME",
             "absoluteBoundingBox": {
@@ -2593,7 +2769,7 @@
             ],
             "children": [
               {
-                "id": "1:86",
+                "id": "1:92",
                 "name": "hora",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2626,7 +2802,7 @@
                 ]
               },
               {
-                "id": "1:87",
+                "id": "1:93",
                 "name": "sinal",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2659,7 +2835,7 @@
                 ]
               },
               {
-                "id": "1:88",
+                "id": "1:94",
                 "name": "voltar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -2683,7 +2859,7 @@
                 "cornerRadius": 18
               },
               {
-                "id": "1:89",
+                "id": "1:95",
                 "name": "seta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2716,7 +2892,7 @@
                 ]
               },
               {
-                "id": "1:90",
+                "id": "1:96",
                 "name": "titulo tela",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2749,7 +2925,7 @@
                 ]
               },
               {
-                "id": "1:91",
+                "id": "1:97",
                 "name": "sub tela",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2782,7 +2958,7 @@
                 ]
               },
               {
-                "id": "1:92",
+                "id": "1:98",
                 "name": "atualizar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -2806,7 +2982,7 @@
                 "cornerRadius": 18
               },
               {
-                "id": "1:93",
+                "id": "1:99",
                 "name": "atualizar icone",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2839,7 +3015,7 @@
                 ]
               },
               {
-                "id": "1:94",
+                "id": "1:100",
                 "name": "secao redes disponíveis",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2872,7 +3048,7 @@
                 ]
               },
               {
-                "id": "1:95",
+                "id": "1:101",
                 "name": "secao meta redes disponíveis",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -2905,7 +3081,7 @@
                 ]
               },
               {
-                "id": "1:96",
+                "id": "1:102",
                 "name": "mercado BH Supermercados",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -2943,7 +3119,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:97",
+                "id": "1:103",
                 "name": "sigla BH Supermercados",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -2967,7 +3143,7 @@
                 "cornerRadius": 13
               },
               {
-                "id": "1:98",
+                "id": "1:104",
                 "name": "sigla texto BH Supermercados",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3000,7 +3176,7 @@
                 ]
               },
               {
-                "id": "1:99",
+                "id": "1:105",
                 "name": "nome BH Supermercados",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3033,7 +3209,7 @@
                 ]
               },
               {
-                "id": "1:100",
+                "id": "1:106",
                 "name": "local BH Supermercados",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3066,7 +3242,7 @@
                 ]
               },
               {
-                "id": "1:101",
+                "id": "1:107",
                 "name": "sel BH Supermercados",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3099,7 +3275,7 @@
                 ]
               },
               {
-                "id": "1:102",
+                "id": "1:108",
                 "name": "mercado EPA Supermercados",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -3137,7 +3313,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:103",
+                "id": "1:109",
                 "name": "sigla EPA Supermercados",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -3161,7 +3337,7 @@
                 "cornerRadius": 13
               },
               {
-                "id": "1:104",
+                "id": "1:110",
                 "name": "sigla texto EPA Supermercados",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3194,7 +3370,7 @@
                 ]
               },
               {
-                "id": "1:105",
+                "id": "1:111",
                 "name": "nome EPA Supermercados",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3227,7 +3403,7 @@
                 ]
               },
               {
-                "id": "1:106",
+                "id": "1:112",
                 "name": "local EPA Supermercados",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3260,7 +3436,7 @@
                 ]
               },
               {
-                "id": "1:107",
+                "id": "1:113",
                 "name": "mercado Mart Minas",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -3298,7 +3474,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:108",
+                "id": "1:114",
                 "name": "sigla Mart Minas",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -3322,7 +3498,7 @@
                 "cornerRadius": 13
               },
               {
-                "id": "1:109",
+                "id": "1:115",
                 "name": "sigla texto Mart Minas",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3355,7 +3531,7 @@
                 ]
               },
               {
-                "id": "1:110",
+                "id": "1:116",
                 "name": "nome Mart Minas",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3388,7 +3564,7 @@
                 ]
               },
               {
-                "id": "1:111",
+                "id": "1:117",
                 "name": "local Mart Minas",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3421,7 +3597,7 @@
                 ]
               },
               {
-                "id": "1:112",
+                "id": "1:118",
                 "name": "mercado Supernosso",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -3459,7 +3635,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:113",
+                "id": "1:119",
                 "name": "sigla Supernosso",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -3483,7 +3659,7 @@
                 "cornerRadius": 13
               },
               {
-                "id": "1:114",
+                "id": "1:120",
                 "name": "sigla texto Supernosso",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3516,7 +3692,7 @@
                 ]
               },
               {
-                "id": "1:115",
+                "id": "1:121",
                 "name": "nome Supernosso",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3549,7 +3725,7 @@
                 ]
               },
               {
-                "id": "1:116",
+                "id": "1:122",
                 "name": "local Supernosso",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3582,7 +3758,7 @@
                 ]
               },
               {
-                "id": "1:117",
+                "id": "1:123",
                 "name": "mercado Verdemar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -3620,7 +3796,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:118",
+                "id": "1:124",
                 "name": "sigla Verdemar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -3644,7 +3820,7 @@
                 "cornerRadius": 13
               },
               {
-                "id": "1:119",
+                "id": "1:125",
                 "name": "sigla texto Verdemar",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3677,7 +3853,7 @@
                 ]
               },
               {
-                "id": "1:120",
+                "id": "1:126",
                 "name": "nome Verdemar",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3710,7 +3886,7 @@
                 ]
               },
               {
-                "id": "1:121",
+                "id": "1:127",
                 "name": "local Verdemar",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3743,7 +3919,7 @@
                 ]
               },
               {
-                "id": "1:122",
+                "id": "1:128",
                 "name": "mercado Apoio Mineiro",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -3781,7 +3957,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:123",
+                "id": "1:129",
                 "name": "sigla Apoio Mineiro",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -3805,7 +3981,7 @@
                 "cornerRadius": 13
               },
               {
-                "id": "1:124",
+                "id": "1:130",
                 "name": "sigla texto Apoio Mineiro",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3838,7 +4014,7 @@
                 ]
               },
               {
-                "id": "1:125",
+                "id": "1:131",
                 "name": "nome Apoio Mineiro",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3871,7 +4047,7 @@
                 ]
               },
               {
-                "id": "1:126",
+                "id": "1:132",
                 "name": "local Apoio Mineiro",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3904,7 +4080,7 @@
                 ]
               },
               {
-                "id": "1:127",
+                "id": "1:133",
                 "name": "mercado Carrefour",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -3942,7 +4118,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:128",
+                "id": "1:134",
                 "name": "sigla Carrefour",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -3966,7 +4142,7 @@
                 "cornerRadius": 13
               },
               {
-                "id": "1:129",
+                "id": "1:135",
                 "name": "sigla texto Carrefour",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -3999,7 +4175,7 @@
                 ]
               },
               {
-                "id": "1:130",
+                "id": "1:136",
                 "name": "nome Carrefour",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4032,7 +4208,7 @@
                 ]
               },
               {
-                "id": "1:131",
+                "id": "1:137",
                 "name": "local Carrefour",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4065,7 +4241,7 @@
                 ]
               },
               {
-                "id": "1:132",
+                "id": "1:138",
                 "name": "home indicator",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4093,7 +4269,7 @@
         ]
       },
       {
-        "id": "1:174",
+        "id": "1:180",
         "name": "04 Carrinho",
         "type": "CANVAS",
         "backgroundColor": {
@@ -4104,7 +4280,7 @@
         },
         "children": [
           {
-            "id": "1:175",
+            "id": "1:181",
             "name": "04 Carrinho",
             "type": "FRAME",
             "absoluteBoundingBox": {
@@ -4127,7 +4303,7 @@
             ],
             "children": [
               {
-                "id": "1:135",
+                "id": "1:141",
                 "name": "fundo celebra",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4150,7 +4326,7 @@
                 ]
               },
               {
-                "id": "1:136",
+                "id": "1:142",
                 "name": "hora",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4183,7 +4359,7 @@
                 ]
               },
               {
-                "id": "1:137",
+                "id": "1:143",
                 "name": "sinal",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4216,7 +4392,7 @@
                 ]
               },
               {
-                "id": "1:138",
+                "id": "1:144",
                 "name": "fechar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4240,7 +4416,7 @@
                 "cornerRadius": 18
               },
               {
-                "id": "1:139",
+                "id": "1:145",
                 "name": "fechar x",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4273,7 +4449,7 @@
                 ]
               },
               {
-                "id": "1:140",
+                "id": "1:146",
                 "name": "badge check",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4297,7 +4473,7 @@
                 "cornerRadius": 32
               },
               {
-                "id": "1:141",
+                "id": "1:147",
                 "name": "check",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4330,7 +4506,7 @@
                 ]
               },
               {
-                "id": "1:142",
+                "id": "1:148",
                 "name": "titulo",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4363,7 +4539,7 @@
                 ]
               },
               {
-                "id": "1:143",
+                "id": "1:149",
                 "name": "sub",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4396,7 +4572,7 @@
                 ]
               },
               {
-                "id": "1:144",
+                "id": "1:150",
                 "name": "total card",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4434,7 +4610,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:145",
+                "id": "1:151",
                 "name": "total label",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4467,7 +4643,7 @@
                 ]
               },
               {
-                "id": "1:146",
+                "id": "1:152",
                 "name": "total valor",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4500,7 +4676,7 @@
                 ]
               },
               {
-                "id": "1:147",
+                "id": "1:153",
                 "name": "total meta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4533,7 +4709,7 @@
                 ]
               },
               {
-                "id": "1:148",
+                "id": "1:154",
                 "name": "divisor",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4556,7 +4732,7 @@
                 ]
               },
               {
-                "id": "1:149",
+                "id": "1:155",
                 "name": "badge economia",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4580,7 +4756,7 @@
                 "cornerRadius": 13
               },
               {
-                "id": "1:150",
+                "id": "1:156",
                 "name": "economia texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4613,7 +4789,7 @@
                 ]
               },
               {
-                "id": "1:151",
+                "id": "1:157",
                 "name": "meta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4646,7 +4822,7 @@
                 ]
               },
               {
-                "id": "1:152",
+                "id": "1:158",
                 "name": "resumo titulo",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4679,7 +4855,7 @@
                 ]
               },
               {
-                "id": "1:153",
+                "id": "1:159",
                 "name": "resumo card 0",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4703,7 +4879,7 @@
                 "cornerRadius": 14
               },
               {
-                "id": "1:154",
+                "id": "1:160",
                 "name": "resumo cat 0",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4736,7 +4912,7 @@
                 ]
               },
               {
-                "id": "1:155",
+                "id": "1:161",
                 "name": "resumo val 0",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4769,7 +4945,7 @@
                 ]
               },
               {
-                "id": "1:156",
+                "id": "1:162",
                 "name": "resumo card 1",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4793,7 +4969,7 @@
                 "cornerRadius": 14
               },
               {
-                "id": "1:157",
+                "id": "1:163",
                 "name": "resumo cat 1",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4826,7 +5002,7 @@
                 ]
               },
               {
-                "id": "1:158",
+                "id": "1:164",
                 "name": "resumo val 1",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4859,7 +5035,7 @@
                 ]
               },
               {
-                "id": "1:159",
+                "id": "1:165",
                 "name": "botao finalizar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4883,7 +5059,7 @@
                 "cornerRadius": 25
               },
               {
-                "id": "1:160",
+                "id": "1:166",
                 "name": "finalizar texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -4916,7 +5092,7 @@
                 ]
               },
               {
-                "id": "1:161",
+                "id": "1:167",
                 "name": "nav fundo",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4939,7 +5115,7 @@
                 ]
               },
               {
-                "id": "1:162",
+                "id": "1:168",
                 "name": "nav linha",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4962,7 +5138,7 @@
                 ]
               },
               {
-                "id": "1:163",
+                "id": "1:169",
                 "name": "nav icone Início",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -4986,7 +5162,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:164",
+                "id": "1:170",
                 "name": "nav label Início",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5019,7 +5195,7 @@
                 ]
               },
               {
-                "id": "1:165",
+                "id": "1:171",
                 "name": "nav icone Listas",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -5043,7 +5219,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:166",
+                "id": "1:172",
                 "name": "nav label Listas",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5076,7 +5252,7 @@
                 ]
               },
               {
-                "id": "1:167",
+                "id": "1:173",
                 "name": "nav icone Escanear",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -5100,7 +5276,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:168",
+                "id": "1:174",
                 "name": "nav label Escanear",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5133,7 +5309,7 @@
                 ]
               },
               {
-                "id": "1:169",
+                "id": "1:175",
                 "name": "nav icone Carrinho",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -5157,7 +5333,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:170",
+                "id": "1:176",
                 "name": "nav label Carrinho",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5190,7 +5366,7 @@
                 ]
               },
               {
-                "id": "1:171",
+                "id": "1:177",
                 "name": "nav icone Perfil",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -5214,7 +5390,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:172",
+                "id": "1:178",
                 "name": "nav label Perfil",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5247,7 +5423,7 @@
                 ]
               },
               {
-                "id": "1:173",
+                "id": "1:179",
                 "name": "home indicator",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -5275,7 +5451,7 @@
         ]
       },
       {
-        "id": "1:213",
+        "id": "1:219",
         "name": "05 Comparador",
         "type": "CANVAS",
         "backgroundColor": {
@@ -5286,7 +5462,7 @@
         },
         "children": [
           {
-            "id": "1:214",
+            "id": "1:220",
             "name": "05 Comparador",
             "type": "FRAME",
             "absoluteBoundingBox": {
@@ -5309,7 +5485,7 @@
             ],
             "children": [
               {
-                "id": "1:176",
+                "id": "1:182",
                 "name": "hora",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5342,7 +5518,7 @@
                 ]
               },
               {
-                "id": "1:177",
+                "id": "1:183",
                 "name": "sinal",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5375,7 +5551,7 @@
                 ]
               },
               {
-                "id": "1:178",
+                "id": "1:184",
                 "name": "voltar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -5399,7 +5575,7 @@
                 "cornerRadius": 18
               },
               {
-                "id": "1:179",
+                "id": "1:185",
                 "name": "seta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5432,7 +5608,7 @@
                 ]
               },
               {
-                "id": "1:180",
+                "id": "1:186",
                 "name": "titulo tela",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5465,7 +5641,7 @@
                 ]
               },
               {
-                "id": "1:181",
+                "id": "1:187",
                 "name": "estado vazio",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -5503,7 +5679,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:182",
+                "id": "1:188",
                 "name": "icone",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -5527,7 +5703,7 @@
                 "cornerRadius": 14
               },
               {
-                "id": "1:183",
+                "id": "1:189",
                 "name": "icone sinal",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5560,7 +5736,7 @@
                 ]
               },
               {
-                "id": "1:184",
+                "id": "1:190",
                 "name": "estado titulo",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5593,7 +5769,7 @@
                 ]
               },
               {
-                "id": "1:185",
+                "id": "1:191",
                 "name": "estado texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5626,7 +5802,7 @@
                 ]
               },
               {
-                "id": "1:186",
+                "id": "1:192",
                 "name": "estado botao",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -5650,7 +5826,7 @@
                 "cornerRadius": 15
               },
               {
-                "id": "1:187",
+                "id": "1:193",
                 "name": "estado botao texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5683,7 +5859,7 @@
                 ]
               },
               {
-                "id": "1:188",
+                "id": "1:194",
                 "name": "secao resultado por rede",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5716,7 +5892,7 @@
                 ]
               },
               {
-                "id": "1:189",
+                "id": "1:195",
                 "name": "secao meta resultado por rede",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5749,7 +5925,7 @@
                 ]
               },
               {
-                "id": "1:190",
+                "id": "1:196",
                 "name": "comp BH Supermercados",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -5787,7 +5963,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:191",
+                "id": "1:197",
                 "name": "comp nome BH Supermercados",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5820,7 +5996,7 @@
                 ]
               },
               {
-                "id": "1:192",
+                "id": "1:198",
                 "name": "comp qtd BH Supermercados",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5853,7 +6029,7 @@
                 ]
               },
               {
-                "id": "1:193",
+                "id": "1:199",
                 "name": "comp valor BH Supermercados",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5886,7 +6062,7 @@
                 ]
               },
               {
-                "id": "1:194",
+                "id": "1:200",
                 "name": "comp best BH Supermercados",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5919,7 +6095,7 @@
                 ]
               },
               {
-                "id": "1:195",
+                "id": "1:201",
                 "name": "comp Mart Minas",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -5957,7 +6133,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:196",
+                "id": "1:202",
                 "name": "comp nome Mart Minas",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -5990,7 +6166,7 @@
                 ]
               },
               {
-                "id": "1:197",
+                "id": "1:203",
                 "name": "comp qtd Mart Minas",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6023,7 +6199,7 @@
                 ]
               },
               {
-                "id": "1:198",
+                "id": "1:204",
                 "name": "comp valor Mart Minas",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6056,7 +6232,7 @@
                 ]
               },
               {
-                "id": "1:199",
+                "id": "1:205",
                 "name": "nota",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6089,7 +6265,7 @@
                 ]
               },
               {
-                "id": "1:200",
+                "id": "1:206",
                 "name": "nav fundo",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6112,7 +6288,7 @@
                 ]
               },
               {
-                "id": "1:201",
+                "id": "1:207",
                 "name": "nav linha",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6135,7 +6311,7 @@
                 ]
               },
               {
-                "id": "1:202",
+                "id": "1:208",
                 "name": "nav icone Início",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6159,7 +6335,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:203",
+                "id": "1:209",
                 "name": "nav label Início",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6192,7 +6368,7 @@
                 ]
               },
               {
-                "id": "1:204",
+                "id": "1:210",
                 "name": "nav icone Listas",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6216,7 +6392,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:205",
+                "id": "1:211",
                 "name": "nav label Listas",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6249,7 +6425,7 @@
                 ]
               },
               {
-                "id": "1:206",
+                "id": "1:212",
                 "name": "nav icone Escanear",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6273,7 +6449,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:207",
+                "id": "1:213",
                 "name": "nav label Escanear",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6306,7 +6482,7 @@
                 ]
               },
               {
-                "id": "1:208",
+                "id": "1:214",
                 "name": "nav icone Carrinho",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6330,7 +6506,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:209",
+                "id": "1:215",
                 "name": "nav label Carrinho",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6363,7 +6539,7 @@
                 ]
               },
               {
-                "id": "1:210",
+                "id": "1:216",
                 "name": "nav icone Perfil",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6387,7 +6563,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:211",
+                "id": "1:217",
                 "name": "nav label Perfil",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6420,7 +6596,7 @@
                 ]
               },
               {
-                "id": "1:212",
+                "id": "1:218",
                 "name": "home indicator",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6448,7 +6624,7 @@
         ]
       },
       {
-        "id": "1:250",
+        "id": "1:256",
         "name": "06 Listas",
         "type": "CANVAS",
         "backgroundColor": {
@@ -6459,7 +6635,7 @@
         },
         "children": [
           {
-            "id": "1:251",
+            "id": "1:257",
             "name": "06 Listas",
             "type": "FRAME",
             "absoluteBoundingBox": {
@@ -6482,7 +6658,7 @@
             ],
             "children": [
               {
-                "id": "1:215",
+                "id": "1:221",
                 "name": "hora",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6515,7 +6691,7 @@
                 ]
               },
               {
-                "id": "1:216",
+                "id": "1:222",
                 "name": "sinal",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6548,7 +6724,7 @@
                 ]
               },
               {
-                "id": "1:217",
+                "id": "1:223",
                 "name": "voltar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6572,7 +6748,7 @@
                 "cornerRadius": 18
               },
               {
-                "id": "1:218",
+                "id": "1:224",
                 "name": "seta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6605,7 +6781,7 @@
                 ]
               },
               {
-                "id": "1:219",
+                "id": "1:225",
                 "name": "titulo tela",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6638,7 +6814,7 @@
                 ]
               },
               {
-                "id": "1:220",
+                "id": "1:226",
                 "name": "sub tela",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6671,7 +6847,7 @@
                 ]
               },
               {
-                "id": "1:221",
+                "id": "1:227",
                 "name": "nova lista",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6695,7 +6871,7 @@
                 "cornerRadius": 23
               },
               {
-                "id": "1:222",
+                "id": "1:228",
                 "name": "nova lista texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6728,7 +6904,7 @@
                 ]
               },
               {
-                "id": "1:223",
+                "id": "1:229",
                 "name": "lista Compras da semana",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6766,7 +6942,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:224",
+                "id": "1:230",
                 "name": "lista nome Compras da semana",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6799,7 +6975,7 @@
                 ]
               },
               {
-                "id": "1:225",
+                "id": "1:231",
                 "name": "lista info Compras da semana",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6832,7 +7008,7 @@
                 ]
               },
               {
-                "id": "1:226",
+                "id": "1:232",
                 "name": "lista badge Compras da semana",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6865,7 +7041,7 @@
                 ]
               },
               {
-                "id": "1:227",
+                "id": "1:233",
                 "name": "lista radio Compras da semana",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6889,7 +7065,7 @@
                 "cornerRadius": 12
               },
               {
-                "id": "1:228",
+                "id": "1:234",
                 "name": "lista Churrasco sábado",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -6927,7 +7103,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:229",
+                "id": "1:235",
                 "name": "lista nome Churrasco sábado",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6960,7 +7136,7 @@
                 ]
               },
               {
-                "id": "1:230",
+                "id": "1:236",
                 "name": "lista info Churrasco sábado",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -6993,7 +7169,7 @@
                 ]
               },
               {
-                "id": "1:231",
+                "id": "1:237",
                 "name": "lista radio Churrasco sábado",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7017,7 +7193,7 @@
                 "cornerRadius": 12
               },
               {
-                "id": "1:232",
+                "id": "1:238",
                 "name": "lista Casa — limpeza",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7055,7 +7231,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:233",
+                "id": "1:239",
                 "name": "lista nome Casa — limpeza",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7088,7 +7264,7 @@
                 ]
               },
               {
-                "id": "1:234",
+                "id": "1:240",
                 "name": "lista info Casa — limpeza",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7121,7 +7297,7 @@
                 ]
               },
               {
-                "id": "1:235",
+                "id": "1:241",
                 "name": "lista radio Casa — limpeza",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7145,7 +7321,7 @@
                 "cornerRadius": 12
               },
               {
-                "id": "1:236",
+                "id": "1:242",
                 "name": "dica",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7178,7 +7354,7 @@
                 ]
               },
               {
-                "id": "1:237",
+                "id": "1:243",
                 "name": "nav fundo",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7201,7 +7377,7 @@
                 ]
               },
               {
-                "id": "1:238",
+                "id": "1:244",
                 "name": "nav linha",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7224,7 +7400,7 @@
                 ]
               },
               {
-                "id": "1:239",
+                "id": "1:245",
                 "name": "nav icone Início",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7248,7 +7424,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:240",
+                "id": "1:246",
                 "name": "nav label Início",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7281,7 +7457,7 @@
                 ]
               },
               {
-                "id": "1:241",
+                "id": "1:247",
                 "name": "nav icone Listas",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7305,7 +7481,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:242",
+                "id": "1:248",
                 "name": "nav label Listas",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7338,7 +7514,7 @@
                 ]
               },
               {
-                "id": "1:243",
+                "id": "1:249",
                 "name": "nav icone Escanear",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7362,7 +7538,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:244",
+                "id": "1:250",
                 "name": "nav label Escanear",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7395,7 +7571,7 @@
                 ]
               },
               {
-                "id": "1:245",
+                "id": "1:251",
                 "name": "nav icone Carrinho",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7419,7 +7595,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:246",
+                "id": "1:252",
                 "name": "nav label Carrinho",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7452,7 +7628,7 @@
                 ]
               },
               {
-                "id": "1:247",
+                "id": "1:253",
                 "name": "nav icone Perfil",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7476,7 +7652,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:248",
+                "id": "1:254",
                 "name": "nav label Perfil",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7509,7 +7685,7 @@
                 ]
               },
               {
-                "id": "1:249",
+                "id": "1:255",
                 "name": "home indicator",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7537,7 +7713,7 @@
         ]
       },
       {
-        "id": "1:303",
+        "id": "1:309",
         "name": "07 Perfil",
         "type": "CANVAS",
         "backgroundColor": {
@@ -7548,7 +7724,7 @@
         },
         "children": [
           {
-            "id": "1:304",
+            "id": "1:310",
             "name": "07 Perfil",
             "type": "FRAME",
             "absoluteBoundingBox": {
@@ -7571,7 +7747,7 @@
             ],
             "children": [
               {
-                "id": "1:252",
+                "id": "1:258",
                 "name": "hora",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7604,7 +7780,7 @@
                 ]
               },
               {
-                "id": "1:253",
+                "id": "1:259",
                 "name": "sinal",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7637,7 +7813,7 @@
                 ]
               },
               {
-                "id": "1:254",
+                "id": "1:260",
                 "name": "voltar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7661,7 +7837,7 @@
                 "cornerRadius": 18
               },
               {
-                "id": "1:255",
+                "id": "1:261",
                 "name": "seta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7694,7 +7870,7 @@
                 ]
               },
               {
-                "id": "1:256",
+                "id": "1:262",
                 "name": "titulo tela",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7727,7 +7903,7 @@
                 ]
               },
               {
-                "id": "1:257",
+                "id": "1:263",
                 "name": "avatar card",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7765,7 +7941,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:258",
+                "id": "1:264",
                 "name": "avatar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7789,7 +7965,7 @@
                 "cornerRadius": 30
               },
               {
-                "id": "1:259",
+                "id": "1:265",
                 "name": "avatar letra",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7822,7 +7998,7 @@
                 ]
               },
               {
-                "id": "1:260",
+                "id": "1:266",
                 "name": "nome",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7855,7 +8031,7 @@
                 ]
               },
               {
-                "id": "1:261",
+                "id": "1:267",
                 "name": "conta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7888,7 +8064,7 @@
                 ]
               },
               {
-                "id": "1:262",
+                "id": "1:268",
                 "name": "stats",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -7926,7 +8102,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:263",
+                "id": "1:269",
                 "name": "stats label",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7959,7 +8135,7 @@
                 ]
               },
               {
-                "id": "1:264",
+                "id": "1:270",
                 "name": "stats valor",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -7992,7 +8168,7 @@
                 ]
               },
               {
-                "id": "1:265",
+                "id": "1:271",
                 "name": "stat 1",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8025,7 +8201,7 @@
                 ]
               },
               {
-                "id": "1:266",
+                "id": "1:272",
                 "name": "stat 1 label",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8058,7 +8234,7 @@
                 ]
               },
               {
-                "id": "1:267",
+                "id": "1:273",
                 "name": "stat 2",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8091,7 +8267,7 @@
                 ]
               },
               {
-                "id": "1:268",
+                "id": "1:274",
                 "name": "stat 2 label",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8124,7 +8300,7 @@
                 ]
               },
               {
-                "id": "1:269",
+                "id": "1:275",
                 "name": "secao configurações e dados",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8157,7 +8333,7 @@
                 ]
               },
               {
-                "id": "1:270",
+                "id": "1:276",
                 "name": "menu Mercados favoritos",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8195,7 +8371,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:271",
+                "id": "1:277",
                 "name": "menu icone Mercados favoritos",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8219,7 +8395,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:272",
+                "id": "1:278",
                 "name": "menu nome Mercados favoritos",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8252,7 +8428,7 @@
                 ]
               },
               {
-                "id": "1:273",
+                "id": "1:279",
                 "name": "menu sub Mercados favoritos",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8285,7 +8461,7 @@
                 ]
               },
               {
-                "id": "1:274",
+                "id": "1:280",
                 "name": "menu seta Mercados favoritos",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8318,7 +8494,7 @@
                 ]
               },
               {
-                "id": "1:275",
+                "id": "1:281",
                 "name": "menu Histórico de compras",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8356,7 +8532,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:276",
+                "id": "1:282",
                 "name": "menu icone Histórico de compras",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8380,7 +8556,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:277",
+                "id": "1:283",
                 "name": "menu nome Histórico de compras",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8413,7 +8589,7 @@
                 ]
               },
               {
-                "id": "1:278",
+                "id": "1:284",
                 "name": "menu sub Histórico de compras",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8446,7 +8622,7 @@
                 ]
               },
               {
-                "id": "1:279",
+                "id": "1:285",
                 "name": "menu seta Histórico de compras",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8479,7 +8655,7 @@
                 ]
               },
               {
-                "id": "1:280",
+                "id": "1:286",
                 "name": "menu Sincronização familiar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8517,7 +8693,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:281",
+                "id": "1:287",
                 "name": "menu icone Sincronização familiar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8541,7 +8717,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:282",
+                "id": "1:288",
                 "name": "menu nome Sincronização familiar",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8574,7 +8750,7 @@
                 ]
               },
               {
-                "id": "1:283",
+                "id": "1:289",
                 "name": "menu sub Sincronização familiar",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8607,7 +8783,7 @@
                 ]
               },
               {
-                "id": "1:284",
+                "id": "1:290",
                 "name": "menu seta Sincronização familiar",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8640,7 +8816,7 @@
                 ]
               },
               {
-                "id": "1:285",
+                "id": "1:291",
                 "name": "menu Preferências & offline",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8678,7 +8854,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:286",
+                "id": "1:292",
                 "name": "menu icone Preferências & offline",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8702,7 +8878,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:287",
+                "id": "1:293",
                 "name": "menu nome Preferências & offline",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8735,7 +8911,7 @@
                 ]
               },
               {
-                "id": "1:288",
+                "id": "1:294",
                 "name": "menu sub Preferências & offline",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8768,7 +8944,7 @@
                 ]
               },
               {
-                "id": "1:289",
+                "id": "1:295",
                 "name": "menu seta Preferências & offline",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8801,7 +8977,7 @@
                 ]
               },
               {
-                "id": "1:290",
+                "id": "1:296",
                 "name": "nav fundo",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8824,7 +9000,7 @@
                 ]
               },
               {
-                "id": "1:291",
+                "id": "1:297",
                 "name": "nav linha",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8847,7 +9023,7 @@
                 ]
               },
               {
-                "id": "1:292",
+                "id": "1:298",
                 "name": "nav icone Início",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8871,7 +9047,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:293",
+                "id": "1:299",
                 "name": "nav label Início",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8904,7 +9080,7 @@
                 ]
               },
               {
-                "id": "1:294",
+                "id": "1:300",
                 "name": "nav icone Listas",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8928,7 +9104,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:295",
+                "id": "1:301",
                 "name": "nav label Listas",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -8961,7 +9137,7 @@
                 ]
               },
               {
-                "id": "1:296",
+                "id": "1:302",
                 "name": "nav icone Escanear",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -8985,7 +9161,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:297",
+                "id": "1:303",
                 "name": "nav label Escanear",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9018,7 +9194,7 @@
                 ]
               },
               {
-                "id": "1:298",
+                "id": "1:304",
                 "name": "nav icone Carrinho",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -9042,7 +9218,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:299",
+                "id": "1:305",
                 "name": "nav label Carrinho",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9075,7 +9251,7 @@
                 ]
               },
               {
-                "id": "1:300",
+                "id": "1:306",
                 "name": "nav icone Perfil",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -9099,7 +9275,7 @@
                 "cornerRadius": 9
               },
               {
-                "id": "1:301",
+                "id": "1:307",
                 "name": "nav label Perfil",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9132,7 +9308,7 @@
                 ]
               },
               {
-                "id": "1:302",
+                "id": "1:308",
                 "name": "home indicator",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -9160,7 +9336,7 @@
         ]
       },
       {
-        "id": "1:331",
+        "id": "1:337",
         "name": "08 Adicionar manual",
         "type": "CANVAS",
         "backgroundColor": {
@@ -9171,7 +9347,7 @@
         },
         "children": [
           {
-            "id": "1:332",
+            "id": "1:338",
             "name": "08 Adicionar manual",
             "type": "FRAME",
             "absoluteBoundingBox": {
@@ -9194,7 +9370,7 @@
             ],
             "children": [
               {
-                "id": "1:305",
+                "id": "1:311",
                 "name": "hora",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9227,7 +9403,7 @@
                 ]
               },
               {
-                "id": "1:306",
+                "id": "1:312",
                 "name": "sinal",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9260,7 +9436,7 @@
                 ]
               },
               {
-                "id": "1:307",
+                "id": "1:313",
                 "name": "voltar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -9284,7 +9460,7 @@
                 "cornerRadius": 18
               },
               {
-                "id": "1:308",
+                "id": "1:314",
                 "name": "seta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9317,7 +9493,7 @@
                 ]
               },
               {
-                "id": "1:309",
+                "id": "1:315",
                 "name": "titulo tela",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9350,7 +9526,7 @@
                 ]
               },
               {
-                "id": "1:310",
+                "id": "1:316",
                 "name": "sub tela",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9383,7 +9559,7 @@
                 ]
               },
               {
-                "id": "1:311",
+                "id": "1:317",
                 "name": "label nome",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9416,7 +9592,7 @@
                 ]
               },
               {
-                "id": "1:312",
+                "id": "1:318",
                 "name": "campo nome",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -9454,7 +9630,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:313",
+                "id": "1:319",
                 "name": "campo nome valor",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9487,7 +9663,7 @@
                 ]
               },
               {
-                "id": "1:314",
+                "id": "1:320",
                 "name": "label preco",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9520,7 +9696,7 @@
                 ]
               },
               {
-                "id": "1:315",
+                "id": "1:321",
                 "name": "campo preco",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -9558,7 +9734,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:316",
+                "id": "1:322",
                 "name": "campo preco valor",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9591,7 +9767,7 @@
                 ]
               },
               {
-                "id": "1:317",
+                "id": "1:323",
                 "name": "label cat",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9624,7 +9800,7 @@
                 ]
               },
               {
-                "id": "1:318",
+                "id": "1:324",
                 "name": "cat MERCEARIA",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -9662,7 +9838,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:319",
+                "id": "1:325",
                 "name": "cat texto MERCEARIA",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9695,7 +9871,7 @@
                 ]
               },
               {
-                "id": "1:320",
+                "id": "1:326",
                 "name": "cat LATICÍNIOS",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -9733,7 +9909,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:321",
+                "id": "1:327",
                 "name": "cat texto LATICÍNIOS",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9766,7 +9942,7 @@
                 ]
               },
               {
-                "id": "1:322",
+                "id": "1:328",
                 "name": "cat BEBIDAS",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -9804,7 +9980,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:323",
+                "id": "1:329",
                 "name": "cat texto BEBIDAS",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9837,7 +10013,7 @@
                 ]
               },
               {
-                "id": "1:324",
+                "id": "1:330",
                 "name": "cat HORTIFRUTI",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -9875,7 +10051,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:325",
+                "id": "1:331",
                 "name": "cat texto HORTIFRUTI",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9908,7 +10084,7 @@
                 ]
               },
               {
-                "id": "1:326",
+                "id": "1:332",
                 "name": "cat LIMPEZA",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -9946,7 +10122,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:327",
+                "id": "1:333",
                 "name": "cat texto LIMPEZA",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -9979,7 +10155,7 @@
                 ]
               },
               {
-                "id": "1:328",
+                "id": "1:334",
                 "name": "botao salvar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -10003,7 +10179,7 @@
                 "cornerRadius": 25
               },
               {
-                "id": "1:329",
+                "id": "1:335",
                 "name": "salvar texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10036,7 +10212,7 @@
                 ]
               },
               {
-                "id": "1:330",
+                "id": "1:336",
                 "name": "home indicator",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -10064,7 +10240,7 @@
         ]
       },
       {
-        "id": "1:355",
+        "id": "1:361",
         "name": "09 Recibo",
         "type": "CANVAS",
         "backgroundColor": {
@@ -10075,7 +10251,7 @@
         },
         "children": [
           {
-            "id": "1:356",
+            "id": "1:362",
             "name": "09 Recibo",
             "type": "FRAME",
             "absoluteBoundingBox": {
@@ -10098,7 +10274,7 @@
             ],
             "children": [
               {
-                "id": "1:333",
+                "id": "1:339",
                 "name": "hora",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10131,7 +10307,7 @@
                 ]
               },
               {
-                "id": "1:334",
+                "id": "1:340",
                 "name": "sinal",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10164,7 +10340,7 @@
                 ]
               },
               {
-                "id": "1:335",
+                "id": "1:341",
                 "name": "voltar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -10188,7 +10364,7 @@
                 "cornerRadius": 18
               },
               {
-                "id": "1:336",
+                "id": "1:342",
                 "name": "seta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10221,7 +10397,7 @@
                 ]
               },
               {
-                "id": "1:337",
+                "id": "1:343",
                 "name": "titulo tela",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10254,7 +10430,7 @@
                 ]
               },
               {
-                "id": "1:338",
+                "id": "1:344",
                 "name": "cupom",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -10292,7 +10468,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:339",
+                "id": "1:345",
                 "name": "marca recibo",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10325,7 +10501,7 @@
                 ]
               },
               {
-                "id": "1:340",
+                "id": "1:346",
                 "name": "mercado recibo",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10358,7 +10534,7 @@
                 ]
               },
               {
-                "id": "1:341",
+                "id": "1:347",
                 "name": "offline recibo",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10391,7 +10567,7 @@
                 ]
               },
               {
-                "id": "1:342",
+                "id": "1:348",
                 "name": "div 1",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -10414,7 +10590,7 @@
                 ]
               },
               {
-                "id": "1:343",
+                "id": "1:349",
                 "name": "recibo item 0",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10447,7 +10623,7 @@
                 ]
               },
               {
-                "id": "1:344",
+                "id": "1:350",
                 "name": "recibo val 0",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10480,7 +10656,7 @@
                 ]
               },
               {
-                "id": "1:345",
+                "id": "1:351",
                 "name": "recibo item 1",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10513,7 +10689,7 @@
                 ]
               },
               {
-                "id": "1:346",
+                "id": "1:352",
                 "name": "recibo val 1",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10546,7 +10722,7 @@
                 ]
               },
               {
-                "id": "1:347",
+                "id": "1:353",
                 "name": "recibo item 2",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10579,7 +10755,7 @@
                 ]
               },
               {
-                "id": "1:348",
+                "id": "1:354",
                 "name": "recibo val 2",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10612,7 +10788,7 @@
                 ]
               },
               {
-                "id": "1:349",
+                "id": "1:355",
                 "name": "div 2",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -10635,7 +10811,7 @@
                 ]
               },
               {
-                "id": "1:350",
+                "id": "1:356",
                 "name": "total label",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10668,7 +10844,7 @@
                 ]
               },
               {
-                "id": "1:351",
+                "id": "1:357",
                 "name": "total valor",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10701,7 +10877,7 @@
                 ]
               },
               {
-                "id": "1:352",
+                "id": "1:358",
                 "name": "share",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -10725,7 +10901,7 @@
                 "cornerRadius": 24
               },
               {
-                "id": "1:353",
+                "id": "1:359",
                 "name": "share texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10758,7 +10934,7 @@
                 ]
               },
               {
-                "id": "1:354",
+                "id": "1:360",
                 "name": "home indicator",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -10786,7 +10962,7 @@
         ]
       },
       {
-        "id": "1:365",
+        "id": "1:371",
         "name": "10 Splash",
         "type": "CANVAS",
         "backgroundColor": {
@@ -10797,7 +10973,7 @@
         },
         "children": [
           {
-            "id": "1:366",
+            "id": "1:372",
             "name": "10 Splash",
             "type": "FRAME",
             "absoluteBoundingBox": {
@@ -10820,7 +10996,7 @@
             ],
             "children": [
               {
-                "id": "1:357",
+                "id": "1:363",
                 "name": "fundo",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -10843,7 +11019,7 @@
                 ]
               },
               {
-                "id": "1:358",
+                "id": "1:364",
                 "name": "logo",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -10867,7 +11043,7 @@
                 "cornerRadius": 22
               },
               {
-                "id": "1:359",
+                "id": "1:365",
                 "name": "logo check",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10900,7 +11076,7 @@
                 ]
               },
               {
-                "id": "1:360",
+                "id": "1:366",
                 "name": "marca",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10933,7 +11109,7 @@
                 ]
               },
               {
-                "id": "1:361",
+                "id": "1:367",
                 "name": "tagline",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -10966,7 +11142,7 @@
                 ]
               },
               {
-                "id": "1:362",
+                "id": "1:368",
                 "name": "botao",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -10990,7 +11166,7 @@
                 "cornerRadius": 25
               },
               {
-                "id": "1:363",
+                "id": "1:369",
                 "name": "botao texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11023,7 +11199,7 @@
                 ]
               },
               {
-                "id": "1:364",
+                "id": "1:370",
                 "name": "home indicator",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11051,7 +11227,7 @@
         ]
       },
       {
-        "id": "1:384",
+        "id": "1:390",
         "name": "11 Auth",
         "type": "CANVAS",
         "backgroundColor": {
@@ -11062,7 +11238,7 @@
         },
         "children": [
           {
-            "id": "1:385",
+            "id": "1:391",
             "name": "11 Auth",
             "type": "FRAME",
             "absoluteBoundingBox": {
@@ -11085,7 +11261,7 @@
             ],
             "children": [
               {
-                "id": "1:367",
+                "id": "1:373",
                 "name": "fundo",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11108,7 +11284,7 @@
                 ]
               },
               {
-                "id": "1:368",
+                "id": "1:374",
                 "name": "logo",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11132,7 +11308,7 @@
                 "cornerRadius": 22
               },
               {
-                "id": "1:369",
+                "id": "1:375",
                 "name": "logo check",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11165,7 +11341,7 @@
                 ]
               },
               {
-                "id": "1:370",
+                "id": "1:376",
                 "name": "titulo",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11198,7 +11374,7 @@
                 ]
               },
               {
-                "id": "1:371",
+                "id": "1:377",
                 "name": "sub",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11231,7 +11407,7 @@
                 ]
               },
               {
-                "id": "1:372",
+                "id": "1:378",
                 "name": "google",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11269,7 +11445,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:373",
+                "id": "1:379",
                 "name": "google texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11302,7 +11478,7 @@
                 ]
               },
               {
-                "id": "1:374",
+                "id": "1:380",
                 "name": "div linha",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11325,7 +11501,7 @@
                 ]
               },
               {
-                "id": "1:375",
+                "id": "1:381",
                 "name": "div texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11358,7 +11534,7 @@
                 ]
               },
               {
-                "id": "1:376",
+                "id": "1:382",
                 "name": "campo email",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11396,7 +11572,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:377",
+                "id": "1:383",
                 "name": "campo email ph",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11429,7 +11605,7 @@
                 ]
               },
               {
-                "id": "1:378",
+                "id": "1:384",
                 "name": "campo senha",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11467,7 +11643,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:379",
+                "id": "1:385",
                 "name": "campo senha ph",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11500,7 +11676,7 @@
                 ]
               },
               {
-                "id": "1:380",
+                "id": "1:386",
                 "name": "botao criar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11524,7 +11700,7 @@
                 "cornerRadius": 24
               },
               {
-                "id": "1:381",
+                "id": "1:387",
                 "name": "botao criar texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11557,7 +11733,7 @@
                 ]
               },
               {
-                "id": "1:382",
+                "id": "1:388",
                 "name": "offline",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11590,7 +11766,7 @@
                 ]
               },
               {
-                "id": "1:383",
+                "id": "1:389",
                 "name": "home indicator",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11618,7 +11794,7 @@
         ]
       },
       {
-        "id": "1:407",
+        "id": "1:413",
         "name": "12 Sincronização",
         "type": "CANVAS",
         "backgroundColor": {
@@ -11629,7 +11805,7 @@
         },
         "children": [
           {
-            "id": "1:408",
+            "id": "1:414",
             "name": "12 Sincronização",
             "type": "FRAME",
             "absoluteBoundingBox": {
@@ -11652,7 +11828,7 @@
             ],
             "children": [
               {
-                "id": "1:386",
+                "id": "1:392",
                 "name": "hora",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11685,7 +11861,7 @@
                 ]
               },
               {
-                "id": "1:387",
+                "id": "1:393",
                 "name": "sinal",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11718,7 +11894,7 @@
                 ]
               },
               {
-                "id": "1:388",
+                "id": "1:394",
                 "name": "voltar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11742,7 +11918,7 @@
                 "cornerRadius": 18
               },
               {
-                "id": "1:389",
+                "id": "1:395",
                 "name": "seta",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11775,7 +11951,7 @@
                 ]
               },
               {
-                "id": "1:390",
+                "id": "1:396",
                 "name": "titulo tela",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11808,7 +11984,7 @@
                 ]
               },
               {
-                "id": "1:391",
+                "id": "1:397",
                 "name": "family card",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11846,7 +12022,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:392",
+                "id": "1:398",
                 "name": "family titulo",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11879,7 +12055,7 @@
                 ]
               },
               {
-                "id": "1:393",
+                "id": "1:399",
                 "name": "family texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11912,7 +12088,7 @@
                 ]
               },
               {
-                "id": "1:394",
+                "id": "1:400",
                 "name": "codigo caixa",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11936,7 +12112,7 @@
                 "cornerRadius": 14
               },
               {
-                "id": "1:395",
+                "id": "1:401",
                 "name": "codigo",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -11969,7 +12145,7 @@
                 ]
               },
               {
-                "id": "1:396",
+                "id": "1:402",
                 "name": "copiar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -11993,7 +12169,7 @@
                 "cornerRadius": 14
               },
               {
-                "id": "1:397",
+                "id": "1:403",
                 "name": "copiar texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -12026,7 +12202,7 @@
                 ]
               },
               {
-                "id": "1:398",
+                "id": "1:404",
                 "name": "status card",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -12064,7 +12240,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:399",
+                "id": "1:405",
                 "name": "status titulo",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -12097,7 +12273,7 @@
                 ]
               },
               {
-                "id": "1:400",
+                "id": "1:406",
                 "name": "status sub",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -12130,7 +12306,7 @@
                 ]
               },
               {
-                "id": "1:401",
+                "id": "1:407",
                 "name": "switch",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -12154,7 +12330,7 @@
                 "cornerRadius": 12
               },
               {
-                "id": "1:402",
+                "id": "1:408",
                 "name": "switch bolinha",
                 "type": "ELLIPSE",
                 "absoluteBoundingBox": {
@@ -12177,7 +12353,7 @@
                 ]
               },
               {
-                "id": "1:403",
+                "id": "1:409",
                 "name": "aviso",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -12210,7 +12386,7 @@
                 ]
               },
               {
-                "id": "1:404",
+                "id": "1:410",
                 "name": "desconectar",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {
@@ -12248,7 +12424,7 @@
                 "strokeAlign": "INSIDE"
               },
               {
-                "id": "1:405",
+                "id": "1:411",
                 "name": "desconectar texto",
                 "type": "TEXT",
                 "absoluteBoundingBox": {
@@ -12281,7 +12457,7 @@
                 ]
               },
               {
-                "id": "1:406",
+                "id": "1:412",
                 "name": "home indicator",
                 "type": "RECTANGLE",
                 "absoluteBoundingBox": {

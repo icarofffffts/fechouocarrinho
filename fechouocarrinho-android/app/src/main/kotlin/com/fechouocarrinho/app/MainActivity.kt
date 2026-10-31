@@ -104,6 +104,7 @@ class MainActivity : ComponentActivity() {
                                 onNavigateToCarrinho = { navController.navigate("carrinho") },
                                 onNavigateToPerfil = { navController.navigate("perfil") },
                                 onNavigateToSupermarkets = { navController.navigate("selecao") },
+                                onNavigateToManual = { navController.navigate("manual") },
                                 onNavigateToHelp = { navController.navigate("splash") },
                                 selectedSupermarket = selectedMarketName,
                                 budgetGoal = budgetGoal,

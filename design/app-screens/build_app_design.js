@@ -177,21 +177,73 @@ function page(name, children, height = H) {
 
 const home = page("01 Home", [
   ...statusbar(),
-  ...appHeader("fechou o carrinho", "olá, bora às compras?"),
-  card(16, 126, W - 32, 74, { fill: C.dark, radius: 22, name: "banner boas-vindas", stroke: C.dark }),
-  t({ name: "banner titulo", x: 36, y: 144, w: 220, h: 20, text: "Escaneie e saiba o total", font: "Nunito", size: 14, weight: 700, color: C.white }),
-  t({ name: "banner texto", x: 36, y: 166, w: 240, h: 24, text: "Aponte para a etiqueta. A conta é feita aqui.", size: 9, color: C.white }),
-  r({ name: "banner botao", x: 284, y: 150, w: 74, h: 28, fill: C.white, radius: 14 }),
-  t({ name: "banner botao texto", x: 284, y: 157, w: 74, h: 14, text: "Escanear", size: 9, weight: 600, color: C.green, align: "CENTER" }),
-  ...budgetCard(216, "R$ 53,28", "R$ 200,00"),
-  ...sectionTitle(352, "lista de compras", "3 itens"),
-  ...itemRow(392, "Arroz branco 5kg", "1 un · Mercearia", "R$ 28,90"),
-  ...itemRow(464, "Feijão carioca 1kg", "2 un · Mercearia", "R$ 14,98"),
-  ...itemRow(536, "Leite integral 1L", "3 un · Bebidas", "R$ 14,97"),
-  r({ name: "total bar", x: 16, y: 620, w: W - 32, h: 52, fill: C.dark, radius: 18 }),
-  t({ name: "total label", x: 36, y: 638, w: 100, h: 14, text: "TOTAL", size: 9, weight: 700, color: C.white, ls: 1.4 }),
-  t({ name: "total valor", x: 220, y: 632, w: 150, h: 24, text: "R$ 58,85", font: "Nunito", size: 18, weight: 700, color: C.white, align: "RIGHT" }),
-  ...bottomNav("Início"),
+  // cabeçalho enxuto sobre o creme
+  r({ name: "logo mark", x: 20, y: 44, w: 40, h: 40, fill: C.green, radius: 12 }),
+  t({ name: "logo check", x: 20, y: 52, w: 40, h: 24, text: "✓", size: 16, weight: 700, color: C.white, align: "CENTER" }),
+  t({ name: "marca", x: 70, y: 50, w: 160, h: 20, text: "fechou o carrinho", font: "Nunito", size: 15, weight: 700, ls: -0.4 }),
+  r({ name: "chip mercado", x: 222, y: 48, w: 148, h: 32, fill: C.white, radius: 16, stroke: C.line, strokeOpacity: 0.15 }),
+  t({ name: "chip texto", x: 234, y: 57, w: 118, h: 14, text: "BH Supermercados", size: 9, weight: 600, color: C.ink }),
+  t({ name: "chip caret", x: 354, y: 55, w: 10, h: 14, text: "▾", size: 8, color: C.muted }),
+
+  // orçamento como bloco principal
+  r({ name: "hero", x: 16, y: 104, w: W - 32, h: 152, fill: C.dark, radius: 26 }),
+  t({ name: "hero label", x: 36, y: 124, w: 200, h: 14, text: "ORÇAMENTO DA COMPRA", size: 8, weight: 700, color: C.white, ls: 1.4 }),
+  t({ name: "hero editar", x: 270, y: 124, w: 84, h: 14, text: "editar meta", size: 9, weight: 600, color: C.white, align: "RIGHT" }),
+  t({ name: "hero total", x: 36, y: 144, w: 260, h: 46, text: "R$ 58,85", font: "Nunito", size: 38, weight: 700, color: C.white, ls: -1.8 }),
+  t({ name: "hero meta", x: 36, y: 192, w: 180, h: 14, text: "de R$ 200,00", size: 10, color: C.white }),
+  t({ name: "hero falta", x: 196, y: 192, w: 158, h: 14, text: "faltam R$ 141,15", size: 10, weight: 600, color: C.white, align: "RIGHT" }),
+  r({ name: "hero trilha", x: 36, y: 216, w: 318, h: 6, fill: C.white, fillOpacity: 0.18, radius: 3 }),
+  r({ name: "hero progresso", x: 36, y: 216, w: 94, h: 6, fill: "#35B96A", radius: 3 }),
+
+  // ação principal
+  r({ name: "cta escanear", x: 16, y: 272, w: 250, h: 54, fill: C.orange, radius: 27 }),
+  r({ name: "cta camera corpo", x: 38, y: 291, w: 20, h: 15, fill: C.white, radius: 4 }),
+  r({ name: "cta camera topo", x: 43, y: 288, w: 10, h: 5, fill: C.white, radius: 2 }),
+  e({ name: "cta camera lente", x: 44, y: 294, w: 8, h: 8, fill: C.orange }),
+  t({ name: "cta texto", x: 66, y: 291, w: 180, h: 18, text: "Escanear etiqueta", size: 13, weight: 700, color: C.white }),
+  r({ name: "cta manual", x: 278, y: 272, w: 96, h: 54, fill: C.white, radius: 27, stroke: C.line, strokeOpacity: 0.15 }),
+  t({ name: "cta manual texto", x: 278, y: 291, w: 96, h: 18, text: "+ Manual", size: 11, weight: 600, color: C.ink, align: "CENTER" }),
+
+  // lista
+  t({ name: "secao lista", x: 20, y: 352, w: 220, h: 18, text: "lista de compras", font: "Nunito", size: 14, weight: 700 }),
+  t({ name: "secao meta", x: 250, y: 354, w: 120, h: 14, text: "3 itens", size: 10, color: C.muted, align: "RIGHT" }),
+
+  ...[
+    ["Arroz branco 5kg", "1 un · Mercearia", "R$ 28,90"],
+    ["Feijão carioca 1kg", "2 un · Mercearia", "R$ 14,98"],
+    ["Leite integral 1L", "3 un · Bebidas", "R$ 14,97"],
+  ].flatMap(([nome, qtd, preco], i) => {
+    const y = 382 + i * 74;
+    return [
+      r({ name: `divisor ${i}`, x: 20, y: y + 72, w: W - 40, h: 1, fill: C.line, fillOpacity: 0.1 }),
+      r({ name: `check ${i}`, x: 20, y: y + 22, w: 24, h: 24, fill: C.white, radius: 12, stroke: C.line, strokeOpacity: 0.25 }),
+      r({ name: `thumb ${i}`, x: 56, y: y + 12, w: 44, h: 44, fill: C.line, fillOpacity: 0.07, radius: 12 }),
+      t({ name: `nome ${i}`, x: 112, y: y + 14, w: 190, h: 18, text: nome, size: 12, weight: 600 }),
+      t({ name: `qtd ${i}`, x: 112, y: y + 34, w: 190, h: 14, text: qtd, size: 10, color: C.muted }),
+      t({ name: `preco ${i}`, x: 252, y: y + 22, w: 118, h: 20, text: preco, font: "Nunito", size: 14, weight: 700, align: "RIGHT" }),
+    ];
+  }),
+
+  // fechamento
+  r({ name: "botao finalizar", x: 16, y: 624, w: W - 32, h: 54, fill: C.green, radius: 27 }),
+  t({ name: "finalizar label", x: 34, y: 643, w: 140, h: 16, text: "Finalizar compra", size: 12, weight: 700, color: C.white }),
+  t({ name: "finalizar valor", x: 220, y: 640, w: 150, h: 20, text: "R$ 58,85", font: "Nunito", size: 15, weight: 700, color: C.white, align: "RIGHT" }),
+
+  // navegação
+  r({ name: "nav fundo", x: 0, y: 794, w: W, h: 86, fill: C.white }),
+  r({ name: "nav linha", x: 0, y: 794, w: W, h: 1, fill: C.line, fillOpacity: 0.1 }),
+  r({ name: "nav ativo", x: 18, y: 806, w: 76, h: 38, fill: C.green, fillOpacity: 0.12, radius: 19 }),
+  r({ name: "nav icone 0", x: 44, y: 816, w: 16, h: 16, fill: C.green, radius: 4 }),
+  t({ name: "nav label 0", x: 62, y: 818, w: 40, h: 12, text: "Início", size: 9, weight: 700, color: C.green }),
+  ...[
+    ["Listas", 117, "▤"],
+    ["Escanear", 195, "◎"],
+    ["Carrinho", 273, "▦"],
+    ["Perfil", 351, "◔"],
+  ].flatMap(([label, cx, glyph]) => [
+    t({ name: `nav glyph ${label}`, x: cx - 14, y: 812, w: 28, h: 20, text: glyph, size: 13, color: C.muted, align: "CENTER" }),
+    t({ name: `nav label ${label}`, x: cx - 34, y: 834, w: 68, h: 12, text: label, size: 9, color: C.muted, align: "CENTER" }),
+  ]),
   homeBar(),
 ]);
 
